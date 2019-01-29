@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "303959792edae09b32f39ba8db27eb03",
+    "content-hash": "9b11de28784eedc30484dd7e843cd865",
     "packages": [
         {
             "name": "box/spout",
@@ -1657,17 +1657,12 @@
         },
         {
             "name": "laravel-enso/core",
-            "version": "3.6.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-enso/Core.git",
-                "reference": "e1a9cfdde775abe97a6f551378d52896a9df5a99"
-            },
+            "version": "3.6.999",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/Core/zipball/e1a9cfdde775abe97a6f551378d52896a9df5a99",
-                "reference": "e1a9cfdde775abe97a6f551378d52896a9df5a99",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/laravel-enso/core",
+                "reference": "8dd8909909c7298abe6e109f1d592ba352ca954e",
+                "shasum": null
             },
             "require": {
                 "guzzlehttp/guzzle": "~6.0",
@@ -1718,7 +1713,6 @@
                     "LaravelEnso\\Core\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1751,7 +1745,9 @@
                 "vue-bulma",
                 "vue-spa"
             ],
-            "time": "2019-01-28T08:17:21+00:00"
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "laravel-enso/dataexport",
@@ -2167,16 +2163,16 @@
         },
         {
             "name": "laravel-enso/helpers",
-            "version": "1.10.1",
+            "version": "1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/Helpers.git",
-                "reference": "3cc44ae3b35ee23ba3ba51723c40b9946d705c18"
+                "reference": "433ba7854a965bc3682dbc77ad1f3cde2bf533a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/Helpers/zipball/3cc44ae3b35ee23ba3ba51723c40b9946d705c18",
-                "reference": "3cc44ae3b35ee23ba3ba51723c40b9946d705c18",
+                "url": "https://api.github.com/repos/laravel-enso/Helpers/zipball/433ba7854a965bc3682dbc77ad1f3cde2bf533a2",
+                "reference": "433ba7854a965bc3682dbc77ad1f3cde2bf533a2",
                 "shasum": ""
             },
             "require": {
@@ -2213,7 +2209,7 @@
                 "helpers",
                 "laravel-enso"
             ],
-            "time": "2019-01-28T10:50:55+00:00"
+            "time": "2019-01-29T07:42:05+00:00"
         },
         {
             "name": "laravel-enso/historytracker",
@@ -2946,16 +2942,16 @@
         },
         {
             "name": "laravel-enso/select",
-            "version": "2.8.19",
+            "version": "2.8.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/Select.git",
-                "reference": "0546e40ffacea13bd846c616a786d8e1364be903"
+                "reference": "977511995bbdd1fa2f0a5b1fcc75ba061a00d87f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/Select/zipball/0546e40ffacea13bd846c616a786d8e1364be903",
-                "reference": "0546e40ffacea13bd846c616a786d8e1364be903",
+                "url": "https://api.github.com/repos/laravel-enso/Select/zipball/977511995bbdd1fa2f0a5b1fcc75ba061a00d87f",
+                "reference": "977511995bbdd1fa2f0a5b1fcc75ba061a00d87f",
                 "shasum": ""
             },
             "require": {
@@ -2996,7 +2992,7 @@
                 "select",
                 "select-server-side"
             ],
-            "time": "2019-01-27T11:08:59+00:00"
+            "time": "2019-01-29T06:54:51+00:00"
         },
         {
             "name": "laravel-enso/structuremanager",
@@ -6356,16 +6352,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "f3aae2877ecf916ee802b7a5b249d36658171df6"
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/f3aae2877ecf916ee802b7a5b249d36658171df6",
-                "reference": "f3aae2877ecf916ee802b7a5b249d36658171df6",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
+                "reference": "2a7dcf7e3e02dc5e701004e51a6f304b713107d5",
                 "shasum": ""
             },
             "require": {
@@ -6403,7 +6399,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-01-28T20:57:27+00:00"
+            "time": "2019-01-29T11:11:52+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

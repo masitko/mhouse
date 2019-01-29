@@ -37,6 +37,13 @@
             "type": "git",
             "url": "https://github.com/bogdankharchenko/Laravel-5-Generators-Extended"
         },
+        "local": {
+            "type": "path",
+            "url": "packages/laravel-enso/*",
+            "options": {
+                "symlink": true
+            }
+          },
         "packagist.org": {
             "type": "composer",
             "url": "https://repo-eu-uk-1.packagist.org"

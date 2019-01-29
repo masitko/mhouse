@@ -1,0 +1,9 @@
+*
+!.gitignore
+!public
+!avatars
+!exports
+!files
+!imports
+!testing
+.DS_STORE

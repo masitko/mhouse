@@ -4,7 +4,7 @@
         :icon="icon"
         :overlay="loading"
         :controls="1"
-        @refresh="fetch"
+        @refresh="get"
         v-if="config">
         <card-control slot="control-1">
             <span class="icon is-small download"
@@ -18,22 +18,22 @@
             :type="config.type"
             ref="chart"/>
     </card>
+
 </template>
 
 <script>
 
 import { saveAs } from 'file-saver';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faChartBar, faChartPie, faChartLine, faChartArea, faCircleNotch, faCircle, faDownload,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faChartPie, faChartLine, faChartArea, faCircleNotch, faCircle, faDownload }
+    from '@fortawesome/free-solid-svg-icons';
 import Card from '../bulma/Card.vue';
 import CardControl from '../bulma/CardControl.vue';
 import Chart from './Chart.vue';
 
-library.add(
+library.add([
     faChartBar, faChartPie, faChartLine, faChartArea, faCircleNotch, faCircle, faDownload,
-);
+]);
 
 const icons = {
     bar: faChartBar,
@@ -62,19 +62,21 @@ export default {
         i18n: {
             type: Function,
             default(key) {
-                return this.$options.methods
-                    && Object.keys(this.$options.methods).includes('__')
+                return this.$options.methods &&
+                    Object.keys(this.$options.methods).includes('__')
                     ? this.__(key)
                     : key;
             },
         },
     },
 
-    data: () => ({
-        loading: false,
-        config: null,
-        icons,
-    }),
+    data() {
+        return {
+            loading: false,
+            config: null,
+            icons,
+        };
+    },
 
     computed: {
         icon() {
@@ -113,18 +115,18 @@ export default {
     watch: {
         params: {
             handler() {
-                this.fetch();
+                this.get();
             },
             deep: true,
         },
     },
 
     mounted() {
-        this.fetch();
+        this.get();
     },
 
     methods: {
-        fetch() {
+        get() {
             this.loading = true;
 
             axios.get(this.source, { params: this.params })
