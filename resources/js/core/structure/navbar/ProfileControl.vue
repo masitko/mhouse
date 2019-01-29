@@ -1,8 +1,8 @@
 <template>
     <a class="navbar-item user-profile"
         @click="goToProfile()">
-        <img class="is-rounded"
-            :src="$store.getters.avatarLink">
+        <!-- <img class="is-rounded"
+            :src="$store.getters.avatarLink"> -->
         <span v-if="!isTouch"
             class="has-margin-left-small">
             {{ $store.state.user.person.appellative || $store.state.user.person.name }}

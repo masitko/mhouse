@@ -1,7 +1,7 @@
 <template>
 
     <div class="columns is-multiline">
-        <div class="column is-one-third">
+        <!-- <div class="column is-one-third">
             <chart-card class="
                     is-rounded has-background-light raises-on-hover
                     has-margin-bottom-large
@@ -41,7 +41,7 @@
                     has-margin-bottom-large
                 "
                 source="/api/dashboard/doughnut"/>
-        </div>
+        </div> -->
     </div>
 
 </template>

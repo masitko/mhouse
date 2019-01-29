@@ -33,7 +33,7 @@
                                     {{ __('Avatar') }}
                                 </span>
                             </a>
-                            <file-uploader @upload-successful="setUserAvatar($event.id)"
+                            <!-- <file-uploader @upload-successful="setUserAvatar($event.id)"
                                 :url="uploadAvatarLink"
                                 file-key="avatar"
                                 v-if="isSelfVisiting">
@@ -49,7 +49,7 @@
                                         </span>
                                     </a>
                                 </template>
-                            </file-uploader>
+                            </file-uploader> -->
                             <a class="button is-fullwidth is-danger has-margin-top-small"
                                 @click="exit()"
                                 v-if="isSelfVisiting">
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <hr class="has-background-grey-lighter">
+        <!-- <hr class="has-background-grey-lighter">
         <div class="level is-mobile has-margin-bottom-large">
             <div class="level-item has-text-centered has-right-border">
                 <div>
@@ -177,7 +177,7 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

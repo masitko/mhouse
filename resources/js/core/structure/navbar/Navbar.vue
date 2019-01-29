@@ -2,9 +2,9 @@
     <nav class="navbar app-navbar has-background-light is-fixed-top">
         <div class="navbar-brand">
             <a class="navbar-item logo" href="#">
-                <figure class="image is-24x24">
+                <!-- <figure class="image is-24x24">
                     <img src="/images/logo.svg">
-                </figure>
+                </figure> -->
                 <h4 v-if="menu.isExpanded && !isMobile"
                     class="title is-4 animated has-margin-left-small">
                     {{ meta.appName }}
@@ -19,11 +19,11 @@
             </a>
             <div v-if="meta.env === 'local'"
                 class="navbar-item">
-                <span class="tag is-warning">
+                <!-- <span class="tag is-warning">
                     <span class="icon is-small">
                         <fa icon="code"/>
                     </span>
-                </span>
+                </span> -->
             </div>
             <div v-if="impersonating"
                 class="navbar-item">
@@ -40,21 +40,21 @@
             </div>
             <div v-if="isTouch"
                 class="is-pulled-right is-flex">
-                <search v-if="!isMobile"/>
-                <i-o/>
-                <notifications/>
+                <!-- <search v-if="!isMobile"/> -->
+                <!-- <i-o/> -->
+                <!-- <notifications/> -->
                 <profile-control/>
-                <settings-control/>
+                <!-- <settings-control/> -->
             </div>
         </div>
         <div class="navbar-menu">
             <div v-if="!isTouch"
                 class="navbar-end">
-                <search/>
-                <i-o/>
-                <notifications/>
+                <!-- <search/> -->
+                <!-- <i-o/> -->
+                <!-- <notifications/> -->
                 <profile-control/>
-                <settings-control/>
+                <!-- <settings-control/> -->
             </div>
         </div>
     </nav>
