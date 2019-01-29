@@ -1535,16 +1535,16 @@
         },
         {
             "name": "laravel-enso/companies",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/Companies.git",
-                "reference": "b18af4d7e14786d5ea1d35677ade1c2751c41237"
+                "reference": "b1e0a711fffc2ef1d37ffae6563772d268df4cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/Companies/zipball/b18af4d7e14786d5ea1d35677ade1c2751c41237",
-                "reference": "b18af4d7e14786d5ea1d35677ade1c2751c41237",
+                "url": "https://api.github.com/repos/laravel-enso/Companies/zipball/b1e0a711fffc2ef1d37ffae6563772d268df4cb0",
+                "reference": "b1e0a711fffc2ef1d37ffae6563772d268df4cb0",
                 "shasum": ""
             },
             "require": {
@@ -1591,7 +1591,7 @@
                 "company-management",
                 "laravel-enso"
             ],
-            "time": "2019-01-27T08:05:48+00:00"
+            "time": "2019-01-29T14:03:25+00:00"
         },
         {
             "name": "laravel-enso/controlpanelapi",
@@ -1933,16 +1933,16 @@
         },
         {
             "name": "laravel-enso/documentsmanager",
-            "version": "2.4.16",
+            "version": "2.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/DocumentsManager.git",
-                "reference": "bafd0a377ae008b44d38d7014c5c79142b2abe80"
+                "reference": "5d2d9d14594b993960c5e0f3f85a322ed10a4698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/DocumentsManager/zipball/bafd0a377ae008b44d38d7014c5c79142b2abe80",
-                "reference": "bafd0a377ae008b44d38d7014c5c79142b2abe80",
+                "url": "https://api.github.com/repos/laravel-enso/DocumentsManager/zipball/5d2d9d14594b993960c5e0f3f85a322ed10a4698",
+                "reference": "5d2d9d14594b993960c5e0f3f85a322ed10a4698",
                 "shasum": ""
             },
             "require": {
@@ -1991,7 +1991,7 @@
                 "file-uploader",
                 "laravel-enso"
             ],
-            "time": "2019-01-26T09:12:49+00:00"
+            "time": "2019-01-29T12:14:41+00:00"
         },
         {
             "name": "laravel-enso/examples",
@@ -2660,17 +2660,12 @@
         },
         {
             "name": "laravel-enso/people",
-            "version": "1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-enso/People.git",
-                "reference": "34f6dff8bc750d87039e69578cdc8f569dff25b8"
-            },
+            "version": "1.1.999",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/People/zipball/34f6dff8bc750d87039e69578cdc8f569dff25b8",
-                "reference": "34f6dff8bc750d87039e69578cdc8f569dff25b8",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/laravel-enso/people",
+                "reference": "aec97923ddb9133340eaa23cff1ad9cd75718e2e",
+                "shasum": null
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -2698,7 +2693,6 @@
                     "LaravelEnso\\People\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2717,7 +2711,9 @@
                 "people",
                 "person-management"
             ],
-            "time": "2019-01-27T11:50:43+00:00"
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "laravel-enso/permissionmanager",
@@ -3379,16 +3375,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.22",
+            "version": "v5.7.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29"
+                "reference": "2ede55db4b8201ed0450fa7e7a4d7220aa29bc34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/64a7749bd9e8df68addce1d01a54bcf606141f29",
-                "reference": "64a7749bd9e8df68addce1d01a54bcf606141f29",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2ede55db4b8201ed0450fa7e7a4d7220aa29bc34",
+                "reference": "2ede55db4b8201ed0450fa7e7a4d7220aa29bc34",
                 "shasum": ""
             },
             "require": {
@@ -3521,7 +3517,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-01-22T15:08:35+00:00"
+            "time": "2019-01-29T22:13:46+00:00"
         },
         {
             "name": "laravel/horizon",

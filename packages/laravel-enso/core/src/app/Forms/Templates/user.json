@@ -20,27 +20,24 @@
             "value": null,
             "column": 2,
             "meta": {
-                "readonly": true,
                 "type": "select",
                 "options": "LaravelEnso\\People\\app\\Enums\\Titles"
             }
         }, {
-            "label": "Name",
-            "name": "name",
+            "label": "First Name",
+            "name": "first_name",
             "value": null,
-            "column": 6,
+            "column": 5,
             "meta": {
-                "readonly": true,
                 "type": "input",
                 "content": "text"
             }
         }, {
-            "label": "Appellative",
-            "name": "appellative",
+            "label": "Last Name",
+            "name": "last_name",
             "value": null,
-            "column": 4,
+            "column": 5,
             "meta": {
-                "readonly": true,
                 "type": "input",
                 "content": "text"
             }

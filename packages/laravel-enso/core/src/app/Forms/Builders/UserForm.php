@@ -48,10 +48,11 @@ class UserForm
     {
         $this->form
             ->value('title', $person->title)
-            ->value('name', $person->name)
-            ->value('appellative', $person->appellative)
+            // ->value('name', $person->name)
+            // ->value('appellative', $person->appellative)
             ->meta('title', 'tooltip', self::Tooltip)
-            ->meta('name', 'tooltip', self::Tooltip)
-            ->meta('appellative', 'tooltip', self::Tooltip);
+            // ->meta('name', 'tooltip', self::Tooltip)
+            // ->meta('appellative', 'tooltip', self::Tooltip)
+            ;
     }
 }

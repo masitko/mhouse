@@ -56,7 +56,7 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                         Route::namespace('User')
                             ->prefix('users')->as('users.')
                             ->group(function () {
-                                Route::get('create/{person}', 'UserController@create')
+                                Route::get('create/{person?}', 'UserController@create')
                                     ->name('create');
 
                                 Route::get('initTable', 'UserTableController@init')
