@@ -10,16 +10,27 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('person_id')->unsigned()->index()->nullable();
+            // $table->integer('person_id')->unsigned()->index()->nullable();
 
-            $table->integer('group_id')->unsigned()->index();
+            $table->integer('group_id')->unsigned()->index()->nullable();
             $table->foreign('group_id')->references('id')->on('user_groups');
 
             $table->integer('role_id')->unsigned()->index('roles_id');
             $table->foreign('role_id')->references('id')->on('roles');
 
+            $table->tinyInteger('title')->nullable();
+            
+            $table->string('first_name');
+            $table->string('other_name')->nullable();
+            $table->string('last_name');
+
             $table->string('email')->unique();
             $table->string('password')->nullable();
+            $table->string('phone')->nullable();
+
+            $table->date('birthday')->nullable();
+
+            $table->text('notes')->nullable();
 
             $table->boolean('is_active');
 

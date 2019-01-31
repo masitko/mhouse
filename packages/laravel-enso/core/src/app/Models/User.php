@@ -21,19 +21,22 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 class User extends Authenticatable
 {
     use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
-        IsPerson, LogsActivity, Notifiable, Uploads;
+        // IsPerson, 
+        LogsActivity, Notifiable, Uploads;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
-    protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
+    // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
+    protected $fillable = [ 'group_id', 'role_id', 'email', 'is_active'];
 
     protected $casts = [
-        'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
+      // 'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
+      'is_active' => 'boolean', 'owner_id' => 'int', 'role_id' => 'int',
     ];
 
     protected $dates = ['password_updated_at'];
 
-    protected $loggableLabel = 'person.name';
+    // protected $loggableLabel = 'person.name';
 
     protected $loggable = [
         'email',
@@ -41,10 +44,10 @@ class User extends Authenticatable
         'role_id' => [Role::class => 'name'],
     ];
 
-    public function person()
-    {
-        return $this->belongsTo(Person::class);
-    }
+    // public function person()
+    // {
+    //     return $this->belongsTo(Person::class);
+    // }
 
     public function group()
     {
@@ -86,10 +89,10 @@ class User extends Authenticatable
         return $this->group_id === UserGroup::AdminGroupId;
     }
 
-    public function isPerson(Person $person)
-    {
-        return $this->person_id === $person->id;
-    }
+    // public function isPerson(Person $person)
+    // {
+    //     return $this->person_id === $person->id;
+    // }
 
     public function persistDefaultPreferences()
     {
