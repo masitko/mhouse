@@ -35,7 +35,8 @@ class AppState implements Responsable
         $localState = config('enso.config.stateBuilder');
 
         return [
-            'user' => auth()->user()->load(['person', 'avatar']),
+            'user' => auth()->user()->load(['avatar']),
+            // 'user' => auth()->user()->load(['person', 'avatar']),
             'preferences' => auth()->user()->preferences(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,

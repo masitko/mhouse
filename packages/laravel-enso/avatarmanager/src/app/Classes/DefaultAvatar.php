@@ -36,7 +36,8 @@ class DefaultAvatar
 
     private function generate()
     {
-        \Avatar::create($this->user->person->name)
+        $name = $this->user->first_name.' '.$this->user->last_name;
+        \Avatar::create($name)
             ->setDimension(Avatar::ImageWidth, Avatar::ImageHeight)
             ->setFontSize(self::FontSize)
             ->setBackground($this->background())

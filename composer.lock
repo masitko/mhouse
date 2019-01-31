@@ -1362,17 +1362,12 @@
         },
         {
             "name": "laravel-enso/avatarmanager",
-            "version": "2.3.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-enso/AvatarManager.git",
-                "reference": "8125abe8aca77246d62a0d017b2554e4fb2fd3c8"
-            },
+            "version": "2.3.999",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/AvatarManager/zipball/8125abe8aca77246d62a0d017b2554e4fb2fd3c8",
-                "reference": "8125abe8aca77246d62a0d017b2554e4fb2fd3c8",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/laravel-enso/avatarmanager",
+                "reference": "e1b09803148f5ce6a393923b563e87022871075e",
+                "shasum": null
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1397,7 +1392,6 @@
                     "LaravelEnso\\AvatarManager\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1417,7 +1411,9 @@
                 "avatarmanager",
                 "laravel-enso"
             ],
-            "time": "2019-01-24T11:54:36+00:00"
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "laravel-enso/charts",
@@ -2823,16 +2819,16 @@
         },
         {
             "name": "laravel-enso/rolemanager",
-            "version": "2.5.9",
+            "version": "2.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/RoleManager.git",
-                "reference": "03bdb27996b8b5acf7dcf4ffe2e8e1545438859a"
+                "reference": "b352a0df5becbc5089a5793fdbe0dd1f84ad1e18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/RoleManager/zipball/03bdb27996b8b5acf7dcf4ffe2e8e1545438859a",
-                "reference": "03bdb27996b8b5acf7dcf4ffe2e8e1545438859a",
+                "url": "https://api.github.com/repos/laravel-enso/RoleManager/zipball/b352a0df5becbc5089a5793fdbe0dd1f84ad1e18",
+                "reference": "b352a0df5becbc5089a5793fdbe0dd1f84ad1e18",
                 "shasum": ""
             },
             "require": {
@@ -2881,7 +2877,7 @@
                 "role-manager",
                 "rolemanager"
             ],
-            "time": "2019-01-24T14:25:04+00:00"
+            "time": "2019-01-31T06:22:06+00:00"
         },
         {
             "name": "laravel-enso/searchable",
@@ -3269,16 +3265,16 @@
         },
         {
             "name": "laravel-enso/vuecomponents",
-            "version": "2.7.6",
+            "version": "2.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/VueComponents.git",
-                "reference": "2f599b59c54e9784282a40cc68d34c5000653b93"
+                "reference": "d7a8b67e6e86516f3b04a0460ce0ce4c55f5408b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/VueComponents/zipball/2f599b59c54e9784282a40cc68d34c5000653b93",
-                "reference": "2f599b59c54e9784282a40cc68d34c5000653b93",
+                "url": "https://api.github.com/repos/laravel-enso/VueComponents/zipball/d7a8b67e6e86516f3b04a0460ce0ce4c55f5408b",
+                "reference": "d7a8b67e6e86516f3b04a0460ce0ce4c55f5408b",
                 "shasum": ""
             },
             "type": "library",
@@ -3314,20 +3310,20 @@
                 "vue-component",
                 "vue-components"
             ],
-            "time": "2019-01-29T05:35:22+00:00"
+            "time": "2019-01-31T06:47:54+00:00"
         },
         {
             "name": "laravel-enso/vuedatatable",
-            "version": "1.9.14",
+            "version": "1.9.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-enso/VueDatatable.git",
-                "reference": "e8a02bb4afdb1197f3eb95033b342990c90c4c31"
+                "reference": "55121e393da87d9069569446fec8dac3bdfb5353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-enso/VueDatatable/zipball/e8a02bb4afdb1197f3eb95033b342990c90c4c31",
-                "reference": "e8a02bb4afdb1197f3eb95033b342990c90c4c31",
+                "url": "https://api.github.com/repos/laravel-enso/VueDatatable/zipball/55121e393da87d9069569446fec8dac3bdfb5353",
+                "reference": "55121e393da87d9069569446fec8dac3bdfb5353",
                 "shasum": ""
             },
             "require": {
@@ -3371,7 +3367,7 @@
                 "datatable",
                 "laravel-enso"
             ],
-            "time": "2019-01-29T04:36:34+00:00"
+            "time": "2019-01-31T09:33:49+00:00"
         },
         {
             "name": "laravel/framework",
