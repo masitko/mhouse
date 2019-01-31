@@ -57,6 +57,18 @@
                     <span class="is-hidden-mobile"/>
                 </a>
             </enso-form>
+            <accessories v-if="ready">
+                <template slot-scope="{ count }">
+                    <tab keep-alive
+                        id="Addresses">
+                        <addresses controls
+                            type="App\User"
+                            :id="$refs.form.routeParam('user')"
+                            @update="$set(count, 'addresses', $refs.addresses.count)"
+                            ref="addresses"/>
+                    </tab>
+                </template>
+            </accessories>
         </div>
     </div>
 
@@ -69,9 +81,14 @@ import InputField from '../../../components/enso/vueforms/fields/InputField.vue'
 import SelectField from '../../../components/enso/vueforms/fields/SelectField.vue';
 import PasswordStrength from '../../auth/password/PasswordStrength.vue';
 
+import Accessories from '../../../components/enso/bulma/Accessories.vue';
+import Tab from '../../../components/enso/bulma/Tab.vue';
+import Addresses from '../../../components/enso/addresses/Addresses.vue';
+
 export default {
     components: {
         EnsoForm, InputField, SelectField, PasswordStrength,
+        Accessories, Tab, Addresses,
     },
 
     data: () => ({
