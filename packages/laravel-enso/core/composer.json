@@ -42,7 +42,7 @@
         "laravel-enso/avatarmanager": "2.3.*",
         "laravel-enso/charts": "2.5.*",
         "laravel-enso/companies": "1.2.*",
-        "laravel-enso/dataexport": "^1.1",
+        "laravel-enso/dataexport": "1.1.*",
         "laravel-enso/dataimport": "3.0.*",
         "laravel-enso/filemanager": "2.5.*",
         "laravel-enso/formbuilder": "2.12.*",

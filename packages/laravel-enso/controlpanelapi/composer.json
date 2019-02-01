@@ -1,0 +1,47 @@
+{
+    "name": "laravel-enso/controlpanelapi",
+    "description": "Control Panel API for Laravel Enso",
+    "version": "2.0.999",
+    "keywords": [
+        "laravel-enso",
+        "controlpanel",
+        "api",
+        "laravel"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mihai Ocneanu",
+            "email": "mihai.ocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "5.7.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/helpers": "1.10.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\ControlPanelApi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\ControlPanelApi\\AppServiceProvider",
+                "LaravelEnso\\ControlPanelApi\\AuthServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

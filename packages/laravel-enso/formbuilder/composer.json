@@ -1,0 +1,41 @@
+{
+    "name": "laravel-enso/formbuilder",
+    "description": "Form builder for Laravel Enso",
+    "version": "2.12.999",
+    "keywords": [
+        "laravel-enso",
+        "forms",
+        "form-builder"
+    ],
+    "homepage": "https://github.com/laravel-enso/FormBuilder",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "5.7.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/select": "2.8.*",
+        "laravel-enso/vuecomponents": "2.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\FormBuilder\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\FormBuilder\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

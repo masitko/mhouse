@@ -1,0 +1,55 @@
+{
+    "name": "laravel-enso/dataimport",
+    "description": "Excel Importer dependency for Laravel Enso",
+    "version": "3.0.999",
+    "keywords": [
+        "laravel-enso",
+        "dataimport",
+        "data-import",
+        "excel-import",
+        "excel-importer"
+    ],
+    "homepage": "https://github.com/laravel-enso/DataImport",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mihai Ocneanu",
+            "email": "mihai.ocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/activitylog": "1.1.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/filemanager": "2.5.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/structuremanager": "2.5.*",
+        "laravel-enso/trackwho": "1.7.*",
+        "laravel-enso/vuedatatable": "1.9.*",
+        "laravel-enso/vuecomponents": "2.7.*",
+        "laravel-enso/select": "2.8.*",
+        "box/spout": "2.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\DataImport\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\DataImport\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

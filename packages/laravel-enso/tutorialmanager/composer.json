@@ -1,0 +1,45 @@
+{
+    "name": "laravel-enso/tutorialmanager",
+    "description": "Tutorial management dependency for Laravel Enso",
+    "version": "2.2.999",
+    "keywords": [
+        "laravel-enso",
+        "tutorialmanager",
+        "tutorial-manager",
+        "bootstrap-tour"
+    ],
+    "homepage": "https://github.com/laravel-enso/TutorialManager",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/activitylog": "1.1.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/vuedatatable": "1.9.*",
+        "laravel-enso/formbuilder": "2.12.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/permissionmanager": "2.3.*",
+        "laravel-enso/structuremanager": "2.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\TutorialManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\TutorialManager\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

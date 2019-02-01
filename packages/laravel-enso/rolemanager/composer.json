@@ -1,0 +1,47 @@
+{
+    "name": "laravel-enso/rolemanager",
+    "description": "Role Manager dependency for Laravel Enso",
+    "version": "2.5.999",
+    "keywords": [
+        "laravel-enso",
+        "rolemanager",
+        "role-manager",
+        "laravel-roles"
+    ],
+    "homepage": "https://github.com/laravel-enso/RoleManager",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/formbuilder": "2.12.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/menumanager": "2.3.*",
+        "laravel-enso/permissionmanager": "2.3.*",
+        "laravel-enso/select": "2.8.*",
+        "laravel-enso/structuremanager": "2.5.*",
+        "laravel-enso/vuecomponents": "2.7.*",
+        "laravel-enso/vuedatatable": "1.9.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\RoleManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\RoleManager\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

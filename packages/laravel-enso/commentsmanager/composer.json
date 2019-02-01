@@ -1,0 +1,46 @@
+{
+    "name": "laravel-enso/commentsmanager",
+    "description": "Comments Manager for Laravel Enso",
+    "version": "2.4.999",
+    "keywords": [
+        "laravel-enso",
+        "commentsmanager",
+        "comments-manager",
+        "comments"
+    ],
+    "homepage": "https://github.com/laravel-enso/CommentsManager",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/activitylog": "1.1.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/trackwho": "1.7.*",
+        "laravel-enso/vuecomponents": "2.7.*",
+        "laravel-enso/structuremanager": "2.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\CommentsManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\CommentsManager\\AppServiceProvider",
+                "LaravelEnso\\CommentsManager\\AuthServiceProvider",
+                "LaravelEnso\\CommentsManager\\NotificationProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

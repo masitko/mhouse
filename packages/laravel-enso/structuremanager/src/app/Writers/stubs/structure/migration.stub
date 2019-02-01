@@ -1,0 +1,13 @@
+<?php
+
+use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+
+class CreateStructureFor${Entity} extends StructureMigration
+{
+    protected $permissions = ${permissions};
+
+    protected $menu = ${menu};
+
+    protected $parentMenu = '${parentMenu}';
+}
+

@@ -1,0 +1,50 @@
+{
+    "name": "laravel-enso/addressesmanager",
+    "description": "Addresses Manager for Laravel Enso",
+    "version": "2.5.999",
+    "keywords": [
+        "laravel-enso",
+        "addresses",
+        "manager",
+        "enso"
+    ],
+    "type": "library",
+    "require": {
+        "laravel-enso/activitylog": "1.1.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/formbuilder": "2.12.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/select": "2.8.*",
+        "laravel-enso/vuecomponents": "2.7.*",
+        "laravel-enso/structuremanager": "2.5.*",
+        "php": ">=7.1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mihai",
+            "email": "mihai.ocneanu@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\AddressesManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\AddressesManager\\AppServiceProvider",
+                "LaravelEnso\\AddressesManager\\RequestValidationProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

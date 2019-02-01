@@ -1,0 +1,42 @@
+{
+    "name": "laravel-enso/activitylog",
+    "description": "User activity log dependency for Laravel Enso",
+    "version": "1.1.999",
+    "keywords": [
+        "laravel-enso",
+        "activitylog",
+        "activity-log",
+        "logging"
+    ],
+    "homepage": "https://github.com/laravel-enso/ActivityLog",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/select": "2.8.*",
+        "laravel-enso/trackwho": "1.7.*",
+        "laravel-enso/vuecomponents": "2.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\ActivityLog\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\ActivityLog\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

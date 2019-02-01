@@ -1,0 +1,45 @@
+{
+    "name": "laravel-enso/howtovideos",
+    "description": "How to video manager for Laravel Enso",
+    "version": "2.2.999",
+    "keywords": [
+        "laravel-enso",
+        "howto",
+        "vidoes"
+    ],
+    "homepage": "https://github.com/laravel-enso/HowToVideos",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel-enso/activitylog": "1.1.*",
+        "laravel-enso/core": "3.6.*",
+        "laravel-enso/filemanager": "2.5.*",
+        "laravel-enso/helpers": "1.10.*",
+        "laravel-enso/imagetransformer": "1.4.*",
+        "laravel-enso/select": "2.8.*",
+        "laravel-enso/structuremanager": "2.5.*",
+        "laravel-enso/vuecomponents": "2.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\HowToVideos\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\HowToVideos\\AppServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}
