@@ -8,119 +8,121 @@ use LaravelEnso\ActivityLog\app\Models\ActivityLog;
 
 class Feed implements Responsable
 {
-    private const Chunk = 50;
+  private const Chunk = 50;
 
-    private $feed;
+  private $feed;
 
-    public function toResponse($request)
-    {
-        $this->setFeed($request);
+  public function toResponse($request)
+  {
+    $this->setFeed($request);
 
-        return $this->feed();
-    }
+    return $this->feed();
+  }
 
-    public function setFeed($request)
-    {
-        $filters = json_decode($request->get('filters'));
+  public function setFeed($request)
+  {
+    $filters = json_decode($request->get('filters'));
 
-        $this->feed = ActivityLog::with('createdBy.person')
-            ->latest()
-            ->skip($request->get('offset'))
-            ->between($filters->interval->min, $filters->interval->max)
-            ->belongingTo($filters->userIds)
-            ->forEvents($filters->events)
-            ->forRoles($filters->roleIds)
-            ->take(self::Chunk)
-            ->get();
-    }
+        // $this->feed = ActivityLog::with('createdBy.person')
+    $this->feed = ActivityLog::with('createdBy')
+      ->latest()
+      ->skip($request->get('offset'))
+      ->between($filters->interval->min, $filters->interval->max)
+      ->belongingTo($filters->userIds)
+      ->forEvents($filters->events)
+      ->forRoles($filters->roleIds)
+      ->take(self::Chunk)
+      ->get();
+  }
 
-    private function feed()
-    {
-        $days = $this->feed->map(function ($item) {
-            return $item->created_at->format('Y-m-d');
-        })->unique()
-            ->values();
+  private function feed()
+  {
+    $days = $this->feed->map(function ($item) {
+      return $item->created_at->format('Y-m-d');
+    })->unique()
+      ->values();
 
-        return $days->map(function ($day) {
+    return $days->map(function ($day) {
+      return [
+        'date' => $day,
+        'list' => $this->feed->filter(function ($item) use ($day) {
+          return $item['created_at']->format('Y-m-d') === $day;
+        })->values()
+          ->map(function ($item) {
             return [
-                'date' => $day,
-                'list' => $this->feed->filter(function ($item) use ($day) {
-                    return $item['created_at']->format('Y-m-d') === $day;
-                })->values()
-                ->map(function ($item) {
-                    return [
-                        'id' => $item->id,
-                        'model' => $this->model($item->model_class),
-                        'action' => [
-                            'type' => $item->event,
-                            'label' => lcfirst(Events::get($item->event)),
-                            'icon' => $item->meta->icon,
-                        ],
-                        'label' => $item->meta->label,
-                        'changes' => $this->changes($item),
-                        'message' => $item->event === Events::Custom
-                            ? $item->meta->message
-                            : null,
-                        'time' => $item->created_at->format('H:i A'),
-                        'author' => [
-                            'name' => $item->createdBy->person->name,
-                            'avatarId' => $item->createdBy->avatar->id,
-                            'id' => $item->createdBy->id,
-                        ],
-                        'morphable' => $this->morphable($item),
-                        'relation' => $this->relation($item),
-                    ];
-                }),
+              'id' => $item->id,
+              'model' => $this->model($item->model_class),
+              'action' => [
+                'type' => $item->event,
+                'label' => lcfirst(Events::get($item->event)),
+                'icon' => $item->meta->icon,
+              ],
+              'label' => $item->meta->label,
+              'changes' => $this->changes($item),
+              'message' => $item->event === Events::Custom
+                ? $item->meta->message
+                : null,
+              'time' => $item->created_at->format('H:i A'),
+              'author' => [
+                // 'name' => $item->createdBy->person->name,
+                'name' => $item->createdBy->name(),
+                'avatarId' => $item->createdBy->avatar->id,
+                'id' => $item->createdBy->id,
+              ],
+              'morphable' => $this->morphable($item),
+              'relation' => $this->relation($item),
             ];
-        }, []);
-    }
+          }),
+      ];
+    }, []);
+  }
 
-    private function model($class)
-    {
-        $model = collect(
-            explode('\\', $class)
-        )->last();
+  private function model($class)
+  {
+    $model = collect(
+      explode('\\', $class)
+    )->last();
 
-        return str_replace('_', ' ', snake_case($model));
-    }
+    return str_replace('_', ' ', snake_case($model));
+  }
 
-    private function changes($item)
-    {
-        return $item->event !== Events::Updated
-            ? []
-            : collect($item->meta->before)
-                ->keys()
-                ->map(function ($key) use ($item) {
-                    return [
-                        'attribute' => $this->attribute($key),
-                        'before' => $item->meta->before->{$key},
-                        'after' => $item->meta->after->{$key},
-                    ];
-                })->toArray();
-    }
+  private function changes($item)
+  {
+    return $item->event !== Events::Updated
+      ? []
+      : collect($item->meta->before)
+      ->keys()
+      ->map(function ($key) use ($item) {
+        return [
+          'attribute' => $this->attribute($key),
+          'before' => $item->meta->before->{$key},
+          'after' => $item->meta->after->{$key},
+        ];
+      })->toArray();
+  }
 
-    private function attribute($key)
-    {
-        return str_replace(['_id', '_'], ['', ' '], $key);
-    }
+  private function attribute($key)
+  {
+    return str_replace(['_id', '_'], ['', ' '], $key);
+  }
 
-    private function morphable($item)
-    {
-        return isset($item->meta->morphable)
-            ? [
-                'model' => $this->model($item->meta->morphable->model_class),
-                'label' => $item->meta->morphable->label,
-            ]
-            : null;
-    }
+  private function morphable($item)
+  {
+    return isset($item->meta->morphable)
+      ? [
+      'model' => $this->model($item->meta->morphable->model_class),
+      'label' => $item->meta->morphable->label,
+    ]
+      : null;
+  }
 
-    private function relation($item)
-    {
-        return isset($item->meta->relation)
-            ? [
-                'model' => $this->model($item->meta->relation->model_class),
-                'label' => $item->meta->relation->label,
-            ]
-            : null;
-    }
+  private function relation($item)
+  {
+    return isset($item->meta->relation)
+      ? [
+      'model' => $this->model($item->meta->relation->model_class),
+      'label' => $item->meta->relation->label,
+    ]
+      : null;
+  }
 }

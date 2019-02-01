@@ -42,7 +42,7 @@
                         v-model="filters.roleIds"/>
                     <vue-select-filter multiple
                         source="administration.users.options"
-                        label="person.name"
+                        label="first_name"
                         :placeholder="__('Authors')"
                         v-model="filters.userIds"/>
                     <vue-select-filter multiple

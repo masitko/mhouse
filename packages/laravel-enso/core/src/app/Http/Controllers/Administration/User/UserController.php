@@ -26,6 +26,10 @@ class UserController extends Controller
 
         $this->authorize('handle', $user);
 
+        if ($request->filled('password')) {
+          $user->password = bcrypt($request->get('password'));
+        }
+
         $user->save();
 
         $user->sendResetPasswordEmail();
@@ -35,18 +39,6 @@ class UserController extends Controller
             'redirect' => 'administration.users.edit',
             'param' => ['user' => $user->id],
         ];
-    }
-
-    public function show(User $user)
-    {
-        (new ProfileBuilder($user))->set();
-
-        return ['user' => $user];
-    }
-
-    public function edit(User $user, UserForm $form)
-    {
-        return ['form' => $form->edit($user)];
     }
 
     public function update(ValidateUserRequest $request, User $user)
@@ -71,6 +63,18 @@ class UserController extends Controller
         }
 
         return ['message' => __('The user was successfully updated')];
+    }
+
+    public function show(User $user)
+    {
+        (new ProfileBuilder($user))->set();
+
+        return ['user' => $user];
+    }
+
+    public function edit(User $user, UserForm $form)
+    {
+        return ['form' => $form->edit($user)];
     }
 
     public function destroy(User $user)

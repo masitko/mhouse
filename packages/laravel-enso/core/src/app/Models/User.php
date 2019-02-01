@@ -28,7 +28,9 @@ class User extends Authenticatable
   use
     ActionLogs,
     ActiveState,
-    Addressable, CreatedBy, UpdatedBy,
+    Addressable,
+    CreatedBy,
+    UpdatedBy,
     HasAvatar,
     HasPassword,
     Impersonates,
@@ -41,8 +43,8 @@ class User extends Authenticatable
 
     // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
-    'group_id', 'role_id', 
-    'first_name', 'last_name', 'other_name', 
+    'group_id', 'role_id',
+    'first_name', 'last_name', 'other_name',
     'email', 'is_active'
   ];
 
@@ -65,6 +67,12 @@ class User extends Authenticatable
     // {
     //     return $this->belongsTo(Person::class);
     // }
+
+  public $test = true;
+
+  public function name() {
+    return $this->first_name.' '.$this->last_name;
+  }
 
   public function group()
   {
@@ -160,15 +168,16 @@ class User extends Authenticatable
 
   public function delete()
   {
-    if ($this->logins()->first() !== null) {
-      throw new ConflictHttpException(__(
-        'The user has activity in the system and cannot be deleted'
-      ));
-    }
+    // if ($this->logins()->first() !== null) {
+    //   throw new ConflictHttpException(__(
+    //     'The user has activity in the system and cannot be deleted'
+    //   ));
+    // }
 
     try {
       parent::delete();
     } catch (\Exception $e) {
+      dd($e);
       throw new ConflictHttpException(__(
         'The user has assigned resources in the system and cannot be deleted'
       ));
