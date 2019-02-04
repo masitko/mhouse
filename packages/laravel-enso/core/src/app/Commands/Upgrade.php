@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\Companies\app\Models\Company;
+use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\DataImport\app\Enums\Statuses;
 use LaravelEnso\DataImport\app\Models\DataImport;
 use LaravelEnso\PermissionManager\app\Models\Permission;
@@ -140,15 +140,15 @@ class Upgrade extends Command
     {
         $this->info('Updating people table');
 
-        if (Schema::hasColumn('people', 'company_id')) {
+        if (Schema::hasColumn('people', 'school_id')) {
             $this->info('Table already updated');
 
             return $this;
         }
 
         Schema::table('people', function (Blueprint $table) {
-            $table->integer('company_id')->after('id')->unsigned()->index()->nullable();
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->integer('school_id')->after('id')->unsigned()->index()->nullable();
+            $table->foreign('school_id')->references('id')->on('schools');
             $table->string('position')->after('birthday')->nullable();
             $table->dropColumn('gender');
         });
@@ -172,7 +172,7 @@ class Upgrade extends Command
             ->each(function ($contact) {
                 Person::whereId($contact->person_id)
                     ->update(collect($contact)->only([
-                        'company_id', 'position',
+                        'school_id', 'position',
                     ])->toArray());
             });
 
@@ -188,7 +188,7 @@ class Upgrade extends Command
         Permission::where(
             'name',
             'LIKE',
-            'administration.companies.contacts.%'
+            'administration.schools.contacts.%'
         )->delete();
 
         $this->info('Structure successfuly updated');
@@ -198,25 +198,25 @@ class Upgrade extends Command
 
     private function updateCompanies()
     {
-        $this->info('Updating companies table');
+        $this->info('Updating schools table');
 
-        if (! Schema::hasColumn('companies', 'mandatary_position')) {
+        if (! Schema::hasColumn('schools', 'mandatary_position')) {
             $this->info('Table already updated');
 
             return $this;
         }
 
-        Company::has('mandatary')
+        School::has('mandatary')
             ->with('mandatary')
             ->get()
-            ->each(function ($company) {
-                $company->mandatary->update([
-                    'company_id' => $company->id,
-                    'position' => $company->mandatary_position,
+            ->each(function ($school) {
+                $school->mandatary->update([
+                    'school_id' => $school->id,
+                    'position' => $school->mandatary_position,
                 ]);
             });
 
-        Schema::table('companies', function (Blueprint $table) {
+        Schema::table('schools', function (Blueprint $table) {
             $table->dropColumn('mandatary_position');
         });
 

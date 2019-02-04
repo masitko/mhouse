@@ -36,7 +36,7 @@ and the option for the customization of any input
 - highly powerful, full search, customizable, template based, huge data-set capable, 
 front-end back-end integrated data table functionality with support for the export of the entire resultset 
 and a great many other features
-- customizable, extensible, companies structure
+- customizable, extensible, schools structure
 - template based, validation capable, asynchronous capable xlsx data import functionality featuring support for big files 
 (the number of rows is limited only by the xlsx format)
  
@@ -54,7 +54,7 @@ and a great many other features
 [Activity Log](https://github.com/laravel-enso/ActivityLog), 
 [Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>, 
 [Charts](https://github.com/laravel-enso/Charts), 
-[Companies](https://github.com/laravel-enso/Companies),
+[Schools](https://github.com/laravel-enso/Schools),
 [Data Export](https://github.com/laravel-enso/DataExport),
 [Data Import](https://github.com/laravel-enso/DataImport), 
 [File Manager](https://github.com/laravel-enso/FileManager), 

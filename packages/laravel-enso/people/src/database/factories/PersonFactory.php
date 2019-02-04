@@ -12,7 +12,7 @@ $factory->define(Person::class, function (Faker $faker) {
         : Genders::Female;
 
     return [
-        'company_id' => null,
+        'school_id' => null,
         'title' => $title,
         'name' => $faker->name(lcfirst(Genders::get($gender))),
         'appellative' => $faker->firstName(lcfirst(Genders::get($gender))),

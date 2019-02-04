@@ -82,15 +82,15 @@
             }
         }]
     }, {
-        "tab": "Company",
+        "tab": "School",
         "columns": 2,
         "fields": [{
-            "label": "Company",
-            "name": "company_id",
+            "label": "School",
+            "name": "school_id",
             "value": null,
             "meta": {
                 "type": "select",
-                "source": "administration.companies.options"
+                "source": "administration.schools.options"
             }
         }, {
             "label": "Position",

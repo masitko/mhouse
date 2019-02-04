@@ -21,7 +21,7 @@ class PersonController extends Controller
     {
         $person = new Person($request->all());
 
-        $this->authorize('set-company', $person);
+        $this->authorize('set-school', $person);
 
         $person->save();
 
@@ -41,8 +41,8 @@ class PersonController extends Controller
     {
         $person->fill($request->all());
 
-        if ($person->isDirty('company_id')) {
-            $this->authorize('change-company', $person);
+        if ($person->isDirty('school_id')) {
+            $this->authorize('change-school', $person);
         }
 
         $person->save();

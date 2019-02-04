@@ -1,6 +1,6 @@
 <?php
 
-use LaravelEnso\Companies\app\Models\Company;
+use LaravelEnso\Schools\app\Models\School;
 
 return [
     'deletableTimeLimit' => 60 * 60,
@@ -9,6 +9,6 @@ return [
     'imageHeight' => 2048,
     'onDelete' => 'restrict',
     'loggableMorph' => [
-        'documentable' => [Company::class => 'name'],
+        'documentable' => [School::class => 'name'],
     ],
 ];

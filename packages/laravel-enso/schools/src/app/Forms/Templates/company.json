@@ -1,0 +1,92 @@
+{
+    "routePrefix": "administration.schools",
+    "sections": [{
+        "columns": 2,
+        "fields": [{
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Mandatary",
+            "name": "mandatary_id",
+            "value": null,
+            "meta": {
+                "custom": true,
+                "type": "select",
+                "source": "administration.people.options"
+            }
+        }]
+    }, {
+        "columns": 3,
+        "fields": [{
+            "label": "Email",
+            "name": "email",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "email"
+            }
+        }, {
+            "label": "Phone Number",
+            "name": "phone",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Fax Number",
+            "name": "fax",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }]
+    }, {
+        "columns": "custom",
+        "fields": [{
+            "column": 5,
+            "label": "Bank",
+            "name": "bank",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "column": 5,
+            "label": "Bank Account",
+            "name": "bank_account",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "column": 2,
+            "label": "Pays VAT",
+            "name": "pays_vat",
+            "value": false,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }]
+    }, {
+        "columns": 1,
+        "fields": [{
+            "label": "Notes",
+            "name": "obs",
+            "value": null,
+            "meta": {
+                "type": "textarea",
+                "rows": 3
+            }
+        }]
+    }]
+}

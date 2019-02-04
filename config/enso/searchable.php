@@ -2,7 +2,7 @@
 
 use LaravelEnso\Teams\app\Models\Team;
 use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\Companies\app\Models\Company;
+use LaravelEnso\Schools\app\Models\School;
 
 return [
     'defaultLabel' => 'name',
@@ -19,11 +19,11 @@ return [
             'label' => 'name',
             'permissionGroup' => 'administration.people',
         ],
-        Company::class => [
-            'group' => 'Company',
+        School::class => [
+            'group' => 'School',
             'attributes' => ['name'],
             'label' => 'name',
-            'permissionGroup' => 'administration.companies',
+            'permissionGroup' => 'administration.schools',
         ],
         Team::class => [
             'group' => 'Team',

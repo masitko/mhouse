@@ -18,8 +18,8 @@ class PersonPolicy
 
     public function setCompany($user, Person $person)
     {
-        return is_null($user->person->company_id)
-            || $user->person->company_id === $person->company_id;
+        return is_null($user->person->school_id)
+            || $user->person->school_id === $person->school_id;
     }
 
     public function changeCompany($user, Person $person)

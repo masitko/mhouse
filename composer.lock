@@ -1510,11 +1510,11 @@
             }
         },
         {
-            "name": "laravel-enso/companies",
+            "name": "laravel-enso/schools",
             "version": "1.2.999",
             "dist": {
                 "type": "path",
-                "url": "packages/laravel-enso/companies",
+                "url": "packages/laravel-enso/schools",
                 "reference": "56fb364d6993dd999b9402ffa63f4a4a5ab384bd",
                 "shasum": null
             },
@@ -1532,15 +1532,15 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "LaravelEnso\\Companies\\AppServiceProvider",
-                        "LaravelEnso\\Companies\\RequestValidationProvider"
+                        "LaravelEnso\\Schools\\AppServiceProvider",
+                        "LaravelEnso\\Schools\\RequestValidationProvider"
                     ],
                     "aliases": []
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "LaravelEnso\\Companies\\": "src/"
+                    "LaravelEnso\\Schools\\": "src/"
                 }
             },
             "license": [
@@ -1555,10 +1555,10 @@
                 }
             ],
             "description": "Person management dependency for Laravel Enso",
-            "homepage": "https://github.com/laravel-enso/Companies",
+            "homepage": "https://github.com/laravel-enso/Schools",
             "keywords": [
-                "companies",
-                "company-management",
+                "schools",
+                "school-management",
                 "laravel-enso"
             ],
             "transport-options": {
@@ -1639,7 +1639,7 @@
                 "laravel-enso/activitylog": "1.1.*",
                 "laravel-enso/avatarmanager": "2.3.*",
                 "laravel-enso/charts": "2.5.*",
-                "laravel-enso/companies": "1.2.*",
+                "laravel-enso/schools": "1.2.*",
                 "laravel-enso/dataexport": "^1.1",
                 "laravel-enso/dataimport": "3.0.*",
                 "laravel-enso/filemanager": "2.5.*",

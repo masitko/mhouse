@@ -36,7 +36,7 @@ class ValidatePersonRequest extends FormRequest implements ValidatesPersonReques
             'birthday' => 'date|nullable',
             'gender' => 'integer|nullable',
             'obs' => 'string|nullable',
-            'company_id' => 'required_with:position',
+            'school_id' => 'required_with:position',
         ];
     }
 }

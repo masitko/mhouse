@@ -7,7 +7,7 @@ use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\People\app\Enums\Titles;
 use LaravelEnso\People\app\Enums\Genders;
-use LaravelEnso\Companies\app\Models\Company;
+use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
 use LaravelEnso\TrackWho\app\Traits\UpdatedBy;
 use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
@@ -36,9 +36,9 @@ class Person extends Model
         return $this->user()->count() === 1;
     }
 
-    public function company()
+    public function school()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(School::class);
     }
 
     public function gender()
@@ -54,7 +54,7 @@ class Person extends Model
 
     public function isMandatary()
     {
-        return $this->id === optional($this->company)->mandatary_id;
+        return $this->id === optional($this->school)->mandatary_id;
     }
 
     public function setBirthdayAttribute($value)
@@ -68,11 +68,11 @@ class Person extends Model
     {
         if ($this->isMandatary()) {
             throw new ConflictHttpException(__(
-                'The selected contact is the company\'s mandatary and cannot be deleted'
+                'The selected contact is the school\'s mandatary and cannot be deleted'
             ));
         }
 
-        $this->company()->dissociate();
+        $this->school()->dissociate();
         $this->save();
     }
 

@@ -1,12 +1,12 @@
 <?php
 
-use LaravelEnso\Companies\app\Models\Company;
+use LaravelEnso\Schools\app\Models\School;
 
 return [
     'onDelete' => 'cascade',
     'loggableMorph' => [
         'discussable' => [
-            Company::class => 'name',
+            School::class => 'name',
         ],
     ],
 ];
