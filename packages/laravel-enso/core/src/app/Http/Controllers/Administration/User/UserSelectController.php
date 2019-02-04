@@ -6,21 +6,20 @@ use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
-class UserSelectController extends Controller
-{
-    use OptionsBuilder;
+class UserSelectController extends Controller {
+  use OptionsBuilder;
 
-    protected $queryAttributes = [
-        // 'email', 'person.name', 'person.appellative',
-        'email', 'first_name', 'last_name',
-    ];
+  protected $queryAttributes = [
+    // 'email', 'person.name', 'person.appellative',
+    'email', 'first_name', 'last_name',
+  ];
 
-    public function query()
-    {
-        return User::active()
-            ->with([
-                // 'person:id,appellative,name',
-                'avatar:id,user_id',
-            ]);
-    }
+  public function query() {
+    return User::active()
+      ->selectRaw("users.*, CONCAT(first_name, ' ', last_name) as name")
+      ->with([
+        // 'person:id,appellative,name',
+        'avatar:id,user_id',
+      ]);
+  }
 }
