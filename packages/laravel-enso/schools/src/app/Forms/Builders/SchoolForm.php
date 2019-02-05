@@ -5,7 +5,7 @@ namespace LaravelEnso\Schools\app\Forms\Builders;
 use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
-class CompanyForm
+class SchoolForm
 {
     private const TemplatePath = __DIR__.'/../Templates/school.json';
 

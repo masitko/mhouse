@@ -20,7 +20,7 @@ School management dependency for [Laravel Enso](https://github.com/laravel-enso/
 - integrates with the [People](https://github.com/laravel-enso/People) package
 - can be reused and integrated with other modules which might deal with schools (e.g. suppliers ) 
 or even other entities, such as people (e.g. clients)
-- a `CompanyFactory` is included by default in the package
+- a `SchoolFactory` is included by default in the package
 - the schools server-side select functionality is also included by default
 
 ### Configuration & Usage

@@ -64,7 +64,7 @@ class Person extends Model
             : null;
     }
 
-    public function dissociateCompany()
+    public function dissociateSchool()
     {
         if ($this->isMandatary()) {
             throw new ConflictHttpException(__(

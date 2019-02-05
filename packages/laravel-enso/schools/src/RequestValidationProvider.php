@@ -3,8 +3,8 @@
 namespace LaravelEnso\Schools;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Schools\app\Contracts\ValidatesCompanyRequest;
-use LaravelEnso\Schools\app\Http\Requests\ValidateCompanyRequest;
+use LaravelEnso\Schools\app\Contracts\ValidatesSchoolRequest;
+use LaravelEnso\Schools\app\Http\Requests\ValidateSchoolRequest;
 
 class RequestValidationProvider extends ServiceProvider
 {
@@ -16,7 +16,7 @@ class RequestValidationProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            ValidatesCompanyRequest::class, ValidateCompanyRequest::class
+            ValidatesSchoolRequest::class, ValidateSchoolRequest::class
         );
     }
 }

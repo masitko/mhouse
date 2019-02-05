@@ -34,7 +34,7 @@ class ValidatePersonRequest extends FormRequest
     private function personExists()
     {
         return Person::whereId($this->get('id'))
-            ->whereCompanyId($this->get('school_id'))
+            ->whereSchoolId($this->get('school_id'))
             ->first() !== null;
     }
 }

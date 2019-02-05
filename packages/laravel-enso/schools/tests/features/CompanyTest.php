@@ -9,7 +9,7 @@ use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
 use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
 use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 
-class CompanyTest extends TestCase
+class SchoolTest extends TestCase
 {
     use Datatable, DestroyForm, EditForm, RefreshDatabase;
 

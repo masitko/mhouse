@@ -5,11 +5,11 @@ namespace LaravelEnso\Schools\app\Http\Controllers;
 use Illuminate\Routing\Controller;
 use LaravelEnso\VueDatatable\app\Traits\Excel;
 use LaravelEnso\VueDatatable\app\Traits\Datatable;
-use LaravelEnso\Schools\app\Tables\Builders\CompanyTable;
+use LaravelEnso\Schools\app\Tables\Builders\SchoolTable;
 
-class CompanyTableController extends Controller
+class SchoolTableController extends Controller
 {
     use Datatable, Excel;
 
-    protected $tableClass = CompanyTable::class;
+    protected $tableClass = SchoolTable::class;
 }

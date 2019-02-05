@@ -7,14 +7,14 @@ Route::namespace('LaravelEnso\Schools\app\Http\Controllers')
     ->group(function () {
         Route::prefix('schools')->as('schools.')
             ->group(function () {
-                Route::get('initTable', 'CompanyTableController@init')
+                Route::get('initTable', 'SchoolTableController@init')
                     ->name('initTable');
-                Route::get('tableData', 'CompanyTableController@data')
+                Route::get('tableData', 'SchoolTableController@data')
                     ->name('tableData');
-                Route::get('exportExcel', 'CompanyTableController@excel')
+                Route::get('exportExcel', 'SchoolTableController@excel')
                     ->name('exportExcel');
 
-                Route::get('options', 'CompanySelectController@options')
+                Route::get('options', 'SchoolSelectController@options')
                     ->name('options');
 
                 Route::prefix('{school}/people')->as('people.')
@@ -38,5 +38,5 @@ Route::namespace('LaravelEnso\Schools\app\Http\Controllers')
                     });
             });
 
-        Route::resource('schools', 'CompanyController', ['except' => ['index', 'show']]);
+        Route::resource('schools', 'SchoolController', ['except' => ['index', 'show']]);
     });

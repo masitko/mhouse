@@ -5,7 +5,7 @@ namespace LaravelEnso\Schools\app\Tables\Builders;
 use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\VueDatatable\app\Classes\Table;
 
-class CompanyTable extends Table
+class SchoolTable extends Table
 {
     const TemplatePath = __DIR__.'/../Templates/schools.json';
 

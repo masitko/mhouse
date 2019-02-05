@@ -32,7 +32,7 @@ class Upgrade extends Command
                 ->updatePermissions()
                 ->updatePeople()
                 ->updateContacts()
-                ->updateCompanies()
+                ->updateSchools()
                 ->updateUsers();
         });
     }
@@ -196,7 +196,7 @@ class Upgrade extends Command
         return $this;
     }
 
-    private function updateCompanies()
+    private function updateSchools()
     {
         $this->info('Updating schools table');
 

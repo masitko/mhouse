@@ -7,7 +7,7 @@ use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Schools\app\Models\School;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CompanyPeopleTest extends TestCase
+class SchoolPeopleTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -40,7 +40,7 @@ class CompanyPeopleTest extends TestCase
     /** @test */
     public function can_view_edit_form()
     {
-        $this->setCompany();
+        $this->setSchool();
 
         $this->get(route('administration.schools.people.edit', [$this->testModel->id], false))
             ->assertStatus(200)
@@ -68,7 +68,7 @@ class CompanyPeopleTest extends TestCase
     /** @test */
     public function can_update_person()
     {
-        $this->setCompany();
+        $this->setSchool();
         $this->testModel->position = 'updated';
 
         $this->patch(
@@ -83,7 +83,7 @@ class CompanyPeopleTest extends TestCase
     /** @test */
     public function can_get_option_list()
     {
-        $this->setCompany();
+        $this->setSchool();
 
         $this->get(route('administration.people.options', [
             'query' => $this->testModel->name,
@@ -98,7 +98,7 @@ class CompanyPeopleTest extends TestCase
     /** @test */
     public function can_dissociate_person()
     {
-        $this->setCompany();
+        $this->setSchool();
 
         $this->delete(route('administration.schools.people.destroy', [$this->testModel->id], false))
             ->assertStatus(200);
@@ -106,7 +106,7 @@ class CompanyPeopleTest extends TestCase
         $this->assertNull($this->testModel->fresh()->school_id);
     }
 
-    public function setCompany()
+    public function setSchool()
     {
         $this->testModel->school_id = $this->school->id;
         $this->testModel->save();

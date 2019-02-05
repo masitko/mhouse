@@ -2,7 +2,7 @@
 
 use LaravelEnso\StructureManager\app\Classes\StructureMigration;
 
-class CreateStructureForCompanies extends StructureMigration
+class CreateStructureForSchools extends StructureMigration
 {
     protected $permissions = [
         ['name' => 'administration.schools.initTable', 'description' => 'Init table for schools', 'type' => 0, 'is_default' => false],

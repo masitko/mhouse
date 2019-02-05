@@ -5,19 +5,19 @@ namespace LaravelEnso\Schools\app\Http\Controllers;
 use Illuminate\Routing\Controller;
 use LaravelEnso\Schools\app\Models\School;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use LaravelEnso\Schools\app\Forms\Builders\CompanyForm;
-use LaravelEnso\Schools\app\Contracts\ValidatesCompanyRequest;
+use LaravelEnso\Schools\app\Forms\Builders\SchoolForm;
+use LaravelEnso\Schools\app\Contracts\ValidatesSchoolRequest;
 
-class CompanyController extends Controller
+class SchoolController extends Controller
 {
     use AuthorizesRequests;
 
-    public function create(CompanyForm $form)
+    public function create(SchoolForm $form)
     {
         return ['form' => $form->create()];
     }
 
-    public function store(ValidatesCompanyRequest $request)
+    public function store(ValidatesSchoolRequest $request)
     {
         $school = School::create($request->all());
 
@@ -28,12 +28,12 @@ class CompanyController extends Controller
         ];
     }
 
-    public function edit(School $school, CompanyForm $form)
+    public function edit(School $school, SchoolForm $form)
     {
         return ['form' => $form->edit($school)];
     }
 
-    public function update(ValidatesCompanyRequest $request, School $school)
+    public function update(ValidatesSchoolRequest $request, School $school)
     {
         $school->update($request->all());
 

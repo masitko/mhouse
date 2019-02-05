@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
-class CompanySelectController extends Controller
+class SchoolSelectController extends Controller
 {
     use OptionsBuilder;
 

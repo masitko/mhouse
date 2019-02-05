@@ -2,7 +2,7 @@
 
 use LaravelEnso\StructureManager\app\Classes\StructureMigration;
 
-class CreateStructureForCompanyPeople extends StructureMigration
+class CreateStructureForSchoolPeople extends StructureMigration
 {
     protected $permissions = [
         ['name' => 'administration.schools.people.create', 'description' => 'Add person to school', 'type' => 1, 'is_default' => false],
