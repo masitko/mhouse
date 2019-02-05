@@ -6,10 +6,10 @@
                 <fa icon="user"
                     size="xs"/>
             </span>
-            {{ profile.person.name }}
-            <span v-if="profile.person.appellative">
+            {{ profile.first_name + ' ' + profile.last_name }}
+            <!-- <span v-if="profile.person.appellative">
                 ({{ profile.person.appellative }})
-            </span>
+            </span> -->
         </h4>
         <hr class="has-background-grey-lighter">
         <div class="columns">
@@ -91,11 +91,12 @@
                     v-if="isMobile">
                 <div class="columns is-mobile is-multiline details">
                     <div class="column is-one-third has-text-right has-padding-small">
-                        <strong>{{ __('Group') }}:</strong>
+                        <strong>{{ __('School') }}:</strong>
                     </div>
                     <div class="column is-two-thirds has-padding-small">
-                        <span class="has-margin-left-medium">
-                            {{ profile.group.name }}
+                        <span v-if="profile.school" 
+                            class="has-margin-left-medium">
+                            {{ profile.school.name }}
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
@@ -119,7 +120,7 @@
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
-                            {{ profile.person.phone }}
+                            {{ profile.phone }}
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
@@ -127,7 +128,7 @@
                     </div>
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
-                            {{ dateFormat(profile.person.birthday) }}
+                            {{ dateFormat(profile.birthday) }}
                         </span>
                     </div>
                     <div class="column is-one-third has-text-right has-padding-small">
@@ -136,8 +137,8 @@
                     <div class="column is-two-thirds has-padding-small">
                         <span class="has-margin-left-medium">
                             {{
-                                profile.person.gender
-                                    ? enums.genders._get(profile.person.gender)
+                                profile.gender
+                                    ? enums.genders._get(profile.gender)
                                     : null
                             }}
                         </span>

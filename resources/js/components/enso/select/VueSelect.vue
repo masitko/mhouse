@@ -20,6 +20,7 @@
                                 @remove="remove(option)"/>
                         </div>
                         <input class="input select-input" type="text"
+                            autocomplete="new-password"
                             :placeholder="i18n(placeholder)"
                             v-model="query"
                             @keydown.esc="hideDropdown"

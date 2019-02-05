@@ -1,6 +1,7 @@
 <template>
     <div :class="['control', { 'has-icons-right': errors.has(field.name) }]">
         <input :class="['input', { 'is-danger': errors.has(field.name) }]"
+            autocomplete="new-password"
             v-model="field.value"
             :disabled="field.meta.disabled"
             :max="field.meta.max"

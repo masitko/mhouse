@@ -3,6 +3,7 @@
         <form-header :data="data"
             :i18n="i18n"/>
         <form class="is-marginless"
+            autocomplete="off"
             @submit.prevent="$refs.actions.submit()">
             <enso-tabs class="form-tabs"
                 @activated="$emit('tab-activated', $event)"

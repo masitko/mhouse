@@ -22,6 +22,7 @@ use LaravelEnso\AddressesManager\app\Traits\Addressable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use LaravelEnso\Schools\app\Models\School;
 
 class User extends Authenticatable
 {
@@ -59,7 +60,7 @@ class User extends Authenticatable
 
   protected $loggable = [
     'email',
-    'group_id' => [UserGroup::class => 'name'],
+    'school_id' => [School::class => 'name'],
     'role_id' => [Role::class => 'name'],
   ];
 
@@ -74,9 +75,9 @@ class User extends Authenticatable
     return $this->first_name.' '.$this->last_name;
   }
 
-  public function group()
+  public function school()
   {
-    return $this->belongsTo(UserGroup::class);
+    return $this->belongsTo(School::class);
   }
 
   public function role()

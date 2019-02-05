@@ -64,9 +64,9 @@
       ]
     },
     {
-      "label": "Group",
-      "name": "userGroup",
-      "data": "user_groups.name",
+      "label": "School",
+      "name": "schoolName",
+      "data": "schools.name",
       "meta": [
         "searchable",
         "sortable"

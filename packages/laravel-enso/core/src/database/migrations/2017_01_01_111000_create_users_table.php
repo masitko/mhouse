@@ -12,9 +12,9 @@ class CreateUsersTable extends Migration
 
             // $table->integer('person_id')->unsigned()->index()->nullable();
 
-            $table->integer('group_id')->unsigned()->index()->nullable();
-            $table->foreign('group_id')->references('id')->on('user_groups');
-
+            // $table->integer('group_id')->unsigned()->index()->nullable();
+            // $table->foreign('group_id')->references('id')->on('user_groups');
+            
             $table->integer('role_id')->unsigned()->index('roles_id');
             $table->foreign('role_id')->references('id')->on('roles');
 

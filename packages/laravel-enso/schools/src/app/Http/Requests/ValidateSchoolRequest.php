@@ -22,15 +22,11 @@ class ValidateSchoolRequest extends FormRequest implements ValidatesSchoolReques
         }
 
         return [
-            'mandatary_id' => 'nullable|exists:people,id',
             'name' => ['required', 'string', $nameUnique],
             'email' => 'email|nullable',
             'phone' => 'nullable',
             'fax' => 'nullable',
-            'bank' => 'string|nullable',
-            'bank_account' => 'string|nullable',
-            'obs' => 'string|nullable',
-            'pays_vat' => 'required|boolean',
+            'notes' => 'string|nullable',
         ];
     }
 

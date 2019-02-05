@@ -12,6 +12,7 @@ class RoleSelectController extends Controller
 
     public function query()
     {
-        return Role::visible();
+      // return Role::visible();
+      return Role::query();
     }
 }

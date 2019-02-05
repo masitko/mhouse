@@ -1,5 +1,5 @@
 <template>
-    <vue-select v-model="field.value"
+    <vue-select v-model="field.value" 
         :disabled="field.meta.disabled"
         :readonly="field.meta.readonly"
         :has-error="errors.has(field.name)"

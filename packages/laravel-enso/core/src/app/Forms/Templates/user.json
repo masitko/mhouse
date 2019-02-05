@@ -64,16 +64,16 @@
           }
         },
         {
-          "label": "Group",
-          "name": "group_id",
+          "label": "School",
+          "name": "school_id",
           "value": null,
           "column": 3,
           "meta": {
-            "custom": true,
+            "custom": false,
             "type": "select",
             "multiple": false,
             "options": [],
-            "source": "administration.userGroups.options"
+            "source": "administration.schools.options"
           }
         },
         {
@@ -82,7 +82,7 @@
           "value": null,
           "column": 3,
           "meta": {
-            "custom": true,
+            "custom": false,
             "type": "select",
             "multiple": false,
             "options": [],

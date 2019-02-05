@@ -12,8 +12,10 @@ class SchoolTable extends Table
     public function query()
     {
         return School::select(\DB::raw(
-                'schools.*, schools.id as "dtRowId", people.name as mandatary'
-            ))->leftJoin('people', 'schools.mandatary_id', '=', 'people.id');
+                'schools.*, schools.id as "dtRowId"'
+            ));
+            // 'schools.*, schools.id as "dtRowId", people.name as mandatary'
+            // ))->leftJoin('people', 'schools.mandatary_id', '=', 'people.id');
     }
 
     public function templatePath()

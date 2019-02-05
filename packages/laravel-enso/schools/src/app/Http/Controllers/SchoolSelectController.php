@@ -15,10 +15,10 @@ class SchoolSelectController extends Controller
     {
         $query = School::query();
 
-        if (! $request->user()->belongsToAdminGroup()
-            && $request->user()->person->school_id) {
-            $query->whereId($request->user()->person->school_id);
-        }
+        // if (! $request->user()->belongsToAdminGroup()
+        //     && $request->user()->person->school_id) {
+        //     $query->whereId($request->user()->person->school_id);
+        // }
 
         return $query;
     }

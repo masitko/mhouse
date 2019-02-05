@@ -9,16 +9,18 @@
                         :i18n="i18n"
                         @input="pivotParams.userGroups.id = $event"/>
                 </template>
-                <template slot="role_id"
+                <!-- <template slot="role_id"
                     slot-scope="{ field, errors, i18n }">
                     <select-field :errors="errors"
                         :field="field"
                         :i18n="i18n"
-                        :pivot-params="pivotParams"/>
-                </template>
+                        :pivot-params="pivotParams"
+                        />
+                </template> -->
                 <template slot="password"
                     slot-scope="{ field, errors, i18n }">
                     <input-field :errors="errors"
+                        autocomplete="new-password"
                         :field="field"
                         :i18n="i18n"
                         @input="password = $event.target.value"
@@ -29,6 +31,7 @@
                 <template slot="password_confirmation"
                     slot-scope="{ field, errors, i18n }">
                     <input-field :errors="errors"
+                        autocomplete="new-password"
                         :field="field"
                         :i18n="i18n"
                         @input="passwordConfirmation = $event.target.value"

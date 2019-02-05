@@ -20,7 +20,7 @@ class School extends Model
 
     protected $guarded = [];
 
-    protected $casts = ['pays_vat' => 'boolean'];
+    // protected $casts = ['pays_vat' => 'boolean'];
 
     protected $loggableLabel = 'name';
 
