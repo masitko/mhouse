@@ -1,0 +1,7 @@
+{
+    "routePrefix": "wheels.observations",
+    "sections": [{
+        "columns": 2,
+        "fields": []
+    }]
+}

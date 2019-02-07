@@ -1,0 +1,14 @@
+{
+    "routePrefix": "wheels.areas",
+    "crtNo": true,
+    "buttons": ["excel", "create", "show", "edit", "destroy"],
+    "columns": [{
+        "label": "Id",
+        "name": "dtRowId",
+        "data": "areas.dtRowId",
+        "meta": [
+            "searchable",
+            "sortable"
+        ]
+    }]
+}
