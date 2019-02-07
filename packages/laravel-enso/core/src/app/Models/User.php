@@ -110,7 +110,7 @@ class User extends Authenticatable
     return $this->role_id === Role::SupervisorId;
   }
 
-  public function belongsToAdminGroup()
+  public function belongsToAdminGroup1()
   {
     return $this->group_id === UserGroup::AdminGroupId;
   }
