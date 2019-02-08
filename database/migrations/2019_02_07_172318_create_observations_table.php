@@ -22,7 +22,7 @@ class CreateObservationsTable extends Migration
       $table->string('name')->unique();
       $table->string('description')->nullable();
 
-      $table->integer('order_index');
+      $table->integer('order');
 
       $table->timestamps();
     });

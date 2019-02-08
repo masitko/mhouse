@@ -12,7 +12,7 @@ class ObservationTable extends Table
     public function query()
     {
         return Observation::select(\DB::raw('
-            observations.id as "dtRowId"
-        '));
+          observations.*, observations.id as "dtRowId", areas.name as area_name
+        '))->leftJoin('areas', 'observations.area_id',  '=',  'areas.id');
     }
 }

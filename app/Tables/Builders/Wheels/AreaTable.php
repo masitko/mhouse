@@ -12,7 +12,7 @@ class AreaTable extends Table
     public function query()
     {
         return Area::select(\DB::raw('
-            areas.id as "dtRowId"
+            areas.*, areas.id as "dtRowId"
         '));
     }
 }

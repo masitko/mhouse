@@ -19,7 +19,8 @@ class CreateAreasTable extends Migration
             $table->string('name')->unique();
             $table->string('description')->nullable();
       
-            $table->integer('order_index');
+            $table->string('colour')->nullable();
+            $table->integer('order');
             
             $table->timestamps();
         });

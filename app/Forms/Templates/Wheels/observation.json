@@ -1,7 +1,54 @@
 {
-    "routePrefix": "wheels.observations",
-    "sections": [{
-        "columns": 2,
-        "fields": []
-    }]
+  "routePrefix": "wheels.observations",
+  "sections": [
+    {
+      "columns": 2,
+      "fields": [
+        {
+          "label": "Name",
+          "name": "name",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Area",
+          "name": "area_id",
+          "value": null,
+          "meta": {
+            "custom": false,
+            "type": "select",
+            "multiple": false,
+            "options": [],
+            "source": "wheels.areas.options"
+          }
+        },
+        {
+          "label": "Order",
+          "name": "order",
+          "value": 0,
+          "meta": {
+            "type": "input",
+            "content": "number"
+          }
+        }
+      ]
+    },
+    {
+      "columns": 1,
+      "fields": [
+        {
+          "label": "Description",
+          "name": "description",
+          "value": null,
+          "meta": {
+            "type": "textarea",
+            "rows": 3
+          }
+        }
+      ]
+    }
+  ]
 }
