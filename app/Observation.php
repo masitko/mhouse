@@ -15,6 +15,8 @@ class Observation extends Model
 
   protected $loggable = ['name', 'description'];
 
-  
+  public function area() {
+    return $this->belongsTo(Area::class);
+  }
 
 }

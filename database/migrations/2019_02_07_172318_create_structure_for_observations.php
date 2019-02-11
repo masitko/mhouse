@@ -22,6 +22,6 @@ class CreateStructureForObservations extends StructureMigration
         'name' => 'Observations', 'icon' => 'clipboard', 'route' => 'wheels.observations.index', 'order_index' => 200, 'has_children' => false
     ];
 
-    protected $parentMenu = 'Wheels';
+    protected $parentMenu = 'Wheels Configuration';
 }
 

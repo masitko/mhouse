@@ -38,7 +38,7 @@ class AreaController extends Controller
 
     public function update(ValidateAreaRequest $request, Area $area)
     {
-        $area->update($request->all());
+        $area->updateWithObservations($request->all());
 
         return ['message' => __('The area was successfully updated')];
     }

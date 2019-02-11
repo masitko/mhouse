@@ -21,6 +21,22 @@ class Area extends Model
       return $this->hasMany(Observation::class, 'area_id');
   }
 
+  public function updateWithObservations(array $attributes)
+  {
+      tap($this)->update($attributes);
+      foreach($this->observations as $observation) {
+        $observation->area()->dissociate($this)->save();
+      }
+      
+      $observations = Observation::findMany($attributes['observations']);
+      foreach($observations as $observation) {
+        $observation->area()->associate($this)->save();
+      }
+
+          // ->observations()
+          // ->sync($attributes['observations']);
+  }
+
   public function delete()
   {
       if ($this->observations()->count()) {
