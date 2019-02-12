@@ -1,7 +1,77 @@
 {
-    "routePrefix": "wheels.wheels",
-    "sections": [{
-        "columns": 2,
-        "fields": []
-    }]
+  "routePrefix": "wheels.wheels",
+  "tabs": true,
+  "sections": [
+    {
+      "tab": "Details",
+      "columns": "custom",
+      "fields": [
+        {
+          "label": "Name",
+          "name": "name",
+          "value": null,
+          "column": 9,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Active",
+          "name": "is_active",
+          "value": false,
+          "column": 3,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
+        }
+
+      ]
+    },
+    {
+      "tab": "Details",
+      "columns": 1,
+      "fields": [
+        {
+          "label": "Description",
+          "name": "description",
+          "value": null,
+          "meta": {
+            "type": "textarea",
+            "rows": 3
+          }
+        },
+        {
+          "label": "Please select areas to be included:",
+          "name": "areas",
+          "value": [],
+          "meta": {
+            "type": "select",
+            "multiple": true,
+            "source": "wheels.areas.options",
+            "custom": true
+          }
+        }
+      ]
+    },
+    {
+      "tab": "Observations",
+      "columns": 1,
+      "fields" : [
+        {
+          "label" : "Please select observations:",
+          "name" : "observations",
+          "value" : [],
+          "meta" :{
+            "type": "select",
+            "multiple": true,
+            "source": "wheels.observations.options",
+            "custom": true
+          }
+        }
+      ]
+    }
+
+  ]
 }

@@ -1,14 +1,30 @@
 {
-    "routePrefix": "wheels.wheels",
-    "crtNo": true,
-    "buttons": ["excel", "create", "show", "edit", "destroy"],
-    "columns": [{
-        "label": "Id",
-        "name": "dtRowId",
-        "data": "wheels.dtRowId",
-        "meta": [
-            "searchable",
-            "sortable"
-        ]
-    }]
+  "routePrefix": "wheels.wheels",
+  "crtNo": true,
+  "buttons": [
+    "excel",
+    "create",
+    "edit",
+    "destroy"
+  ],
+  "columns": [
+    {
+      "label": "Name",
+      "name": "name",
+      "data": "wheels.name",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
+      "label": "Active",
+      "name": "is_active",
+      "data": "users.is_active",
+      "meta": [
+        "boolean"
+      ]
+    }
+
+  ]
 }

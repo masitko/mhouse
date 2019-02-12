@@ -12,7 +12,7 @@ class WheelTable extends Table
     public function query()
     {
         return Wheel::select(\DB::raw('
-            wheels.id as "dtRowId"
+            wheels.*, wheels.id as "dtRowId"
         '));
     }
 }

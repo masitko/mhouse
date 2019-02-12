@@ -15,6 +15,15 @@ class CreateWheelsTable extends Migration
     {
         Schema::create('wheels', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+
+            // json structure of the wheel
+            $table->json('definition')->nullable();
+
+            $table->boolean('is_active');
+
             $table->timestamps();
         });
     }

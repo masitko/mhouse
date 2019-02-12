@@ -18,6 +18,7 @@ class AreaController extends Controller
     public function store(ValidateAreaRequest $request)
     {
         $area = Area::create($request->all());
+        $area->associateObservations($request->input('observations'));
 
         return [
             'message' => __('The area was successfully created'),
@@ -38,7 +39,8 @@ class AreaController extends Controller
 
     public function update(ValidateAreaRequest $request, Area $area)
     {
-        $area->updateWithObservations($request->all());
+        $area->update($request->all());
+        $area->associateObservations($request->input('observations'));
 
         return ['message' => __('The area was successfully updated')];
     }

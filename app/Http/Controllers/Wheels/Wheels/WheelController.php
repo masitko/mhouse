@@ -2,54 +2,60 @@
 
 namespace App\Http\Controllers\Wheels\Wheels;
 
-use App\Wheel;
 use App\Forms\Builders\Wheels\WheelForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Wheels\ValidateWheelRequest;
+use App\Wheel;
 
+class WheelController extends Controller {
+  public function create(WheelForm $form) {
+    return ['form' => $form->create()];
+  }
 
-class WheelController extends Controller
-{
-    public function create(WheelForm $form)
-    {
-        return ['form' => $form->create()];
-    }
+  public function store(ValidateWheelRequest $request) {
 
-    public function store(ValidateWheelRequest $request)
-    {
-        $wheel = Wheel::create($request->all());
+    $wheel = new Wheel($request->all());
+    $this->updateDefinition($request, $wheel)
+      ->save();
 
-        return [
-            'message' => __('The wheel was successfully created'),
-            'redirect' => 'wheels.wheels.edit',
-            'param' => ['wheel' => $wheel->id],
-        ];
-    }
+    return [
+      'message' => __('The wheel was successfully created'),
+      'redirect' => 'wheels.wheels.edit',
+      'param' => ['wheel' => $wheel->id],
+    ];
+  }
 
-    public function show(Wheel $wheel)
-    {
-        return ['wheel' => $wheel];
-    }
+  public function show(Wheel $wheel) {
+    return ['wheel' => $wheel];
+  }
 
-    public function edit(Wheel $wheel, WheelForm $form)
-    {
-        return ['form' => $form->edit($wheel)];
-    }
+  public function edit(Wheel $wheel, WheelForm $form) {
+    return ['form' => $form->edit($wheel)];
+  }
 
-    public function update(ValidateWheelRequest $request, Wheel $wheel)
-    {
-        $wheel->update($request->all());
+  public function update(ValidateWheelRequest $request, Wheel $wheel) {
 
-        return ['message' => __('The wheel was successfully updated')];
-    }
+    $this->updateDefinition($request, $wheel)
+      ->update($request->all());
 
-    public function destroy(Wheel $wheel)
-    {
-        $wheel->delete();
+    return ['message' => __('The wheel was successfully updated')];
+  }
 
-        return [
-            'message' => __('The wheel was successfully deleted'),
-            'redirect' => 'wheels.wheels.index',
-        ];
-    }
+  public function destroy(Wheel $wheel) {
+    $wheel->delete();
+
+    return [
+      'message' => __('The wheel was successfully deleted'),
+      'redirect' => 'wheels.wheels.index',
+    ];
+  }
+
+  private function updateDefinition(ValidateWheelRequest $request, Wheel $wheel) {
+    $wheel->definition = json_encode((object) [
+      "areas" => $request->input('areas'),
+      "observations" => $request->input('observations'),
+    ]);
+    return $wheel;
+  }
+
 }
