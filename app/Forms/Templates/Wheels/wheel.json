@@ -56,7 +56,7 @@
       ]
     },
     {
-      "tab": "Observations",
+      "tab": "Selection",
       "columns": 1,
       "fields" : [
         {
@@ -67,6 +67,22 @@
             "type": "select",
             "multiple": true,
             "source": "wheels.observations.options",
+            "custom": true
+          }
+        }
+      ]
+    },
+    {
+      "tab": "Preview",
+      "columns": "custom",
+      "fields" : [
+        {
+          "label" : "",
+          "column": 8,
+          "name" : "wheelchart",
+          "value" : [],
+          "meta" :{
+            "type": "select",
             "custom": true
           }
         }

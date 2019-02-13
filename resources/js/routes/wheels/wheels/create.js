@@ -1,4 +1,4 @@
-const WheelCreate = () => import('../../../pages/wheels/wheels/Create.vue');
+const WheelCreate = () => import('../../../pages/wheels/wheels/Edit.vue');
 
 export default {
     name: 'wheels.wheels.create',

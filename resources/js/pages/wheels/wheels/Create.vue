@@ -1,9 +1,19 @@
 <template>
   <div class="columns is-centered">
     <div class="column is-three-quarters-desktop is-full-touch">
-      <enso-form class="box has-background-light raises-on-hover animated fadeIn" ref="form">
+      <enso-form
+        class="box has-background-light raises-on-hover animated fadeIn"
+        ref="form"
+        @loaded="formLoaded(this)"
+      >
         <template slot="areas" slot-scope="{ field, errors, i18n }">
-          <select-field :errors="errors" :field="field" :i18n="i18n" @input="inputChange($event)"/>
+          <select-field
+            :errors="errors"
+            :field="field"
+            :i18n="i18n"
+            @input="inputChange"
+            @fetch="areasFetched"
+          />
         </template>
 
         <template slot="observations">
@@ -22,7 +32,6 @@
 </template>
 
 <script>
-
 import EnsoForm from "../../../components/enso/vueforms/EnsoForm.vue";
 import SelectField from "../../../components/enso/vueforms/fields/SelectField.vue";
 import CheckboxManager from "../../../components/observationsmanager/CheckboxManager.vue";
@@ -32,8 +41,9 @@ export default {
 
   data: () => ({
     data: null,
+    loaded: false,
+    fetched: false,
     pivotParams: {
-      // areas: [],
       structure: { _items: [] }
     }
   }),
@@ -43,7 +53,17 @@ export default {
   },
 
   methods: {
+    formLoaded(self) {
+      console.log("FORM LOADED!!!!");
+      this.loaded = true;
+    },
+    areasFetched(options) {
+      console.log("AREAS FETCHED!!!!");
+      this.inputChange(this.$refs.form.formData().areas);
+      this.fetched = true;
+    },
     inputChange(areas) {
+      console.log("INPUT CHANGED!!!!");
       var options = this.$refs.form.field("areas").meta.options;
       this.pivotParams.structure = { _items: [] };
       areas.forEach(areaId => {

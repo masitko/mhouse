@@ -1,13 +1,18 @@
 <template>
   <div class="columns is-centered">
     <div class="column is-three-quarters-desktop is-full-touch">
-      <enso-form class="box has-background-light raises-on-hover animated fadeIn" 
-      ref="form"
-      @loaded="formLoaded(this)">
+      <enso-form
+        class="box has-background-light raises-on-hover animated fadeIn"
+        ref="form"
+        @loaded="formLoaded(this)"
+      >
         <template slot="areas" slot-scope="{ field, errors, i18n }">
-          <select-field :errors="errors" :field="field" :i18n="i18n" 
-          @input="inputChange"
-          @fetch="areasFetched"
+          <select-field
+            :errors="errors"
+            :field="field"
+            :i18n="i18n"
+            @input="inputChange"
+            @fetch="areasFetched"
           />
         </template>
 
@@ -21,6 +26,15 @@
             />
           </div>
         </template>
+
+        <template slot="wheelchart">
+          <div class="animated fadeIn is-half" v-if="fetched">
+            <chart-card
+              class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
+              source="/api/dashboard/pie"
+            />
+          </div>
+        </template>
       </enso-form>
     </div>
   </div>
@@ -30,45 +44,35 @@
 import EnsoForm from "../../../components/enso/vueforms/EnsoForm.vue";
 import SelectField from "../../../components/enso/vueforms/fields/SelectField.vue";
 import CheckboxManager from "../../../components/observationsmanager/CheckboxManager.vue";
+import ChartCard from "../../../components/enso/charts/ChartCard.vue";
 
 export default {
-  components: { EnsoForm, SelectField, CheckboxManager },
+  components: { EnsoForm, SelectField, CheckboxManager, ChartCard },
 
   data: () => ({
     data: null,
     loaded: false,
     fetched: false,
     pivotParams: {
-      // areas: [],
       structure: { _items: [] }
     }
   }),
-
-  props: {
-    params: {
-      type: Object,
-      default: null
-    },
-  },
 
   created() {
     this.fetch();
   },
   methods: {
     formLoaded(self) {
-      console.log('LOADED!!!!');
-      console.log(this);
-      console.log(this.$refs.form.field("areas"));
+      console.log("FORM LOADED!!!!");
       this.loaded = true;
     },
     areasFetched(options) {
-      console.log('FETCHED!!!!');
-      console.log(options);
+      console.log("AREAS FETCHED!!!!");
       this.inputChange(this.$refs.form.formData().areas);
       this.fetched = true;
     },
     inputChange(areas) {
-      console.log('CHANGED!!!!');
+      console.log("INPUT CHANGED!!!!");
       var options = this.$refs.form.field("areas").meta.options;
       this.pivotParams.structure = { _items: [] };
       areas.forEach(areaId => {
