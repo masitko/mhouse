@@ -40,9 +40,25 @@ class ChartController extends Controller
     public function pie()
     {
         return (new PieChart())
-            ->title('Colors')
-            ->labels(['Green', 'Red', 'Azzure'])
-            ->datasets([400, 50, 100])
+            ->title('Outcome Wheel')
+            ->labels(['Green', 'Red', 'Azzure', 'Next', 'BBB', 'JJJ'])
+            ->datasets([
+              [30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
+              ])
+            ->options([
+              'cutoutPercentage' => 20,
+              'aspectRatio' => 5/4,
+              'legend' => [
+                'position' => 'right',
+              ],
+              // 'onClick' => 'function(attr){console.log(attr)}'
+            ])
             ->get();
     }
 

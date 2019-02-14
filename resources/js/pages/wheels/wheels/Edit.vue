@@ -33,6 +33,7 @@
               class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
               source="/api/dashboard/pie"
             />
+              <!-- :wheel="pie" -->
           </div>
         </template>
       </enso-form>
@@ -44,7 +45,7 @@
 import EnsoForm from "../../../components/enso/vueforms/EnsoForm.vue";
 import SelectField from "../../../components/enso/vueforms/fields/SelectField.vue";
 import CheckboxManager from "../../../components/observationsmanager/CheckboxManager.vue";
-import ChartCard from "../../../components/enso/charts/ChartCard.vue";
+import ChartCard from "../../../components/wheelchart/ChartCard.vue";
 
 export default {
   components: { EnsoForm, SelectField, CheckboxManager, ChartCard },
@@ -55,6 +56,26 @@ export default {
     fetched: false,
     pivotParams: {
       structure: { _items: [] }
+    },
+    pie: {
+      data: {
+        labels: ["Green", "Red", "Azzure"],
+        datasets: [
+          {
+            data: [400, 50, 100],
+            backgroundColor: ["#008000", "#FF0000", "#1E90FF"],
+            datalabels: { backgroundColor: ["#008000", "#FF0000", "#1E90FF"] }
+          },
+          {
+            data: [200, 150, 100],
+            backgroundColor: ["#008000", "#FF0000", "#1E90FF"],
+            datalabels: { backgroundColor: ["#008000", "#FF0000", "#1E90FF"] }
+          }
+        ]
+      },
+      options: { aspectRatio: 1 },
+      title: "Wheel",
+      type: "doughnut"
     }
   }),
 

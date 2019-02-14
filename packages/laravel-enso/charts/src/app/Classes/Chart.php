@@ -37,6 +37,13 @@ abstract class Chart
         return $this;
     }
 
+    public function options(array $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
     public function labels(array $labels)
     {
         $this->labels = $labels;
