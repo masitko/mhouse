@@ -10,17 +10,27 @@
           "label": "Name",
           "name": "name",
           "value": null,
-          "column": 9,
+          "column": 8,
           "meta": {
             "type": "input",
             "content": "text"
           }
         },
         {
+          "label": "Layers",
+          "name": "layers",
+          "value": 6,
+          "column": 2,
+          "meta": {
+            "type": "input",
+            "content": "number"
+          }
+        },
+        {
           "label": "Active",
           "name": "is_active",
           "value": false,
-          "column": 3,
+          "column": 2,
           "meta": {
             "type": "input",
             "content": "checkbox"
@@ -74,11 +84,10 @@
     },
     {
       "tab": "Preview",
-      "columns": "custom",
+      "columns": "1",
       "fields" : [
         {
           "label" : "",
-          "column": 8,
           "name" : "wheelchart",
           "value" : [],
           "meta" :{

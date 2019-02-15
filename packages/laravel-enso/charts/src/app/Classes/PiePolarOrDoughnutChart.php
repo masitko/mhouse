@@ -38,7 +38,10 @@ abstract class PiePolarOrDoughnutChart extends Chart
     private function stackedDatasets()
     {
         return collect($this->datasets)->map(function ($dataset) {
-            return [
+            if(isset($dataset['data']))
+              return $dataset;
+            else
+              return [
                 'data' => $dataset,
                 'backgroundColor' => $this->colors,
                 'datalabels' => [

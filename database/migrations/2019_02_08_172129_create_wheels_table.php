@@ -22,6 +22,8 @@ class CreateWheelsTable extends Migration
             // json structure of the wheel
             $table->json('definition')->nullable();
 
+            // amount of layers
+            $table->integer('layers');
             $table->boolean('is_active');
 
             $table->timestamps();

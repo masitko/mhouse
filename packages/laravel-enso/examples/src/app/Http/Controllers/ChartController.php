@@ -13,93 +13,121 @@ use LaravelEnso\Charts\app\Classes\DoughnutChart;
 
 class ChartController extends Controller
 {
-    public function line()
-    {
-        return (new LineChart())
-            ->title('Income')
-            ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
-            ->datasets([
-                'Sales' => [65, 59, 80, 81, 26, 25, 10],
-                'Revenue' => [15, 29, 60, 31, 56, 65, 44],
-            ])->fill()
-            ->get();
-    }
+  public function line()
+  {
+    return (new LineChart())
+      ->title('Income')
+      ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
+      ->datasets([
+        'Sales' => [65, 59, 80, 81, 26, 25, 10],
+        'Revenue' => [15, 29, 60, 31, 56, 65, 44],
+      ])->fill()
+      ->get();
+  }
 
-    public function bar()
-    {
-        return (new BarChart())
-            ->title('Sales')
-            ->labels(['Ian', 'Feb', 'Mar'])
-            ->datasets([
-                'Sales' => [1233, 1231, 3123],
-                'Spendings' => [1250, 1730, 5300],
-                'Profit' => [1250 - 1233, 1730 - 1231, 5300 - 3123],
-            ])->get();
-    }
+  public function bar()
+  {
+    return (new BarChart())
+      ->title('Sales')
+      ->labels(['Ian', 'Feb', 'Mar'])
+      ->datasets([
+        'Sales' => [1233, 1231, 3123],
+        'Spendings' => [1250, 1730, 5300],
+        'Profit' => [1250 - 1233, 1730 - 1231, 5300 - 3123],
+      ])->get();
+  }
 
-    public function pie()
-    {
-        return (new PieChart())
-            ->title('Outcome Wheel')
-            ->labels(['Green', 'Red', 'Azzure', 'Next', 'BBB', 'JJJ'])
-            ->datasets([
-              [30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30], 
-              ])
-            ->options([
-              'cutoutPercentage' => 20,
-              'aspectRatio' => 5/4,
-              'legend' => [
-                'position' => 'right',
-              ],
+  public function pie()
+  {
+    return (new PieChart())
+      ->title('Outcome Wheel')
+      ->labels(['Area 1 some very long observation name', 'Red', 'Azzure', 'Next', 'BBB', 'JJJ'])
+      ->datasets([
+        [
+          'data' => [30, 30, 30, 30, 30, 30],
+          'backgroundColor' => ["#008000", "#FF0000", "#1E90FF", "#800080", "#FFA500", "#A52A2A"],
+          'labels' => [
+            'Area 1 some very long observation name', 
+            'Area 2 some very long observation name', 
+            'Area 3 some very long observation name', 
+            'Area 4 some very long observation name', 
+            'Area 5', 
+            'Area 6'
+          ],
+          'datalabels' => [
+            "backgroundColor" => ["#008000", "#FF0000", "#1E90FF", "#800080", "#FFA500", "#A52A2A"],
+            'anchor' => "end",
+            'align' => "end",
+          ],
+        ],
+
+        [
+          'data' => [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+          'backgroundColor' => [
+            "#008000", "#008000",
+            "#FF0000", '#FF0000',
+            "#1E90FF", '#1E90FF',
+            "#800080", '#800080',
+            "#FFA500", '#FFA500',
+            "#A52A2A", '#A52A2A'
+          ],
+
+        ],
+        [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+        [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+        [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+        [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+        [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+      ])
+      ->options([
+        'cutoutPercentage' => 20,
+        'aspectRatio' => 6/3,
+        'legend' => [
+          'position' => 'right',
+        ],
               // 'onClick' => 'function(attr){console.log(attr)}'
-            ])
-            ->get();
-    }
+      ])
+      ->get();
+  }
 
-    public function doughnut()
-    {
-        return (new DoughnutChart())
-            ->title('Colors Two')
-            ->labels(['Green', 'Red', 'Azzure'])
-            ->datasets([400, 50, 100])
-            ->get();
-    }
+  public function doughnut()
+  {
+    return (new DoughnutChart())
+      ->title('Colors Two')
+      ->labels(['Green', 'Red', 'Azzure'])
+      ->datasets([400, 50, 100])
+      ->get();
+  }
 
-    public function radar()
-    {
-        return (new RadarChart())
-            ->title('Habits')
-            ->labels(['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'])
-            ->datasets([
-            '2005' => [65, 59, 90, 81, 56, 55, 40],
-            '2006' => [28, 48, 40, 19, 96, 27, 100],
-            ])->get();
-    }
+  public function radar()
+  {
+    return (new RadarChart())
+      ->title('Habits')
+      ->labels(['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'])
+      ->datasets([
+        '2005' => [65, 59, 90, 81, 56, 55, 40],
+        '2006' => [28, 48, 40, 19, 96, 27, 100],
+      ])->get();
+  }
 
-    public function polar()
-    {
-        return (new PolarChart())
-            ->title('Again Colors')
-            ->labels(['Green', 'Red', 'Azzure', 'Portocaliu', 'Purple'])
-            ->datasets([11, 16, 7, 14, 14])
-            ->get();
-    }
+  public function polar()
+  {
+    return (new PolarChart())
+      ->title('Again Colors')
+      ->labels(['Green', 'Red', 'Azzure', 'Portocaliu', 'Purple'])
+      ->datasets([11, 16, 7, 14, 14])
+      ->get();
+  }
 
-    public function bubble()
-    {
-        return (new BubbleChart())
-            ->title('City Population by Age')
-            ->labels(['Geneva', 'Besel', 'Bucharest'])
-            ->datasets([
-                0 => [[1010, 59, 4800], [2011, 55, 1800], [1012, 45, 2000], [413, 58, 4400]],
-                1 => [[2010, 48, 1700], [1211, 67, 1200], [2012, 96, 1233], [813, 35, 3000]],
-                2 => [[1510, 44, 2000], [811, 62, 1500], [212, 55, 1299], [1213, 39, 4000]],
-            ])->get();
-    }
+  public function bubble()
+  {
+    return (new BubbleChart())
+      ->title('City Population by Age')
+      ->labels(['Geneva', 'Besel', 'Bucharest'])
+      ->datasets([
+        0 => [[1010, 59, 4800], [2011, 55, 1800], [1012, 45, 2000], [413, 58, 4400]],
+        1 => [[2010, 48, 1700], [1211, 67, 1200], [2012, 96, 1233], [813, 35, 3000]],
+        2 => [[1510, 44, 2000], [811, 62, 1500], [212, 55, 1299], [1213, 39, 4000]],
+      ])->get();
+  }
 }

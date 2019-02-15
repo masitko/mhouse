@@ -18,9 +18,18 @@
       ]
     },
     {
+      "label": "Layers",
+      "name": "layers",
+      "data": "wheels.layers",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
       "label": "Active",
       "name": "is_active",
-      "data": "users.is_active",
+      "data": "wheels.is_active",
       "meta": [
         "boolean"
       ]

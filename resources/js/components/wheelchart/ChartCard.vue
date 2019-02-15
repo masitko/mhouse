@@ -158,7 +158,7 @@ export default {
               console.log(this);
               console.log(params);
               console.log(elements);
-              elements[0]._model.backgroundColor="#00F000";
+              // elements[0]._model.backgroundColor="#00F000";
               this.update();
             }
             this.config = data;
