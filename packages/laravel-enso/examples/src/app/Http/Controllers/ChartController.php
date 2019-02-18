@@ -41,7 +41,7 @@ class ChartController extends Controller
   {
     return (new PieChart())
       ->title('Outcome Wheel')
-      ->labels(['Area 1 some very long observation name', 'Red', 'Azzure', 'Next', 'BBB', 'JJJ'])
+      ->labels(['Area 1 some very long observation name', 'Area 2 some very long observation name', 'Azzure', 'Next', 'BBB', 'JJJ'])
       ->datasets([
         [
           'data' => [30, 30, 30, 30, 30, 30],

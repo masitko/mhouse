@@ -84,6 +84,7 @@ export default {
         checkedIds() {
             this.removeGroupPermissions();
             this.addCheckedPermissions();
+            this.change();
         },
     },
 
@@ -96,6 +97,9 @@ export default {
     },
 
     methods: {
+        change(){
+          this.$emit('change');
+        },
         init() {
             this.checkedIds = this.permissionIds
                 .filter(id => this.rolePermissions.indexOf(id) > -1);

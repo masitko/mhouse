@@ -1,6 +1,7 @@
 <template>
   <div class="columns is-centered">
     <div class="column is-three-quarters-desktop is-full-touch">
+      <!-- <p>{{observations}}</p> -->
       <enso-form
         class="box has-background-light raises-on-hover animated fadeIn"
         ref="form"
@@ -22,18 +23,18 @@
               class="is-rounded has-margin-top-large"
               :title="`Please select required observations`"
               :role-permissions="$refs.form.formData().observations"
-              :data="pivotParams.structure"
+              :data="structure"
+              @change="change"
             />
           </div>
         </template>
 
         <template slot="wheelchart">
-          <div class="animated fadeIn is-half" v-if="fetched">
+          <div class="animated fadeIn is-half" v-if="wheelData.data">
             <chart-card
               class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
-              source="/api/dashboard/pie"
+              :wheel-data="wheelData"
             />
-              <!-- :wheel="pie" -->
           </div>
         </template>
       </enso-form>
@@ -54,50 +55,73 @@ export default {
     data: null,
     loaded: false,
     fetched: false,
-    pivotParams: {
-      structure: { _items: [] }
-    },
-    pie: {
-      data: {
-        labels: ["Green", "Red", "Azzure"],
-        datasets: [
-          {
-            data: [400, 50, 100],
-            backgroundColor: ["#008000", "#FF0000", "#1E90FF"],
-            datalabels: { backgroundColor: ["#008000", "#FF0000", "#1E90FF"] }
-          },
-          {
-            data: [200, 150, 100],
-            backgroundColor: ["#008000", "#FF0000", "#1E90FF"],
-            datalabels: { backgroundColor: ["#008000", "#FF0000", "#1E90FF"] }
-          }
-        ]
-      },
-      options: { aspectRatio: 1 },
-      title: "Wheel",
-      type: "doughnut"
+    areas: false,
+    areaOptions: false,
+    observations: false,
+    structure: { _items: [] },
+    wheelData: {
+      data: false,
+      title: "Wheel Preview",
     }
   }),
 
   created() {
     this.fetch();
   },
+
   methods: {
+    change() {
+      console.log("EDIT CHANGE!!!");
+      // console.log(this.areas);
+      // console.log(this.observations);
+      // console.log(this.structure);
+      this.prepareWheel();
+    },
+
+    prepareWheel(){
+      const areas = [];
+      const layers = this.$refs.form.formData().layers;
+      let column = 0;
+      this.areas.forEach( areaId => {
+        const area = _.find(this.areaOptions, { id: areaId });
+        const observations = this.data.filter(obs => 
+          obs.area_id === areaId && (this.observations.indexOf(obs.id) > -1 ) )
+        if( observations.length) {
+          areas.push(area);
+          area.columnIndex = column;
+          area.columns = Math.ceil(observations.length/layers);
+          column += area.columns;
+          area.selection = observations;
+        }
+      });
+      this.wheelData.data = {
+        layers: layers,
+        areas:areas
+      };
+      // this.wheelData.data = this.processData({
+      //   layers: layers,
+      //   areas:wheelData
+      // });
+      // console.log(wheelData);
+    },
+
     formLoaded(self) {
-      console.log("FORM LOADED!!!!");
+      // console.log("FORM LOADED!!!!");
       this.loaded = true;
     },
     areasFetched(options) {
       console.log("AREAS FETCHED!!!!");
-      this.inputChange(this.$refs.form.formData().areas);
+      this.areas = this.$refs.form.formData().areas;
+      this.observations = this.$refs.form.formData().observations;
+      this.areaOptions = options;
+      this.inputChange(this.areas);
       this.fetched = true;
     },
     inputChange(areas) {
       console.log("INPUT CHANGED!!!!");
-      var options = this.$refs.form.field("areas").meta.options;
-      this.pivotParams.structure = { _items: [] };
+      this.structure = { _items: [] };
       areas.forEach(areaId => {
-        this.pivotParams.structure[_.find(options, { id: areaId }).name] = {
+        this.structure[_.find(this.areaOptions, { id: areaId }).name] = {
           _items: this.data.filter(obs => obs.area_id === areaId)
         };
       });

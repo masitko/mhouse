@@ -1,11 +1,11 @@
 <template>
   <card
     refresh
-    :title="title"
-    :icon="icon"
+    :title="config.title"
+    icon="chart-pie"
     :overlay="loading"
     :controls="1"
-    @refresh="get"
+    @refresh="update"
     v-if="config"
   >
     <card-control slot="control-1">
@@ -15,9 +15,8 @@
     </card-control>
     <chart
       class="has-padding-medium"
-      :data="data"
+      :data="config.data"
       :options="config.options"
-      :type="config.type"
       ref="chart"
     />
   </card>
@@ -26,38 +25,12 @@
 <script>
 import { saveAs } from "file-saver";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faChartBar,
-  faChartPie,
-  faChartLine,
-  faChartArea,
-  faCircleNotch,
-  faCircle,
-  faDownload
-} from "@fortawesome/free-solid-svg-icons";
+import { faChartPie, faDownload } from "@fortawesome/free-solid-svg-icons";
 import Card from "../enso/bulma/Card.vue";
 import CardControl from "../enso/bulma/CardControl.vue";
 import Chart from "./Chart.vue";
 
-library.add([
-  faChartBar,
-  faChartPie,
-  faChartLine,
-  faChartArea,
-  faCircleNotch,
-  faCircle,
-  faDownload
-]);
-
-const icons = {
-  bar: faChartBar,
-  pie: faChartPie,
-  line: faChartLine,
-  radar: faChartArea,
-  polarArea: faCircleNotch,
-  doughnut: faChartPie,
-  bubble: faCircle
-};
+library.add([faChartPie, faDownload]);
 
 export default {
   name: "ChartCard",
@@ -65,111 +38,99 @@ export default {
   components: { Card, CardControl, Chart },
 
   props: {
-    source: {
-      type: String,
-      required: true
-    },
-    wheel: {
+    wheelData: {
       type: Object,
       default: null
-    },
-    params: {
-      type: Object,
-      default: null
-    },
-    i18n: {
-      type: Function,
-      default(key) {
-        return this.$options.methods &&
-          Object.keys(this.$options.methods).includes("__")
-          ? this.__(key)
-          : key;
-      }
     }
   },
 
   data() {
     return {
       loading: false,
-      config: null,
-      icons
+      config: null
     };
   },
 
-  computed: {
-    icon() {
-      return this.icons[this.config.type];
-    },
-    title() {
-      return this.i18n(this.config.title);
-    },
-    data() {
-      switch (this.config.type) {
-        case "bubble":
-          return {
-            datasets: this.config.data.datasets.map(dataset => {
-              dataset.label = this.i18n(dataset.label);
-              return dataset;
-            })
-          };
-        case "line":
-        case "bar":
-          return {
-            datasets: this.config.data.datasets.map(dataset => {
-              dataset.label = this.i18n(dataset.label);
-              return dataset;
-            }),
-            labels: this.config.data.labels.map(label => this.i18n(label))
-          };
-        default:
-          return {
-            datasets: this.config.data.datasets,
-            labels: this.config.data.labels.map(label => this.i18n(label))
-          };
-      }
-    }
-  },
-
   watch: {
-    params: {
+    "wheelData.data": {
       handler() {
-        this.get();
-      },
-      deep: true
+        console.log("WHEEL DATA CHANGE!!!");
+        this.update();
+      }
+      // deep: true
     }
   },
 
   mounted() {
-    this.get();
+    this.update();
   },
 
   methods: {
-    get() {
+    update() {
       // this.config = this.wheel;
-      if (this.wheel) {
-        this.config = this.wheel;
-      } else {
-        this.loading = true;
-        axios
-          .get(this.source, { params: this.params })
-          .then(({ data }) => {
-            console.log(data);
-            data.options.onClick = function(params, elements) {
-              console.log(this);
-              console.log(params);
-              console.log(elements);
-              // elements[0]._model.backgroundColor="#00F000";
-              this.update();
-            }
-            this.config = data;
-            this.loading = false;
-          })
-          .catch(error => {
-            this.loading = false;
-            this.handleError(error);
-          });
+      if (this.wheelData) {
+        console.log(this.wheelData);
+        // this.config = this.wheelData;
+        this.config = {
+          title: this.wheelData.title,
+          data: this.processData(this.wheelData.data)
+        }
       }
     },
+
+    processData(wheel) {
+      console.log(wheel);
+      const data = {};
+      // prepare main labels to be showed in the legend
+      data.labels = wheel.areas.map(area => area.name);
+      data.datasets = [];
+      data.datasets.push(this.processLayer0(wheel.areas));
+      for (let i = 0; i < wheel.layers; i++) {
+        data.datasets.push(this.processLayer(wheel, i));
+      }
+      return data;
+    },
+
+    processLayer0(areas) {
+      return {
+        records: areas,
+        data: areas.map(area => 10 * area.columns),
+        labels: areas.map(area => area.name),
+        backgroundColor: areas.map(area => area.colour),
+        datalabels: {
+          backgroundColor: areas.map(area => area.colour),
+          anchor: "end",
+          align: "end"
+        }
+      };
+    },
+    processLayer(wheel, layer) {
+      const dataset = {
+        records: [],
+        data: [],
+        labels: [],
+        backgroundColor: [],
+        datalabels: {
+          backgroundColor: []
+        }
+      };
+      wheel.areas.forEach(area => {
+        for (let i = 0; i < area.columns; i++) {
+          // set index od observation record
+          let index = wheel.layers - layer - 1 + i * wheel.layers;
+          if (typeof area.selection[index] !== "undefined") {
+            area.selection[index].questionIndex = index;
+          }
+          dataset.records.push(area.selection[index]);
+          dataset.data.push(10);
+          dataset.labels.push(area.name);
+          dataset.backgroundColor.push(area.colour);
+          dataset.datalabels.backgroundColor.push(area.colour);
+        }
+      });
+      return dataset;
+    },
+
     download() {
       this.$refs.chart.$el.toBlob(blob =>
         saveAs(blob, `${this.config.title}.png`)

@@ -5,6 +5,7 @@
 <script>
 import Chart from "chart.js";
 import "chartjs-plugin-datalabels";
+import { Portuguese } from "flatpickr/dist/l10n/pt";
 
 // Chart.defaults.global.plugins.datalabels.formatter = value => `${format(value)}m`;
 
@@ -24,11 +25,6 @@ export default {
   name: "Chart",
 
   props: {
-    type: {
-      type: String,
-      required: true,
-      validator: value => types.includes(value)
-    },
     data: {
       type: Object,
       required: true
@@ -45,6 +41,7 @@ export default {
 
   watch: {
     data() {
+      console.log("CHART CHANGE!");
       this.update();
     }
   },
@@ -60,10 +57,45 @@ export default {
   methods: {
     init() {
       this.chart = new Chart(this.$el, {
-        type: this.type,
+        type: 'pie',
         data: this.data,
         options: {
+          cutoutPercentage: 10,
+          aspectRatio: 4 / 2,
+          legend: {
+            position: "right"
+          },
+
           // tooltips: false,
+          tooltips: {
+            callbacks: {
+              label(item, data) {
+                // console.log(item, data);
+                if (item)
+                  if (
+                    item.datasetIndex &&
+                    typeof data.datasets[item.datasetIndex].records[
+                      item.index
+                    ] !== "undefined"
+                  )
+                    return data.datasets[item.datasetIndex].records[item.index]
+                      .name;
+                  else return "not set";
+              }
+            }
+          },
+          onClick: function(event, elements) {
+            // console.log(event);
+            console.log("CLICK ", elements);
+            if (elements.length) {
+              const context = elements[0].$datalabels.$context;
+              context.dataset.backgroundColor[context.dataIndex] = "#000";
+              this.update();
+            }
+            // return true;
+            // elements[0]._model.backgroundColor="#00F000";
+          },
+
           plugins: {
             datalabels: {
               anchor: "center",
@@ -74,16 +106,31 @@ export default {
               font: {
                 style: "bold"
               },
+              listeners: {
+                click(context) {
+                  console.log("DATALABEL ", context);
+                }
+              },
               formatter(value, context) {
-                console.log(context);
+                // console.log(context);
                 if (context.datasetIndex === 0)
                   return context.dataset.labels[context.dataIndex];
-                else return context.datasetIndex + "-" + context.dataIndex;
+                else {
+                  if (
+                    typeof context.dataset.records[context.dataIndex] !==
+                    "undefined"
+                  ) {
+                    return context.dataset.records[context.dataIndex]
+                      .questionIndex;
+                  } else {
+                    return "";
+                  }
+                }
               },
               display({ chart, datasetIndex }) {
-                  const meta = chart.getDatasetMeta(datasetIndex);
-                  return !meta.hidden;
-              },
+                const meta = chart.getDatasetMeta(datasetIndex);
+                return !meta.hidden;
+              }
             }
           },
           ...this.options
@@ -101,10 +148,7 @@ export default {
       this.chart.update();
     },
     updateDatasets() {
-      if (this.datasetsStructureChanged()) {
-        this.$set(this.chart.data, "datasets", this.data.datasets);
-        return;
-      }
+      this.$set(this.chart.data, "datasets", this.data.datasets);
 
       this.chart.data.datasets.forEach((dataset, index) => {
         dataset.data = this.data.datasets[index].data;
@@ -113,16 +157,6 @@ export default {
           index
         ].datalabels.backgroundColor;
       });
-    },
-    datasetsStructureChanged() {
-      return (
-        this.chart.data.datasets.length !== this.data.datasets.length ||
-        this.chart.data.datasets.filter(
-          ({ label }) =>
-            this.data.datasets.findIndex(dataset => dataset.label === label) ===
-            -1
-        ).length !== 0
-      );
     },
     svg() {
       return this.$el.toDataURL("image/jpg");

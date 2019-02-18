@@ -32,12 +32,14 @@
                 @shrink="$refs.card.shrink($event)"
                 @extend="$refs.card.extend($event)"
                 @update="update"
+                @change="change"
                 ref="children"/>
             <content-manager :items="data._items"
                 :role-permissions="rolePermissions"
                 @checked="check"
                 @indeterminate="indeterminate"
                 @unchecked="uncheck"
+                @change="change"
                 ref="content"
                 v-if="data._items.length"/>
         </div>
@@ -90,6 +92,9 @@ export default {
     },
 
     methods: {
+        change() {
+          this.$emit('change');
+        },
         check() {
             this.checkbox.indeterminate = false;
             this.checkbox.checked = true;
@@ -106,6 +111,7 @@ export default {
             this.$emit('update');
         },
         update() {
+            this.$emit('change');
             const checkedCount = this.$refs.children
                 .filter(child => child.checkbox.checked
                     && (!child.$refs.content || child.$refs.content.status === Checked))
