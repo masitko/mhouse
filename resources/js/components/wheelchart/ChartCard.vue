@@ -93,6 +93,8 @@ export default {
         backgroundColor: areas.map(area => area.colour),
         datalabels: {
           backgroundColor: areas.map(area => area.colour),
+          borderWidth: 1,
+          borderColor: '#FFFFFF',
           anchor: "center",
           align: "end"
         }

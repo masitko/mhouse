@@ -5,8 +5,8 @@
 <script>
 import Chart from "chart.js";
 import "chartjs-plugin-datalabels";
-import Outcomes from "./outcomes.js"
-import { Portuguese } from 'flatpickr/dist/l10n/pt';
+import Outcomes from "./outcomes.js";
+import { Portuguese } from "flatpickr/dist/l10n/pt";
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
 
@@ -46,7 +46,7 @@ export default {
   methods: {
     init() {
       this.chart = new Chart(this.$el, {
-        type: 'pie',
+        type: "pie",
         data: this.data,
         options: {
           cutoutPercentage: 20,
@@ -55,7 +55,7 @@ export default {
             position: "right"
           },
           layout: {
-            padding:{
+            padding: {
               top: 10,
               bottom: 10
             }
@@ -66,31 +66,35 @@ export default {
             callbacks: {
               label(item, data) {
                 // console.log(item, data);
-                if (item)
+                if (item) {
                   if (
-                    item.datasetIndex &&
                     typeof data.datasets[item.datasetIndex].records[
                       item.index
                     ] !== "undefined"
                   )
-                    return data.datasets[item.datasetIndex].records[item.index]
-                      .name;
+                    return data.datasets[item.datasetIndex].records[item.index][item.datasetIndex?'name':'description'];
                   else return "not set";
+                }
               }
             }
           },
           onClick: function(event, elements) {
             // console.log(event);
             console.log("CLICK ", elements);
-            if (elements.length && elements[0].$datalabels.$context.datasetIndex ) {
+            if (
+              elements.length &&
+              elements[0].$datalabels.$context.datasetIndex
+            ) {
               const context = elements[0].$datalabels.$context;
               const record = context.dataset.records[context.dataIndex];
-              record.outcome++; 
+              record.outcome++;
               record.outcome %= Outcomes.length;
-              if( Outcomes[record.outcome].colour !== 'clear' )
-                context.dataset.backgroundColor[context.dataIndex] = Outcomes[record.outcome].colour;
-              else 
-                context.dataset.backgroundColor[context.dataIndex] = record.areaColour;
+              if (Outcomes[record.outcome].colour !== "clear")
+                context.dataset.backgroundColor[context.dataIndex] =
+                  Outcomes[record.outcome].colour;
+              else
+                context.dataset.backgroundColor[context.dataIndex] =
+                  record.areaColour;
               this.update();
             }
           },
@@ -118,8 +122,10 @@ export default {
                     typeof context.dataset.records[context.dataIndex] !==
                     "undefined"
                   ) {
-                    return context.dataset.records[context.dataIndex]
-                      .questionIndex+1;
+                    return (
+                      context.dataset.records[context.dataIndex].questionIndex +
+                      1
+                    );
                   } else {
                     return "";
                   }
