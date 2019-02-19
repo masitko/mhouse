@@ -1,7 +1,7 @@
 <template>
   <card
     refresh
-    :title="config.title"
+    :title="title"
     icon="chart-pie"
     :overlay="loading"
     :controls="1"
@@ -13,12 +13,7 @@
         <fa icon="download"/>
       </span>
     </card-control>
-    <chart
-      class="has-padding-medium"
-      :data="config.data"
-      :options="config.options"
-      ref="chart"
-    />
+    <chart class="has-padding-medium" :data="config.data" :options="config.options" ref="chart"/>
   </card>
 </template>
 
@@ -41,6 +36,10 @@ export default {
     wheelData: {
       type: Object,
       default: null
+    },
+    title: {
+      type: String,
+      default: ""
     }
   },
 
@@ -52,7 +51,7 @@ export default {
   },
 
   watch: {
-    "wheelData.data": {
+    wheelData: {
       handler() {
         console.log("WHEEL DATA CHANGE!!!");
         this.update();
@@ -67,19 +66,14 @@ export default {
 
   methods: {
     update() {
-      // this.config = this.wheel;
       if (this.wheelData) {
-        console.log(this.wheelData);
-        // this.config = this.wheelData;
         this.config = {
-          title: this.wheelData.title,
-          data: this.processData(this.wheelData.data)
-        }
+          data: this.processData(this.wheelData)
+        };
       }
     },
 
     processData(wheel) {
-      console.log(wheel);
       const data = {};
       // prepare main labels to be showed in the legend
       data.labels = wheel.areas.map(area => area.name);
@@ -120,6 +114,8 @@ export default {
           let index = wheel.layers - layer - 1 + i * wheel.layers;
           if (typeof area.selection[index] !== "undefined") {
             area.selection[index].questionIndex = index;
+            area.selection[index].outcome = 3;
+            area.selection[index].areaColour = area.colour;
           }
           dataset.records.push(area.selection[index]);
           dataset.data.push(10);

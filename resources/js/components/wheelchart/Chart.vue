@@ -5,21 +5,9 @@
 <script>
 import Chart from "chart.js";
 import "chartjs-plugin-datalabels";
-import { Portuguese } from "flatpickr/dist/l10n/pt";
-
-// Chart.defaults.global.plugins.datalabels.formatter = value => `${format(value)}m`;
+import Outcomes from "./outcomes.js"
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
-
-const types = [
-  "line",
-  "bar",
-  "radar",
-  "polarArea",
-  "pie",
-  "doughnut",
-  "bubble"
-];
 
 export default {
   name: "Chart",
@@ -60,7 +48,7 @@ export default {
         type: 'pie',
         data: this.data,
         options: {
-          cutoutPercentage: 10,
+          cutoutPercentage: 20,
           aspectRatio: 4 / 2,
           legend: {
             position: "right"
@@ -87,13 +75,17 @@ export default {
           onClick: function(event, elements) {
             // console.log(event);
             console.log("CLICK ", elements);
-            if (elements.length) {
+            if (elements.length && elements[0].$datalabels.$context.datasetIndex ) {
               const context = elements[0].$datalabels.$context;
-              context.dataset.backgroundColor[context.dataIndex] = "#000";
+              const record = context.dataset.records[context.dataIndex];
+              record.outcome++; 
+              record.outcome %= Outcomes.length;
+              if( Outcomes[record.outcome].colour !== 'clear' )
+                context.dataset.backgroundColor[context.dataIndex] = Outcomes[record.outcome].colour;
+              else 
+                context.dataset.backgroundColor[context.dataIndex] = record.areaColour;
               this.update();
             }
-            // return true;
-            // elements[0]._model.backgroundColor="#00F000";
           },
 
           plugins: {
@@ -101,10 +93,9 @@ export default {
               anchor: "center",
               align: "middle",
               borderRadius: 3,
-              // padding: 2,
-              color: "white",
+              color: "black",
               font: {
-                style: "bold"
+                // style: "bold"
               },
               listeners: {
                 click(context) {

@@ -22,6 +22,6 @@ class CreateStructureForWheels extends StructureMigration
         'name' => 'Wheels', 'icon' => 'dharmachakra', 'route' => 'wheels.wheels.index', 'order_index' => 300, 'has_children' => false
     ];
 
-    protected $parentMenu = 'Wheels Configuration';
+    protected $parentMenu = 'Wheel Builder';
 }
 

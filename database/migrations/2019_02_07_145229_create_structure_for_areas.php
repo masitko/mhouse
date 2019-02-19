@@ -22,6 +22,6 @@ class CreateStructureForAreas extends StructureMigration
         'name' => 'Areas', 'icon' => 'layer-group', 'route' => 'wheels.areas.index', 'order_index' => 100, 'has_children' => false
     ];
 
-    protected $parentMenu = 'Wheels Configuration';
+    protected $parentMenu = 'Wheel Builder';
 }
 

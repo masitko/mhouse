@@ -30,9 +30,10 @@
         </template>
 
         <template slot="wheelchart">
-          <div class="animated fadeIn is-half" v-if="wheelData.data">
+          <div class="animated fadeIn is-half" v-if="wheelData">
             <chart-card
               class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
+              :title="title"
               :wheel-data="wheelData"
             />
           </div>
@@ -59,10 +60,11 @@ export default {
     areaOptions: false,
     observations: false,
     structure: { _items: [] },
-    wheelData: {
-      data: false,
-      title: "Wheel Preview",
-    }
+    title: "Wheel Preview",
+    wheelData: false,
+    // wheelData: {
+    //   data: false,
+    // }
   }),
 
   created() {
@@ -94,15 +96,11 @@ export default {
           area.selection = observations;
         }
       });
-      this.wheelData.data = {
+      this.wheelData = {
+      // this.wheelData.data = {
         layers: layers,
         areas:areas
       };
-      // this.wheelData.data = this.processData({
-      //   layers: layers,
-      //   areas:wheelData
-      // });
-      // console.log(wheelData);
     },
 
     formLoaded(self) {
