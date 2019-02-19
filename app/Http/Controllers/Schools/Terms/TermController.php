@@ -33,7 +33,6 @@ class TermController extends Controller
 
     public function edit(Term $term, TermForm $form)
     {
-        dd($term);
         return ['form' => $form->edit($term)];
     }
 
