@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
-    'group_id', 'role_id',
+    'role_id',
     'first_name', 'last_name', 'other_name',
     'email', 'is_active'
   ];
@@ -56,7 +56,7 @@ class User extends Authenticatable
 
   protected $dates = ['password_updated_at'];
 
-    // protected $loggableLabel = 'person.name';
+  protected $loggableLabel = 'email';
 
   protected $loggable = [
     'email',

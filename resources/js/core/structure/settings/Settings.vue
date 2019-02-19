@@ -18,16 +18,16 @@
             <li class="settings-item has-margin-bottom-small">
                 <menu-state/>
             </li>
-            <li class="settings-item has-margin-bottom-small">
+            <!-- <li class="settings-item has-margin-bottom-small">
                 <bookmarks-state/>
-            </li>
-            <li v-if="canAccess('system.tutorials.show')"
+            </li> -->
+            <!-- <li v-if="canAccess('system.tutorials.show')"
                 class="settings-item">
                 <tutorial/>
-            </li>
-            <li class="settings-item">
+            </li> -->
+            <!-- <li class="settings-item">
                 <key-collector v-if="meta.env === 'local'"/>
-            </li>
+            </li> -->
         </ul>
     </vue-aside>
 </template>

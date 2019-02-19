@@ -40,11 +40,11 @@
             </div>
             <div v-if="isTouch"
                 class="is-pulled-right is-flex">
-                <!-- <search v-if="!isMobile"/> -->
+                <search v-if="!isMobile"/>
                 <!-- <i-o/> -->
-                <!-- <notifications/> -->
+                <notifications/>
                 <profile-control/>
-                <!-- <settings-control/> -->
+                <settings-control/>
             </div>
         </div>
         <div class="navbar-menu">
@@ -52,9 +52,9 @@
                 class="navbar-end">
                 <!-- <search/> -->
                 <!-- <i-o/> -->
-                <!-- <notifications/> -->
+                <notifications/>
                 <profile-control/>
-                <!-- <settings-control/> -->
+                <settings-control/>
             </div>
         </div>
     </nav>
