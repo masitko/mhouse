@@ -15,6 +15,16 @@ class CreateTermsTable extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->integer('school_id')->unsigned()->index()->nullable();
+            $table->foreign('school_id')->references('id')->on('schools');
+
+            $table->date('start_date');
+            $table->date('end_date');
+            
+            $table->string('name');
+            $table->text('notes')->nullable();
+      
             $table->timestamps();
         });
     }

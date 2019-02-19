@@ -19,7 +19,7 @@ class CreateStructureForTerms extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Terms', 'icon' => 'terms', 'route' => 'schools.terms.index', 'order_index' => 10, 'has_children' => false
+        'name' => 'Terms', 'icon' => 'calendar-alt', 'route' => 'schools.terms.index', 'order_index' => 10, 'has_children' => false
     ];
 
     protected $parentMenu = 'School';

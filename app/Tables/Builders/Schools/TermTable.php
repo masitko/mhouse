@@ -12,7 +12,7 @@ class TermTable extends Table
     public function query()
     {
         return Term::select(\DB::raw('
-            terms.id as "dtRowId"
+            terms.*, terms.id as "dtRowId"
         '));
     }
 }

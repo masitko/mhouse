@@ -1,5 +1,5 @@
 {
-  "routePrefix": "wheels.areas",
+  "routePrefix": "schools.classes",
   "crtNo": true,
   "buttons": [
     "excel",
@@ -11,25 +11,16 @@
     {
       "label": "Name",
       "name": "name",
-      "data": "areas.name",
+      "data": "school_classes.name",
       "meta": [
         "searchable",
         "sortable"
       ]
     },
     {
-      "label": "Colour",
-      "name": "colour",
-      "data": "areas.colour",
-      "meta": [
-        "searchable",
-        "sortable"
-      ]
-    },
-    {
-      "label": "Order",
-      "name": "order",
-      "data": "areas.order",
+      "label": "Age Group",
+      "name": "age",
+      "data": "school_classes.age",
       "meta": [
         "searchable",
         "sortable"

@@ -6,6 +6,7 @@
 import Chart from "chart.js";
 import "chartjs-plugin-datalabels";
 import Outcomes from "./outcomes.js"
+import { Portuguese } from 'flatpickr/dist/l10n/pt';
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
 
@@ -52,6 +53,12 @@ export default {
           aspectRatio: 4 / 2,
           legend: {
             position: "right"
+          },
+          layout: {
+            padding:{
+              top: 10,
+              bottom: 10
+            }
           },
 
           // tooltips: false,
@@ -112,7 +119,7 @@ export default {
                     "undefined"
                   ) {
                     return context.dataset.records[context.dataIndex]
-                      .questionIndex;
+                      .questionIndex+1;
                   } else {
                     return "";
                   }

@@ -1,5 +1,5 @@
 {
-  "routePrefix": "schools.terms",
+  "routePrefix": "schools.classes",
   "sections": [
     {
       "columns": "custom",
@@ -15,6 +15,21 @@
           }
         },
         {
+          "label": "Age group",
+          "name": "age",
+          "value": 0,
+          "column": 4,
+          "meta": {
+            "type": "input",
+            "content": "number"
+          }
+        }
+      ]
+    },
+    {
+      "columns": "custom",
+      "fields": [
+        {
           "label": "School (admin only)",
           "name": "school_id",
           "value": null,
@@ -23,27 +38,6 @@
             "type": "select",
             "options": [],
             "source": "administration.schools.options"
-          }
-        }
-      ]
-    },
-    {
-      "columns": "2",
-      "fields": [
-        {
-          "label": "Start Date",
-          "name": "start_date",
-          "value": null,
-          "meta": {
-            "type": "datepicker"
-          }
-        },
-        {
-          "label": "End Date",
-          "name": "end_date",
-          "value": null,
-          "meta": {
-            "type": "datepicker"
           }
         }
       ]

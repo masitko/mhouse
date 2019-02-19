@@ -17,7 +17,7 @@ class CreateWheelsTable extends Migration
             $table->increments('id');
 
             $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
 
             // json structure of the wheel
             $table->json('definition')->nullable();
