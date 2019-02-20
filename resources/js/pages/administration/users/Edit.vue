@@ -41,7 +41,7 @@
                         @keydown="$emit('update');"
                         v-if="!field.meta.hidden"/>
                 </template>
-                <a slot="actions"
+                <!-- <a slot="actions"
                     class="button is-warning"
                     @click="$router.push({
                         name: 'administration.people.edit',
@@ -55,7 +55,7 @@
                         <fa icon="user-tie"/>
                     </span>
                     <span class="is-hidden-mobile"/>
-                </a>
+                </a> -->
             </enso-form>
             <accessories v-if="ready">
                 <template slot-scope="{ count }">

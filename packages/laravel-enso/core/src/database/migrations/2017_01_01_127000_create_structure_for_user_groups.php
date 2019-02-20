@@ -18,7 +18,7 @@ class CreateStructureForUserGroups extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'User Groups', 'icon' => 'users', 'route' => 'administration.userGroups.index', 'order_index' => 500, 'has_children' => false,
+        // 'name' => 'User Groups', 'icon' => 'users', 'route' => 'administration.userGroups.index', 'order_index' => 500, 'has_children' => false,
     ];
 
     protected $parentMenu = 'Administration';
