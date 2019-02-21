@@ -73,7 +73,7 @@ export default {
 
   methods: {
     change() {
-      console.log("EDIT CHANGE!!!");
+      // console.log("EDIT CHANGE!!!");
       // console.log(this.areas);
       // console.log(this.observations);
       // console.log(this.structure);
@@ -116,7 +116,7 @@ export default {
       this.fetched = true;
     },
     inputChange(areas) {
-      console.log("INPUT CHANGED!!!!");
+      // console.log("INPUT CHANGED!!!!");
       this.structure = { _items: [] };
       areas.forEach(areaId => {
         this.structure[_.find(this.areaOptions, { id: areaId }).name] = {

@@ -4,9 +4,11 @@
 
 <script>
 import Chart from "chart.js";
+import "./chart-center.js";
 import "chartjs-plugin-datalabels";
 import Outcomes from "./outcomes.js";
 import { Portuguese } from "flatpickr/dist/l10n/pt";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
 
@@ -30,17 +32,26 @@ export default {
 
   watch: {
     data() {
-      console.log("CHART CHANGE!");
+      // console.log("CHART CHANGE!");
       this.update();
     }
   },
 
   mounted() {
     this.init();
+    console.log(this);
   },
 
   beforeDestroy() {
     this.chart.destroy();
+  },
+
+  computed: {
+    // ...mapState('layout', ['themes']),
+    ...mapGetters("preferences", ["theme"]),
+    fontColour() {
+      return this.theme === "dark" ? "white" : "black";
+    }
   },
 
   methods: {
@@ -49,10 +60,22 @@ export default {
         type: "pie",
         data: this.data,
         options: {
+          elements: {
+            center: {
+              text: "some long text",
+              color: "#FF6384", // Default is #000000
+              fontStyle: "Arial", // Default is Arial
+              sidePadding: 20 // Defualt is 20 (as a percentage)
+            }
+          },
           cutoutPercentage: 20,
           aspectRatio: 4 / 2,
           legend: {
-            position: "right"
+            position: "right",
+            labels: {
+              fontSize: 15,
+              fontColor: this.fontColour
+            }
           },
           layout: {
             padding: {
@@ -60,9 +83,23 @@ export default {
               bottom: 10
             }
           },
+          legendCallback: function(chart) {
+            console.log("LEGEND CALLBACK !!!");
+            return "<p>CUSTOM LEGEND</p>";
+          },
 
           // tooltips: false,
           tooltips: {
+            borderWidth: 1,
+            borderColor: "white",
+            bodyFontSize: 15,
+            bofyFontStyle: 'bold',
+            bodySpacing: 5,
+            // xAlign: 'center',
+            // titleAlign: 'center',
+            // bodyAlign: 'center',
+            // footerAlign: 'center',
+            displayColors: false,
             callbacks: {
               label(item, data) {
                 // console.log(item, data);
@@ -72,8 +109,23 @@ export default {
                       item.index
                     ] !== "undefined"
                   )
-                    return data.datasets[item.datasetIndex].records[item.index][item.datasetIndex?'name':'description'];
+                    return data.datasets[item.datasetIndex].records[item.index][
+                      item.datasetIndex ? "name" : "description"
+                    ];
                   else return "not set";
+                }
+              },
+              afterLabel(item, data) {
+                if (
+                  item && item.datasetIndex &&
+                  typeof data.datasets[item.datasetIndex].records[
+                    item.index
+                  ] !== "undefined"
+                ) {
+                  const record =
+                    data.datasets[item.datasetIndex].records[item.index];
+                  if(typeof Outcomes[record.outcome] !== 'undefined')
+                    return "Current outcome: " + Outcomes[record.outcome].label;
                 }
               }
             }

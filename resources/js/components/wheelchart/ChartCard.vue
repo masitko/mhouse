@@ -53,7 +53,7 @@ export default {
   watch: {
     wheelData: {
       handler() {
-        console.log("WHEEL DATA CHANGE!!!");
+        // console.log("WHEEL DATA CHANGE!!!");
         this.update();
       }
       // deep: true
@@ -94,7 +94,11 @@ export default {
         datalabels: {
           backgroundColor: areas.map(area => area.colour),
           borderWidth: 1,
-          borderColor: '#FFFFFF',
+          borderColor: "#FFFFFF",
+          font: {
+            size: 15,
+
+          },
           anchor: "center",
           align: "end"
         }
