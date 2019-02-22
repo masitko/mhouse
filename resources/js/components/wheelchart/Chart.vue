@@ -5,10 +5,14 @@
 <script>
 import Chart from "chart.js";
 import "./chart-center.js";
+import "./chart-legend.js";
+import "./core.tooltip.js";
 import "chartjs-plugin-datalabels";
 import Outcomes from "./outcomes.js";
 import { Portuguese } from "flatpickr/dist/l10n/pt";
 import { mapState, mapGetters, mapActions } from "vuex";
+
+Chart.Tooltip = require("./core.tooltip");
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
 
@@ -19,6 +23,9 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    title: {
+      type: String
     },
     options: {
       type: Object,
@@ -40,6 +47,7 @@ export default {
   mounted() {
     this.init();
     console.log(this);
+    console.log(Chart);
   },
 
   beforeDestroy() {
@@ -62,9 +70,9 @@ export default {
         options: {
           elements: {
             center: {
-              text: "some long text",
-              color: "#FF6384", // Default is #000000
-              fontStyle: "Arial", // Default is Arial
+              text: this.title,
+              color: this.fontColour, // Default is #000000
+              // fontStyle: "Arial", // Default is Arial
               sidePadding: 20 // Defualt is 20 (as a percentage)
             }
           },
@@ -93,11 +101,11 @@ export default {
             borderWidth: 1,
             borderColor: "white",
             bodyFontSize: 15,
-            bofyFontStyle: 'bold',
+            bofyFontStyle: "bold",
             bodySpacing: 5,
-            // xAlign: 'center',
+            xAlign: "center",
             // titleAlign: 'center',
-            // bodyAlign: 'center',
+            bodyAlign: "center",
             // footerAlign: 'center',
             displayColors: false,
             callbacks: {
@@ -117,15 +125,16 @@ export default {
               },
               afterLabel(item, data) {
                 if (
-                  item && item.datasetIndex &&
+                  item &&
+                  item.datasetIndex &&
                   typeof data.datasets[item.datasetIndex].records[
                     item.index
                   ] !== "undefined"
                 ) {
                   const record =
                     data.datasets[item.datasetIndex].records[item.index];
-                  if(typeof Outcomes[record.outcome] !== 'undefined')
-                    return "Current outcome: " + Outcomes[record.outcome].label;
+                  if (typeof Outcomes[record.outcome] !== "undefined")
+                    return "Current score: " + Outcomes[record.outcome].label;
                 }
               }
             }
@@ -192,6 +201,21 @@ export default {
           ...this.options
         }
       });
+      var titleOpts = {
+        title: {
+          display: true,
+          text: "Wheel Title"
+        }
+      };
+      var title = new Chart.Title({
+        ctx: this.chart.ctx,
+        options: titleOpts,
+        chart: this.chart
+      });
+      Chart.layouts.configure(this.chart, title, titleOpts);
+      Chart.layouts.addBox(this.chart, title);
+      this.chart.titleBlock = title;
+      this.chart.update();
     },
     update() {
       if (!this.chart) {

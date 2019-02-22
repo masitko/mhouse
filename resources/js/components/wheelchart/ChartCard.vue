@@ -13,7 +13,12 @@
         <fa icon="download"/>
       </span>
     </card-control>
-    <chart class="has-padding-medium" :data="config.data" :options="config.options" ref="chart"/>
+    <chart class="has-padding-medium" 
+      :title="`Wheel Preview`"
+      :data="config.data" 
+      :options="config.options" 
+      ref="chart"
+      />
   </card>
 </template>
 
