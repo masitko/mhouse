@@ -24,6 +24,7 @@ class CreateWheelsTable extends Migration
 
             // amount of layers
             $table->integer('layers');
+            
             $table->boolean('is_active');
 
             $table->timestamps();

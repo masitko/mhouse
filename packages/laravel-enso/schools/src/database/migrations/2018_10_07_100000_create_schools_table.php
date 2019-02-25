@@ -52,6 +52,11 @@ class CreateSchoolsTable extends Migration
             $table->dropColumn('school_id');
         });
 
-        Schema::dropIfExists('schools');
+        Schema::table('users', function (Blueprint $table) {
+          $table->dropForeign(['school_id']);
+          $table->dropColumn('school_id');
+      });
+
+      Schema::dropIfExists('schools');
     }
 }

@@ -11,9 +11,9 @@ class UserPolicy
 
     public function before($user)
     {
-        if ($user->isAdmin()) {
+        // if ($user->isAdmin()) {
             return true;
-        }
+        // }
     }
 
     public function handle(User $user, User $targetUser)
@@ -35,7 +35,7 @@ class UserPolicy
     public function impersonate(User $user, User $targetUser)
     {
         return $user->can('access-route', 'core.impersonate.start')
-            && ! $targetUser->isAdmin()
+            // && ! $targetUser->isAdmin()
             && $user->id !== $targetUser->id
             && ! $user->isImpersonating();
     }

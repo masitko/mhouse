@@ -6,13 +6,10 @@ use LaravelEnso\Schools\app\Models\School;
 $factory->define(School::class, function (Faker $faker) {
     return [
         'mandatary_id' => null,
-        'name' => $faker->school,
+        'name' => $faker->word,
         'email' => $faker->email,
         'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
-        'bank' => $faker->school,
-        'bank_account' => $faker->bankAccountNumber,
         'obs' => $faker->sentence,
-        'pays_vat' => $faker->boolean,
     ];
 });

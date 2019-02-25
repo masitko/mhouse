@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             AreaSeeder::class,
             ObservationSeeder::class,
+            SchoolSeeder::class,
         ]);
     }
 }

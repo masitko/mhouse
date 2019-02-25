@@ -6,8 +6,8 @@
                 ref="form"
                 @loaded="
                     ready = true;
-                    pivotParams.userGroups.id = $refs.form.field('group_id').value;
                 ">
+                    <!-- pivotParams.userGroups.id = $refs.form.field('group_id').value; -->
                 <template slot="group_id"
                     slot-scope="{ field, errors, i18n }">
                     <select-field :errors="errors"

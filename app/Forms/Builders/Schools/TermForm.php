@@ -5,24 +5,29 @@ namespace App\Forms\Builders\Schools;
 use App\Term;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
-class TermForm
-{
-    private const TemplatePath = __DIR__.'/../../Templates/Schools/term.json';
+use App\Traits\CurrentUser;
 
-    private $form;
+class TermForm {
+  use CurrentUser;
 
-    public function __construct()
-    {
-        $this->form = new Form(self::TemplatePath);
+  private const TemplatePath = __DIR__ . '/../../Templates/Schools/term.json';
+
+  private $form;
+
+  public function __construct() {
+    $this->form = new Form(self::TemplatePath);
+    if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
+      $this->form->hide('school_id');
     }
+  }
 
-    public function create()
-    {
-        return $this->form->create();
-    }
+  public function create() {
+    $term = new Term();
+    $term->school_id = $this->getCurrentUser()->school_id;
+    return $this->form->create($term);
+  }
 
-    public function edit(Term $term)
-    {
-        return $this->form->edit($term);
-    }
+  public function edit(Term $term) {
+    return $this->form->edit($term);
+  }
 }

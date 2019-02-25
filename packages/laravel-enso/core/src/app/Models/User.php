@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
-    'role_id',
+    'role_id', 'school_id', 
     'first_name', 'last_name', 'other_name',
     'email', 'is_active'
   ];
@@ -60,7 +60,7 @@ class User extends Authenticatable
 
   protected $loggable = [
     'email',
-    'school_id' => [School::class => 'name'],
+    // 'school_id' => [School::class => 'name'],
     'role_id' => [Role::class => 'name'],
   ];
 
@@ -100,12 +100,18 @@ class User extends Authenticatable
     return $this->hasOne(Preference::class);
   }
 
-  public function isAdmin()
+  public function hasPermission( $name ) {
+    $role = $this->role;
+    return $role->permissions()->get()->contains('name', $name);
+    // return (boolean)$role->permissions()->where('role_id', $role->id)->where('name', $name)->count();
+  }
+ 
+  public function isAdmin2()
   {
     return $this->role_id === Role::AdminId;
   }
 
-  public function isSupervisor()
+  public function isSupervisor2()
   {
     return $this->role_id === Role::SupervisorId;
   }

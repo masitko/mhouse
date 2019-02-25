@@ -4,7 +4,7 @@ namespace App\Http\Requests\Schools;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateTermRequest extends FormRequest
+class ValidateOutcomeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ValidateTermRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,7 @@ class ValidateTermRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => ['required'],
-          'school_id' => 'required|exists:schools,id',
-          'start_date' => ['required', 'date'],
-          'end_date' => ['required', 'date', 'after:start_date'],
-          'notes' => 'nullable',
+            //
         ];
     }
 }

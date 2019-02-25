@@ -26,6 +26,7 @@ class ValidateUserRequest extends FormRequest
             'last_name' => 'required',
             // 'group_id' => 'required|exists:user_groups,id',
             'role_id' => 'required|exists:roles,id',
+            'school_id' => '',
             'email' => ['email', 'required', $emailUnique],
             'password' => 'nullable|confirmed|min:'.config('enso.auth.password.minLength'),
             'is_active' => 'boolean',
