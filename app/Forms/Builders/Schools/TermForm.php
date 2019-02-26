@@ -3,9 +3,8 @@
 namespace App\Forms\Builders\Schools;
 
 use App\Term;
-use LaravelEnso\FormBuilder\app\Classes\Form;
-
 use App\Traits\CurrentUser;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 
 class TermForm {
   use CurrentUser;
@@ -16,15 +15,15 @@ class TermForm {
 
   public function __construct() {
     $this->form = new Form(self::TemplatePath);
-    if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
+    if (!$this->getCurrentUser()->can('access-route', 'administration.schools.options')) {
       $this->form->hide('school_id');
     }
   }
 
   public function create() {
-    $term = new Term();
-    $term->school_id = $this->getCurrentUser()->school_id;
-    return $this->form->create($term);
+    return $this->form
+      ->value('school_id', $this->getCurrentUser()->school_id)
+      ->create();
   }
 
   public function edit(Term $term) {

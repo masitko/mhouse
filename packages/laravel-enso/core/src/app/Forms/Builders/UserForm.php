@@ -5,8 +5,12 @@ namespace LaravelEnso\Core\app\Forms\Builders;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
+use App\Traits\CurrentUser;
+
 class UserForm
 {
+  use CurrentUser;
+
   private const TemplatePath = __DIR__ . '/../Templates/user.json';
   private const Tooltip = 'Personal information can only be edited via the person form';
 
@@ -15,6 +19,10 @@ class UserForm
   public function __construct()
   {
     $this->form = new Form(self::TemplatePath);
+    if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
+      $this->form->hide('school_id');
+    }
+
   }
 
   public function create($person)
@@ -27,6 +35,7 @@ class UserForm
       ]);
     // }
     return $this->form
+          ->value('school_id', $this->getCurrentUser()->school_id)
             // ->value('email', $person->email)
             // ->value('person_id', $person->id)
       ->create();
