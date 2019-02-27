@@ -85,6 +85,7 @@ Route::namespace ('Schools\Classes')
     Route::resource('classes', 'SchoolClassController'); // if it's the case, use `except` or `only` to avoid generating unused routes
   });
 
+// ====== OUTCOMES ====================
 Route::namespace ('Schools\Outcomes')
   ->prefix('schools/outcomes')->as('schools.outcomes.')
   ->group(function () {
@@ -92,6 +93,8 @@ Route::namespace ('Schools\Outcomes')
     Route::get('tableData', 'OutcomeTableController@data')->name('tableData');
     Route::get('exportExcel', 'OutcomeTableController@excel')->name('exportExcel');
     Route::get('options', 'OutcomeSelectController@options')->name('options');
+
+    Route::get('getWheel', 'OutcomeController@getWheel')->name('getWheel');
   });
 
 Route::namespace ('Schools\Outcomes')

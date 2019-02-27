@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Schools\Outcomes;
 
-use App\Outcome;
 use App\Forms\Builders\Schools\OutcomeForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Schools\ValidateOutcomeRequest;
+use Illuminate\Http\Request;
+
+use App\Outcome;
+use App\Wheel;
+use App\Area;
+use App\Observation;
 
 
 class OutcomeController extends Controller
@@ -41,6 +46,24 @@ class OutcomeController extends Controller
         $outcome->update($request->all());
 
         return ['message' => __('The outcome was successfully updated')];
+    }
+
+    public function getWheel(Request $request) {
+
+      $filters = json_decode($request->get('filters'));
+      
+      $wheel = $filters->wheelId?Wheel::find($filters->wheelId):null;
+      if( $wheel ) {
+        $definition = json_decode($wheel->definition);
+        $wheel->areas = Area::find($definition->areas);
+        $wheel->observations = Observation::find($definition->observations);
+      }
+
+      return [
+        'filters' => $filters,
+        'wheel' =>  $wheel,
+      ];
+
     }
 
     public function destroy(Outcome $outcome)

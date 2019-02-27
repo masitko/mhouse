@@ -1,7 +1,7 @@
 <template>
   <div class="columns is-centered">
     <div class="column is-three-quarters-desktop is-full-touch">
-      <!-- <p>{{observations}}</p> -->
+      <!-- <p>{{wheelData}}</p> -->
       <enso-form
         class="box has-background-light raises-on-hover animated fadeIn"
         ref="form"
@@ -53,15 +53,16 @@ export default {
   components: { EnsoForm, SelectField, CheckboxManager, ChartCard },
 
   data: () => ({
-    data: null,
+    obsOptions: null,
     loaded: false,
     fetched: false,
     areas: false,
     areaOptions: false,
     observations: false,
+    outcomes: {},
     structure: { _items: [] },
     title: "Wheel Preview",
-    wheelData: false,
+    wheelData: false
     // wheelData: {
     //   data: false,
     // }
@@ -73,34 +74,29 @@ export default {
 
   methods: {
     change() {
-      // console.log("EDIT CHANGE!!!");
+      console.log("EDIT CHANGE!!!");
       // console.log(this.areas);
       // console.log(this.observations);
       // console.log(this.structure);
       this.prepareWheel();
     },
 
-    prepareWheel(){
-      const areas = [];
-      const layers = this.$refs.form.formData().layers;
-      let column = 0;
-      this.areas.forEach( areaId => {
-        const area = _.find(this.areaOptions, { id: areaId });
-        const observations = this.data.filter(obs => 
-          obs.area_id === areaId && (this.observations.indexOf(obs.id) > -1 ) )
-        if( observations.length) {
-          areas.push(area);
-          area.columnIndex = column;
-          area.columns = Math.ceil(observations.length/layers);
-          column += area.columns;
-          area.selection = observations;
-        }
-      });
+    prepareWheel() {
+      // const areas = [];
+      // const layers = this.$refs.form.formData().layers;
       this.wheelData = {
-      // this.wheelData.data = {
-        layers: layers,
-        areas:areas
+        layers: this.$refs.form.formData().layers,
+        areas: this.areaOptions.filter(
+          area => this.areas.indexOf(area.id) > -1
+        ),
+        observations: this.obsOptions.filter(
+          obs => this.observations.indexOf(obs.id) > -1
+        ),
+        outcomes: this.outcomes,
       };
+      console.log(this.areas);
+      console.log(this.observations);
+      console.log(this);
     },
 
     formLoaded(self) {
@@ -120,14 +116,14 @@ export default {
       this.structure = { _items: [] };
       areas.forEach(areaId => {
         this.structure[_.find(this.areaOptions, { id: areaId }).name] = {
-          _items: this.data.filter(obs => obs.area_id === areaId)
+          _items: this.obsOptions.filter(obs => obs.area_id === areaId)
         };
       });
     },
     fetch() {
       axios
         .get(route("wheels.observations.options"))
-        .then(({ data }) => (this.data = data))
+        .then(({ data }) => (this.obsOptions = data))
         .catch(error => this.handleError(error));
     }
   }

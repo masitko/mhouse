@@ -103,9 +103,9 @@ export default {
             bodyFontSize: 15,
             bofyFontStyle: "bold",
             bodySpacing: 5,
-            xAlign: "center",
+            // xAlign: "center",
             // titleAlign: 'center',
-            bodyAlign: "center",
+            // bodyAlign: "center",
             // footerAlign: 'center',
             displayColors: false,
             callbacks: {
@@ -133,8 +133,9 @@ export default {
                 ) {
                   const record =
                     data.datasets[item.datasetIndex].records[item.index];
-                  if (typeof Outcomes[record.outcome] !== "undefined")
-                    return "Current score: " + Outcomes[record.outcome].label;
+                  const outcomes = data.datasets[item.datasetIndex].outcomes;
+                  if (typeof Outcomes[outcomes[record.id]] !== "undefined")
+                    return "Current score: " + Outcomes[outcomes[record.id]].label;
                 }
               }
             }
@@ -148,15 +149,17 @@ export default {
             ) {
               const context = elements[0].$datalabels.$context;
               const record = context.dataset.records[context.dataIndex];
-              record.outcome++;
-              record.outcome %= Outcomes.length;
-              if (Outcomes[record.outcome].colour !== "clear")
+              const outcomes = context.dataset.outcomes;
+              outcomes[record.id]++;
+              outcomes[record.id] %= Outcomes.length;
+              if (Outcomes[outcomes[record.id]].colour !== "clear")
                 context.dataset.backgroundColor[context.dataIndex] =
-                  Outcomes[record.outcome].colour;
+                  Outcomes[outcomes[record.id]].colour;
               else
                 context.dataset.backgroundColor[context.dataIndex] =
                   record.areaColour;
               this.update();
+              console.log(outcomes);
             }
           },
 

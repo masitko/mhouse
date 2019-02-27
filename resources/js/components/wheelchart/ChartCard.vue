@@ -13,12 +13,7 @@
         <fa icon="download"/>
       </span>
     </card-control>
-    <chart class="has-padding-medium" 
-      :title="`Wheel Preview`"
-      :data="config.data" 
-      :options="config.options" 
-      ref="chart"
-      />
+    <chart class="has-padding-medium" :title="`Wheel Preview`" :data="config.data" ref="chart"/>
   </card>
 </template>
 
@@ -29,6 +24,7 @@ import { faChartPie, faDownload } from "@fortawesome/free-solid-svg-icons";
 import Card from "../enso/bulma/Card.vue";
 import CardControl from "../enso/bulma/CardControl.vue";
 import Chart from "./Chart.vue";
+import Outcomes from "./outcomes.js";
 
 library.add([faChartPie, faDownload]);
 
@@ -58,7 +54,7 @@ export default {
   watch: {
     wheelData: {
       handler() {
-        // console.log("WHEEL DATA CHANGE!!!");
+        console.log("WHEEL DATA CHANGE!!!");
         this.update();
       }
       // deep: true
@@ -71,11 +67,25 @@ export default {
 
   methods: {
     update() {
-      if (this.wheelData) {
+      if (this.wheelData && this.wheelData.areas) {
         this.config = {
-          data: this.processData(this.wheelData)
+          data: this.processData(this.prepareData(this.wheelData))
         };
       }
+    },
+
+    prepareData(wheel) {
+      let column = 0;
+      wheel.areas.forEach(area => {
+        area.selection = wheel.observations.filter(
+          obs => obs.area_id === area.id
+        );
+        area.columnIndex = column;
+        area.columns = Math.ceil(area.selection.length / wheel.layers);
+        column += area.columns;
+      });
+      console.log(wheel);
+      return wheel;
     },
 
     processData(wheel) {
@@ -83,26 +93,26 @@ export default {
       // prepare main labels to be showed in the legend
       data.labels = wheel.areas.map(area => area.name);
       data.datasets = [];
-      data.datasets.push(this.processLayer0(wheel.areas));
+      data.datasets.push(this.processLayer0(wheel));
       for (let i = 0; i < wheel.layers; i++) {
         data.datasets.push(this.processLayer(wheel, i));
       }
       return data;
     },
 
-    processLayer0(areas) {
+    processLayer0(wheel) {
       return {
-        records: areas,
-        data: areas.map(area => 10 * area.columns),
-        labels: areas.map(area => area.name),
-        backgroundColor: areas.map(area => area.colour),
+        outcomes: wheel.outcomes,
+        records: wheel.areas,
+        data: wheel.areas.map(area => 10 * area.columns),
+        labels: wheel.areas.map(area => area.name),
+        backgroundColor: wheel.areas.map(area => area.colour),
         datalabels: {
-          backgroundColor: areas.map(area => area.colour),
+          backgroundColor: wheel.areas.map(area => area.colour),
           borderWidth: 1,
           borderColor: "#FFFFFF",
           font: {
-            size: 15,
-
+            size: 15
           },
           anchor: "center",
           align: "end"
@@ -111,6 +121,7 @@ export default {
     },
     processLayer(wheel, layer) {
       const dataset = {
+        outcomes: wheel.outcomes,
         records: [],
         data: [],
         labels: [],
@@ -121,17 +132,24 @@ export default {
       };
       wheel.areas.forEach(area => {
         for (let i = 0; i < area.columns; i++) {
-          // set index od observation record
+          // set index of observation record
           let index = wheel.layers - layer - 1 + i * wheel.layers;
+          let backgroundColor = area.colour;
           if (typeof area.selection[index] !== "undefined") {
-            area.selection[index].questionIndex = index;
-            area.selection[index].outcome = 3;
-            area.selection[index].areaColour = area.colour;
+            let record = area.selection[index];
+            record.questionIndex = index;
+            record.areaColour = area.colour;
+            if (typeof wheel.outcomes[record.id] === "undefined") {
+              wheel.outcomes[record.id] = 0; // default value
+            }
+            if (Outcomes[wheel.outcomes[record.id]].colour !== "clear") {
+              backgroundColor = Outcomes[wheel.outcomes[record.id]].colour;
+            }
           }
           dataset.records.push(area.selection[index]);
           dataset.data.push(10);
           dataset.labels.push(area.name);
-          dataset.backgroundColor.push(area.colour);
+          dataset.backgroundColor.push(backgroundColor);
           dataset.datalabels.backgroundColor.push(area.colour);
         }
       });
