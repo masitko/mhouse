@@ -11,7 +11,7 @@
     <div class="columns is-reverse-mobile">
       <div class="column is-three-quarters">
         {{filters}}
-        <div class="animated fadeIn is-half">
+        <div class="animated fadeIn is-half" v-if="wheelData">
           <chart-card
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
@@ -84,9 +84,8 @@ export default {
       termId: null,
       wheelId: null
     },
-    wheelData: {
-
-    }
+    wheelData: false,
+    outcomes: {}
   }),
 
   computed: {
@@ -120,13 +119,15 @@ export default {
           cancelToken: this.axiosRequest.token
         })
         .then(({ data }) => {
+          console.log(data);
           this.loading = false;
-          if( data.wheel ) {
-            wheelData.areas = data.wheel.areas;
-            wheelData.observations = data.wheel.observations;
+          if( typeof data.wheel !== 'undefined' ) {
+            this.wheelData = data.wheel;
+            this.wheelData.outcomes = this.outcomes;
+            // this.wheelData.observations = data.wheel.observations;
           }
 
-          console.log(data);
+          console.log(this);
         })
         .catch(error => {
           this.loading = false;
