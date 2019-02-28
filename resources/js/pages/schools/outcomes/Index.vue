@@ -1,41 +1,20 @@
 <template>
   <div class="wrapper">
-    <div class="has-text-centered" v-if="!ready && loading">
-      <h4 class="title is-4 has-text-centered">
-        {{ __('Loading') }}
-        <span class="icon is-small has-margin-left-medium">
-          <fa icon="spinner" size="xs" spin/>
-        </span>
-      </h4>
-    </div>
     <div class="columns is-reverse-mobile">
       <div class="column is-three-quarters">
-        {{filters}}
-        <div class="animated fadeIn is-half" v-if="wheelData">
+        <!-- v-if="wheelData" -->
+        <div class="animated fadeIn is-half">
           <chart-card
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
+            :outcomes="outcomes"
           />
         </div>
-
-        <!-- <timeline class="raises-on-hover"
-                    :feed="feed"
-                    :loading="loading"
-        @load-more="fetch()"/>-->
       </div>
       <div class="column is-one-quarter">
-        <button class="button is-fullwidth" :class="{ 'is-loading': loading }" @click="reload()">
-          <span>{{ __('') }}</span>
-          <span class="icon">
-            <fa icon="sync-alt"/>
-          </span>
-        </button>
-        <!-- <date-filter class="box raises-on-hover has-margin-top-large"
-                    :locale="locale"
-        @update="filters.interval = $event"/>-->
         <div class="box has-padding-medium raises-on-hover has-background-light">
           <p class="has-text-centered">
-            <strong>{{ __('What') }}</strong>
+            <strong>{{ __('Please select:') }}</strong>
           </p>
           <vue-select-filter
             source="wheels.wheels.options"
@@ -53,6 +32,19 @@
             :placeholder="__('Select Term')"
             v-model="filters.termId"
           />
+          <p class="has-text-centered">
+            <button 
+              class="button is-success" 
+              :class="{ 'is-loading': loading }" 
+              @click="reload()"
+              :disabled="!(filters.termId && filters.userId && filters.wheelId)"
+              >
+              <span>{{ __('Save') }}</span>
+              <span class="icon">
+                <fa icon="check"/>
+              </span>
+            </button>
+          </p>
         </div>
       </div>
     </div>
@@ -70,7 +62,8 @@ library.add(faSpinner);
 
 export default {
   components: {
-    VueSelectFilter, ChartCard
+    VueSelectFilter,
+    ChartCard
   },
 
   data: () => ({
@@ -84,7 +77,7 @@ export default {
       termId: null,
       wheelId: null
     },
-    wheelData: false,
+    wheelData: {},
     outcomes: {}
   }),
 
@@ -93,42 +86,69 @@ export default {
   },
 
   watch: {
-    filters: {
+    "filters.wheelId": {
       handler() {
-        this.reload();
-      },
-      deep: true
+        this.fetch(true);
+      }
+    },
+    "filters.userId": {
+      handler() {
+        this.fetch(false);
+      }
+    },
+    "filters.termId": {
+      handler() {
+        this.fetch(false);
+      }
     }
   },
 
   methods: {
-    fetch() {
-      if (!this.filters.userId || !this.filters.termId || !this.filters.wheelId)
+    save() {
+      axios
+        .post(route("schools.outcomes.store"), {
+          outcomes: this.outcomes,
+          term_id: this.filters.termId,
+          user_id: this.filters.userId,
+          wheel_id: this.filters.wheelId,
+          // params: { filters: this.filters },
+          // cancelToken: this.axiosRequest.token
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(error => {
+          this.loading = false;
+          if (axios.isCancel(error)) {
+            this.axiosRequest = null;
+            return;
+          }
+          this.handleError(error);
+        });      
+    },
+    fetch(includeWheel = false) {
+      if (!this.filters.wheelId && includeWheel) {
+        this.wheelData = {};
         return;
+      }
+      if (!this.filters.userId || !this.filters.termId) {
+        this.outcomes = {};
+        if (!includeWheel) {
+          return;
+        }
+      }
+      this.filters.includeWheel = includeWheel;
       this.loading = true;
-
       if (this.axiosRequest) {
         this.axiosRequest.cancel();
       }
-
       this.axiosRequest = axios.CancelToken.source();
-
       axios
         .get(route("schools.outcomes.getWheel"), {
           params: { filters: this.filters },
           cancelToken: this.axiosRequest.token
         })
-        .then(({ data }) => {
-          console.log(data);
-          this.loading = false;
-          if( typeof data.wheel !== 'undefined' ) {
-            this.wheelData = data.wheel;
-            this.wheelData.outcomes = this.outcomes;
-            // this.wheelData.observations = data.wheel.observations;
-          }
-
-          console.log(this);
-        })
+        .then(({ data }) => this.processData(data))
         .catch(error => {
           this.loading = false;
           if (axios.isCancel(error)) {
@@ -138,9 +158,25 @@ export default {
           this.handleError(error);
         });
     },
-    reload() {
-      this.fetch();
-    },
+    processData(data) {
+      console.log(data);
+      this.loading = false;
+      if (typeof data.wheel !== "undefined") {
+        this.wheelData = data.wheel;
+        this.outcomes = {};
+        // this.wheelData.outcomes = this.outcomes;
+      }
+      if (typeof data.outcomeRec !== "undefined") {
+        console.log("UPDATING OUTCOMES!!!");
+        this.outcomes = data.outcomeRec.outcomes;
+        // this.wheelData.outcomes = this.outcomes;
+        this.wheelData.observations.forEach(observation => {
+          if (typeof this.outcomes[observation.id] === "undefined") {
+            this.outcomes[observation.id] = 0;
+          }
+        });
+      }
+    }
   }
 };
 </script>

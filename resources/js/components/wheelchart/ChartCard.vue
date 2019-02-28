@@ -1,19 +1,17 @@
 <template>
-  <card
-    refresh
-    :title="title"
-    icon="chart-pie"
-    :overlay="loading"
-    :controls="1"
-    @refresh="update"
-    v-if="config"
-  >
+  <card refresh :title="title" icon="chart-pie" :overlay="loading" :controls="1" @refresh="update">
     <card-control slot="control-1">
       <span class="icon is-small download" @click="download">
         <fa icon="download"/>
       </span>
     </card-control>
-    <chart class="has-padding-medium" :title="`Wheel Preview`" :data="config.data" ref="chart"/>
+    <chart
+      class="has-padding-medium"
+      :title=title
+      :data="config.data"
+      ref="chart"
+      v-if="config"
+    />
   </card>
 </template>
 
@@ -38,6 +36,10 @@ export default {
       type: Object,
       default: null
     },
+    outcomes: {
+      type: Object,
+      default: () => ({})
+    },
     title: {
       type: String,
       default: ""
@@ -54,10 +56,15 @@ export default {
   watch: {
     wheelData: {
       handler() {
-        console.log("WHEEL DATA CHANGE!!!");
         this.update();
       }
       // deep: true
+    },
+    outcomes: {
+      handler() {
+        console.log("OUTCOMES DATA CHANGE!!!");
+        this.update();
+      }
     }
   },
 
@@ -67,19 +74,24 @@ export default {
 
   methods: {
     update() {
+      console.log("WHEEL DATA CHANGE!!!");
       if (this.wheelData && this.wheelData.areas) {
+        this.wheelData.outcomes = this.outcomes;
         this.config = {
           data: this.processData(this.prepareData(this.wheelData))
         };
+      } else {
+        this.config = null;
       }
     },
 
     prepareData(wheel) {
       let column = 0;
+      wheel.areas = wheel.areas.sort((a, b) => a.order > b.order);
       wheel.areas.forEach(area => {
-        area.selection = wheel.observations.filter(
-          obs => obs.area_id === area.id
-        );
+        area.selection = wheel.observations
+          .filter(obs => obs.area_id === area.id)
+          .sort((a, b) => a.order > b.order);
         area.columnIndex = column;
         area.columns = Math.ceil(area.selection.length / wheel.layers);
         column += area.columns;
@@ -140,7 +152,8 @@ export default {
             record.questionIndex = index;
             record.areaColour = area.colour;
             if (typeof wheel.outcomes[record.id] === "undefined") {
-              wheel.outcomes[record.id] = 0; // default value
+              // console.log('setting default value');
+              wheel.outcomes[record.id] = 3; // default value
             }
             if (Outcomes[wheel.outcomes[record.id]].colour !== "clear") {
               backgroundColor = Outcomes[wheel.outcomes[record.id]].colour;
