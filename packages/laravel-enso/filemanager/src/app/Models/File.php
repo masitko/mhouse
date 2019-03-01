@@ -53,9 +53,10 @@ class File extends Model
 
     public function scopeForUser($query, $user)
     {
-        return $user->isAdmin() || $user->isSupervisor()
-            ? $query
-            : $query->whereCreatedBy($user->id);
+        return $query;
+        // return $user->isAdmin() || $user->isSupervisor()
+        //     ? $query
+        //     : $query->whereCreatedBy($user->id);
     }
 
     public function scopeOrdered($query)

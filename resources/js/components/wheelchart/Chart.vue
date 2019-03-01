@@ -85,6 +85,9 @@ export default {
               fontColor: this.fontColour
             }
           },
+          animation: {
+            // 'duration': 500
+          },
           layout: {
             padding: {
               top: 10,

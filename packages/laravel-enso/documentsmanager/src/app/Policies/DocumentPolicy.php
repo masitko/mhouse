@@ -13,9 +13,9 @@ class DocumentPolicy
 
     public function before($user)
     {
-        if ($user->isAdmin() || $user->isSupervisor()) {
+        // if ($user->isAdmin() || $user->isSupervisor()) {
             return true;
-        }
+        // }
     }
 
     public function destroy(User $user, Document $document)
