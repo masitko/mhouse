@@ -12,63 +12,30 @@
                         {{ address.number }}
                     </strong>
                     <strong>
-                        {{ address.street }}
+                        {{ address.address1 }}
                     </strong>
-                    <strong v-if="address.streetType">
-                        {{ __(address.streetType) }},
-                    </strong>
-                    <br>
-                    <strong v-if="address.building">
-                        <span class="has-text-grey">
-                            {{ __(address.buildingType) }}
-                        </span>
-                        {{ address.building }},
-                    </strong>
-                    <strong v-if="address.entry">
-                        <span class="has-text-grey">
-                            {{ __('Entry') }}
-                        </span>
-                        {{ address.entry }},
-                    </strong>
-                    <strong v-if="address.floor">
-                        <span class="has-text-grey">
-                            {{ __('Floor') }}
-                        </span>
-                        {{ address.floor }},
-                    </strong>
-                    <strong v-if="address.apartment">
-                        <span class="has-text-grey">
-                            {{ __('Apartment') }}
-                        </span>
-                        {{ address.apartment }},
+                    <strong v-if="address.address2">
+                        <br>
+                        {{ address.address2 }}
                     </strong>
                     <br>
-                    <strong v-if="address.subAdministrativeArea">
-                        {{ address.subAdministrativeArea }},
+                    <strong>
+                        {{ address.town }}
                     </strong>
-                    <strong v-if="address.city">
-                        {{ address.city }},
-                    </strong>
-                    <br>
-                    <strong v-if="address.postalArea">
-                        {{ address.postalArea }},
-                    </strong>
-                    <strong v-if="address.administrativeArea">
-                        {{ address.administrativeArea }},
+                    <strong v-if="address.county">
+                        <br>
+                        {{ address.county }}
                     </strong>
                     <br>
-                    <span class="icon">
-                        <fa icon="globe"/>
-                    </span>
                     <strong>
                         {{ address.country }}
                     </strong>
                     <br>
                     <span class="icon"
-                        v-if="address.obs">
+                        v-if="address.notes">
                         <fa icon="sticky-note"/>
                     </span>
-                     {{ address.obs }}
+                     {{ address.notes }}
                 </slot>
             </div>
         </div>

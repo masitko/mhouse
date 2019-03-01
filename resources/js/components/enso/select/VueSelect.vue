@@ -166,7 +166,7 @@ export default {
         },
         limit: {
             type: Number,
-            default: 100,
+            default: 200,
         },
         multiple: {
             type: Boolean,

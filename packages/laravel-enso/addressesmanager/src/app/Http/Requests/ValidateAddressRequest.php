@@ -23,8 +23,8 @@ class ValidateAddressRequest extends FormRequest implements ValidatesAddressRequ
         return $this->method() === 'GET'
             ? $rules
             : $rules + [
-                'street'     => 'required',
-                'city'       => 'required',
+                'address1'     => 'required',
+                'town'       => 'required',
                 'country_id' => 'required',
             ];
     }

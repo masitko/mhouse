@@ -74,7 +74,11 @@ export default {
     },
     fetch() {
       axios
-        .get(route("wheels.observations.options"))
+        .get(route("wheels.observations.options"), {
+          params: {
+            limit: 1000
+          }
+        })
         .then(({ data }) => (this.data = data))
         .catch(error => this.handleError(error));
     }

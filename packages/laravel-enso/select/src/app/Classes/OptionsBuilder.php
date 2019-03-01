@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\Responsable;
 
 class OptionsBuilder implements Responsable
 {
-    private const Limit = 100;
+    private const Limit = 500;
 
     private $queryAttributes;
     private $query;

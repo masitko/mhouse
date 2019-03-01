@@ -16,7 +16,7 @@ class Address extends Model
     protected $loggableLabel = 'label';
 
     protected $loggable = [
-        'street', 'number', 'city', 'country_id' => [Country::class => 'name'],
+        'address1', 'number', 'towm', 'country_id' => [Country::class => 'name'],
     ];
 
     public function country()
@@ -32,8 +32,8 @@ class Address extends Model
     public function getLabelAttribute()
     {
         $label = collect([
-                trim($this->number.' '.$this->street),
-                $this->city,
+                trim($this->number.' '.$this->address1),
+                $this->town,
                 $this->country->name,
             ])->filter()
             ->implode(', ');

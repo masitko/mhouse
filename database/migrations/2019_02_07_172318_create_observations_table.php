@@ -20,6 +20,7 @@ class CreateObservationsTable extends Migration
       $table->foreign('area_id')->references('id')->on('areas');
 
       $table->string('name')->unique();
+      $table->string('key')->nullable();
       $table->text('description')->nullable();
 
       $table->integer('order');

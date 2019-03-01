@@ -17,20 +17,14 @@ class CreateAddressesTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
 
             $table->boolean('is_default')->default(true);
-            $table->string('apartment')->nullable();
-            $table->string('floor')->nullable();
-            $table->string('entry')->nullable();
-            $table->string('building')->nullable();
-            $table->string('building_type')->nullable();
             $table->string('number')->nullable();
-            $table->string('street')->nullable();
-            $table->string('street_type')->nullable();
-            $table->string('sub_administrative_area')->nullable();
-            $table->string('city');
-            $table->string('administrative_area')->nullable();
-            $table->string('postal_area')->nullable();
+            $table->string('address1')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('town')->nullable();
+            $table->string('county')->nullable();
+            $table->string('post_code')->nullable();
 
-            $table->text('obs')->nullable();
+            $table->text('notes')->nullable();
 
             $table->float('lat', 10, 6)->nullable();
             $table->float('long', 10, 6)->nullable();

@@ -5,11 +5,47 @@
     "routePrefix": "core.addresses",
     "sections": [
         {
-            "columns": "custom",
+            "columns": 3,
+            "fields": [
+                {
+                    "label": "Country",
+                    "name": "country_id",
+                    "value": null,
+                    "meta": {
+                        "type": "select",
+                        "multiple": false,
+                        "source": "core.addresses.countryOptions",
+                        "options": []
+                    }
+                },
+                {
+                    "label": "Street Type",
+                    "name": "street_type",
+                    "value": null,
+                    "meta": {
+                        "type": "select",
+                        "multiple": false,
+                        "options": "LaravelEnso\\AddressesManager\\app\\Enums\\StreetTypes"
+                    }
+                },
+                {
+                    "label": "Street",
+                    "name": "street",
+                    "value": null,
+                    "meta": {
+                        "custom": false,
+                        "type": "input",
+                        "content": "text",
+                        "disabled": false
+                    }
+                }
+            ]
+        },
+        {
+            "columns": 6,
             "fields": [
                 {
                     "label": "Number",
-                    "column": 2,
                     "name": "number",
                     "value": null,
                     "meta": {
@@ -20,9 +56,8 @@
                     }
                 },
                 {
-                    "label": "Address 1",
-                    "column": 5,
-                    "name": "address1",
+                    "label": "Postal Area",
+                    "name": "postal_area",
                     "value": null,
                     "meta": {
                         "custom": false,
@@ -32,9 +67,41 @@
                     }
                 },
                 {
-                    "label": "Address 2",
-                    "column": 5,
-                    "name": "address2",
+                    "label": "Building",
+                    "name": "building",
+                    "value": null,
+                    "meta": {
+                        "custom": false,
+                        "type": "input",
+                        "content": "text",
+                        "disabled": false
+                    }
+                },
+                {
+                    "label": "Entry",
+                    "name": "entry",
+                    "value": null,
+                    "meta": {
+                        "custom": false,
+                        "type": "input",
+                        "content": "text",
+                        "disabled": false
+                    }
+                },
+                {
+                    "label": "Floor",
+                    "name": "floor",
+                    "value": null,
+                    "meta": {
+                        "custom": false,
+                        "type": "input",
+                        "content": "text",
+                        "disabled": false
+                    }
+                },
+                {
+                    "label": "Apartment",
+                    "name": "apartment",
                     "value": null,
                     "meta": {
                         "custom": false,
@@ -46,11 +113,21 @@
             ]
         },
         {
-            "columns": 3,
+            "columns": 4,
             "fields": [
                 {
-                    "label": "Town",
-                    "name": "town",
+                    "label": "Building Type",
+                    "name": "building_type",
+                    "value": null,
+                    "meta": {
+                        "multiple": false,
+                        "type": "select",
+                        "options": "LaravelEnso\\AddressesManager\\app\\Enums\\BuildingTypes"
+                    }
+                },
+                {
+                    "label": "Sub Administrative Area",
+                    "name": "sub_administrative_area",
                     "value": null,
                     "meta": {
                         "custom": false,
@@ -60,8 +137,8 @@
                     }
                 },
                 {
-                    "label": "County",
-                    "name": "county",
+                    "label": "City",
+                    "name": "city",
                     "value": null,
                     "meta": {
                         "custom": false,
@@ -71,8 +148,8 @@
                     }
                 },
                 {
-                    "label": "Post Code",
-                    "name": "post_code",
+                    "label": "Administrative Area",
+                    "name": "administrative_area",
                     "value": null,
                     "meta": {
                         "custom": false,
@@ -81,22 +158,6 @@
                         "disabled": false
                     }
                 }
-            ]
-        },
-        {
-            "columns": 3,
-            "fields": [
-              {
-                "label": "Country",
-                "name": "country_id",
-                "value": "United Kingdom",
-                "meta": {
-                    "type": "select",
-                    "multiple": false,
-                    "source": "core.addresses.countryOptions",
-                    "options": []
-                }
-            }
             ]
         },
         {
@@ -104,12 +165,12 @@
             "fields": [
                 {
                     "label": "Notes",
-                    "name": "notes",
+                    "name": "obs",
                     "value": null,
                     "meta": {
                         "custom": false,
                         "type": "textarea",
-                        "rows": 3,
+                        "rows": 2,
                         "disabled": false
                     }
                 }
