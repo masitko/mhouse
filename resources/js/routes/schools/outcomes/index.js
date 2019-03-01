@@ -6,6 +6,6 @@ export default {
     component: OutcomeIndex,
     meta: {
         breadcrumb: 'index',
-        title: 'Outcome',
+        title: 'Outcomes',
     },
 };

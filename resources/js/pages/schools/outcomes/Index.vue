@@ -8,6 +8,7 @@
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
             :outcomes="outcomes"
+            :title="wheelData.name"
           />
         </div>
       </div>
