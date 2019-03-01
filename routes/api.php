@@ -95,6 +95,7 @@ Route::namespace ('Schools\Outcomes')
     Route::get('options', 'OutcomeSelectController@options')->name('options');
 
     Route::get('getWheel', 'OutcomeController@getWheel')->name('getWheel');
+    Route::post('storeWheel', 'OutcomeController@storeWheel')->name('storeWheel');
   });
 
 Route::namespace ('Schools\Outcomes')

@@ -17,6 +17,7 @@ class CreateStructureForOutcomes extends StructureMigration
         ['name' => 'schools.outcomes.exportExcel', 'description' => 'Export excel for outcome', 'type' => 0, 'is_default' => false],
         ['name' => 'schools.outcomes.options', 'description' => 'Get outcome options for select', 'type' => 0, 'is_default' => false],
         ['name' => 'schools.outcomes.getWheel', 'description' => 'Get outcome wheel info', 'type' => 0, 'is_default' => false],
+        ['name' => 'schools.outcomes.storeWheel', 'description' => 'Store outcomes', 'type' => 1, 'is_default' => false],
     ];
 
     protected $menu = [

@@ -50,6 +50,30 @@ class OutcomeController extends Controller
         return ['message' => __('The outcome was successfully updated')];
     }
 
+    public function storeWheel(Request $request) {
+      $outcome = $request->all();
+      // var_dump($outcome);
+      $result = Outcome::updateOrCreate([
+        'term_id' => $outcome['term_id'],
+        'wheel_id' => $outcome['wheel_id'],
+        'user_id' => $outcome['user_id'],
+      ], [
+        // 'term_id' => $outcome['term_id'],
+        // 'wheel_id' => $outcome['wheel_id'],
+        // 'user_id' => $outcome['user_id'],
+        'outcomes' =>  json_encode($outcome['outcomes']),
+        'editable' => false
+      ]);
+      return [
+        'message' => __('Outcomes stored...'),
+      ];
+      var_dump($result);
+      die();
+    }    
+
+    /**
+     * 
+     */
     public function getWheel(Request $request) {
 
       $result = [];
@@ -74,9 +98,10 @@ class OutcomeController extends Controller
             'term_id' => $filters->termId,
             'wheel_id' => $filters->wheelId,
             'user_id' => $filters->userId,
-            'outcomes' => (object)[]
+            'outcomes' => "{}"
           ];
         }
+        $result['outcomeRec']['outcomes'] = json_decode($result['outcomeRec']['outcomes']);
       }
   
       return $result;

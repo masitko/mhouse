@@ -35,7 +35,7 @@ class CreateOutcomesTable extends Migration
             $table->json('extra')->nullable();
 
             // this can be set if we want to edit after the end of the term
-            $table->boolean('editable');
+            $table->boolean('editable')->default(false);
       
             $table->integer('created_by')->unsigned()->index()->nullable();
             $table->foreign('created_by')->references('id')->on('users');

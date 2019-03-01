@@ -33,12 +33,12 @@
             v-model="filters.termId"
           />
           <p class="has-text-centered">
-            <button 
-              class="button is-success" 
-              :class="{ 'is-loading': loading }" 
-              @click="reload()"
+            <button
+              class="button is-success"
+              :class="{ 'is-loading': loading }"
+              @click="save()"
               :disabled="!(filters.termId && filters.userId && filters.wheelId)"
-              >
+            >
               <span>{{ __('Save') }}</span>
               <span class="icon">
                 <fa icon="check"/>
@@ -106,15 +106,15 @@ export default {
   methods: {
     save() {
       axios
-        .post(route("schools.outcomes.store"), {
+        .post(route("schools.outcomes.storeWheel"), {
           outcomes: this.outcomes,
           term_id: this.filters.termId,
           user_id: this.filters.userId,
-          wheel_id: this.filters.wheelId,
+          wheel_id: this.filters.wheelId
           // params: { filters: this.filters },
           // cancelToken: this.axiosRequest.token
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
         })
         .catch(error => {
@@ -124,7 +124,7 @@ export default {
             return;
           }
           this.handleError(error);
-        });      
+        });
     },
     fetch(includeWheel = false) {
       if (!this.filters.wheelId && includeWheel) {

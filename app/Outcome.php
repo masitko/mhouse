@@ -12,6 +12,7 @@ class Outcome extends Model
 {
   use CreatedBy, UpdatedBy;
     //
+    protected $guarded = [];
 
     
 }
