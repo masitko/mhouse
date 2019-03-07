@@ -29,10 +29,24 @@
           />
           <vue-select-filter
             source="schools.terms.options"
-            label="name"
             :placeholder="__('Select Term')"
             v-model="filters.termId"
           />
+          <vue-switch
+            source="schools.terms.options"
+            label="Show Legend"
+            v-model="filters.showLegend"
+          />
+
+                    <!-- <div class="column">
+                        <label class="label">
+                            {{ __('Only missing') }}
+                            <vue-switch class="has-margin-left-medium"
+                                v-model="filterMissing"
+                                size="is-large"/>
+                        </label>
+                    </div> -->
+
           <p class="has-text-centered">
             <button
               class="button is-success"
@@ -57,6 +71,7 @@ import { mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import VueSelectFilter from "../../../components/enso/select/VueSelectFilter.vue";
+import VueSwitch from '../../../components/enso/vueforms/VueSwitch.vue';
 import ChartCard from "../../../components/wheelchart/ChartCard.vue";
 
 library.add(faSpinner);
@@ -64,6 +79,7 @@ library.add(faSpinner);
 export default {
   components: {
     VueSelectFilter,
+    VueSwitch,
     ChartCard
   },
 
@@ -76,7 +92,8 @@ export default {
     filters: {
       userId: null,
       termId: null,
-      wheelId: null
+      wheelId: null,
+      showLegend: false,
     },
     wheelData: {},
     outcomes: {}
@@ -133,8 +150,8 @@ export default {
         return;
       }
       if (!this.filters.userId || !this.filters.termId) {
-        this.outcomes = {};
         if (!includeWheel) {
+          this.outcomes = {};
           return;
         }
       }

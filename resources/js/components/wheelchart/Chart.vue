@@ -40,8 +40,9 @@ export default {
   watch: {
     data() {
       // console.log("CHART CHANGE!");
+      this.chart.options.elements.center.text = this.title;
       this.update();
-    }
+    },
   },
 
   mounted() {
@@ -77,6 +78,7 @@ export default {
             }
           },
           cutoutPercentage: 20,
+          rotation: -0.6 * Math.PI,
           aspectRatio: 4 / 2,
           legend: {
             position: "right",
@@ -86,7 +88,7 @@ export default {
             }
           },
           animation: {
-            // 'duration': 500
+            'duration': 700
           },
           layout: {
             padding: {
@@ -207,21 +209,21 @@ export default {
           ...this.options
         }
       });
-      var titleOpts = {
-        title: {
-          display: true,
-          text: "Wheel Title"
-        }
-      };
-      var title = new Chart.Title({
-        ctx: this.chart.ctx,
-        options: titleOpts,
-        chart: this.chart
-      });
-      Chart.layouts.configure(this.chart, title, titleOpts);
-      Chart.layouts.addBox(this.chart, title);
-      this.chart.titleBlock = title;
-      this.chart.update();
+      // var titleOpts = {
+      //   title: {
+      //     display: true,
+      //     text: "Wheel Title"
+      //   }
+      // };
+      // var title = new Chart.Title({
+      //   ctx: this.chart.ctx,
+      //   options: titleOpts,
+      //   chart: this.chart
+      // });
+      // Chart.layouts.configure(this.chart, title, titleOpts);
+      // Chart.layouts.addBox(this.chart, title);
+      // this.chart.titleBlock = title;
+      // this.chart.update();
     },
     update() {
       if (!this.chart) {

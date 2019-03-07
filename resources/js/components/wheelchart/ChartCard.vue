@@ -49,13 +49,16 @@ export default {
   data() {
     return {
       loading: false,
-      config: null
+      config: null,
+      wheelChanging: false,
     };
   },
 
   watch: {
     wheelData: {
       handler() {
+        console.log("WHEEL DATA CHANGE!!!");
+        this
         this.update();
       }
       // deep: true
@@ -74,7 +77,6 @@ export default {
 
   methods: {
     update() {
-      console.log("WHEEL DATA CHANGE!!!");
       if (this.wheelData && this.wheelData.areas) {
         this.wheelData.outcomes = this.outcomes;
         this.config = {
