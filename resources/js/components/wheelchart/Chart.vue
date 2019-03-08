@@ -16,6 +16,8 @@ Chart.Tooltip = require("./core.tooltip");
 
 Chart.scaleService.updateScaleDefaults("linear", { ticks: { min: 0 } });
 
+let self;
+
 export default {
   name: "Chart",
 
@@ -30,7 +32,17 @@ export default {
     options: {
       type: Object,
       default: () => ({})
-    }
+    },
+    infos: {
+      type: Object,
+      default: () => ({
+        'dupa' : 1
+      })
+    },
+    showLegend: {
+      type: Boolean,
+      default: true
+    },
   },
 
   data: () => ({
@@ -41,6 +53,12 @@ export default {
     data() {
       // console.log("CHART CHANGE!");
       this.chart.options.elements.center.text = this.title;
+      this.update();
+    },
+    showLegend() {
+      console.log("LEGEND CHANGE!");
+      this.chart.options.legend.display = this.showLegend;
+      this.chart.options.aspectRatio = this.showLegend?2:1.5;
       this.update();
     },
   },
@@ -65,10 +83,14 @@ export default {
 
   methods: {
     init() {
+      self = this;
       this.chart = new Chart(this.$el, {
         type: "pie",
         data: this.data,
         options: {
+          cutoutPercentage: 20,
+          rotation: -0.45 * Math.PI,
+          aspectRatio: this.showLegend?2:1.5,
           elements: {
             center: {
               text: this.title,
@@ -77,10 +99,8 @@ export default {
               sidePadding: 20 // Defualt is 20 (as a percentage)
             }
           },
-          cutoutPercentage: 20,
-          rotation: -0.6 * Math.PI,
-          aspectRatio: 4 / 2,
           legend: {
+            display: this.showLegend,
             position: "right",
             labels: {
               fontSize: 15,
@@ -145,8 +165,22 @@ export default {
               }
             }
           },
+          onHover: function(event, elements) {
+            console.log(self);
+            console.log('HOVER', elements);
+            if (
+              elements.length &&
+              elements[0].$datalabels.$context.datasetIndex
+            ) {
+              const context = elements[0].$datalabels.$context;
+              const record = context.dataset.records[context.dataIndex];
+              const outcomes = context.dataset.outcomes;
+
+              self.infos.currentRecord = record;
+              self.infos.currentOutcome = Outcomes[outcomes[record.id]].colour;
+            }
+          },
           onClick: function(event, elements) {
-            // console.log(event);
             console.log("CLICK ", elements);
             if (
               elements.length &&
@@ -164,6 +198,7 @@ export default {
                 context.dataset.backgroundColor[context.dataIndex] =
                   record.areaColour;
               this.update();
+              self.infos.currentOutcome = Outcomes[outcomes[record.id]].colour;
               console.log(outcomes);
             }
           },

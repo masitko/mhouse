@@ -3,65 +3,31 @@
     <div class="columns is-reverse-mobile">
       <div class="column is-three-quarters">
         <!-- v-if="wheelData" -->
-        <div class="animated fadeIn is-half">
+        <div class="animated fadeIn">
           <chart-card
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
             :outcomes="outcomes"
+            :infos="infos"
             :title="wheelData.name"
+            :show-legend="filters.showLegend"
           />
         </div>
       </div>
       <div class="column is-one-quarter">
-        <div class="box has-padding-medium raises-on-hover has-background-light">
-          <p class="has-text-centered">
-            <strong>{{ __('Please select:') }}</strong>
-          </p>
-          <vue-select-filter
-            source="wheels.wheels.options"
-            :placeholder="__('Wheel Type')"
-            v-model="filters.wheelId"
-          />
-          <vue-select-filter
-            source="administration.users.options"
-            :placeholder="__('Select Student')"
-            v-model="filters.userId"
-          />
-          <vue-select-filter
-            source="schools.terms.options"
-            :placeholder="__('Select Term')"
-            v-model="filters.termId"
-          />
-          <vue-switch
-            source="schools.terms.options"
-            label="Show Legend"
-            v-model="filters.showLegend"
-          />
+        <filter-card
+          class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
+          :filters="filters"
+          :options="options"
+          @save="save"
+        />
+        <info-card
+          class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
+          :infos="infos"
+        />
 
-                    <!-- <div class="column">
-                        <label class="label">
-                            {{ __('Only missing') }}
-                            <vue-switch class="has-margin-left-medium"
-                                v-model="filterMissing"
-                                size="is-large"/>
-                        </label>
-                    </div> -->
-
-          <p class="has-text-centered">
-            <button
-              class="button is-success"
-              :class="{ 'is-loading': loading }"
-              @click="save()"
-              :disabled="!(filters.termId && filters.userId && filters.wheelId)"
-            >
-              <span>{{ __('Save') }}</span>
-              <span class="icon">
-                <fa icon="check"/>
-              </span>
-            </button>
-          </p>
-        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -70,22 +36,22 @@
 import { mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import VueSelectFilter from "../../../components/enso/select/VueSelectFilter.vue";
-import VueSwitch from '../../../components/enso/vueforms/VueSwitch.vue';
 import ChartCard from "../../../components/wheelchart/ChartCard.vue";
+import FilterCard from "../../../components/wheelchart/FilterCard.vue";
+import InfoCard from "../../../components/wheelchart/InfoCard.vue";
 
 library.add(faSpinner);
 
 export default {
   components: {
-    VueSelectFilter,
-    VueSwitch,
-    ChartCard
+    ChartCard,
+    FilterCard,
+    InfoCard,
   },
 
   data: () => ({
     ready: false,
-    loading: false,
+    // loading: false,
     axiosRequest: null,
     feed: [],
     offset: 0,
@@ -93,7 +59,12 @@ export default {
       userId: null,
       termId: null,
       wheelId: null,
-      showLegend: false,
+      showLegend: true
+    },
+    options: {
+      loading: false,
+    },
+    infos: {
     },
     wheelData: {},
     outcomes: {}
@@ -123,6 +94,7 @@ export default {
 
   methods: {
     save() {
+      console.log('SAVING!');
       axios
         .post(route("schools.outcomes.storeWheel"), {
           outcomes: this.outcomes,
@@ -136,7 +108,7 @@ export default {
           console.log(response);
         })
         .catch(error => {
-          this.loading = false;
+          this.options.loading = false;
           if (axios.isCancel(error)) {
             this.axiosRequest = null;
             return;
@@ -156,7 +128,7 @@ export default {
         }
       }
       this.filters.includeWheel = includeWheel;
-      this.loading = true;
+      this.options.loading = true;
       if (this.axiosRequest) {
         this.axiosRequest.cancel();
       }
@@ -168,7 +140,7 @@ export default {
         })
         .then(({ data }) => this.processData(data))
         .catch(error => {
-          this.loading = false;
+          this.options.loading = false;
           if (axios.isCancel(error)) {
             this.axiosRequest = null;
             return;
@@ -178,7 +150,7 @@ export default {
     },
     processData(data) {
       console.log(data);
-      this.loading = false;
+      this.options.loading = false;
       if (typeof data.wheel !== "undefined") {
         this.wheelData = data.wheel;
         this.outcomes = {};

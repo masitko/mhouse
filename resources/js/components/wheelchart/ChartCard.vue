@@ -7,8 +7,10 @@
     </card-control>
     <chart
       class="has-padding-medium"
-      :title=title
+      :title="title"
+      :show-legend="showLegend"
       :data="config.data"
+      :infos="infos"
       ref="chart"
       v-if="config"
     />
@@ -40,9 +42,17 @@ export default {
       type: Object,
       default: () => ({})
     },
+    infos: {
+      type: Object,
+      default: () => ({})
+    },
     title: {
       type: String,
       default: ""
+    },
+    showLegend: {
+      type: Boolean,
+      default: true
     }
   },
 

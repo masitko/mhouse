@@ -1,0 +1,87 @@
+<template>
+  <!-- <div class="box has-padding-medium raises-on-hover has-background-light">
+    <p class="has-text-centered">
+      <strong>{{ __('Please select:') }}</strong>
+  </p>-->
+  <card 
+    :title="__('Please select:')" 
+    icon="sliders-h" 
+    :controls="2"
+    >
+    <card-control slot="control-2">
+    </card-control>
+
+    <vue-select-filter
+      source="wheels.wheels.options"
+      :placeholder="__('Wheel Type')"
+      v-model="filters.wheelId"
+    />
+    <vue-select-filter
+      source="administration.users.options"
+      :placeholder="__('Select Student')"
+      v-model="filters.userId"
+    />
+    <vue-select-filter
+      source="schools.terms.options"
+      :placeholder="__('Select Term')"
+      v-model="filters.termId"
+    />
+    <p class="has-text-centered">
+      <label class="label">
+        {{ __('Show Legend') }}
+        <vue-switch class="has-margin-left-medium" v-model="filters.showLegend" size="is-small"/>
+      </label>
+    </p>
+    <p class="has-text-centered">
+      <button
+        class="button is-success"
+        :class="{ 'is-loading': options.loading }"
+        @click="save()"
+        :disabled="!(filters.termId && filters.userId && filters.wheelId)"
+      >
+        <span>{{ __('Save') }}</span>
+        <span class="icon">
+          <fa icon="check"/>
+        </span>
+      </button>
+    </p>
+  </card>
+  <!-- </div> -->
+</template>
+
+<script>
+import Card from "../enso/bulma/Card.vue";
+import CardControl from "../enso/bulma/CardControl.vue";
+import VueSelectFilter from "../enso/select/VueSelectFilter.vue";
+import VueSwitch from "../enso/vueforms/VueSwitch.vue";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
+
+
+export default {
+  name: "FilterCard",
+
+  components: {
+    VueSelectFilter,
+    VueSwitch,
+    Card,
+    CardControl
+  },
+
+  props: {
+    filters: {
+      type: Object,
+      default: () => ({})
+    },
+    options: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  methods: {
+    save() {
+      console.log("EMITING SAVE");
+      this.$emit("save");
+    }
+  }
+};
+</script>
