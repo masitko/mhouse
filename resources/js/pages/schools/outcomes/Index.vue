@@ -56,7 +56,7 @@ export default {
       userId: null,
       termId: null,
       wheelId: null,
-      showLegend: true
+      showLegend: false
     },
     options: {
       loading: false

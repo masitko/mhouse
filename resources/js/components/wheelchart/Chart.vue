@@ -52,7 +52,7 @@ export default {
     showLegend() {
       console.log("LEGEND CHANGE!");
       this.chart.options.legend.display = this.showLegend;
-      this.chart.options.aspectRatio = this.showLegend?2:1.5;
+      this.chart.options.aspectRatio = this.showLegend?2:1.8;
       this.update();
     },
   },
@@ -84,7 +84,7 @@ export default {
         options: {
           cutoutPercentage: 20,
           rotation: -0.45 * Math.PI,
-          aspectRatio: this.showLegend?2:1.5,
+          aspectRatio: this.showLegend?2:1.8,
           elements: {
             center: {
               text: this.title,

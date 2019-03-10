@@ -3,13 +3,13 @@
     <p class="has-text-centered">
       <strong>{{ __('Please select:') }}</strong>
   </p>-->
-  <card 
+  <card fixed
     :title="__('Please select:')" 
     icon="sliders-h" 
     :controls="2"
     >
-    <card-control slot="control-2">
-    </card-control>
+    <!-- <card-control slot="control-2">
+    </card-control> -->
 
     <vue-select-filter
       source="wheels.wheels.options"

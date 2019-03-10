@@ -3,13 +3,14 @@
     <p class="has-text-centered">
       <strong>{{ __('Please select:') }}</strong>
   </p>-->
-  <card 
+  <card fixed
     :title="__('Info:')" 
     icon="info-circle" 
     :controls="2"
+    class="has-padding-medium"
     >
-    <card-control slot="control-2">
-    </card-control>
+    <!-- <card-control slot="control-2">
+    </card-control> -->
 
   <p v-if="infos.record">
     <strong>Observation: </strong>{{infos.record.name}}
