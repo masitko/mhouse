@@ -10,9 +10,9 @@
       :title="title"
       :show-legend="showLegend"
       :data="config.data"
-      :infos="infos"
       ref="chart"
       v-if="config"
+      @change="$emit('change', $event)"
     />
   </card>
 </template>
@@ -39,10 +39,6 @@ export default {
       default: null
     },
     outcomes: {
-      type: Object,
-      default: () => ({})
-    },
-    infos: {
       type: Object,
       default: () => ({})
     },

@@ -89,7 +89,8 @@ class OutcomeController extends Controller
       if( $filters->userId && $filters->termId && $filters->wheelId ) {
         $result['user'] = User::find($filters->userId);
         $result['term'] = Term::find($filters->termId);
-        $result['outcomeRec'] = Outcome::where('term_id',$filters->termId)
+        $result['outcomeRec'] = 
+            Outcome::where('term_id',$filters->termId)
             ->where('wheel_id',$filters->wheelId)
             ->where('user_id',$filters->userId)
             ->first();

@@ -11,7 +11,12 @@
     <card-control slot="control-2">
     </card-control>
 
-  {{infos}}
+  <p v-if="infos.record">
+    <strong>Observation: </strong>{{infos.record.name}}
+  </p>
+  <p v-if="infos.outcome">
+    <strong>Outcome: </strong>{{getOutcome(infos.outcome).label}}
+  </p>
   </card>
   <!-- </div> -->
 </template>
@@ -21,6 +26,7 @@ import Card from "../enso/bulma/Card.vue";
 import CardControl from "../enso/bulma/CardControl.vue";
 import VueSelectFilter from "../enso/select/VueSelectFilter.vue";
 import VueSwitch from "../enso/vueforms/VueSwitch.vue";
+import Outcomes from "./outcomes.js";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -37,10 +43,14 @@ export default {
   props: {
     infos: {
       type: Object,
-      default: () => ({})
     },
   },
   methods: {
+    getOutcome(colour) {
+      return Outcomes.find(
+        (outcome) => outcome.colour === colour
+        );
+    }
   }
 };
 </script>

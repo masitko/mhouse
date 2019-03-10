@@ -2,15 +2,14 @@
   <div class="wrapper">
     <div class="columns is-reverse-mobile">
       <div class="column is-three-quarters">
-        <!-- v-if="wheelData" -->
         <div class="animated fadeIn">
           <chart-card
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
             :outcomes="outcomes"
-            :infos="infos"
             :title="wheelData.name"
             :show-legend="filters.showLegend"
+            @change="chartChange"
           />
         </div>
       </div>
@@ -25,9 +24,7 @@
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
           :infos="infos"
         />
-
       </div>
-
     </div>
   </div>
 </template>
@@ -46,7 +43,7 @@ export default {
   components: {
     ChartCard,
     FilterCard,
-    InfoCard,
+    InfoCard
   },
 
   data: () => ({
@@ -62,7 +59,7 @@ export default {
       showLegend: true
     },
     options: {
-      loading: false,
+      loading: false
     },
     infos: {
     },
@@ -93,8 +90,16 @@ export default {
   },
 
   methods: {
+    chartChange(values) {
+      // console.log("CHART CHANGED!!!");
+      // console.log( record );
+      this.infos = values;
+      // if (typeof this.infos.record === "undefined") {
+      //   this.infos.record = {};
+      // }
+    },
     save() {
-      console.log('SAVING!');
+      console.log("SAVING!");
       axios
         .post(route("schools.outcomes.storeWheel"), {
           outcomes: this.outcomes,

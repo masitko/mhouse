@@ -33,12 +33,6 @@ export default {
       type: Object,
       default: () => ({})
     },
-    infos: {
-      type: Object,
-      default: () => ({
-        'dupa' : 1
-      })
-    },
     showLegend: {
       type: Boolean,
       default: true
@@ -166,8 +160,7 @@ export default {
             }
           },
           onHover: function(event, elements) {
-            console.log(self);
-            console.log('HOVER', elements);
+            // console.log('HOVER', elements);
             if (
               elements.length &&
               elements[0].$datalabels.$context.datasetIndex
@@ -175,13 +168,16 @@ export default {
               const context = elements[0].$datalabels.$context;
               const record = context.dataset.records[context.dataIndex];
               const outcomes = context.dataset.outcomes;
-
-              self.infos.currentRecord = record;
-              self.infos.currentOutcome = Outcomes[outcomes[record.id]].colour;
+              self.$emit('change', {
+                record :record ,
+                outcome: Outcomes[outcomes[record.id]].colour
+              });
+            } else {
+              self.$emit('change', {});
             }
           },
           onClick: function(event, elements) {
-            console.log("CLICK ", elements);
+            // console.log("CLICK ", elements);
             if (
               elements.length &&
               elements[0].$datalabels.$context.datasetIndex
@@ -198,8 +194,10 @@ export default {
                 context.dataset.backgroundColor[context.dataIndex] =
                   record.areaColour;
               this.update();
-              self.infos.currentOutcome = Outcomes[outcomes[record.id]].colour;
-              console.log(outcomes);
+              self.$emit('change', {
+                record :record ,
+                outcome: Outcomes[outcomes[record.id]].colour
+              });
             }
           },
 
