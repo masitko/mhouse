@@ -3,14 +3,9 @@
     <p class="has-text-centered">
       <strong>{{ __('Please select:') }}</strong>
   </p>-->
-  <card fixed
-    :title="__('Please select:')" 
-    icon="sliders-h" 
-    :controls="2"
-    >
+  <card fixed :title="__('Please select:')" icon="sliders-h" :controls="2">
     <!-- <card-control slot="control-2">
-    </card-control> -->
-
+    </card-control>-->
     <vue-select-filter
       source="wheels.wheels.options"
       :placeholder="__('Wheel Type')"
@@ -26,27 +21,28 @@
       :placeholder="__('Select Term')"
       v-model="filters.termId"
     />
-    <p class="has-text-centered">
-      <label class="label">
-        {{ __('Show Legend') }}
-        <vue-switch class="has-margin-left-medium" v-model="filters.showLegend" size="is-small"/>
-      </label>
-    </p>
-    <p class="has-text-centered">
-      <button
-        class="button is-success"
-        :class="{ 'is-loading': options.loading }"
-        @click="save()"
-        :disabled="!(filters.termId && filters.userId && filters.wheelId)"
-      >
-        <span>{{ __('Save') }}</span>
-        <span class="icon">
-          <fa icon="check"/>
-        </span>
-      </button>
-    </p>
+    <div class="columns has-padding-medium">
+      <div class="column is-half">
+        <label class="label has-margin-top-medium">
+          {{ __('Show Legend') }}
+          <vue-switch class="has-margin-left-medium" v-model="filters.showLegend" size="is-small"/>
+        </label>
+      </div>
+      <div class="column is-half has-text-right">
+        <button
+          class="button is-success"
+          :class="{ 'is-loading': options.loading }"
+          @click="save()"
+          :disabled="!(filters.termId && filters.userId && filters.wheelId)"
+        >
+          <span>{{ __('Save') }}</span>
+          <span class="icon">
+            <fa icon="check"/>
+          </span>
+        </button>
+      </div>
+    </div>
   </card>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -55,7 +51,6 @@ import CardControl from "../enso/bulma/CardControl.vue";
 import VueSelectFilter from "../enso/select/VueSelectFilter.vue";
 import VueSwitch from "../enso/vueforms/VueSwitch.vue";
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
-
 
 export default {
   name: "FilterCard",

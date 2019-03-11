@@ -9,6 +9,7 @@
             :outcomes="outcomes"
             :title="wheelData.name"
             :show-legend="filters.showLegend"
+            :disabled="!wheelEnabled"
             @change="chartChange"
           />
         </div>
@@ -68,6 +69,10 @@ export default {
   }),
 
   computed: {
+    wheelEnabled() {
+      console.log('COMPUTED UPDATED!!!');
+      return this.filters.userId && this.filters.termId && this.filters.wheelId;
+    },
     ...mapGetters("preferences", { locale: "lang" })
   },
 
@@ -154,7 +159,7 @@ export default {
         });
     },
     processData(data) {
-      console.log(data);
+      // console.log(data);
       this.options.loading = false;
       if (typeof data.wheel !== "undefined") {
         this.wheelData = data.wheel;
@@ -162,7 +167,7 @@ export default {
         // this.wheelData.outcomes = this.outcomes;
       }
       if (typeof data.outcomeRec !== "undefined") {
-        console.log("UPDATING OUTCOMES!!!");
+        // console.log("UPDATING OUTCOMES!!!");
         this.outcomes = data.outcomeRec.outcomes;
         // this.wheelData.outcomes = this.outcomes;
         this.wheelData.observations.forEach(observation => {

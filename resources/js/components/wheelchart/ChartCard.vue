@@ -9,6 +9,7 @@
       class="has-padding-medium"
       :title="title"
       :show-legend="showLegend"
+      :disabled="disabled"
       :data="config.data"
       ref="chart"
       v-if="config"
@@ -49,7 +50,11 @@ export default {
     showLegend: {
       type: Boolean,
       default: true
-    }
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -63,15 +68,14 @@ export default {
   watch: {
     wheelData: {
       handler() {
-        console.log("WHEEL DATA CHANGE!!!");
-        this
+        // console.log("WHEEL DATA CHANGE!!!");
         this.update();
       }
       // deep: true
     },
     outcomes: {
       handler() {
-        console.log("OUTCOMES DATA CHANGE!!!");
+        // console.log("OUTCOMES DATA CHANGE!!!");
         this.update();
       }
     }
@@ -104,7 +108,7 @@ export default {
         area.columns = Math.ceil(area.selection.length / wheel.layers);
         column += area.columns;
       });
-      console.log(wheel);
+      // console.log(wheel);
       return wheel;
     },
 

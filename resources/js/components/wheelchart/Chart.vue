@@ -37,6 +37,10 @@ export default {
       type: Boolean,
       default: true
     },
+    disabled: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data: () => ({
@@ -50,17 +54,21 @@ export default {
       this.update();
     },
     showLegend() {
-      console.log("LEGEND CHANGE!");
+      // console.log("LEGEND CHANGE!");
       this.chart.options.legend.display = this.showLegend;
       this.chart.options.aspectRatio = this.showLegend?2:1.8;
       this.update();
+    },
+    disabled() {
+      console.log("DISABLED CHANGE!");
+      console.log(this.disabled);
     },
   },
 
   mounted() {
     this.init();
-    console.log(this);
-    console.log(Chart);
+    // console.log(this);
+    // console.log(Chart);
   },
 
   beforeDestroy() {
@@ -178,6 +186,9 @@ export default {
           },
           onClick: function(event, elements) {
             // console.log("CLICK ", elements);
+            event.stopPropagation();
+            if( self.disabled )
+              return false;
             if (
               elements.length &&
               elements[0].$datalabels.$context.datasetIndex
@@ -199,6 +210,7 @@ export default {
                 outcome: Outcomes[outcomes[record.id]].colour
               });
             }
+            return false;
           },
 
           plugins: {

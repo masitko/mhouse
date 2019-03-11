@@ -1,23 +1,17 @@
 <template>
-  <!-- <div class="box has-padding-medium raises-on-hover has-background-light">
-    <p class="has-text-centered">
-      <strong>{{ __('Please select:') }}</strong>
-  </p>-->
-  <card fixed
-    :title="__('Info:')" 
-    icon="info-circle" 
-    :controls="2"
-    class="has-padding-medium"
-    >
+  <card fixed :title="__('Info:')" icon="info-circle" :controls="2" class="has-padding-medium">
     <!-- <card-control slot="control-2">
-    </card-control> -->
-
-  <p v-if="infos.record">
-    <strong>Observation: </strong>{{infos.record.name}}
-  </p>
-  <p v-if="infos.outcome">
-    <strong>Outcome: </strong>{{getOutcome(infos.outcome).label}}
-  </p>
+    </card-control>-->
+    <div class="has-padding-medium has-margin-top-medium">
+      <p v-if="infos.record">
+        <strong>Observation:</strong>
+        {{infos.record.name}}
+      </p>
+      <p v-if="infos.outcome">
+        <strong>Outcome:</strong>
+        {{getOutcome(infos.outcome).label}}
+      </p>
+    </div>
   </card>
   <!-- </div> -->
 </template>
@@ -29,7 +23,6 @@ import VueSelectFilter from "../enso/select/VueSelectFilter.vue";
 import VueSwitch from "../enso/vueforms/VueSwitch.vue";
 import Outcomes from "./outcomes.js";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-
 
 export default {
   name: "InfoCard",
@@ -43,14 +36,12 @@ export default {
 
   props: {
     infos: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   methods: {
     getOutcome(colour) {
-      return Outcomes.find(
-        (outcome) => outcome.colour === colour
-        );
+      return Outcomes.find(outcome => outcome.colour === colour);
     }
   }
 };
