@@ -60,6 +60,7 @@ export default {
       userId: null,
       termId: null,
       wheelId: null,
+      unsaved: false, // needs saving if set to true
       showLegend: false
     },
     options: {

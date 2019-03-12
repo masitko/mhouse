@@ -178,7 +178,8 @@ export default {
               const outcomes = context.dataset.outcomes;
               self.$emit('change', {
                 record :record ,
-                outcome: Outcomes[outcomes[record.id]].colour
+                outcome: Outcomes[outcomes[record.id]].colour,
+                type: 'hover'
               });
             } else {
               self.$emit('change', {});
@@ -207,7 +208,8 @@ export default {
               this.update();
               self.$emit('change', {
                 record :record ,
-                outcome: Outcomes[outcomes[record.id]].colour
+                outcome: Outcomes[outcomes[record.id]].colour,
+                type: 'click'
               });
             }
             return false;
