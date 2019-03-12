@@ -7,7 +7,7 @@
     </card-control>
     <chart
       class="has-padding-medium"
-      :title="title"
+      :title="config.title"
       :show-legend="showLegend"
       :disabled="disabled"
       :data="config.data"
@@ -90,7 +90,8 @@ export default {
       if (this.wheelData && this.wheelData.areas) {
         this.wheelData.outcomes = this.outcomes;
         this.config = {
-          data: this.processData(this.prepareData(this.wheelData))
+          data: this.processData(this.prepareData(this.wheelData)),
+          title: this.wheelData.name
         };
       } else {
         this.config = null;

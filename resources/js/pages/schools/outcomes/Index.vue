@@ -7,7 +7,7 @@
             class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
             :wheel-data="wheelData"
             :outcomes="outcomes"
-            :title="wheelData.name"
+            :title="title"
             :show-legend="filters.showLegend"
             :disabled="!wheelEnabled"
             @change="chartChange"
@@ -20,6 +20,8 @@
           :filters="filters"
           :options="options"
           @save="save"
+          @users-fetched="usersFetched"
+          @terms-fetched="termsFetched"
         />
         <info-card
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
@@ -52,6 +54,7 @@ export default {
     // loading: false,
     axiosRequest: null,
     feed: [],
+    title: '',
     offset: 0,
     filters: {
       userId: null,
@@ -85,11 +88,13 @@ export default {
     "filters.userId": {
       handler() {
         this.fetch(false);
+        this.updateTitle();
       }
     },
     "filters.termId": {
       handler() {
         this.fetch(false);
+        this.updateTitle();
       }
     }
   },
@@ -125,6 +130,20 @@ export default {
           }
           this.handleError(error);
         });
+    },
+    usersFetched( users ) {
+      console.log('USERS!', users);
+      this.users = users;
+    },
+    termsFetched( terms ) {
+      console.log('TERMS!',terms);
+      this.terms = terms;
+    },
+    updateTitle() {
+      this.title = "" ;
+      this.title += this.filters.wheelId?this.wheelData.name:'';
+      this.title += this.filters.userId? ' - ' + this.users.filter(user=>user.id === this.filters.userId)[0].name:'';
+      this.title += this.filters.termId? ' - ' + this.terms.filter(term=>term.id === this.filters.termId)[0].name:'';
     },
     fetch(includeWheel = false) {
       if (!this.filters.wheelId && includeWheel) {
@@ -176,6 +195,7 @@ export default {
           }
         });
       }
+      this.updateTitle();
     }
   }
 };

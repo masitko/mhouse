@@ -15,11 +15,13 @@
       source="administration.users.options"
       :placeholder="__('Select Student')"
       v-model="filters.userId"
+      @fetch="$emit('users-fetched', $event)"
     />
     <vue-select-filter
       source="schools.terms.options"
       :placeholder="__('Select Term')"
       v-model="filters.termId"
+      @fetch="$emit('terms-fetched', $event)"
     />
     <div class="columns has-padding-medium">
       <div class="column is-half">
@@ -76,7 +78,7 @@ export default {
     save() {
       console.log("EMITING SAVE");
       this.$emit("save");
-    }
+    },
   }
 };
 </script>
