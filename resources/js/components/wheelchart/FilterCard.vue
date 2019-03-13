@@ -35,15 +35,16 @@
           class="button is-success"
           :class="{ 'is-loading': options.loading }"
           @click="save()"
-          :disabled="!(filters.termId && filters.userId && filters.wheelId)"
+          :disabled="!buttonEnabled"
         >
-          <span>{{ __('Save') }}</span>
+          <span>{{ statuses[filters.status] }}</span>
           <span class="icon">
             <fa icon="check"/>
           </span>
         </button>
       </div>
     </div>
+    <!-- <div>{{buttonStatus}}</div> -->
   </card>
 </template>
 
@@ -72,6 +73,21 @@ export default {
     options: {
       type: Object,
       default: () => ({})
+    }
+  },
+
+  data() {
+    return {
+      statuses: {
+        changed: "Saving...",
+        current: "Up to date"
+      }
+    };
+  },
+
+  computed: {
+    buttonEnabled() {
+      return this.filters.termId && this.filters.userId && this.filters.wheelId && this.filters.unsaved;
     }
   },
   methods: {

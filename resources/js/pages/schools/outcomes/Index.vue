@@ -61,6 +61,7 @@ export default {
       termId: null,
       wheelId: null,
       unsaved: false, // needs saving if set to true
+      status: 'current',
       showLegend: false
     },
     options: {
@@ -102,9 +103,13 @@ export default {
 
   methods: {
     chartChange(values) {
-      // console.log("CHART CHANGED!!!");
-      // console.log( record );
+      console.log("CHART CHANGED!!!");
+      console.log( values );
       this.infos = values;
+      if( values.type === 'click') {
+        // this.filters.unsaved = true;
+        this.filters.status = 'changed';
+      }
       // if (typeof this.infos.record === "undefined") {
       //   this.infos.record = {};
       // }
@@ -121,6 +126,8 @@ export default {
           // cancelToken: this.axiosRequest.token
         })
         .then(response => {
+          // this.filters.unsaved = false;
+          this.filters.status = 'current';
           console.log(response);
         })
         .catch(error => {
@@ -147,6 +154,8 @@ export default {
       this.title += this.filters.termId? ' - ' + this.terms.filter(term=>term.id === this.filters.termId)[0].name:'';
     },
     fetch(includeWheel = false) {
+      this.filters.status = 'current';
+      // this.filters.unsaved = false;
       if (!this.filters.wheelId && includeWheel) {
         this.wheelData = {};
         return;
