@@ -1,5 +1,5 @@
 <template>
-  <card fixed :title="__('Info:')" icon="info-circle" :controls="2" class="has-padding-medium">
+  <card fixed :title="__('Info:')" icon="eye" :controls="2" class="has-padding-medium">
     <!-- <card-control slot="control-2">
     </card-control>-->
     <div class="has-padding-medium has-margin-top-medium">
@@ -8,7 +8,7 @@
         {{infos.record.name}}
       </p>
       <p v-if="infos.outcome">
-        <strong>Outcome:</strong>
+        <strong>Score: </strong>
         {{getOutcome(infos.outcome).label}}
       </p>
     </div>
@@ -19,17 +19,13 @@
 <script>
 import Card from "../enso/bulma/Card.vue";
 import CardControl from "../enso/bulma/CardControl.vue";
-import VueSelectFilter from "../enso/select/VueSelectFilter.vue";
-import VueSwitch from "../enso/vueforms/VueSwitch.vue";
 import Outcomes from "./outcomes.js";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   name: "InfoCard",
 
   components: {
-    VueSelectFilter,
-    VueSwitch,
     Card,
     CardControl
   },

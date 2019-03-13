@@ -1,5 +1,5 @@
 <template>
-  <card refresh :title="title" icon="chart-pie" :overlay="loading" :controls="1" @refresh="update">
+  <card fixed refresh :title="title" icon="chart-pie" :overlay="loading" :controls="1" @refresh="update">
     <card-control slot="control-1">
       <span class="icon is-small download" @click="download">
         <fa icon="download"/>
@@ -180,7 +180,7 @@ export default {
           dataset.data.push(10);
           dataset.labels.push(area.name);
           dataset.backgroundColor.push(backgroundColor);
-          dataset.datalabels.backgroundColor.push('white');
+          dataset.datalabels.backgroundColor.push("white");
         }
       });
       return dataset;

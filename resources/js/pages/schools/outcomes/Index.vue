@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="columns is-reverse-mobile">
+    <div class="columns">
       <div class="column is-three-quarters">
         <div class="animated fadeIn">
           <chart-card

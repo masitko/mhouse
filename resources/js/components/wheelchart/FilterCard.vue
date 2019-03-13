@@ -23,14 +23,14 @@
       v-model="filters.termId"
       @fetch="$emit('terms-fetched', $event)"
     />
-    <div class="columns has-padding-medium">
-      <div class="column is-half">
+    <div class="columns has-padding-medium is-desktop">
+      <div class="column">
         <label class="label has-margin-top-medium">
           {{ __('Show Legend') }}
           <vue-switch class="has-margin-left-medium" v-model="filters.showLegend" size="is-small"/>
         </label>
       </div>
-      <div class="column is-half has-text-right">
+      <div class="column has-text-right">
         <button
           class="button"
           :class="[statuses[filters.status].class, { 'is-loading': options.loading }]"
