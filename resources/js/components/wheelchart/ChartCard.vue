@@ -61,7 +61,7 @@ export default {
     return {
       loading: false,
       config: null,
-      wheelChanging: false,
+      wheelChanging: false
     };
   },
 
@@ -135,7 +135,8 @@ export default {
         datalabels: {
           backgroundColor: wheel.areas.map(area => area.colour),
           borderWidth: 1,
-          borderColor: "#FFFFFF",
+          opacity: 1,
+          borderColor: "white",
           font: {
             size: 15
           },
@@ -152,7 +153,10 @@ export default {
         labels: [],
         backgroundColor: [],
         datalabels: {
-          backgroundColor: []
+          backgroundColor: [],
+          borderWidth: 1,
+          borderColor: "lightgrey",
+          padding: 3
         }
       };
       wheel.areas.forEach(area => {
@@ -176,7 +180,7 @@ export default {
           dataset.data.push(10);
           dataset.labels.push(area.name);
           dataset.backgroundColor.push(backgroundColor);
-          dataset.datalabels.backgroundColor.push(area.colour);
+          dataset.datalabels.backgroundColor.push('white');
         }
       });
       return dataset;

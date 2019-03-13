@@ -56,13 +56,13 @@ export default {
     showLegend() {
       // console.log("LEGEND CHANGE!");
       this.chart.options.legend.display = this.showLegend;
-      this.chart.options.aspectRatio = this.showLegend?2:1.8;
+      this.chart.options.aspectRatio = this.showLegend ? 2 : 1.8;
       this.update();
     },
     disabled() {
       console.log("DISABLED CHANGE!");
       console.log(this.disabled);
-    },
+    }
   },
 
   mounted() {
@@ -92,7 +92,7 @@ export default {
         options: {
           cutoutPercentage: 20,
           rotation: -0.45 * Math.PI,
-          aspectRatio: this.showLegend?2:1.8,
+          aspectRatio: this.showLegend ? 2 : 1.8,
           elements: {
             center: {
               text: this.title,
@@ -110,7 +110,7 @@ export default {
             }
           },
           animation: {
-            'duration': 700
+            duration: 700
           },
           layout: {
             padding: {
@@ -162,7 +162,9 @@ export default {
                     data.datasets[item.datasetIndex].records[item.index];
                   const outcomes = data.datasets[item.datasetIndex].outcomes;
                   if (typeof Outcomes[outcomes[record.id]] !== "undefined")
-                    return "Current score: " + Outcomes[outcomes[record.id]].label;
+                    return (
+                      "Current score: " + Outcomes[outcomes[record.id]].label
+                    );
                 }
               }
             }
@@ -176,20 +178,19 @@ export default {
               const context = elements[0].$datalabels.$context;
               const record = context.dataset.records[context.dataIndex];
               const outcomes = context.dataset.outcomes;
-              self.$emit('change', {
-                record :record ,
+              self.$emit("change", {
+                record: record,
                 outcome: Outcomes[outcomes[record.id]].colour,
-                type: 'hover'
+                type: "hover"
               });
             } else {
-              self.$emit('change', {});
+              self.$emit("change", {});
             }
           },
           onClick: function(event, elements) {
-            // console.log("CLICK ", elements);
+            console.log("CLICK ", elements);
             event.stopPropagation();
-            if( self.disabled )
-              return false;
+            if (self.disabled) return false;
             if (
               elements.length &&
               elements[0].$datalabels.$context.datasetIndex
@@ -206,10 +207,10 @@ export default {
                 context.dataset.backgroundColor[context.dataIndex] =
                   record.areaColour;
               this.update();
-              self.$emit('change', {
-                record :record ,
+              self.$emit("change", {
+                record: record,
                 outcome: Outcomes[outcomes[record.id]].colour,
-                type: 'click'
+                type: "click"
               });
             }
             return false;
@@ -219,11 +220,9 @@ export default {
             datalabels: {
               anchor: "center",
               align: "middle",
-              borderRadius: 3,
+              borderRadius: 5,
+              opacity: 0.8,
               color: "black",
-              font: {
-                // style: "bold"
-              },
               listeners: {
                 click(context) {
                   console.log("DATALABEL ", context);
@@ -256,21 +255,6 @@ export default {
           ...this.options
         }
       });
-      // var titleOpts = {
-      //   title: {
-      //     display: true,
-      //     text: "Wheel Title"
-      //   }
-      // };
-      // var title = new Chart.Title({
-      //   ctx: this.chart.ctx,
-      //   options: titleOpts,
-      //   chart: this.chart
-      // });
-      // Chart.layouts.configure(this.chart, title, titleOpts);
-      // Chart.layouts.addBox(this.chart, title);
-      // this.chart.titleBlock = title;
-      // this.chart.update();
     },
     update() {
       if (!this.chart) {
@@ -288,9 +272,10 @@ export default {
       this.chart.data.datasets.forEach((dataset, index) => {
         dataset.data = this.data.datasets[index].data;
         dataset.backgroundColor = this.data.datasets[index].backgroundColor;
-        dataset.datalabels.backgroundColor = this.data.datasets[
-          index
-        ].datalabels.backgroundColor;
+        // dataset.datalabels.backgroundColor = this.data.datasets[
+        //   index
+        // ].datalabels.backgroundColor;
+        // dataset.datalabels.backgroundColor = "white";
       });
     },
     svg() {
