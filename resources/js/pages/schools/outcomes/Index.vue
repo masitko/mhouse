@@ -53,6 +53,7 @@ export default {
     ready: false,
     // loading: false,
     axiosRequest: null,
+    timeout: null,
     feed: [],
     title: '',
     offset: 0,
@@ -103,16 +104,14 @@ export default {
 
   methods: {
     chartChange(values) {
-      console.log("CHART CHANGED!!!");
-      console.log( values );
       this.infos = values;
       if( values.type === 'click') {
-        // this.filters.unsaved = true;
+        console.log("CHART CLICKED!!!");
+        console.log( values );
         this.filters.status = 'changed';
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(this.save, 1000);
       }
-      // if (typeof this.infos.record === "undefined") {
-      //   this.infos.record = {};
-      // }
     },
     save() {
       console.log("SAVING!");

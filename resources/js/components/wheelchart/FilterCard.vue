@@ -32,13 +32,13 @@
       </div>
       <div class="column is-half has-text-right">
         <button
-          class="button is-success"
-          :class="{ 'is-loading': options.loading }"
+          class="button"
+          :class="[statuses[filters.status].class, { 'is-loading': options.loading }]"
           @click="save()"
           :disabled="!buttonEnabled"
         >
-          <span>{{ statuses[filters.status] }}</span>
-          <span class="icon">
+          <span>{{ statuses[filters.status].label }}</span>
+          <span v-if="filters.status==='current'" class="icon">
             <fa icon="check"/>
           </span>
         </button>
@@ -79,8 +79,14 @@ export default {
   data() {
     return {
       statuses: {
-        changed: "Saving...",
-        current: "Up to date"
+        changed: {
+          label: "Data changed...",
+          class: 'is-warning'
+        },
+        current: {
+          label: "Up to date",
+          class: 'is-success'
+        }
       }
     };
   },
