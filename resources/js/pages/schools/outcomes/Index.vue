@@ -27,6 +27,9 @@
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
           :infos="infos"
         />
+        <legend-card
+          class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
+       />
       </div>
     </div>
   </div>
@@ -39,6 +42,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import ChartCard from "../../../components/wheelchart/ChartCard.vue";
 import FilterCard from "../../../components/wheelchart/FilterCard.vue";
 import InfoCard from "../../../components/wheelchart/InfoCard.vue";
+import LegendCard from "../../../components/wheelchart/LegendCard.vue";
 
 library.add(faSpinner);
 
@@ -46,7 +50,8 @@ export default {
   components: {
     ChartCard,
     FilterCard,
-    InfoCard
+    InfoCard,
+    LegendCard,
   },
 
   data: () => ({
