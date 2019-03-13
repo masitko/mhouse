@@ -139,9 +139,10 @@ export default {
 
     computed: {
       getButtons:  function() {
-        return this.template.buttons.global.filter(
-          button => button.action !== 'export' 
-        );
+        return this.template.buttons.global;
+        // .filter(
+        //   button => button.action !== 'export' 
+        // );
       }       
     },
 
