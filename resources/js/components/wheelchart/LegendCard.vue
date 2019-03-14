@@ -4,7 +4,8 @@
     </card-control>-->
     <ul class="has-padding-medium has-margin-top-medium">
       <li v-for="outcome in outcomes" :key="outcome.value">
-        <button class="button is-small" disabled :style="{'background-color':outcome.colour}"></button> 
+        <button class="button is-small" disabled 
+          :style="{'background-color':outcome.colour, opacity: 1}"></button> 
         <strong>{{outcome.label}}</strong>
         <span> - {{outcome.response}}</span>
       </li>

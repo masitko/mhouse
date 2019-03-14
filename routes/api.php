@@ -58,9 +58,9 @@ Route::namespace ('Schools\Terms')
   ->prefix('schools/terms')->as('schools.terms.')
   ->group(function () {
     Route::get('initTable', 'TermTableController@init')->name('initTable');
-    Route::get('tableData', 'TermTableController@data')->name('tableData');
+    Route::get('tableData', 'TermTableController@data')->name('tableData')->middleware('school.access');
     Route::get('exportExcel', 'TermTableController@excel')->name('exportExcel');
-    Route::get('options', 'TermSelectController@options')->name('options');
+    Route::get('options', 'TermSelectController@options')->name('options')->middleware('school.access');
   });
 
 Route::namespace ('Schools\Terms')

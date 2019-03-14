@@ -221,7 +221,7 @@ export default {
               anchor: "center",
               align: "middle",
               borderRadius: 5,
-              opacity: 0.8,
+              opacity: 0.75,
               color: "black",
               listeners: {
                 click(context) {

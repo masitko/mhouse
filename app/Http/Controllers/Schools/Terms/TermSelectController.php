@@ -12,11 +12,4 @@ class TermSelectController extends Controller
     use OptionsBuilder;
 
     protected $model = Term::class;
-
-    //protected $queryAttributes = ['name'];
-
-    //public function query(Request $request)
-    //{
-    //    return Term::query();
-    //}
 }
