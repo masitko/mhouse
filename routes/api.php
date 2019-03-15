@@ -74,9 +74,9 @@ Route::namespace ('Schools\Classes')
   ->prefix('schools/classes')->as('schools.classes.')
   ->group(function () {
     Route::get('initTable', 'SchoolClassTableController@init')->name('initTable');
-    Route::get('tableData', 'SchoolClassTableController@data')->name('tableData');
+    Route::get('tableData', 'SchoolClassTableController@data')->name('tableData')->middleware('school.access');;
     Route::get('exportExcel', 'SchoolClassTableController@excel')->name('exportExcel');
-    Route::get('options', 'SchoolClassSelectController@options')->name('options');
+    Route::get('options', 'SchoolClassSelectController@options')->name('options')->middleware('school.access');;
   });
 
 Route::namespace ('Schools\Classes')
@@ -90,9 +90,9 @@ Route::namespace ('Schools\Outcomes')
   ->prefix('schools/outcomes')->as('schools.outcomes.')
   ->group(function () {
     Route::get('initTable', 'OutcomeTableController@init')->name('initTable');
-    Route::get('tableData', 'OutcomeTableController@data')->name('tableData');
+    Route::get('tableData', 'OutcomeTableController@data')->name('tableData')->middleware('school.access');;
     Route::get('exportExcel', 'OutcomeTableController@excel')->name('exportExcel');
-    Route::get('options', 'OutcomeSelectController@options')->name('options');
+    Route::get('options', 'OutcomeSelectController@options')->name('options')->middleware('school.access');;
 
     Route::get('getWheel', 'OutcomeController@getWheel')->name('getWheel');
     Route::post('storeWheel', 'OutcomeController@storeWheel')->name('storeWheel');

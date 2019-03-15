@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 
 class SchoolClass extends Model
