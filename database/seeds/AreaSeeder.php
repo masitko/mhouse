@@ -32,8 +32,8 @@ class AreaSeeder extends Seeder
     ['name' => 'Behaviour - verbal', 'description' => '', 'order' => 50, 'colour' => '#CBE896'],
     ['name' => 'Behaviour - damage/physical', 'description' => '', 'order' => 60, 'colour' => '#8D89A6'],
     ['name' => 'Confidence', 'description' => '', 'order' => 70, 'colour' => '#77B28C'],
-    ['name' => 'Self-Image', 'description' => '', 'order' => 80, 'colour' => '#1B9AAA'],
-    ['name' => 'Accountability and Responsibility', 'description' => '', 'order' => 90, 'colour' => '#D4B483'],
+    ['name' => 'Self-Image', 'description' => '', 'order' => 80, 'colour' => '#E8C2DE'],
+    ['name' => 'Accountability and Responsibility', 'description' => '', 'order' => 90, 'colour' => '#1B9AAA'],
 
   ];
 
