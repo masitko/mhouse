@@ -31,5 +31,6 @@ class RoleSeeder extends Seeder
 
         $supervisor->permissions()
                 ->sync(Permission::implicit()->pluck('id'));
+        
     }
 }

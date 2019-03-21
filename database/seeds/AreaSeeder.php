@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Area;
-use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class AreaSeeder extends Seeder
 {
