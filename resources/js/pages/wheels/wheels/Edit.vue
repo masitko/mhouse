@@ -93,6 +93,7 @@ export default {
           obs => this.observations.indexOf(obs.id) > -1
         ),
         outcomes: this.outcomes,
+        name: this.$refs.form.formData().name,
       };
       console.log(this.areas);
       console.log(this.observations);
