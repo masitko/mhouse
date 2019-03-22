@@ -15,8 +15,8 @@ class AreaSelectController extends Controller
 
     //protected $queryAttributes = ['name'];
 
-    //public function query(Request $request)
-    //{
-    //    return Area::query();
-    //}
+    public function query(Request $request)
+    {
+       return Area::query()->orderBy('order');
+    }
 }

@@ -15,8 +15,8 @@ class ObservationSelectController extends Controller
 
     //protected $queryAttributes = ['name'];
 
-    //public function query(Request $request)
-    //{
-    //    return Observation::query();
-    //}
+    public function query(Request $request)
+    {
+       return Observation::query()->orderBy('order');
+    }
 }
