@@ -137,9 +137,9 @@ class Builder
 
     private function isForbidden($route)
     {
-        return $route !== 'back'
+        return !request()->user() || ($route !== 'back'
             && $this->template->authorize
             && request()->user()
-                ->cannot('access-route', $route);
+                ->cannot('access-route', $route));
     }
 }

@@ -88,7 +88,7 @@ class Buttons
             return false;
         }
 
-        return auth()->user()
+        return !auth()->user() || auth()->user()
             ->cannot('access-route', $route);
     }
 }
