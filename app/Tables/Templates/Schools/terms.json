@@ -21,9 +21,12 @@
       "label": "Start Date",
       "name": "start_date",
       "data": "terms.start_date",
+      "dateFormat" : "Y-m-d",
       "meta": [
+        "date",
         "searchable",
-        "sortable"
+        "sortable",
+        "sort:ASC"
       ]
     },
     {
@@ -31,6 +34,7 @@
       "name": "end_date",
       "data": "terms.end_date",
       "meta": [
+        "date",
         "searchable",
         "sortable"
       ]

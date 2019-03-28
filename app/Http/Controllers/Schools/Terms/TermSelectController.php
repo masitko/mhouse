@@ -12,4 +12,10 @@ class TermSelectController extends Controller
     use OptionsBuilder;
 
     protected $model = Term::class;
+
+    public function query(Request $request)
+    {
+       return Term::query()->orderBy('start_date');
+    }
+
 }
