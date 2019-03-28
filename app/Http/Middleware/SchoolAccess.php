@@ -18,13 +18,15 @@ class SchoolAccess
   public function handle($request, Closure $next)
   {
     // this will add school selection for options
-    $request->request->add([
-      'pivotParams' => json_encode([
-        'school' => [
-          'id' => $request->user()->school_id
-        ]
-      ])
-    ]);
+    if ($request->user()) {
+      $request->request->add([
+        'pivotParams' => json_encode([
+          'school' => [
+            'id' => $request->user()->school_id
+          ]
+        ])
+      ]);
+    }
     return $next($request);
   }
 }
