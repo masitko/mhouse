@@ -13,79 +13,102 @@ use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 
 class UserController extends Controller
 {
-    use AuthorizesRequests;
+  use AuthorizesRequests;
 
-    public function create(Person $person, UserForm $form)
-    {
-        return ['form' => $form->create($person)];
+  public function create(Person $person, UserForm $form)
+  {
+    return ['form' => $form->create($person)];
+  }
+
+  public function store(ValidateUserRequest $request)
+  {
+    $user = new User($request->validated());
+
+    $this->authorize('handle', $user);
+
+    if ($request->filled('password')) {
+      $user->password = bcrypt($request->get('password'));
     }
 
-    public function store(ValidateUserRequest $request)
-    {
-        $user = new User($request->validated());
+    $user->save();
 
-        $this->authorize('handle', $user);
+    $user->sendResetPasswordEmail();
 
-        if ($request->filled('password')) {
-          $user->password = bcrypt($request->get('password'));
-        }
+    return [
+      'message' => __('The user was successfully created'),
+      'redirect' => 'administration.users.edit',
+      'param' => ['user' => $user->id],
+    ];
+  }
 
-        $user->save();
+  public function update(ValidateUserRequest $request, User $user)
+  {
+    $this->authorize('handle', $user);
 
-        $user->sendResetPasswordEmail();
-
-        return [
-            'message' => __('The user was successfully created'),
-            'redirect' => 'administration.users.edit',
-            'param' => ['user' => $user->id],
-        ];
+    if ($request->filled('password')) {
+      $this->authorize('change-password', $user);
+      $user->password = bcrypt($request->get('password'));
     }
 
-    public function update(ValidateUserRequest $request, User $user)
-    {
-        $this->authorize('handle', $user);
+    $user->fill($request->validated());
 
-        if ($request->filled('password')) {
-            $this->authorize('change-password', $user);
-            $user->password = bcrypt($request->get('password'));
-        }
-
-        $user->fill($request->validated());
-
-        if ($user->isDirty('role_id')) {
-            $this->authorize('change-role', $user);
-        }
-
-        $user->update($request->validated());
-
-        if (collect($user->getChanges())->keys()->contains('password')) {
-            event(new PasswordReset($user));
-        }
-
-        return ['message' => __('The user was successfully updated')];
+    if ($user->isDirty('role_id')) {
+      $this->authorize('change-role', $user);
     }
 
-    public function show(User $user)
-    {
-        (new ProfileBuilder($user))->set();
+    $user->update($request->validated());
 
-        return ['user' => $user];
+    if (collect($user->getChanges())->keys()->contains('password')) {
+      event(new PasswordReset($user));
     }
 
-    public function edit(User $user, UserForm $form)
-    {
-        return ['form' => $form->edit($user)];
-    }
+    return ['message' => __('The user was successfully updated')];
+  }
 
-    public function destroy(User $user)
-    {
-        $this->authorize('handle', $user);
+  public function show(User $user)
+  {
+    (new ProfileBuilder($user))->set();
 
-        $user->delete();
+    return ['user' => $user];
+  }
 
-        return [
-            'message' => __('The user was successfully deleted'),
-            'redirect' => 'administration.users.index',
-        ];
-    }
+  public function edit(User $user, UserForm $form)
+  {
+    return ['form' => $form->edit($user)];
+  }
+
+  public function destroy(User $user)
+  {
+    $this->authorize('handle', $user);
+
+    $user->delete();
+
+    return [
+      'message' => __('The user was successfully deleted'),
+      'redirect' => 'administration.users.index',
+    ];
+  }
+
+
+  /**
+   * Ecrypt the user's google_2fa secret.
+   *
+   * @param  string  $value
+   * @return string
+   */
+  public function setGoogle2faSecretAttribute($value)
+  {
+    $this->attributes['google2fa_secret'] = encrypt($value);
+  }
+
+  /**
+   * Decrypt the user's google_2fa secret.
+   *
+   * @param  string  $value
+   * @return string
+   */
+  public function getGoogle2faSecretAttribute($value)
+  {
+    return decrypt($value);
+  }
 }

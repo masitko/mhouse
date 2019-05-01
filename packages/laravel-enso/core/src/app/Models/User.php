@@ -40,7 +40,7 @@ class User extends Authenticatable
     Notifiable,
     Uploads;
 
-  protected $hidden = ['password', 'remember_token', 'password_updated_at'];
+  protected $hidden = ['password', 'remember_token', 'password_updated_at', 'google2fa_secret'];
 
     // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
