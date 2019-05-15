@@ -81,7 +81,7 @@ export default {
 
   computed: {
     wheelEnabled() {
-      console.log('COMPUTED UPDATED!!!');
+      // console.log('COMPUTED UPDATED!!!');
       return this.filters.userId && this.filters.termId && this.filters.wheelId;
     },
     ...mapGetters("preferences", { locale: "lang" })
@@ -111,15 +111,15 @@ export default {
     chartChange(values) {
       this.infos = values;
       if( values.type === 'click') {
-        console.log("CHART CLICKED!!!");
-        console.log( values );
+        // console.log("CHART CLICKED!!!");
+        // console.log( values );
         this.filters.status = 'changed';
         clearTimeout(this.timeout);
         this.timeout = setTimeout(this.save, 1000);
       }
     },
     save() {
-      console.log("SAVING!");
+      // console.log("SAVING!");
       axios
         .post(route("schools.outcomes.storeWheel"), {
           outcomes: this.outcomes,
@@ -132,7 +132,7 @@ export default {
         .then(response => {
           // this.filters.unsaved = false;
           this.filters.status = 'current';
-          console.log(response);
+          // console.log(response);
         })
         .catch(error => {
           this.options.loading = false;
@@ -144,12 +144,12 @@ export default {
         });
     },
     usersFetched( users ) {
-      console.log('USERS!', users);
+      // console.log('USERS!', users);
       this.users = users;
     },
     termsFetched( terms ) {
       console.log('TERMS!',terms);
-      this.terms = terms;
+      // this.terms = terms;
     },
     updateTitle() {
       this.title = "" ;
