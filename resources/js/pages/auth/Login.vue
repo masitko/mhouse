@@ -16,13 +16,14 @@ export default {
     components: { AuthForm },
 
     computed: {
-        ...mapState(['meta']),
+        // ...mapState(['meta']),
     },
 
     methods: {
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['showHome']),
-        ...mapMutations(['setShowQuote', 'setCsrfToken']),
+        // ...mapMutations(['setShowQuote', 'setCsrfToken']),
+        ...mapMutations(['setCsrfToken']),
         init(data) {
             // this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
