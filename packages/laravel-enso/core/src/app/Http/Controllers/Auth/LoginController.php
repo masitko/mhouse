@@ -49,7 +49,7 @@ class LoginController extends Controller
     return true;
   }
 
-  protected function ipCodeCheck(Request $request, $user)
+  protected function authCodeCheck(Request $request, $user)
   {
     $code = AuthCode::firstOrCreate([
       'user_id' => $user->id,
@@ -68,7 +68,7 @@ class LoginController extends Controller
       'auth' => false,
       // 'auth' => auth()->check(),
       'csrfToken' => csrf_token(),
-      'ipAuthCode' => $this->ipCodeCheck($request, $user)
+      'ipConfirmed' => $this->authCodeCheck($request, $user)['confirmed']
     ]);
   }
 
@@ -78,4 +78,13 @@ class LoginController extends Controller
 
     $request->session()->invalidate();
   }
+
+  public function authCode(Request $request)
+  {
+    return response()->json([
+      'code' => $request->input('authCode'),
+      'test' => true,
+    ]);
+  }
+
 }

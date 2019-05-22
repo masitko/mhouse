@@ -9,7 +9,7 @@
             </h3>
             <form class="has-margin-bottom-medium"
                 @submit.prevent="submit()">
-                <div class="field">
+                <div v-if="!isConfirm" class="field">
                     <div class="control has-icons-left has-icons-right">
                         <input v-model="email"
                             v-focus
@@ -20,6 +20,28 @@
                             @input="hasErrors=false">
                         <span class="icon is-small is-left">
                             <fa icon="envelope"/>
+                        </span>
+                        <span v-if="isSuccessful"
+                            class="icon is-small is-right has-text-success">
+                            <fa icon="check"/>
+                        </span>
+                        <span v-if="hasErrors"
+                            class="icon is-small is-right has-text-danger">
+                            <fa icon="exclamation-triangle"/>
+                        </span>
+                    </div>
+                </div>
+                <div v-if="isConfirm" class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input v-model="authCode"
+                            v-focus
+                            class="input"
+                            type="string"
+                            :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
+                            :placeholder="__('Enter verification code')"
+                            @input="hasErrors=false">
+                        <span class="icon is-small is-left">
+                            <fa icon="lock"/>
                         </span>
                         <span v-if="isSuccessful"
                             class="icon is-small is-right has-text-success">
@@ -131,6 +153,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        isConfirm: {  // ip confirmation code
+            type: Boolean,
+            default: false,
+        },
         isReset: {
             type: Boolean,
             default: false,
@@ -147,6 +173,7 @@ export default {
 
     data: () => ({
         loading: false,
+        authCode: '',
         email: '',
         password: '',
         passwordConfirmation: null,
@@ -173,6 +200,12 @@ export default {
             let params = {
                 email: this.email,
             };
+
+            if (this.isConfirm) {
+                params = {
+                    authCode: this.authCode,
+                };
+            }
 
             if (this.isLogin) {
                 params = Object.assign({

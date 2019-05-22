@@ -48,7 +48,7 @@ class GuestState implements Responsable
 
     protected function routes()
     {
-        $authRoutes = collect(['login', 'password.email', 'password.reset']);
+        $authRoutes = collect(['login', 'auth.code', 'password.email', 'password.reset']);
 
         return collect(\Route::getRoutes()->getRoutesByName())
             ->filter(function ($route, $name) use ($authRoutes) {
