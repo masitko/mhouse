@@ -1,7 +1,10 @@
 export default (to, from, next) => {
-    if (to.meta.guestGuard) {
+  console.log('GUEST GUARD!!');
+  if (to.meta.guestGuard) {
         next();
     } else {
-        next({ name: 'login' });
-    }
+      console.log('GUEST - LOGIN!!');
+      next({ name: 'login' });
+        // next();
+      }
 };

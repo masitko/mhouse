@@ -25,11 +25,13 @@ export default {
         // ...mapMutations(['setShowQuote', 'setCsrfToken']),
         ...mapMutations(['setCsrfToken']),
         init(data) {
+            console.log( 'LOGGED IN ');
+            console.log(data);
             // this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
-                this.login();
-                this.showHome();
+                // this.login();
+                // this.showHome();
             }, 500);
         },
     },
