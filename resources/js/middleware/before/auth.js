@@ -1,7 +1,9 @@
 export default (to, from, next) => {
     if (to.meta.guestGuard) {
-        next({ name: '/' });
+      console.log( 'AUTH - going home');
+      next({ name: '/' });
     } else {
+      console.log( 'AUTH - just next');
         next();
     }
 };

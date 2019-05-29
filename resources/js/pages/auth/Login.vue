@@ -20,16 +20,16 @@ export default {
     },
 
     methods: {
-        ...mapMutations('auth', ['login']),
+        ...mapMutations('auth', ['login', 'auth1f']),
         ...mapMutations('layout', ['showHome']),
         // ...mapMutations(['setShowQuote', 'setCsrfToken']),
         ...mapMutations(['setCsrfToken']),
         init(data) {
-            console.log( 'LOGGED IN ');
-            console.log(data);
+            console.log( 'LOGGING IN - 1st factor ');
             // this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
+                this.auth1f();
                 // this.login();
                 // this.showHome();
             }, 500);

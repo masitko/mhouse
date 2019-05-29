@@ -9,10 +9,10 @@ import progressBar from './before/progressBar';
 export default (to, from, next) => {
   progressBar();
   if (store.state.auth.isAuth) {
-    verify2f(to, from, next);
     auth(to, from, next);
     allow(to, from, next);
   } else {
+    verify2f(to, from, next);
     guest(to, from, next);
   }
 };
