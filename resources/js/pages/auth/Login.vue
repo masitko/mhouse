@@ -29,8 +29,13 @@ export default {
             // this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
-                this.auth1f();
-                // this.login();
+                if( data.ipConfirmed === true ) {
+                  this.login();
+                } else {
+                  console.log('IP VERIFICATION REQUIRED...');
+                  this.auth1f();
+                  this.$router.push({name:'auth.code'});
+                }
                 // this.showHome();
             }, 500);
         },

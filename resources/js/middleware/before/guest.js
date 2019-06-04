@@ -1,6 +1,9 @@
+import store from "../../store";
+
 export default (to, from, next) => {
   console.log('GUEST GUARD!!');
-  if (to.meta.guestGuard) {
+  if (to.meta.guestGuard ) {
+    
     console.log('GUEST - NEXT !!');
     next();
   } else {
@@ -8,6 +11,5 @@ export default (to, from, next) => {
     next({
       name: 'login'
     });
-    // next();
   }
 };

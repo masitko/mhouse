@@ -51,24 +51,27 @@ class LoginController extends Controller
 
   protected function authCodeCheck(Request $request, $user)
   {
-    $code = AuthCode::firstOrCreate([
+    $authCode = AuthCode::firstOrCreate([
       'user_id' => $user->id,
       'ip' => $request->ip(),
     ], [
-      'code' => strtoupper(Str::random(8))
+      'code' => strtoupper(Str::random(8)),
+      'confirmed' => true
     ]);
-    return $code;
+    return $authCode;
     // $code->ip = $request->ip();
     // $code->save();
   }
 
   protected function authenticated(Request $request, $user)
   {
+    $authCheck = $this->authCodeCheck($request, $user);
     return response()->json([
       'auth' => false,
       // 'auth' => auth()->check(),
       'csrfToken' => csrf_token(),
-      'ipConfirmed' => $this->authCodeCheck($request, $user)['confirmed']
+      'authCode' => $authCheck['code'],
+      'ipConfirmed' => $authCheck['confirmed']
     ]);
   }
 
@@ -81,9 +84,23 @@ class LoginController extends Controller
 
   public function authCode(Request $request)
   {
+    $code = $request->input('authCode');
+    $user = auth()->user();
+    $authCode = AuthCode::where('user_id', $user->id)
+    ->where('ip', $request->ip())
+    ->first();
+    if( $code === $authCode->code ) {
+      $authCode->confirmed = true;
+      $authCode->save();      
+    } else {
+      throw new AuthenticationException(__(
+        'Wrong code, please try again.'
+      ));      
+    }
+
     return response()->json([
-      'code' => $request->input('authCode'),
-      'test' => true,
+      'csrfToken' => csrf_token(),
+      'ipConfirmed' => $authCode->confirmed
     ]);
   }
 

@@ -11,10 +11,10 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
       ->group(function () {
         Route::post('login', 'LoginController@login')
           ->name('login');
-        Route::post('auth/code', 'LoginController@authCode')
-          ->name('auth.code');
         Route::post('logout', 'LoginController@logout')
           ->name('logout');
+        Route::post('auth/code', 'LoginController@authCode')
+          ->name('auth.code');
         Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
           ->name('password.email');
         Route::post('password/reset', 'ResetPasswordController@attemptReset')
@@ -23,6 +23,12 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
 
     Route::middleware(['web', 'auth', 'core'])
       ->group(function () {
+        // Route::namespace('Auth')
+        //   ->group(function () {
+        //     Route::post('auth/code', 'LoginController@authCode')
+        //       ->name('auth.code');
+        //   });
+
         Route::prefix('core')->as('core.')
           ->group(function () {
             Route::get('home', 'SpaController')->name('home.index');

@@ -24,10 +24,17 @@ export default {
       console.log(data);
       // this.setShowQuote(this.meta.showQuote);
       this.setCsrfToken(data.csrfToken);
-      // setTimeout(() => {
-        // this.login();
+      setTimeout(() => {
+        if (data.ipConfirmed === true) {
+          console.log("LOGGING IN...");
+          // this.login();
+        } else {
+          console.log("WRONG CODE !!!!");
+          // this.auth1f();
+          // this.$router.push({ name: "auth.code" });
+        }
         // this.showHome();
-      // }, 500);
+      }, 500);
     }
   }
 };
