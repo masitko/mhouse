@@ -238,13 +238,12 @@ export default {
   },
 
   methods: {
-    authCodeInput() {
-      console.log('input change');
-      this.hasErrors=false;
-    },
     ...mapMutations("auth", ["logout"]),
+    authCodeInput() {
+      this.hasErrors=false;
+      this.authCode = this.authCode.toUpperCase();
+    },
     backToLogin() {
-      console.log("BACK !!!!");
       axios.post("/api/logout").then(() => {
         this.logout();
         this.$router.push({ name: "login" });

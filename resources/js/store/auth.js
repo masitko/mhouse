@@ -5,12 +5,12 @@ export const state = {
 
 export const mutations = {
   login(state) {
-    console.log('SETTING AUTH TO TRUE !!! ');
+    // console.log('SETTING AUTH TO TRUE !!! ');
     state.isAuth = true;
     localStorage.setItem('isAuth', true);
   },
   auth1f(state) {
-    console.log('SETTING 1st AUTH FACTOR !!! ');
+    // console.log('SETTING 1st AUTH FACTOR !!! ');
     state.isAuth1st = true;
     localStorage.setItem('isAuth1st', true);
   },

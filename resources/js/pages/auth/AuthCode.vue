@@ -26,14 +26,12 @@ export default {
       this.setCsrfToken(data.csrfToken);
       setTimeout(() => {
         if (data.ipConfirmed === true) {
-          console.log("LOGGING IN...");
-          // this.login();
+          this.login();
+          this.showHome();
+          // this.$router.push({path:'/'});
         } else {
           console.log("WRONG CODE !!!!");
-          // this.auth1f();
-          // this.$router.push({ name: "auth.code" });
         }
-        // this.showHome();
       }, 500);
     }
   }

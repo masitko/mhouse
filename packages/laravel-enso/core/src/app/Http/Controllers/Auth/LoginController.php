@@ -3,9 +3,12 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\app\Notifications\AuthCodeNotification;
+
 use App\Http\Controllers\Auth\LoginController as Controller;
 
 use Illuminate\Support\Str;
@@ -56,11 +59,14 @@ class LoginController extends Controller
       'ip' => $request->ip(),
     ], [
       'code' => strtoupper(Str::random(8)),
-      'confirmed' => true
+      'confirmed' => false
     ]);
+
+    if( !$authCode->confirmed ) {
+      $user->notify(new AuthCodeNotification($authCode->code));
+    }
+
     return $authCode;
-    // $code->ip = $request->ip();
-    // $code->save();
   }
 
   protected function authenticated(Request $request, $user)
@@ -70,8 +76,8 @@ class LoginController extends Controller
       'auth' => false,
       // 'auth' => auth()->check(),
       'csrfToken' => csrf_token(),
-      'authCode' => $authCheck['code'],
-      'ipConfirmed' => $authCheck['confirmed']
+      // 'authCode' => $authCheck['code'],
+      'ipConfirmed' => (Boolean)$authCheck['confirmed']
     ]);
   }
 
@@ -86,16 +92,22 @@ class LoginController extends Controller
   {
     $code = $request->input('authCode');
     $user = auth()->user();
+    if (!$user) {
+      throw new AuthenticationException(__(
+        'PLease try to log-in again.'
+      ));
+    }
+
     $authCode = AuthCode::where('user_id', $user->id)
-    ->where('ip', $request->ip())
-    ->first();
-    if( $code === $authCode->code ) {
+      ->where('ip', $request->ip())
+      ->first();
+    if ($code === $authCode->code) {
       $authCode->confirmed = true;
-      $authCode->save();      
+      $authCode->save();
     } else {
       throw new AuthenticationException(__(
         'Wrong code, please try again.'
-      ));      
+      ));
     }
 
     return response()->json([
@@ -103,5 +115,4 @@ class LoginController extends Controller
       'ipConfirmed' => $authCode->confirmed
     ]);
   }
-
 }

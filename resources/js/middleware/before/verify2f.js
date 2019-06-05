@@ -2,7 +2,7 @@ import store from "../../store";
 
 export default (to, from, next) => {
 
-  console.log('VERIFYING 2F ... ');
+  // console.log('VERIFYING 2F ... ');
 
   if (store.state.auth.isAuth1st) {
     if (to.name === 'auth.code') {
