@@ -14,7 +14,7 @@ export default {
 
     computed: {
         key() {
-            return JSON.stringify(this.$route.params);
+            return JSON.stringify(this.$route.path)+JSON.stringify(this.$route.params);
         },
     },
 };

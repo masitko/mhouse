@@ -9,8 +9,12 @@ const routePathMatches = ({ route }) => router.app.$route.matched.length > 1
         .map(matchedRoute => matchedRoute.path)[router.app.$route.matched.length - 2]
     === `/${route.split('.').slice(0, -1).join('/')}`;
 
-const isActive = menu => menu.route !== null
-    && (routeNameMatches(menu) || routePathMatches(menu));
+const isActive = menu => {
+  return menu.route !== null
+    && (routeNameMatches(menu) 
+    // && routePathMatches(menu) <-- this checks API paths - wrong!
+    );
+  } 
 
 const hasActiveChild = menu => menu.has_children
     && menu.children.some(child => isActive(child) || hasActiveChild(child));

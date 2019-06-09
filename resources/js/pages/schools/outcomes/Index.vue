@@ -44,6 +44,8 @@ import FilterCard from "../../../components/wheelchart/FilterCard.vue";
 import InfoCard from "../../../components/wheelchart/InfoCard.vue";
 import LegendCard from "../../../components/wheelchart/LegendCard.vue";
 
+import isWithinInterval from 'date-fns/isWithinInterval';
+
 library.add(faSpinner);
 
 export default {
@@ -71,13 +73,19 @@ export default {
       showLegend: false
     },
     options: {
-      loading: false
+      loading: false,
     },
     infos: {
     },
     wheelData: {},
     outcomes: {}
   }),
+
+  created() {
+    this.options.history = this.$route.meta.history;
+    // this.name = this.name+this.options.history;
+    // console.log(this);
+  },
 
   computed: {
     wheelEnabled() {
@@ -149,13 +157,23 @@ export default {
     },
     termsFetched( terms ) {
       console.log('TERMS!',terms);
+      terms.forEach( term => {
+        if(isWithinInterval(new Date(), {
+          start:new Date(term.start_date),
+          end: new Date(term.end_date)
+        }) === true ) {
+          this.filters.termId = term.id;
+        };
+        // console.log(from < today);
+        // console.log(today < to);
+      });
       // this.terms = terms;
     },
     updateTitle() {
       this.title = "" ;
       this.title += this.filters.wheelId?this.wheelData.name:'';
-      this.title += this.filters.userId? ' - ' + this.users.filter(user=>user.id === this.filters.userId)[0].name:'';
-      this.title += this.filters.termId? ' - ' + this.terms.filter(term=>term.id === this.filters.termId)[0].name:'';
+      this.title += (this.filters.userId && this.users)?' - ' + this.users.filter(user=>user.id === this.filters.userId)[0].name:'';
+      this.title += (this.filters.termId && this.terms)? ' - ' + this.terms.filter(term=>term.id === this.filters.termId)[0].name:'';
     },
     fetch(includeWheel = false) {
       this.filters.status = 'current';

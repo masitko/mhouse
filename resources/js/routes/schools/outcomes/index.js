@@ -7,5 +7,6 @@ export default {
     meta: {
         breadcrumb: 'index',
         title: 'Outcomes',
+        history: false
     },
 };
