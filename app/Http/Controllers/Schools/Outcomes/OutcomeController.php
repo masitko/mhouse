@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Schools\ValidateOutcomeRequest;
 use Illuminate\Http\Request;
 
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+
 use App\Outcome;
 use App\Wheel;
 use App\Area;
@@ -85,7 +87,10 @@ class OutcomeController extends Controller
       $result['wheel'] = Wheel::find($filters->wheelId);
       $definition = json_decode($result['wheel']->definition);
       if (!$definition) {
-        return 'ERROR';
+        throw new ConflictHttpException(
+          __("This wheel has no structure defined!")
+        );
+          // return 'ERROR';
       }
       $result['wheel']->areas = Area::find($definition->areas);
       $result['wheel']->observations = Observation::find($definition->observations);
