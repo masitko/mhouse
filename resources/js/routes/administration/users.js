@@ -9,6 +9,7 @@ export default {
     meta: {
         breadcrumb: 'users',
         route: 'administration.users.index',
+        prefix: 'administration.users'
     },
     children: routes,
 };

@@ -79,6 +79,26 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
               });
 
             Route::resource('users', 'User\UserController', ['except' => ['index', 'create']]);
+
+            Route::namespace('User')
+              ->prefix('students')->as('students.')
+              ->group(function () {
+                Route::get('create', 'UserController@create')
+                  ->name('create');
+
+                Route::get('initTable', 'UserTableController@init')
+                  ->name('initTable');
+                Route::get('tableData', 'UserTableController@data')
+                  ->name('tableData');
+                Route::get('exportExcel', 'UserTableController@excel')
+                  ->name('exportExcel');
+
+                Route::get('options', 'UserSelectController@options')
+                  ->name('options');
+              });
+
+            Route::resource('students', 'User\UserController', ['except' => ['index', 'create']]);
+
           });
       });
   });

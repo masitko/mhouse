@@ -15,8 +15,12 @@ class Route {
     }
 
     buildUrl() {
+        console.log(this.name);
+        // the below line makes sure students routes are using user's API
+        let name = this.name;
+        // let name = this.name.replace('students', 'users');
         const url = this.buildDomain()
-            + store.state.routes[this.name].uri.replace(/^\//, '');
+            + store.state.routes[name].uri.replace(/^\//, '');
 
         return this.fillParams(url);
     }
