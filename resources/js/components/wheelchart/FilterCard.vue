@@ -19,7 +19,7 @@
     />
     <vue-select-filter
       source="schools.terms.options"
-      :disabled="options.history"
+      :disabled="!options.history"
       :placeholder="__('Select Term')"
       v-model="filters.termId"
       @fetch="$emit('terms-fetched', $event)"

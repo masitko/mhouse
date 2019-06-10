@@ -164,6 +164,14 @@ export default {
         }) === true ) {
           this.filters.termId = term.id;
         };
+        if( !this.options.history && !this.filters.termId ) {
+          console.log('NO CURRENT TERM!!!');
+          this.filters.termId = 99999;
+          terms.push({
+            id: this.filters.termId,
+            name: 'No active term!'
+          });
+        }
         // console.log(from < today);
         // console.log(today < to);
       });
