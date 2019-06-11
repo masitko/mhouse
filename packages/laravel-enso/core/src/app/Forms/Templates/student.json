@@ -1,0 +1,200 @@
+{
+  "routePrefix": "administration.users",
+  "tabs": true,
+  "sections": [
+    {
+      "columns": "custom",
+      "tab": "User Info",
+      "title": "User Info",
+      "fields": [
+        {
+          "label": "Email",
+          "name": "email",
+          "value": null,
+          "column": 6,
+          "meta": {
+            "type": "input",
+            "content": "email"
+          }
+        },
+        {
+          "label": "School",
+          "name": "school_id",
+          "value": null,
+          "column": 3,
+          "meta": {
+            "custom": false,
+            "type": "select",
+            "multiple": false,
+            "options": [],
+            "source": "administration.schools.options"
+          }
+        },
+        {
+          "label": "Role",
+          "name": "role_id",
+          "value": null,
+          "column": 3,
+          "meta": {
+            "custom": false,
+            "type": "select",
+            "multiple": false,
+            "options": [],
+            "source": "system.roles.options"
+          }
+        }
+      ]
+    },
+    {
+      "columns": 2,
+      "tab": "User Info",
+      "fields": [
+        {
+          "label": "Password",
+          "name": "password",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "password",
+            "hidden": true,
+            "custom": true
+          }
+        },
+        {
+          "label": "Password Confirmation",
+          "name": "password_confirmation",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "password",
+            "hidden": true,
+            "custom": true
+          }
+        },
+        {
+          "label": "Active",
+          "name": "is_active",
+          "value": false,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
+        }
+      ]
+    },
+    {
+      "columns": "custom",
+      "tab": "Personal Info",
+      "fields": [
+        {
+          "label": "Title",
+          "name": "title",
+          "value": null,
+          "column": 2,
+          "meta": {
+            "type": "select",
+            "options": "LaravelEnso\\People\\app\\Enums\\Titles"
+          }
+        },
+        {
+          "label": "First Name",
+          "name": "first_name",
+          "value": null,
+          "column": 5,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Last Name",
+          "name": "last_name",
+          "value": null,
+          "column": 5,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Other Names",
+          "name": "other_name",
+          "value": null,
+          "column": 8,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }          
+        }
+      ]
+    },
+    {
+      "columns": "custom",
+      "tab": "Personal Info",
+      "fields": [
+        {
+          "label": "Date of Birth",
+          "name": "birthday",
+          "column": 4,
+          "value": null,
+          "meta": {
+            "type": "datepicker"
+          }
+        },
+        {
+          "label": "Ethnicity",
+          "name": "ethnicity",
+          "value": null,
+          "column": 4,
+          "meta": {
+            "type": "select",
+            "options": "App\\Enums\\Ethnicity"
+          }
+        },
+        {
+          "label": "Gender",
+          "name": "gender",
+          "value": null,
+          "column": 4,
+          "meta": {
+            "type": "select",
+            "options": "App\\Enums\\Genders"
+          }
+        }
+      ]
+    },
+    {
+      "columns": "2",
+      "tab": "Student Info",
+      "fields": [
+        {
+          "label": "Unique Pupil Number",
+          "name": "upn",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Income Deprivation Affecting Children Index",
+          "name": "idaci",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "Date of Admision",
+          "name": "admission_date",
+          "value": null,
+          "meta": {
+            "type": "datepicker"
+          }
+        }
+      ]
+    }
+
+  ]
+}

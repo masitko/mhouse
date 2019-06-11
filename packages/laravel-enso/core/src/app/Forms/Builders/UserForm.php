@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Forms\Builders;
 
+use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
@@ -11,14 +12,17 @@ class UserForm
 {
   use CurrentUser;
 
-  private const TemplatePath = __DIR__ . '/../Templates/user.json';
+  private const TemplatePath = __DIR__ . '/../Templates/';
   private const Tooltip = 'Personal information can only be edited via the person form';
 
   private $form;
 
-  public function __construct()
+  public function __construct( Request $request )
   {
-    $this->form = new Form(self::TemplatePath);
+    // getting template corresponding to the route name (user, student, ...)
+    $segments = explode( '.', $request->route()->getName() );
+    $template = self::TemplatePath . substr($segments[1], 0, -1) . '.json';
+    $this->form = new Form($template);
     if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
       $this->form->hide('school_id');
     }

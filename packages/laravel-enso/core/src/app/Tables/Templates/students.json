@@ -1,0 +1,83 @@
+{
+  "routePrefix": "administration.students",
+  "crtNo": true,
+  "buttons": [
+    "excel",
+    "create",
+    "show",
+    "edit",
+    "destroy"
+  ],
+  "columns": [
+    {
+      "label": "",
+      "name": "avatarId",
+      "data": "avatars.avatarId",
+      "meta": [
+        "slot"
+      ],
+      "class": "is-paddingless"
+    },
+    {
+      "label": "First Name",
+      "name": "first_name",
+      "data": "users.first_name",
+      "meta": [
+        "sortable",
+        "searchable"
+      ]
+    },
+    {
+      "label": "Last Name",
+      "name": "last_name",
+      "data": "users.last_name",
+      "meta": [
+        "sortable",
+        "searchable"
+      ]
+    },
+    {
+      "label": "Phone",
+      "name": "phone",
+      "data": "users.phone",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
+      "label": "Email",
+      "name": "email",
+      "data": "users.email",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
+      "label": "School",
+      "name": "schoolName",
+      "data": "schools.name",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
+      "label": "Active",
+      "name": "is_active",
+      "data": "users.is_active",
+      "meta": [
+        "boolean"
+      ]
+    },
+    {
+      "label": "Joined",
+      "name": "created_at",
+      "data": "users.created_at",
+      "meta": [
+        "date"
+      ]
+    }
+  ]
+}
