@@ -1,11 +1,10 @@
 {
-  "routePrefix": "administration.users",
+  "routePrefix": "administration.students",
   "tabs": true,
   "sections": [
     {
       "columns": "custom",
       "tab": "User Info",
-      "title": "User Info",
       "fields": [
         {
           "label": "Email",
@@ -74,7 +73,7 @@
         {
           "label": "Active",
           "name": "is_active",
-          "value": false,
+          "value": true,
           "meta": {
             "type": "input",
             "content": "checkbox"
@@ -124,7 +123,7 @@
           "meta": {
             "type": "input",
             "content": "text"
-          }          
+          }
         }
       ]
     },
@@ -177,14 +176,53 @@
           }
         },
         {
-          "label": "Income Deprivation Affecting Children Index",
+          "label": "IDACI score",
           "name": "idaci",
           "value": null,
           "meta": {
             "type": "input",
             "content": "text"
           }
+        }
+      ]
+    },
+    {
+      "columns": 3,
+      "tab": "Student Info",
+      "fields": [
+        {
+          "label": "Free School Meal",
+          "name": "free_meal",
+          "value": false,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
         },
+        {
+          "label": "Pupil Premium",
+          "name": "pupil_premium",
+          "value": false,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
+        },
+        {
+          "label": "Child Looked After",
+          "name": "looked_after",
+          "value": false,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
+        }
+      ]
+    },
+    {
+      "columns": "2",
+      "tab": "Student Info",
+      "fields": [
         {
           "label": "Date of Admision",
           "name": "admission_date",

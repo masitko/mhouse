@@ -10,7 +10,7 @@ class Genders extends Enum
     const Male = 2;
 
     protected static $data = [
-        self::Female => 'female',
-        self::Male => 'male',
+        self::Female => 'Female',
+        self::Male => 'Male',
     ];
 }

@@ -41,8 +41,11 @@ class UserController extends Controller
         ];
     }
 
-    public function update(ValidateUserRequest $request, User $user)
+    // public function update(ValidateUserRequest $request, User $user)
+    public function update(ValidateUserRequest $request, $id)
     {
+        // var_dump('update');
+        $user = User::find($id);
         $this->authorize('handle', $user);
 
         if ($request->filled('password')) {
@@ -65,15 +68,20 @@ class UserController extends Controller
         return ['message' => __('The user was successfully updated')];
     }
 
-    public function show(User $user)
+    public function show($id)
     {
+      $user = User::find($id);
         (new ProfileBuilder($user))->set();
 
         return ['user' => $user];
     }
 
-    public function edit(User $user, UserForm $form)
+    public function edit($id, UserForm $form)
     {
+      // var_dump('edit');
+
+      $user = User::find($id);
+      // dd($user);
         return ['form' => $form->edit($user)];
     }
 

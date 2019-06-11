@@ -2,6 +2,8 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use Carbon\Carbon;
+
 use Illuminate\Notifications\Notifiable;
 // use LaravelEnso\People\app\Models\Person;
 // use LaravelEnso\People\app\Traits\IsPerson;
@@ -44,17 +46,23 @@ class User extends Authenticatable
 
     // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
-    'role_id', 'school_id', 
-    'first_name', 'last_name', 'other_name',
-    'email', 'is_active'
+    'role_id', 'school_id', 'first_name', 'last_name', 'other_name',
+    'email', 'is_active', 'birthday', 
+    'ethnicity', 'gender', 'admission_date',
+    'free_meal', 'pupil_premium', 'looked_after', 
   ];
 
   protected $casts = [
       // 'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
-    'is_active' => 'boolean', 'owner_id' => 'int', 'role_id' => 'int',
+    'is_active' => 'boolean', 
+    'free_meal' => 'boolean', 
+    'pupil_premium' => 'boolean', 
+    'looked_after' => 'boolean', 
+    'owner_id' => 'int', 
+    'role_id' => 'int',
   ];
 
-  protected $dates = ['password_updated_at'];
+  protected $dates = ['password_updated_at', 'birthday', 'admission_date'];
 
   protected $loggableLabel = 'email';
 
@@ -171,6 +179,20 @@ class User extends Authenticatable
     $preferences->local->$route = $value;
 
     $this->setPreferences($preferences);
+  }
+
+  public function setBirthdayAttribute($value)
+  {
+      $this->attributes['birthday'] = isset($value)
+          ? Carbon::parse($value)
+          : null;
+  }
+
+  public function setAdmissionDateAttribute($value)
+  {
+      $this->attributes['admission_date'] = isset($value)
+          ? Carbon::parse($value)
+          : null;
   }
 
   public function delete()

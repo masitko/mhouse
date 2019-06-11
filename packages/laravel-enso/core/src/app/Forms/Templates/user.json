@@ -5,7 +5,6 @@
     {
       "columns": "custom",
       "tab": "User Info",
-      "title": "User Info",
       "fields": [
         {
           "label": "Email",
@@ -159,38 +158,6 @@
           "meta": {
             "type": "select",
             "options": "App\\Enums\\Genders"
-          }
-        }
-      ]
-    },
-    {
-      "columns": "2",
-      "tab": "Student Info",
-      "fields": [
-        {
-          "label": "Unique Pupil Number",
-          "name": "upn",
-          "value": null,
-          "meta": {
-            "type": "input",
-            "content": "text"
-          }
-        },
-        {
-          "label": "Income Deprivation Affecting Children Index",
-          "name": "idaci",
-          "value": null,
-          "meta": {
-            "type": "input",
-            "content": "text"
-          }
-        },
-        {
-          "label": "Date of Admision",
-          "name": "admission_date",
-          "value": null,
-          "meta": {
-            "type": "datepicker"
           }
         }
       ]

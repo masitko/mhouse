@@ -91,6 +91,10 @@ export default {
         Accessories, Tab, Addresses,
     },
 
+    created() {
+      console.log(this.$refs.form);
+    },
+
     data: () => ({
         ready: false,
         pivotParams: { userGroups: { id: null } },

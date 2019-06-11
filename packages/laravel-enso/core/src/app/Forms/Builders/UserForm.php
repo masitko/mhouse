@@ -26,7 +26,6 @@ class UserForm
     if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
       $this->form->hide('school_id');
     }
-
   }
 
   public function create($person)
@@ -47,6 +46,7 @@ class UserForm
 
   public function edit(User $user)
   {
+    // var_dump($user);
     $this->setCommonValues($user->person);
 
     if (auth()->user()->can('change-password', $user)) {
@@ -68,7 +68,7 @@ class UserForm
             // ->value('title', $person->title)
             // ->value('name', $person->name)
             // ->value('appellative', $person->appellative)
-      ->meta('title', 'tooltip', self::Tooltip)
+      // ->meta('title', 'tooltip', self::Tooltip)
             // ->meta('name', 'tooltip', self::Tooltip)
             // ->meta('appellative', 'tooltip', self::Tooltip);
             ;
