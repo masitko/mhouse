@@ -35,9 +35,10 @@ class ValidateUserRequest extends FormRequest
       'admission_date' => 'date|nullable',
       'ethnicity' => 'integer|nullable',
       'gender' => 'integer|nullable',
-      'free_meal' => 'boolean',
-      'pupil_premium' => 'boolean',
-      'looked_after' => 'boolean',
+      'flag_fsm' => 'boolean',
+      'post_cla' => 'boolean',
+      'flag_cla' => 'boolean',
+      'flag_sen' => 'boolean',
 
     ];
   }

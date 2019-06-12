@@ -205,12 +205,12 @@
       ]
     },
     {
-      "columns": 3,
+      "columns": 4,
       "tab": "Student Info",
       "fields": [
         {
-          "label": "Free School Meal",
-          "name": "free_meal",
+          "label": "FSM",
+          "name": "flag_fsm",
           "value": false,
           "meta": {
             "type": "input",
@@ -218,8 +218,8 @@
           }
         },
         {
-          "label": "Pupil Premium",
-          "name": "pupil_premium",
+          "label": "Post CLA",
+          "name": "post_cla",
           "value": false,
           "meta": {
             "type": "input",
@@ -227,8 +227,17 @@
           }
         },
         {
-          "label": "Child Looked After",
-          "name": "looked_after",
+          "label": "CLA",
+          "name": "flag_cla",
+          "value": false,
+          "meta": {
+            "type": "input",
+            "content": "checkbox"
+          }
+        },
+        {
+          "label": "SEN",
+          "name": "flag_sen",
           "value": false,
           "meta": {
             "type": "input",

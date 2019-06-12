@@ -49,15 +49,17 @@ class User extends Authenticatable
     'role_id', 'school_id', 'first_name', 'last_name', 'other_name',
     'email', 'is_active', 'birthday', 
     'ethnicity', 'gender', 'admission_date',
-    'free_meal', 'pupil_premium', 'looked_after', 
+    'flag_fsm', 'post_cla', 'flag_cla','flag_sen'
   ];
 
   protected $casts = [
-      // 'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
     'is_active' => 'boolean', 
-    'free_meal' => 'boolean', 
-    'pupil_premium' => 'boolean', 
-    'looked_after' => 'boolean', 
+
+    'flag_fsm' => 'boolean', 
+    'post_cla' => 'boolean', 
+    'flag_cla' => 'boolean', 
+    'flag_sen' => 'boolean', 
+
     'owner_id' => 'int', 
     'role_id' => 'int',
   ];
