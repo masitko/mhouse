@@ -20,7 +20,7 @@
           "label": "School",
           "name": "school_id",
           "value": null,
-          "column": 3,
+          "column": 6,
           "meta": {
             "custom": false,
             "type": "select",
@@ -32,9 +32,10 @@
         {
           "label": "Role",
           "name": "role_id",
-          "value": null,
+          "value": 6,
           "column": 3,
           "meta": {
+            "hidden": true,
             "custom": false,
             "type": "select",
             "multiple": false,
@@ -176,6 +177,23 @@
           }
         },
         {
+          "label": "Date of Admision",
+          "name": "admission_date",
+          "value": null,
+          "meta": {
+            "type": "datepicker"
+          }
+        },
+        {
+          "label": "Post code for IDACI",
+          "name": "post_code",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
           "label": "IDACI score",
           "name": "idaci",
           "value": null,
@@ -218,21 +236,6 @@
           }
         }
       ]
-    },
-    {
-      "columns": "2",
-      "tab": "Student Info",
-      "fields": [
-        {
-          "label": "Date of Admision",
-          "name": "admission_date",
-          "value": null,
-          "meta": {
-            "type": "datepicker"
-          }
-        }
-      ]
     }
-
   ]
 }
