@@ -2,7 +2,7 @@ const UserShow = () => import('../../../pages/administration/users/Show.vue');
 
 export default {
     name: 'administration.students.show',
-    path: ':user',
+    path: ':student',
     component: UserShow,
     meta: {
         breadcrumb: 'show',
