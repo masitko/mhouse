@@ -9,7 +9,6 @@ export default {
     meta: {
         breadcrumb: 'students',
         route: 'administration.students.index',
-        userType: 'Student',
         prefix: 'administration.students'
     },
     children: routes,

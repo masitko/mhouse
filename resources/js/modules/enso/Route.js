@@ -15,7 +15,7 @@ class Route {
     }
 
     buildUrl() {
-        console.log(this.name);
+        // console.log(this.name);
         // the below line makes sure students routes are using user's API
         let name = this.name;
         // let name = this.name.replace('students', 'users');
