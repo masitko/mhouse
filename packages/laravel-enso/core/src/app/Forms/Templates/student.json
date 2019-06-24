@@ -164,12 +164,23 @@
       ]
     },
     {
-      "columns": "2",
+      "columns": "custom",
       "tab": "Student Info",
       "fields": [
         {
+          "label": "School DfE",
+          "name": "school.dfe",
+          "column": 3,
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
           "label": "Unique Pupil Number",
           "name": "upn",
+          "column": 5,
           "value": null,
           "meta": {
             "type": "input",
@@ -179,6 +190,7 @@
         {
           "label": "Date of Admision",
           "name": "admission_date",
+          "column": 4,
           "value": null,
           "meta": {
             "type": "datepicker"
