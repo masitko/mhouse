@@ -185,8 +185,8 @@
           }
         },
         {
-          "label": "Post code for IDACI",
-          "name": "post_code",
+          "label": "IDACI score",
+          "name": "idaci",
           "value": null,
           "meta": {
             "type": "input",
@@ -194,12 +194,13 @@
           }
         },
         {
-          "label": "IDACI score",
-          "name": "idaci",
+          "label": "Post code for IDACI",
+          "name": "post_code",
           "value": null,
           "meta": {
             "type": "input",
-            "content": "text"
+            "content": "text",
+            "custom": true
           }
         }
       ]

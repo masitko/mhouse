@@ -1,4 +1,5 @@
 <?php
+use LaravelEnso\Core\app\Http\Controllers\IdaciController;
 
 Route::namespace('LaravelEnso\Core\app\Http\Controllers')
   ->prefix('api')
@@ -41,6 +42,9 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                   ->name('setDefault');
               });
           });
+
+        Route::get('/idaci/getForPostCode/{postCode}', 'IdaciController@getForPostCode')
+          ->name('idaci.getForPostCode');
 
         Route::namespace('Administration')
           ->prefix('administration')->as('administration.')
@@ -98,7 +102,6 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
               });
 
             Route::resource('students', 'User\UserController', ['except' => ['index', 'create']]);
-
           });
       });
   });
