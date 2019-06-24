@@ -7,6 +7,7 @@ use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
 use App\Traits\CurrentUser;
+use LaravelEnso\Schools\app\Models\School;
 
 class UserForm
 {
@@ -17,37 +18,33 @@ class UserForm
 
   private $form;
 
-  public function __construct( Request $request )
+  public function __construct(Request $request)
   {
     // getting template corresponding to the route name (user, student, ...)
-    $segments = explode( '.', $request->route()->getName() );
+    $segments = explode('.', $request->route()->getName());
     $template = self::TemplatePath . substr($segments[1], 0, -1) . '.json';
     $this->form = new Form($template);
-    if(!$this->getCurrentUser()->can('access-route','administration.schools.options')) {
+    if (!$this->getCurrentUser()->can('access-route', 'administration.schools.options')) {
       $this->form->hide('school_id');
     }
   }
 
   public function create($person)
   {
-    $this->setCommonValues($person);
 
-    // if (auth()->user()->can('change-password', $user)) {
-      $this->form->show([
-        'password', 'password_confirmation',
-      ]);
-    // }
+    $this->form->show([
+      'password', 'password_confirmation',
+    ]);
+
+    $school = School::find($this->getCurrentUser()->school_id);
     return $this->form
-          ->value('school_id', $this->getCurrentUser()->school_id)
-            // ->value('email', $person->email)
-            // ->value('person_id', $person->id)
+      ->value('school_id', $school->id)
+      ->value('school.dfe', $school->dfe)
       ->create();
   }
 
   public function edit(User $user)
   {
-    // var_dump($user);
-    $this->setCommonValues($user->person);
 
     if (auth()->user()->can('change-password', $user)) {
       $this->form->show([
@@ -57,20 +54,21 @@ class UserForm
 
     return $this->form
       ->value('password', null)
-            // ->append('personId', $user->person_id)
+      ->value('school.dfe', $user->school->dfe)
       ->actions(['back', 'destroy', 'show', 'update'])
       ->edit($user);
   }
 
-  private function setCommonValues($person)
-  {
-    $this->form
-            // ->value('title', $person->title)
-            // ->value('name', $person->name)
-            // ->value('appellative', $person->appellative)
-      // ->meta('title', 'tooltip', self::Tooltip)
-            // ->meta('name', 'tooltip', self::Tooltip)
-            // ->meta('appellative', 'tooltip', self::Tooltip);
-            ;
-  }
+  // private function setCommonValues($user)
+  // {
+  //   $this->form
+  //     ->value('school.dfe', $user->school->dfe)
+  //     // ->value('title', $person->title)
+  //     // ->value('name', $person->name)
+  //     // ->value('appellative', $person->appellative)
+  //     // ->meta('title', 'tooltip', self::Tooltip)
+  //     // ->meta('name', 'tooltip', self::Tooltip)
+  //     // ->meta('appellative', 'tooltip', self::Tooltip);
+  //   ;
+  // }
 }

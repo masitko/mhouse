@@ -36,6 +36,7 @@ class ValidateUserRequest extends FormRequest
       'ethnicity' => 'integer|nullable',
       'gender' => 'integer|nullable',
       'idaci' => 'string|nullable',
+      'upn' => 'string|nullable',
       'flag_fsm' => 'boolean',
       'post_cla' => 'boolean',
       'flag_cla' => 'boolean',

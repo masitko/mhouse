@@ -26,7 +26,7 @@ class UserTable extends Table {
   public function query() {
     return User::select(\DB::raw(
       'users.id, users.id as "dtRowId", avatars.id as avatarId,
-        schools.name as schoolName,
+        schools.name as schoolName, schools.dfe as dfe, users.upn,
         users.first_name, users.last_name, users.phone, users.email,
         roles.name as role, users.admission_date,
         users.is_active, users.created_at'

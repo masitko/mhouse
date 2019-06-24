@@ -174,7 +174,8 @@
           "value": null,
           "meta": {
             "type": "input",
-            "content": "text"
+            "content": "text",
+            "disabled": true
           }
         },
         {

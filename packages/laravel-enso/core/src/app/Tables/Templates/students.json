@@ -37,16 +37,25 @@
       ]
     },
     {
-      "label": "Email",
-      "name": "email",
-      "data": "users.email",
+      "label": "DfE",
+      "name": "dfe",
+      "data": "users.dfe",
       "meta": [
         "searchable",
         "sortable"
       ]
     },
     {
-      "label": "School",
+      "label": "UPN",
+      "name": "upn",
+      "data": "users.upn",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
+      "label": "School Name",
       "name": "schoolName",
       "data": "schools.name",
       "meta": [
