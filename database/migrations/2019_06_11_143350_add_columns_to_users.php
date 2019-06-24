@@ -18,7 +18,7 @@ class AddColumnsToUsers extends Migration
           $table->integer('gender')->nullable();
           $table->date('admission_date')->nullable();
           $table->string('upn', 30 )->nullable();
-          $table->integer('idaci')->nullable();
+          $table->string('idaci', 15)->nullable();
           $table->boolean('free_meal')->default(false);
           $table->boolean('pupil_premium')->default(false);
           $table->boolean('looked_after')->default(false);

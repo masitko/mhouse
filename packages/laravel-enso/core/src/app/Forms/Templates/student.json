@@ -183,11 +183,17 @@
           "meta": {
             "type": "datepicker"
           }
-        },
+        }
+      ]},
+      {
+        "columns": "custom",
+        "tab": "Student Info",
+        "fields": [  
         {
           "label": "IDACI score",
           "name": "idaci",
           "value": null,
+          "column": 5,
           "meta": {
             "type": "input",
             "content": "text"
@@ -197,6 +203,18 @@
           "label": "Post code for IDACI",
           "name": "post_code",
           "value": null,
+          "column": 5,
+          "meta": {
+            "type": "input",
+            "content": "text",
+            "custom": true
+          }
+        },
+        {
+          "label": "Click to",
+          "name": "idaci_fetcher",
+          "value": null,
+          "column": 2,
           "meta": {
             "type": "input",
             "content": "text",

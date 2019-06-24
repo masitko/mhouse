@@ -35,6 +35,7 @@ class ValidateUserRequest extends FormRequest
       'admission_date' => 'date|nullable',
       'ethnicity' => 'integer|nullable',
       'gender' => 'integer|nullable',
+      'idaci' => 'string|nullable',
       'flag_fsm' => 'boolean',
       'post_cla' => 'boolean',
       'flag_cla' => 'boolean',

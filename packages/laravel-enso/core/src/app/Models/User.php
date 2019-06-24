@@ -48,7 +48,7 @@ class User extends Authenticatable
   protected $fillable = [
     'role_id', 'school_id', 'first_name', 'last_name', 'other_name',
     'email', 'is_active', 'birthday', 
-    'ethnicity', 'gender', 'admission_date',
+    'ethnicity', 'gender', 'admission_date', 'idaci',
     'flag_fsm', 'post_cla', 'flag_cla','flag_sen'
   ];
 

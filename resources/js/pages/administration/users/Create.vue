@@ -2,13 +2,6 @@
   <div class="columns is-centered">
     <div class="column is-three-quarters-desktop is-full-touch">
       <enso-form ref="form" class="box has-background-light raises-on-hover animated fadeIn">
-        <!-- <template slot="group_id"
-                    slot-scope="{ field, errors, i18n }">
-                    <select-field :errors="errors"
-                        :field="field"
-                        :i18n="i18n"
-                        @input="pivotParams.userGroups.id = $event"/>
-        </template>-->
         <template slot="role_id" slot-scope="{ field, errors, i18n }">
           <select-field :errors="errors" :field="field" :i18n="i18n" :pivot-params="pivotParams"/>
         </template>
@@ -42,13 +35,12 @@
             :i18n="i18n"
             v-if="!field.meta.hidden"
           />
-          <!-- @change="idaciUpdate($event)" -->
-          <a :class="['button', {'is-loading': idaciLoading}]" @click="idaciUpdate()">
-            <span>Fetch</span>
-            <span class="icon is-small">
-              <fa icon="sync"/>
-            </span>
-          </a>
+        </template>
+        <template slot="idaci_fetcher" slot-scope="{}">
+          <idaci-fetcher
+            :source="$refs.form.field('post_code')"
+            :target="$refs.form.field('idaci')"
+          />
         </template>
       </enso-form>
     </div>
@@ -56,6 +48,7 @@
 </template>
 
 <script>
+import IdaciFetcher from "./IdaciFetcher.vue";
 import EnsoForm from "../../../components/enso/vueforms/EnsoForm.vue";
 import InputField from "../../../components/enso/vueforms/fields/InputField.vue";
 import SelectField from "../../../components/enso/vueforms/fields/SelectField.vue";
@@ -63,12 +56,17 @@ import PasswordStrength from "../../auth/password/PasswordStrength.vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
-import { Portuguese } from "flatpickr/dist/l10n/pt";
 
 library.add(faSync);
 
 export default {
-  components: { EnsoForm, InputField, SelectField, PasswordStrength },
+  components: {
+    IdaciFetcher,
+    EnsoForm,
+    InputField,
+    SelectField,
+    PasswordStrength
+  },
 
   created() {
     console.log(this);
@@ -79,48 +77,8 @@ export default {
       roles: { name: "student" },
       userGroups: { id: null }
     },
-    idaciLoading: false,
     password: null,
     passwordConfirmation: null
-  }),
-
-  methods: {
-    idaciUpdate() {
-      let postCode = this.$refs.form.field("post_code").value;
-      if (postCode && postCode.length > 3) {
-        this.retrieveIdaci(postCode);
-      } else {
-        this.$toastr.error('Please enter a valid post code.');
-      }
-    },
-
-    retrieveIdaci(postCode) {
-      this.idaciLoading = true;
-      axios
-        .get(
-          route("idaci.getForPostCode", {
-            postCode: postCode
-          })
-        )
-        .then(response => {
-          this.idaciLoading = false;
-          if( response.data.response["Postcode Status"] === 'Live' ) {
-            this.$refs.form.field("idaci").value =
-            response.data.response["IDACI Score"];
-            this.$toastr.success('IDACI score fetched.');
-          } else {
-            this.$toastr.error('Please enter a valid post code.');
-          }
-        })
-        .catch(error => {
-          this.idaciLoading = false;
-          if (axios.isCancel(error)) {
-            this.axiosRequest = null;
-            return;
-          }
-          this.handleError(error);
-        });
-    }
-  }
+  })
 };
 </script>
