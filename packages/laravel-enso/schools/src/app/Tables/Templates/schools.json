@@ -18,6 +18,15 @@
       ]
     },
     {
+      "label": "DfE",
+      "name": "dfe",
+      "data": "schools.dfe",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
       "label": "Email",
       "name": "email",
       "data": "schools.email",

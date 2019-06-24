@@ -23,6 +23,7 @@ class ValidateSchoolRequest extends FormRequest implements ValidatesSchoolReques
 
         return [
             'name' => ['required', 'string', $nameUnique],
+            'dfe' => ['required', 'string'],
             'email' => 'email|nullable',
             'phone' => 'nullable',
             'fax' => 'nullable',

@@ -37,15 +37,6 @@
       ]
     },
     {
-      "label": "Phone",
-      "name": "phone",
-      "data": "users.phone",
-      "meta": [
-        "searchable",
-        "sortable"
-      ]
-    },
-    {
       "label": "Email",
       "name": "email",
       "data": "users.email",
@@ -72,11 +63,13 @@
       ]
     },
     {
-      "label": "Joined",
-      "name": "created_at",
-      "data": "users.created_at",
+      "label": "Admission date",
+      "name": "admission_date",
+      "data": "users.admission_date",
       "meta": [
-        "date"
+        "date",
+        "sortable",
+        "searchable"
       ]
     }
   ]

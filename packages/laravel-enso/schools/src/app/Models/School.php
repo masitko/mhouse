@@ -22,7 +22,7 @@ class School extends Model
 
     protected $loggableLabel = 'name';
 
-    protected $loggable = ['name', 'email', 'phone'];
+    protected $loggable = ['name', 'email', 'phone', 'dfe'];
 
     public function mandatary()
     {

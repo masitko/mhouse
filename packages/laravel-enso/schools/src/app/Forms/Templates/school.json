@@ -2,11 +2,22 @@
   "routePrefix": "administration.schools",
   "sections": [
     {
-      "columns": 2,
+      "columns": "custom",
       "fields": [
         {
           "label": "Name",
           "name": "name",
+          "column": 8,
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
+          "label": "DfE Number",
+          "name": "dfe",
+          "column": 4,
           "value": null,
           "meta": {
             "type": "input",

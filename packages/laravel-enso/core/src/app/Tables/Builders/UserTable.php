@@ -28,7 +28,7 @@ class UserTable extends Table {
       'users.id, users.id as "dtRowId", avatars.id as avatarId,
         schools.name as schoolName,
         users.first_name, users.last_name, users.phone, users.email,
-        roles.name as role,
+        roles.name as role, users.admission_date,
         users.is_active, users.created_at'
     ))
     // ->join('people', 'users.person_id', '=', 'people.id')
