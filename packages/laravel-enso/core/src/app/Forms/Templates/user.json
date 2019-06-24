@@ -132,25 +132,6 @@
       "tab": "Personal Info",
       "fields": [
         {
-          "label": "Date of Birth",
-          "name": "birthday",
-          "column": 4,
-          "value": null,
-          "meta": {
-            "type": "datepicker"
-          }
-        },
-        {
-          "label": "Ethnicity",
-          "name": "ethnicity",
-          "value": null,
-          "column": 4,
-          "meta": {
-            "type": "select",
-            "options": "App\\Enums\\Ethnicity"
-          }
-        },
-        {
           "label": "Gender",
           "name": "gender",
           "value": null,
