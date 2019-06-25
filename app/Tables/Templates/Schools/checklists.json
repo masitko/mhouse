@@ -1,0 +1,14 @@
+{
+    "routePrefix": "schools.checklists",
+    "crtNo": true,
+    "buttons": ["excel"],
+    "columns": [{
+        "label": "Id",
+        "name": "dtRowId",
+        "data": "outcomes.dtRowId",
+        "meta": [
+            "searchable",
+            "sortable"
+        ]
+    }]
+}

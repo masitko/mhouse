@@ -103,3 +103,19 @@ Route::namespace ('Schools\Outcomes')
   ->group(function () {
     Route::resource('outcomes', 'OutcomeController'); // if it's the case, use `except` or `only` to avoid generating unused routes
   });
+
+// ====== CHECKLISTS ====================
+Route::namespace ('Schools\Checklists')
+  ->prefix('schools/checklists')->as('schools.checklists.')
+  ->group(function () {
+    Route::get('initTable', 'ChecklistTableController@init')->name('initTable');
+    Route::get('tableData', 'ChecklistTableController@data')->name('tableData')->middleware('school.access');;
+    Route::get('exportExcel', 'ChecklistTableController@excel')->name('exportExcel');
+
+  });
+
+Route::namespace ('Schools\Checklists')
+  ->prefix('schools')->as('checklists.')
+  ->group(function () {
+    Route::resource('checklists', 'ChecklistController'); // if it's the case, use `except` or `only` to avoid generating unused routes
+  });
