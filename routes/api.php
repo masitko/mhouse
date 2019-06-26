@@ -109,7 +109,7 @@ Route::namespace ('Schools\Checklists')
   ->prefix('schools/checklists')->as('schools.checklists.')
   ->group(function () {
     Route::get('initTable', 'ChecklistTableController@init')->name('initTable');
-    Route::get('tableData', 'ChecklistTableController@data')->name('tableData')->middleware('school.access');;
+    Route::get('tableData', 'ChecklistTableController@customData')->name('tableData');
     Route::get('exportExcel', 'ChecklistTableController@excel')->name('exportExcel');
 
   });

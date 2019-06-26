@@ -6,6 +6,7 @@
           <vue-table
             class="box has-background-light is-paddingless raises-on-hover is-rounded"
             :path="path"
+            :pivot-params="pivotParams"
             id="school_classes"
           />
         </div>
@@ -18,6 +19,7 @@
           @save="save"
           @users-fetched="usersFetched"
           @terms-fetched="termsFetched"
+          @wheels-fetched="wheelsFetched"
         />
       </div>
     </div>
@@ -30,7 +32,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import FilterCard from "../../../components/wheelchart/FilterCard.vue";
 
-import VueTable from '../../../components/enso/vuedatatable/VueTable.vue';
+import VueTable from "../../../components/enso/vuedatatable/VueTable.vue";
 
 import isWithinInterval from "date-fns/isWithinInterval";
 
@@ -39,11 +41,11 @@ library.add(faSpinner);
 export default {
   components: {
     VueTable,
-    FilterCard,
+    FilterCard
   },
 
   data: () => ({
-    path: route('schools.checklists.initTable'),
+    path: route("schools.checklists.initTable"),
     ready: false,
     // loading: false,
     axiosRequest: null,
@@ -62,6 +64,17 @@ export default {
     options: {
       loading: false
     },
+    pivotParams: {
+      area: {
+        id: []
+      },
+      user: {
+        id: null
+      },
+      term: {
+        id: null
+      }
+    },
     infos: {},
     wheelData: {},
     outcomes: {}
@@ -73,35 +86,38 @@ export default {
     // console.log(this);
   },
 
-  computed: {
-    wheelEnabled() {
-      // console.log('COMPUTED UPDATED!!!');
-      return this.filters.userId && this.filters.termId && this.filters.wheelId;
-    },
-    ...mapGetters("preferences", { locale: "lang" })
-  },
-
   watch: {
     "filters.wheelId": {
       handler() {
-        this.fetch(true);
+        this.wheelChange();
       }
     },
     "filters.userId": {
       handler() {
-        this.fetch(false);
-        this.updateTitle();
+        this.pivotParams.user.id = this.filters.userId;
       }
     },
     "filters.termId": {
       handler() {
-        this.fetch(false);
-        this.updateTitle();
+        this.pivotParams.term.id = this.filters.termId;
       }
     }
   },
 
   methods: {
+    save() {},
+    wheelChange() {
+      if (this.filters.wheelId) {
+        let def = JSON.parse(
+          this.wheels.find(wheel => wheel.id === this.filters.wheelId)
+            .definition
+        );
+        console.log(def);
+        if (def && def.areas) this.pivotParams.area.id = def.areas;
+      } else {
+        this.pivotParams.area.id = [];
+      }
+    },
     chartChange(values) {
       this.infos = values;
       if (values.type === "click") {
@@ -112,37 +128,16 @@ export default {
         this.timeout = setTimeout(this.save, 1000);
       }
     },
-    save() {
-      // console.log("SAVING!");
-      axios
-        .post(route("schools.outcomes.storeWheel"), {
-          outcomes: this.outcomes,
-          term_id: this.filters.termId,
-          user_id: this.filters.userId,
-          wheel_id: this.filters.wheelId
-          // params: { filters: this.filters },
-          // cancelToken: this.axiosRequest.token
-        })
-        .then(response => {
-          // this.filters.unsaved = false;
-          this.filters.status = "current";
-          // console.log(response);
-        })
-        .catch(error => {
-          this.options.loading = false;
-          if (axios.isCancel(error)) {
-            this.axiosRequest = null;
-            return;
-          }
-          this.handleError(error);
-        });
+    wheelsFetched(wheels) {
+      console.log("Wheels fetched!", wheels);
+      this.wheels = wheels;
     },
     usersFetched(users) {
       // console.log('USERS!', users);
       this.users = users;
     },
     termsFetched(terms) {
-      console.log("TERMS!", terms);
+      // console.log("TERMS!", terms);
       terms.forEach(term => {
         if (
           isWithinInterval(new Date(), {
@@ -160,10 +155,7 @@ export default {
             name: "No active term!"
           });
         }
-        // console.log(from < today);
-        // console.log(today < to);
       });
-      // this.terms = terms;
     },
     updateTitle() {
       this.title = "";
@@ -179,40 +171,7 @@ export default {
             this.terms.filter(term => term.id === this.filters.termId)[0].name
           : "";
     },
-    fetch(includeWheel = false) {
-      this.filters.status = "current";
-      // this.filters.unsaved = false;
-      if (!this.filters.wheelId && includeWheel) {
-        this.wheelData = {};
-        return;
-      }
-      if (!this.filters.userId || !this.filters.termId) {
-        if (!includeWheel) {
-          this.outcomes = {};
-          return;
-        }
-      }
-      this.filters.includeWheel = includeWheel;
-      this.options.loading = true;
-      if (this.axiosRequest) {
-        this.axiosRequest.cancel();
-      }
-      this.axiosRequest = axios.CancelToken.source();
-      axios
-        .get(route("schools.outcomes.getWheel"), {
-          params: { filters: this.filters },
-          cancelToken: this.axiosRequest.token
-        })
-        .then(({ data }) => this.processData(data))
-        .catch(error => {
-          this.options.loading = false;
-          if (axios.isCancel(error)) {
-            this.axiosRequest = null;
-            return;
-          }
-          this.handleError(error);
-        });
-    },
+    fetch() {},
     processData(data) {
       // console.log(data);
       this.options.loading = false;

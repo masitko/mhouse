@@ -10,6 +10,7 @@
       source="wheels.wheels.options"
       :placeholder="__('Wheel Type')"
       v-model="filters.wheelId"
+      @fetch="$emit('wheels-fetched', $event)"
     />
     <vue-select-filter
       source="administration.users.options"

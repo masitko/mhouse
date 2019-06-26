@@ -123,6 +123,10 @@ export default {
             type: Object,
             default: null,
         },
+        pivotParams: {
+            type: Object,
+            default: null,
+        },
         intervals: {
             type: Object,
             default: null,
@@ -205,6 +209,12 @@ export default {
             deep: true,
         },
         params: {
+            handler() {
+                this.filterUpdate();
+            },
+            deep: true,
+        },
+        pivotParams: {
             handler() {
                 this.filterUpdate();
             },
@@ -354,6 +364,7 @@ export default {
                 filters: this.filters,
                 intervals: this.intervals,
                 params: this.params,
+                pivotParams: this.pivotParams,
                 selected: this.selected,
                 comparisonOperator: this.template.comparisonOperator,
             };
@@ -438,6 +449,7 @@ export default {
                 filters: this.filters,
                 intervals: this.intervals,
                 params: this.params,
+                pivotParams: this.pivotParams,
                 comparisonOperator: this.template.comparisonOperator,
             };
 

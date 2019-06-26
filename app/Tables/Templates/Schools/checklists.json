@@ -2,13 +2,40 @@
     "routePrefix": "schools.checklists",
     "crtNo": true,
     "buttons": ["excel"],
-    "columns": [{
-        "label": "Id",
-        "name": "dtRowId",
-        "data": "outcomes.dtRowId",
+    "columns": [
+      {
+        "label": "Area",
+        "name": "area_name",
+        "data": "areas.name",
         "meta": [
-            "searchable",
-            "sortable"
+          "searchable",
+          "sortable"
         ]
-    }]
+      },
+      {
+        "label": "Key",
+        "name": "key",
+        "data": "observations.key",
+        "meta": [
+          "searchable",
+          "sortable"
+        ]
+      },
+      {
+        "label": "Name",
+        "name": "name",
+        "data": "observations.name",
+        "meta": [
+          "searchable",
+          "sortable"
+        ]
+      },
+      {
+        "label": "Outcome",
+        "name": "outcome",
+        "data": "outcome",
+        "meta": [
+        ]
+      }
+    ]
 }

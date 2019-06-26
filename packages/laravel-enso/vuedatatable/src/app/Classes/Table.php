@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\VueDatatable\app\Classes;
 
-// use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 use LaravelEnso\Helpers\app\Classes\Obj;
 use LaravelEnso\VueDatatable\app\Classes\Table\Builder;
 
@@ -49,17 +49,21 @@ abstract class Table
   private function setPivotParams()
   {
     $params = json_decode($this->request);
+    // dd($params);
     if (isset($params->pivotParams)) {
       // Log::debug($params->pivotParams);
       collect(json_decode($params->pivotParams))
         ->each(function ($param, $relation) {
-          $this->query->whereHas($relation, function ($query) use ($param) {
-            collect($param)->each(
-              function ($value, $attribute) use ($query) {
-                $query->whereIn($attribute, (array)$value);
-              }
-            );
-          });
+          $model = $this->query->getModel();
+          if (method_exists($model, $relation))
+            $this->query->whereHas($relation, function ($query) use ($param) {
+              collect($param)->each(
+                function ($value, $attribute) use ($query) {
+                  $query->whereIn($attribute, (array)$value);
+                }
+              );
+            });
+            
         });
     }
   }
@@ -68,6 +72,9 @@ abstract class Table
   {
     $this->query = $this->query();
     $this->setPivotParams();
+
+    // dd($this->query);
+
     return new Builder($this->request, $this->query);
   }
 }
