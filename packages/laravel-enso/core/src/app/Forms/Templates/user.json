@@ -140,7 +140,19 @@
             "type": "select",
             "options": "App\\Enums\\Genders"
           }
-        }
+        },
+        {
+          "label": "School DfE",
+          "name": "school.dfe",
+          "column": 3,
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text",
+            "disabled": true,
+            "hidden": true
+          }
+        }    
       ]
     }
 
