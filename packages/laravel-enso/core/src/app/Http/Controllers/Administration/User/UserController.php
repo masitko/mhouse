@@ -32,7 +32,9 @@ class UserController extends Controller
 
         $user->save();
 
-        $user->sendResetPasswordEmail();
+        if (!$request->filled('password')) {
+          $user->sendResetPasswordEmail();
+        }
 
         return [
             'message' => __('The user was successfully created'),
