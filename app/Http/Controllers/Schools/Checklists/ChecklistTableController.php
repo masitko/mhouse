@@ -4,21 +4,49 @@ namespace App\Http\Controllers\Schools\Checklists;
 
 use App\Tables\Builders\Schools\ChecklistTable;
 use App\Http\Controllers\Controller;
+use App\Outcome;
+
 use LaravelEnso\VueDatatable\app\Traits\Excel;
 use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use Illuminate\Http\Request;
 
 class ChecklistTableController extends Controller
 {
-    use Datatable, Excel;
+  use Datatable, Excel;
 
-    protected $tableClass = ChecklistTable::class;
+  private $request;
+  private $data;
 
-    public function customData(Request $request)
-    {
-      $data = (new $this->tableClass($request->all()))
-        ->data(); 
-      // dd($request->all());
-      return $data;
+  public function __construct(Request $request)
+  {
+    $this->request = $request->all();
+  }
+
+  protected $tableClass = ChecklistTable::class;
+
+  public function customData()
+  {
+    $this->data = (new $this->tableClass($this->request))
+      ->data();
+    $params = json_decode($this->request['pivotParams']);
+    $this->fillOutcomes($params);
+    return $this->data;
+  }
+
+  private function fillOutcomes($params)
+  {
+    if ($params->user->id && $params->term->id && $params->wheel->id) {
+      $outcomeData = Outcome::where('user_id', $params->user->id)
+        ->where('term_id', $params->term->id)
+        ->where('wheel_id', $params->wheel->id)
+        ->get()->first();
+      // dd($outcomeData);
+      $outcomes = json_decode($outcomeData->outcomes);
+      $this->data['data'] = $this->data['data']->transform(function ($observation) use ($outcomes) {
+        // var_dump($observation);
+        $observation['outcome'] = $outcomes->{$observation['id']};
+        return $observation;
+      });
     }
+  }
 }

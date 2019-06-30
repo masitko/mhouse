@@ -73,7 +73,10 @@ export default {
       },
       term: {
         id: null
-      }
+      },
+      wheel: {
+        id: null
+      },
     },
     infos: {},
     wheelData: {},
@@ -89,6 +92,7 @@ export default {
   watch: {
     "filters.wheelId": {
       handler() {
+        this.pivotParams.wheel.id = this.filters.wheelId;
         this.wheelChange();
       }
     },
