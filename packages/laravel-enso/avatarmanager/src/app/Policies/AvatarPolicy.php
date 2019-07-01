@@ -12,9 +12,11 @@ class AvatarPolicy
 
     public function before($user)
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
+      return $user->can('access-route', 'core.avatars.update');
+
+        // if ($user->isAdmin()) {
+        //     return true;
+        // }
     }
 
     public function update(User $user, Avatar $avatar)

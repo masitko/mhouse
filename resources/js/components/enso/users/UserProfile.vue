@@ -26,23 +26,24 @@
                 </span>
                 <span>{{ __('Avatar') }}</span>
               </a>
-              <!-- <file-uploader @upload-successful="setUserAvatar($event.id)"
-                                :url="uploadAvatarLink"
-                                file-key="avatar"
-                                v-if="isSelfVisiting">
-                                <template slot="upload-button"
-                                    slot-scope="{ openFileBrowser }">
-                                    <a class="button is-fullwidth is-info has-margin-top-small"
-                                        @click="openFileBrowser">
-                                        <span class="icon">
-                                            <fa icon="upload"/>
-                                        </span>
-                                        <span>
-                                            {{ __('Avatar') }}
-                                        </span>
-                                    </a>
-                                </template>
-              </file-uploader>-->
+              <file-uploader
+                @upload-successful="setUserAvatar($event.id)"
+                :url="uploadAvatarLink"
+                file-key="avatar"
+                v-if="isSelfVisiting"
+              >
+                <template slot="upload-button" slot-scope="{ openFileBrowser }">
+                  <a
+                    class="button is-fullwidth is-info has-margin-top-small"
+                    @click="openFileBrowser"
+                  >
+                    <span class="icon">
+                      <fa icon="upload"/>
+                    </span>
+                    <span>{{ __('Avatar') }}</span>
+                  </a>
+                </template>
+              </file-uploader>
               <a
                 class="button is-fullwidth is-danger has-margin-top-small"
                 @click="exit()"

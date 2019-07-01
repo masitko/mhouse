@@ -11,6 +11,7 @@ return [
     'jsDateFormat' => 'dd-MM-yyyy',
     'paths' => [
         'files' => 'files',
+        'logos' => 'logos',
         'avatars' => 'avatars',
         'imports' => 'imports',
         'exports' => 'exports',
