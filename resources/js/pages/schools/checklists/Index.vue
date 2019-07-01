@@ -7,7 +7,7 @@
             class="box has-background-light is-paddingless raises-on-hover is-rounded"
             :path="path"
             :pivot-params="pivotParams"
-            id="school_classes"
+            id="checklist"
           />
         </div>
       </div>

@@ -40,13 +40,14 @@ class ChecklistTableController extends Controller
         ->where('term_id', $params->term->id)
         ->where('wheel_id', $params->wheel->id)
         ->get()->first();
-      // dd($outcomeData);
-      $outcomes = json_decode($outcomeData->outcomes);
-      $this->data['data'] = $this->data['data']->transform(function ($observation) use ($outcomes) {
-        // var_dump($observation);
-        $observation['outcome'] = $outcomes->{$observation['id']};
-        return $observation;
-      });
+      if ($outcomeData) {
+        $outcomes = json_decode($outcomeData->outcomes);
+        $this->data['data'] = $this->data['data']->transform(function ($observation) use ($outcomes) {
+          // var_dump($observation);
+          $observation['outcome'] = $outcomes->{$observation['id']};
+          return $observation;
+        });
+      }
     }
   }
 }

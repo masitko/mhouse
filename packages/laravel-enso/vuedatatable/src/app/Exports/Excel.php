@@ -188,7 +188,10 @@ class Excel
     {
         return $data->map(function ($row) {
             return $this->columns->reduce(function ($mappedRow, $column) use ($row) {
-                $mappedRow->push($row[$column->name]);
+                // var_dump($row);
+                // var_dump($column);
+                $value = isset($row[$column->name])?$row[$column->name]:'';
+                $mappedRow->push($value);
 
                 return $mappedRow;
             }, collect());

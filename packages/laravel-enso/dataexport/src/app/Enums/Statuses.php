@@ -9,4 +9,5 @@ class Statuses extends Enum
     const Waiting = 10;
     const Processing = 20;
     const Finalized = 30;
+    const Error = 40;
 }
