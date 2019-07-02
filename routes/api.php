@@ -69,7 +69,7 @@ Route::namespace ('Schools\Terms')
     Route::resource('terms', 'TermController'); // if it's the case, use `except` or `only` to avoid generating unused routes
   });
 
-// ====== SCHOOLS ====================
+// ====== SCHOOL CLASSES ====================
 Route::namespace ('Schools\Classes')
   ->prefix('schools/classes')->as('schools.classes.')
   ->group(function () {

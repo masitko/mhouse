@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Schools\app\Models;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 use LaravelEnso\FileManager\app\Traits\HasFile;
 use LaravelEnso\FileManager\app\Contracts\Attachable;
-
+use LaravelEnso\FileManager\app\Classes\FileManager;
 
 class School extends Model implements Attachable
 {
@@ -31,7 +32,7 @@ class School extends Model implements Attachable
     protected $mimeTypes = ['image/png', 'image/jpg', 'image/jpeg'];
 // ========== LOGO END ============       
 
-    protected $guarded = [];
+    protected $guarded = ['logo'];
 
     protected $loggableLabel = 'name';
 
@@ -80,6 +81,16 @@ class School extends Model implements Attachable
 
     //     return $school;
     // }
+
+    public function logoUpload(UploadedFile $file) {
+      (new FileManager($this))->delete();
+      $this->upload($file);
+    }
+
+    public function getLogo()
+    {
+        return $this->download();
+    }
 
     public function folder()
     {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Schools\Classes;
 
+use App\SchoolClass;
 use App\Forms\Builders\Schools\SchoolClassForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Schools\ValidateSchoolClassRequest;
-use App\SchoolClass;
 
 class SchoolClassController extends Controller {
   public function create(SchoolClassForm $form) {

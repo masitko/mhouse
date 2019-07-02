@@ -59,15 +59,27 @@
       ]
     },
     {
-      "columns": 1,
+      "columns": "custom",
       "fields": [
         {
           "label": "Notes",
           "name": "notes",
           "value": null,
+          "column": 8,
           "meta": {
             "type": "textarea",
             "rows": 3
+          }
+        },
+        {
+          "label": "School Logo",
+          "name": "logo",
+          "value": null,
+          "column": 4,
+          "meta": {
+            "type": "input",
+            "content": "text",
+            "custom": true
           }
         }
       ]

@@ -7,6 +7,7 @@ use LaravelEnso\Schools\app\Models\School;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Schools\app\Forms\Builders\SchoolForm;
 use LaravelEnso\Schools\app\Contracts\ValidatesSchoolRequest;
+use LaravelEnso\Schools\app\Contracts\ValidateLogoRequest;
 
 class SchoolController extends Controller
 {
@@ -28,6 +29,21 @@ class SchoolController extends Controller
         ];
     }
 
+    public function logoUpload(ValidateLogoRequest $request, School $school) {
+
+      $response = $school->logoUpload($request->file("logo"));
+      return [
+        "response" => $response,
+        "school" => $school,
+        "request" => $request->all()
+      ];
+    }
+  
+    public function getLogo(School $school) {
+
+      return $school->inline();
+    }
+  
     public function edit(School $school, SchoolForm $form)
     {
         return ['form' => $form->edit($school)];
