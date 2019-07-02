@@ -9,8 +9,8 @@
         <template slot="logo" slot-scope="{ field, errors, i18n }">
           <div class="columns is-mobile">
             <div class="column">
-              <figure class="image is-128x128 avatar">
-                <img v-show="showLogo" :src="avatarLink" @error="hideLogo()">
+              <figure class="image is-128x128 logo">
+                <img v-show="showLogo" :src="logoLink" @error="hideLogo()">
               </figure>
             </div>
             <div class="column">
@@ -90,6 +90,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import Accessories from "../../../components/enso/bulma/Accessories.vue";
 import Tab from "../../../components/enso/bulma/Tab.vue";
 import Addresses from "../../../components/enso/addresses/Addresses.vue";
@@ -123,7 +125,7 @@ export default {
   }),
 
   computed: {
-    avatarLink() {
+    logoLink() {
       this.showLogo = true;
       return route("administration.schools.getLogo", { school: this.schoolId, timestamp: this.timeStamp });
     },
@@ -134,12 +136,14 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(["setLogo"]),
     hideLogo() {
       console.log('HIDE LOGO!!!');
       this.showLogo = false;
     },
     updateLogo() {
       this.timeStamp = Date.now();
+      this.setLogo(this.schoolId);
       // this.schoolId = ;
     }
   },
