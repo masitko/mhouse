@@ -28,12 +28,13 @@ export default new Vuex.Store({
   },
 
   getters: {
+    mainTitle: state => (state.isInitialised && state.user.school) ? state.user.school.name : state.meta.appName,
     avatarLink: state => (state.isInitialised ?
       route('core.avatars.show', state.user.avatar.id) :
       '#'),
-    logoLink: state => (state.isInitialised ?
+    logoLink: state => (state.isInitialised && state.user.school ?
       route('administration.schools.getLogo', { school: state.user.school.id, timestamp: Date.now() }) :
-      '#'),
+      ''),
     routes: state => Object.keys(state.routes),
     requests: state => state.requests.length,
     requestIndex: state => ({

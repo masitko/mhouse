@@ -2,13 +2,13 @@
   <nav class="navbar app-navbar has-background-light is-fixed-top">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <figure class="image is-48x48">
-          <img :src="$store.getters.logoLink" error="this.style.display='none'">
+        <figure class="image is-32x32">
+          <img class="school-logo" :src="$store.getters.logoLink" onerror="this.style.display='none'">
         </figure>
         <h4
           v-if="menu.isExpanded && !isMobile"
           class="title is-4 animated has-margin-left-small"
-        >{{ meta.appName }}</h4>
+        >{{ $store.getters.mainTitle }}</h4>
       </a>
       <a class="navbar-item" @click="toggleMenu(isTouch)">
         <span class="icon is-small">
@@ -89,9 +89,16 @@ export default {
 
   computed: {
     ...mapState(["meta", "impersonating"]),
-    ...mapState("layout", ["isMobile", "isTouch", "menu"])
+    ...mapState("layout", ["isMobile", "isTouch", "menu"]),
+    getTitle() {
+      return this.meta.appName;
+      // return this.meta.user.school.name;
+    }
   },
 
+  created() {
+    console.log(this);
+  },
   methods: {
     ...mapMutations("layout/menu", { toggleMenu: "toggle" })
   }

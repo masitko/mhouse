@@ -37,10 +37,12 @@ class UserForm
     ]);
 
     $school = School::find($this->getCurrentUser()->school_id);
-    return $this->form
+    if( $school ) {
+      $this->form
       ->value('school_id', $school->id)
-      ->value('school.dfe', $school->dfe)
-      ->create();
+      ->value('school.dfe', $school->dfe);
+    }
+    return $this->form->create();
   }
 
   public function edit(User $user)
@@ -54,7 +56,7 @@ class UserForm
 
     return $this->form
       ->value('password', null)
-      ->value('school.dfe', $user->school->dfe)
+      ->value('school.dfe', ($user->school?$user->school->dfe:''))
       ->actions(['back', 'destroy', 'show', 'update'])
       ->edit($user);
   }
