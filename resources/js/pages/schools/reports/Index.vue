@@ -3,12 +3,55 @@
     <div class="columns">
       <div class="column is-three-quarters">
         <div class="animated fadeIn">
-          <vue-table
+    <div class="columns is-multiline">
+        <div class="column is-one-third">
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/pie"/>
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/polar"/>
+        </div>
+        <div class="column is-one-third">
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/bar"/>
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/bubble"/>
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/line"/>
+        </div>
+        <div class="column is-one-third">
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/radar"/>
+            <chart-card class="
+                    is-rounded has-background-light raises-on-hover
+                    has-margin-bottom-large
+                "
+                source="/api/dashboard/doughnut"/>
+        </div>
+    </div>
+          <!-- <vue-table
             class="box has-background-light is-paddingless raises-on-hover is-rounded"
             :path="path"
             :pivot-params="pivotParams"
             id="checklist"
-          />
+          /> -->
         </div>
       </div>
       <div class="column is-one-quarter">
@@ -16,7 +59,7 @@
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
           :filters="filters"
           :options="options"
-          type="checklists"
+          type="reports"
           @save="save"
           @users-fetched="usersFetched"
           @terms-fetched="termsFetched"
@@ -32,8 +75,7 @@ import { mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import FilterCard from "../../../components/wheelchart/FilterCard.vue";
-
-import VueTable from "../../../components/enso/vuedatatable/VueTable.vue";
+import ChartCard from '../../../components/enso/charts/ChartCard.vue';
 
 import isWithinInterval from "date-fns/isWithinInterval";
 
@@ -41,7 +83,7 @@ library.add(faSpinner);
 
 export default {
   components: {
-    VueTable,
+    ChartCard,
     FilterCard
   },
 

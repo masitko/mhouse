@@ -12,7 +12,7 @@ class CreateStructureForChecklists extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Checklists', 'icon' => 'clipboard', 'route' => 'schools.checklists.index', 'order_index' => 500, 'has_children' => false
+        'name' => 'Checklists', 'icon' => 'tasks', 'route' => 'schools.checklists.index', 'order_index' => 500, 'has_children' => false
     ];
 
     protected $parentMenu = 'School';

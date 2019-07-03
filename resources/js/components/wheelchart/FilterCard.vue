@@ -25,7 +25,7 @@
       v-model="filters.termId"
       @fetch="$emit('terms-fetched', $event)"
     />
-    <div class="columns has-padding-medium is-desktop">
+    <div v-if="type==='outcomes'" class="columns has-padding-medium is-desktop">
       <div class="column">
         <label class="label has-margin-top-medium">
           {{ __('Show Legend') }}
@@ -75,6 +75,10 @@ export default {
     options: {
       type: Object,
       default: () => ({})
+    },
+    type: {
+      type: String,
+      default: () => ('outcomes')
     }
   },
 
