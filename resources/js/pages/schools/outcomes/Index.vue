@@ -68,7 +68,6 @@ export default {
       userId: null,
       termId: null,
       wheelId: null,
-      unsaved: false, // needs saving if set to true
       status: 'current',
       showLegend: false
     },
@@ -119,28 +118,21 @@ export default {
     chartChange(values) {
       this.infos = values;
       if( values.type === 'click') {
-        // console.log("CHART CLICKED!!!");
-        // console.log( values );
         this.filters.status = 'changed';
         clearTimeout(this.timeout);
         this.timeout = setTimeout(this.save, 1000);
       }
     },
     save() {
-      // console.log("SAVING!");
       axios
         .post(route("schools.outcomes.storeWheel"), {
           outcomes: this.outcomes,
           term_id: this.filters.termId,
           user_id: this.filters.userId,
           wheel_id: this.filters.wheelId
-          // params: { filters: this.filters },
-          // cancelToken: this.axiosRequest.token
         })
         .then(response => {
-          // this.filters.unsaved = false;
           this.filters.status = 'current';
-          // console.log(response);
         })
         .catch(error => {
           this.options.loading = false;
@@ -152,11 +144,9 @@ export default {
         });
     },
     usersFetched( users ) {
-      // console.log('USERS!', users);
       this.users = users;
     },
     termsFetched( terms ) {
-      console.log('TERMS!',terms);
       terms.forEach( term => {
         if(isWithinInterval(new Date(), {
           start:new Date(term.start_date),
@@ -172,10 +162,7 @@ export default {
             name: 'No active term!'
           });
         }
-        // console.log(from < today);
-        // console.log(today < to);
       });
-      // this.terms = terms;
     },
     updateTitle() {
       this.title = "" ;
@@ -185,7 +172,6 @@ export default {
     },
     fetch(includeWheel = false) {
       this.filters.status = 'current';
-      // this.filters.unsaved = false;
       if (!this.filters.wheelId && includeWheel) {
         this.wheelData = {};
         return;
@@ -223,12 +209,10 @@ export default {
       if (typeof data.wheel !== "undefined") {
         this.wheelData = data.wheel;
         this.outcomes = {};
-        // this.wheelData.outcomes = this.outcomes;
       }
       if (typeof data.outcomeRec !== "undefined") {
         // console.log("UPDATING OUTCOMES!!!");
         this.outcomes = data.outcomeRec.outcomes;
-        // this.wheelData.outcomes = this.outcomes;
         this.wheelData.observations.forEach(observation => {
           if (typeof this.outcomes[observation.id] === "undefined") {
             this.outcomes[observation.id] = 0;

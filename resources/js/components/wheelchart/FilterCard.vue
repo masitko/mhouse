@@ -19,10 +19,19 @@
       @fetch="$emit('users-fetched', $event)"
     />
     <vue-select-filter
+      v-if="type!=='reports'"
       source="schools.terms.options"
+      trackBy="id"
       :disabled="!options.history"
       :placeholder="__('Select Term')"
       v-model="filters.termId"
+      @fetch="$emit('terms-fetched', $event)"
+    />
+    <vue-select-filter multiple
+      v-if="type==='reports'"
+      source="schools.terms.options"
+      :placeholder="__('Select Term')"
+      v-model="filters.terms"
       @fetch="$emit('terms-fetched', $event)"
     />
     <div v-if="type==='outcomes'" class="columns has-padding-medium is-desktop">

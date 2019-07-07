@@ -47,23 +47,24 @@ export default {
 
   data: () => ({
     path: route("schools.checklists.initTable"),
-    ready: false,
+    // ready: false,
     // loading: false,
-    axiosRequest: null,
-    timeout: null,
-    feed: [],
-    title: "",
-    offset: 0,
+    // axiosRequest: null,
+    // timeout: null,
+    // feed: [],
+    // title: "",
+    // offset: 0,
     filters: {
       userId: null,
-      termId: null,
       wheelId: null,
+      termId: null,
       unsaved: false, // needs saving if set to true
-      status: "current",
-      showLegend: false
+      // status: "current",
+      // showLegend: false
     },
     options: {
-      loading: false
+      loading: false,
+      history: true,
     },
     pivotParams: {
       area: {
@@ -84,11 +85,11 @@ export default {
     outcomes: {}
   }),
 
-  created() {
-    this.options.history = this.$route.meta.history;
-    // this.name = this.name+this.options.history;
-    // console.log(this);
-  },
+  // created() {
+  //   this.options.history = this.$route.meta.history;
+  //   // this.name = this.name+this.options.history;
+  //   // console.log(this);
+  // },
 
   watch: {
     "filters.wheelId": {
@@ -123,18 +124,18 @@ export default {
         this.pivotParams.area.id = [];
       }
     },
-    chartChange(values) {
-      this.infos = values;
-      if (values.type === "click") {
-        // console.log("CHART CLICKED!!!");
-        // console.log( values );
-        this.filters.status = "changed";
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(this.save, 1000);
-      }
-    },
+    // chartChange(values) {
+    //   this.infos = values;
+    //   if (values.type === "click") {
+    //     // console.log("CHART CLICKED!!!");
+    //     // console.log( values );
+    //     this.filters.status = "changed";
+    //     clearTimeout(this.timeout);
+    //     this.timeout = setTimeout(this.save, 1000);
+    //   }
+    // },
     wheelsFetched(wheels) {
-      console.log("Wheels fetched!", wheels);
+      // console.log("Wheels fetched!", wheels);
       this.wheels = wheels;
     },
     usersFetched(users) {
@@ -162,41 +163,41 @@ export default {
         }
       });
     },
-    updateTitle() {
-      this.title = "";
-      this.title += this.filters.wheelId ? this.wheelData.name : "";
-      this.title +=
-        this.filters.userId && this.users
-          ? " - " +
-            this.users.filter(user => user.id === this.filters.userId)[0].name
-          : "";
-      this.title +=
-        this.filters.termId && this.terms
-          ? " - " +
-            this.terms.filter(term => term.id === this.filters.termId)[0].name
-          : "";
-    },
-    fetch() {},
-    processData(data) {
-      // console.log(data);
-      this.options.loading = false;
-      if (typeof data.wheel !== "undefined") {
-        this.wheelData = data.wheel;
-        this.outcomes = {};
-        // this.wheelData.outcomes = this.outcomes;
-      }
-      if (typeof data.outcomeRec !== "undefined") {
-        // console.log("UPDATING OUTCOMES!!!");
-        this.outcomes = data.outcomeRec.outcomes;
-        // this.wheelData.outcomes = this.outcomes;
-        this.wheelData.observations.forEach(observation => {
-          if (typeof this.outcomes[observation.id] === "undefined") {
-            this.outcomes[observation.id] = 0;
-          }
-        });
-      }
-      this.updateTitle();
-    }
+    // updateTitle() {
+    //   this.title = "";
+    //   this.title += this.filters.wheelId ? this.wheelData.name : "";
+    //   this.title +=
+    //     this.filters.userId && this.users
+    //       ? " - " +
+    //         this.users.filter(user => user.id === this.filters.userId)[0].name
+    //       : "";
+    //   this.title +=
+    //     this.filters.termId && this.terms
+    //       ? " - " +
+    //         this.terms.filter(term => term.id === this.filters.termId)[0].name
+    //       : "";
+    // },
+    // fetch() {},
+    // processData(data) {
+    //   // console.log(data);
+    //   this.options.loading = false;
+    //   if (typeof data.wheel !== "undefined") {
+    //     this.wheelData = data.wheel;
+    //     this.outcomes = {};
+    //     // this.wheelData.outcomes = this.outcomes;
+    //   }
+    //   if (typeof data.outcomeRec !== "undefined") {
+    //     // console.log("UPDATING OUTCOMES!!!");
+    //     this.outcomes = data.outcomeRec.outcomes;
+    //     // this.wheelData.outcomes = this.outcomes;
+    //     this.wheelData.observations.forEach(observation => {
+    //       if (typeof this.outcomes[observation.id] === "undefined") {
+    //         this.outcomes[observation.id] = 0;
+    //       }
+    //     });
+    //   }
+    //   this.updateTitle();
+    // }
   }
 };
 </script>

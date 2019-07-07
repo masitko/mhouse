@@ -95,10 +95,7 @@ export default {
       // return this.meta.user.school.name;
     }
   },
-
-  created() {
-    console.log(this);
-  },
+  
   methods: {
     ...mapMutations("layout/menu", { toggleMenu: "toggle" })
   }

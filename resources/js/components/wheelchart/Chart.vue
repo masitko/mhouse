@@ -59,10 +59,6 @@ export default {
       this.chart.options.aspectRatio = this.showLegend ? 2 : 1.8;
       this.update();
     },
-    disabled() {
-      console.log("DISABLED CHANGE!");
-      console.log(this.disabled);
-    }
   },
 
   mounted() {
@@ -188,7 +184,6 @@ export default {
             }
           },
           onClick: function(event, elements) {
-            console.log("CLICK ", elements);
             event.stopPropagation();
             if (self.disabled) return false;
             if (

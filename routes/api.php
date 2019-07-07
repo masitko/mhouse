@@ -89,19 +89,15 @@ Route::namespace ('Schools\Classes')
 Route::namespace ('Schools\Outcomes')
   ->prefix('schools/outcomes')->as('schools.outcomes.')
   ->group(function () {
-    Route::get('initTable', 'OutcomeTableController@init')->name('initTable');
-    Route::get('tableData', 'OutcomeTableController@data')->name('tableData')->middleware('school.access');;
-    Route::get('exportExcel', 'OutcomeTableController@excel')->name('exportExcel');
-    Route::get('options', 'OutcomeSelectController@options')->name('options')->middleware('school.access');;
-
     Route::get('getWheel', 'OutcomeController@getWheel')->name('getWheel');
     Route::post('storeWheel', 'OutcomeController@storeWheel')->name('storeWheel');
   });
 
-Route::namespace ('Schools\Outcomes')
-  ->prefix('schools')->as('schools.')
+// ====== REPORTS ====================
+Route::namespace ('Schools\Reports')
+  ->prefix('schools/reports')->as('schools.reports.')
   ->group(function () {
-    Route::resource('outcomes', 'OutcomeController'); // if it's the case, use `except` or `only` to avoid generating unused routes
+    Route::get('getReport', 'ReportController@getReport')->name('getReport');
   });
 
 // ====== CHECKLISTS ====================
@@ -114,8 +110,8 @@ Route::namespace ('Schools\Checklists')
 
   });
 
-Route::namespace ('Schools\Checklists')
-  ->prefix('schools')->as('checklists.')
-  ->group(function () {
-    Route::resource('checklists', 'ChecklistController'); // if it's the case, use `except` or `only` to avoid generating unused routes
-  });
+// Route::namespace ('Schools\Checklists')
+//   ->prefix('schools')->as('checklists.')
+//   ->group(function () {
+//     Route::resource('checklists', 'ChecklistController'); // if it's the case, use `except` or `only` to avoid generating unused routes
+//   });

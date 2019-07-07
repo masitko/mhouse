@@ -88,38 +88,16 @@ export default {
   },
 
   data: () => ({
-    path: route("schools.checklists.initTable"),
     ready: false,
-    // loading: false,
     axiosRequest: null,
-    timeout: null,
     feed: [],
-    title: "",
-    offset: 0,
     filters: {
-      userId: null,
-      termId: null,
       wheelId: null,
-      unsaved: false, // needs saving if set to true
-      status: "current",
-      showLegend: false
+      userId: null,
+      terms: [],
     },
     options: {
-      loading: false
-    },
-    pivotParams: {
-      area: {
-        id: []
-      },
-      user: {
-        id: null
-      },
-      term: {
-        id: null
-      },
-      wheel: {
-        id: null
-      },
+      loading: false,
     },
     infos: {},
     wheelData: {},
@@ -127,56 +105,29 @@ export default {
   }),
 
   created() {
-    this.options.history = this.$route.meta.history;
-    // this.name = this.name+this.options.history;
     // console.log(this);
   },
 
   watch: {
     "filters.wheelId": {
       handler() {
-        this.pivotParams.wheel.id = this.filters.wheelId;
-        this.wheelChange();
+        this.fetch(true);
       }
     },
     "filters.userId": {
       handler() {
-        this.pivotParams.user.id = this.filters.userId;
+        this.fetch();
       }
     },
     "filters.termId": {
       handler() {
-        this.pivotParams.term.id = this.filters.termId;
+        this.fetch();
       }
     }
   },
 
   methods: {
-    save() {},
-    wheelChange() {
-      if (this.filters.wheelId) {
-        let def = JSON.parse(
-          this.wheels.find(wheel => wheel.id === this.filters.wheelId)
-            .definition
-        );
-        console.log(def);
-        if (def && def.areas) this.pivotParams.area.id = def.areas;
-      } else {
-        this.pivotParams.area.id = [];
-      }
-    },
-    chartChange(values) {
-      this.infos = values;
-      if (values.type === "click") {
-        // console.log("CHART CLICKED!!!");
-        // console.log( values );
-        this.filters.status = "changed";
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(this.save, 1000);
-      }
-    },
     wheelsFetched(wheels) {
-      console.log("Wheels fetched!", wheels);
       this.wheels = wheels;
     },
     usersFetched(users) {
@@ -184,24 +135,11 @@ export default {
       this.users = users;
     },
     termsFetched(terms) {
-      // console.log("TERMS!", terms);
-      terms.forEach(term => {
-        if (
-          isWithinInterval(new Date(), {
-            start: new Date(term.start_date),
-            end: new Date(term.end_date)
-          }) === true
-        ) {
-          this.filters.termId = term.id;
-        }
-        if (!this.options.history && !this.filters.termId) {
-          console.log("NO CURRENT TERM!!!");
-          this.filters.termId = 99999;
-          terms.push({
-            id: this.filters.termId,
-            name: "No active term!"
-          });
-        }
+      console.log("TERMS!", terms);
+
+      terms.forEach((term, idx) => {
+        if( idx < 2 ) // default amount of past terms to include in the reports
+          this.filters.terms.push(term.id);
       });
     },
     updateTitle() {
@@ -218,7 +156,38 @@ export default {
             this.terms.filter(term => term.id === this.filters.termId)[0].name
           : "";
     },
-    fetch() {},
+    fetch(includeWheel = false) {
+      if (!this.filters.wheelId && includeWheel) {
+        this.wheelData = {};
+        return;
+      }
+      if (!this.filters.userId || !this.filters.termId) {
+        if (!includeWheel) {
+          this.outcomes = {};
+          return;
+        }
+      }
+      this.filters.includeWheel = includeWheel;
+      this.options.loading = true;
+      if (this.axiosRequest) {
+        this.axiosRequest.cancel();
+      }
+      this.axiosRequest = axios.CancelToken.source();
+      axios
+        .get(route("schools.outcomes.getWheel"), {
+          params: { filters: this.filters },
+          cancelToken: this.axiosRequest.token
+        })
+        .then(({ data }) => this.processData(data))
+        .catch(error => {
+          this.options.loading = false;
+          if (axios.isCancel(error)) {
+            this.axiosRequest = null;
+            return;
+          }
+          this.handleError(error);
+        });
+    },
     processData(data) {
       // console.log(data);
       this.options.loading = false;

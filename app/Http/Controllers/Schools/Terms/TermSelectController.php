@@ -15,7 +15,7 @@ class TermSelectController extends Controller
 
     public function query(Request $request)
     {
-       return Term::query()->orderBy('start_date');
+       return Term::query()->orderBy('start_date', 'DESC');
     }
 
 }
