@@ -79,13 +79,13 @@ abstract class Chart
         return $this;
     }
 
-    protected function hex2rgba($color)
+    protected function hex2rgba($color, $opacity = 0.25)
     {
         $color = substr($color, 1);
         $hex = [$color[0].$color[1], $color[2].$color[3], $color[4].$color[5]];
         $rgb = array_map('hexdec', $hex);
 
-        return 'rgba('.implode(',', $rgb).','.config('enso.charts.fillBackgroundOpacity').')';
+        return 'rgba('.implode(',', $rgb).','.$opacity.')';
     }
 
     protected function color($index = null)
@@ -100,19 +100,18 @@ abstract class Chart
         if (! $this->colors) {
             $this->colors = array_values(config('enso.charts.colors'));
         }
-// dd($this->colors);
         return $this->colors;
     }
 
     protected function ticks()
     {
-        $this->options['scales'] = new Obj(['xAxes' => [
-            new Obj([
+        $this->options['scales'] = ['xAxes' => [
+            [
                 'ticks' => [
                     'autoSkip' => false,
                     'maxRotation' => 90,
                 ],
-            ]),
-        ]]);
+            ],
+        ]];
     }
 }

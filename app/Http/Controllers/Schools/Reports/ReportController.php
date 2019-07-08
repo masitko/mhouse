@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Schools\Reports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
-use App\Classes\Chart;
+use App\Reports\ReportChart;
 
 
 class ReportController extends Controller
@@ -17,7 +16,7 @@ class ReportController extends Controller
 
     $filters = json_decode($request->get('filters'));
 
-    return (new Chart($filters))->init()->getChart();
+    return (new ReportChart($filters))->init()->getChart();
 
   }
 }

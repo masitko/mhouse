@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Reports;
 
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -10,9 +10,8 @@ use App\Area;
 use App\Observation;
 use App\User;
 use App\Term;
-use LaravelEnso\Charts\app\Classes\BarChart;
 
-class Chart
+class ReportChart
 {
 
   private $student;
@@ -65,33 +64,31 @@ class Chart
       return $area->colour;
     });
 
-    // dd($this->colors);
-
-    // assign obervations to correcponding areas
+    // assign obervations to corresponding areas
     $this->areas->transform(function ($area) {
       $area->observations = $this->observations->filter(function ($observation) use ($area) {
         return $area->id === $observation->area_id;
       })->map(function ($observation) {
         return $observation->id;
-      })->values()->toArray();
+      })->values();
       return $area;
     });
 
     $this->datasets = $this->areas->mapWithKeys(function ($area) {
-      $data = $this->terms->map(function($term) use ($area){
+      $data = $this->terms->map(function($term) use ($area) {
+        // select outcomes for current term
         $outcome = $this->outcomes->firstWhere('term_id', $term->id);
         if( $outcome) {
-          // dd($area->observations);
-          $results = collect(json_decode($outcome->outcomes))
+          // get outcomes
+          return round(collect(json_decode($outcome->outcomes))
+          // filter outcomes for current area only
           ->filter(function($value, $key) use ($area){
-            return in_array($key, $area->observations);
-          })->sum();
-          return $results;
-          // dd($results->toArray());
+            return in_array($key, $area->observations->toArray());
+            // add results
+          })->sum()*100/$area->observations->count());
         }
         else 
           return null;
-        // return ;
       });
       return [$area->name => $data];
     });
@@ -106,7 +103,7 @@ class Chart
       ->title($this->student->name())
       ->labels($this->labels->toArray())
       ->datasets($this->datasets->toArray())
-      ->setColors($this->colors->toArray())
+      // ->setColors($this->colors->toArray())
       // ->labels(["first", "second", "third", "thourth"])
       // ->datasets([
       //   'Sales' => [1233, 1231, 3123],
