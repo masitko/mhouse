@@ -3,64 +3,25 @@
     <div class="columns">
       <div class="column is-three-quarters">
         <div class="animated fadeIn">
-    <div class="columns is-multiline">
-        <div class="column is-one-third">
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/pie"/>
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/polar"/>
-        </div>
-        <div class="column is-one-third">
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/bar"/>
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/bubble"/>
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/line"/>
-        </div>
-        <div class="column is-one-third">
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/radar"/>
-            <chart-card class="
-                    is-rounded has-background-light raises-on-hover
-                    has-margin-bottom-large
-                "
-                source="/api/dashboard/doughnut"/>
-        </div>
-    </div>
-          <!-- <vue-table
-            class="box has-background-light is-paddingless raises-on-hover is-rounded"
-            :path="path"
-            :pivot-params="pivotParams"
-            id="checklist"
-          /> -->
+          <!-- <div class="columns is-multiline"> -->
+          <chart-card
+            v-if="ready"
+            class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
+            :source="path"
+            :params="params"
+          />
+          <!-- <chart-card
+            class="is-rounded has-background-light raises-on-hover has-margin-bottom-large"
+            source="/api/dashboard/radar"
+          />-->
         </div>
       </div>
       <div class="column is-one-quarter">
         <filter-card
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
-          :filters="filters"
+          :filters="params.filters"
           :options="options"
           type="reports"
-          @save="save"
           @users-fetched="usersFetched"
           @terms-fetched="termsFetched"
           @wheels-fetched="wheelsFetched"
@@ -75,7 +36,7 @@ import { mapGetters } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import FilterCard from "../../../components/wheelchart/FilterCard.vue";
-import ChartCard from '../../../components/enso/charts/ChartCard.vue';
+import ChartCard from "../../../components/enso/charts/ChartCard.vue";
 
 import isWithinInterval from "date-fns/isWithinInterval";
 
@@ -88,42 +49,50 @@ export default {
   },
 
   data: () => ({
-    ready: false,
+    // ready: false,
     axiosRequest: null,
     feed: [],
-    filters: {
-      wheelId: null,
-      userId: null,
-      terms: [],
+    params: {
+      filters: {
+        wheelId: null,
+        userId: null,
+        terms: []
+      }
     },
     options: {
-      loading: false,
+      loading: false
     },
     infos: {},
     wheelData: {},
     outcomes: {}
   }),
 
-  created() {
-    // console.log(this);
+  // watch: {
+  //   "params.filters": {
+  //     handler() {
+  //       console.log('FILTERS CHANGE!!!');
+  //       console.log(this.ready);
+  //     },
+  //     deep: true
+  //   }
+  // },
+
+  computed: {
+    ready() {
+      console.log("FILTERS CHANGE!!!");
+      return (
+        this.params.filters.wheelId &&
+        this.params.filters.userId &&
+        this.params.filters.terms.length
+      );
+    },
+    path() {
+      return route("schools.reports.getChart");
+    }
   },
 
-  watch: {
-    "filters.wheelId": {
-      handler() {
-        this.fetch(true);
-      }
-    },
-    "filters.userId": {
-      handler() {
-        this.fetch();
-      }
-    },
-    "filters.termId": {
-      handler() {
-        this.fetch();
-      }
-    }
+  created() {
+    // console.log(this);
   },
 
   methods: {
@@ -138,8 +107,9 @@ export default {
       console.log("TERMS!", terms);
 
       terms.forEach((term, idx) => {
-        if( idx < 2 ) // default amount of past terms to include in the reports
-          this.filters.terms.push(term.id);
+        if (idx < 3)
+          // default amount of past terms to include in the reports
+          this.params.filters.terms.push(term.id);
       });
     },
     updateTitle() {
@@ -156,18 +126,14 @@ export default {
             this.terms.filter(term => term.id === this.filters.termId)[0].name
           : "";
     },
-    fetch(includeWheel = false) {
-      if (!this.filters.wheelId && includeWheel) {
-        this.wheelData = {};
+    fetch() {
+      if (
+        !this.filters.userId ||
+        !this.filters.wheelId ||
+        this.filters.terms.length < 1
+      ) {
         return;
       }
-      if (!this.filters.userId || !this.filters.termId) {
-        if (!includeWheel) {
-          this.outcomes = {};
-          return;
-        }
-      }
-      this.filters.includeWheel = includeWheel;
       this.options.loading = true;
       if (this.axiosRequest) {
         this.axiosRequest.cancel();

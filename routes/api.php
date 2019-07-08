@@ -97,7 +97,7 @@ Route::namespace ('Schools\Outcomes')
 Route::namespace ('Schools\Reports')
   ->prefix('schools/reports')->as('schools.reports.')
   ->group(function () {
-    Route::get('getReport', 'ReportController@getReport')->name('getReport');
+    Route::get('getChart', 'ReportController@getChart')->name('getChart');
   });
 
 // ====== CHECKLISTS ====================

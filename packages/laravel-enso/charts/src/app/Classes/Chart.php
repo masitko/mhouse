@@ -65,6 +65,13 @@ abstract class Chart
         return $this;
     }
 
+    public function setColors($colors)
+    {
+        $this->colors = $colors;
+
+        return $this;
+    }
+
     protected function type(string $type)
     {
         $this->type = $type;
@@ -93,7 +100,7 @@ abstract class Chart
         if (! $this->colors) {
             $this->colors = array_values(config('enso.charts.colors'));
         }
-
+// dd($this->colors);
         return $this->colors;
     }
 

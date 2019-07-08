@@ -9,7 +9,7 @@ class CreateStructureForReports extends StructureMigration
         // ['name' => 'schools.reports.initTable', 'description' => 'Init table for report', 'type' => 0, 'is_default' => false],
         // ['name' => 'schools.reports.tableData', 'description' => 'Get table data for report', 'type' => 0, 'is_default' => false],
         // ['name' => 'schools.reports.exportExcel', 'description' => 'Export excel for report', 'type' => 0, 'is_default' => false],
-        ['name' => 'schools.reports.getReport', 'description' => 'Get report', 'type' => 0, 'is_default' => false],
+        ['name' => 'schools.reports.getChart', 'description' => 'Get chart', 'type' => 0, 'is_default' => false],
     ];
 
     protected $menu = [
