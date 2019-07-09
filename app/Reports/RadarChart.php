@@ -11,12 +11,13 @@ class RadarChart extends Chart
     parent::__construct();
 
     $this->type('radar')
-      ->ratio(1);
+      ->ratio(1.6);
       $this->options['scale']['ticks'] = [
         'beginAtZero' => true,
         'min' => 0,
         // 'stepSize' => 10,
       ];
+      $this->options['legend']['position'] = 'right';
   }
 
   public function response()
