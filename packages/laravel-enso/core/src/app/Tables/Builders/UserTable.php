@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\VueDatatable\app\Classes\Table;
 
+use App\Traits\CurrentUser;
+
 class UserTable extends Table {
+
+  use CurrentUser;
 
   private const TemplatePath = __DIR__ . '/../Templates/';
   protected $templatePath;
@@ -34,7 +38,8 @@ class UserTable extends Table {
     // ->join('people', 'users.person_id', '=', 'people.id')
       ->join('roles', 'users.role_id', '=', 'roles.id')
       ->where( 'roles.name', $this->type==='students'?'=':'<>', 'student')
-      ->leftJoin('schools', 'users.school_id', '=', 'schools.id')
+      ->join('schools', 'users.school_id', '=', 'schools.id')
+      ->where('schools.id', $this->getCurrentUser()->school_id)
       ->leftJoin('avatars', 'users.id', '=', 'avatars.user_id');
   }
 }

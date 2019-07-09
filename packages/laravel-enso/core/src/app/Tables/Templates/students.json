@@ -39,7 +39,7 @@
     {
       "label": "DfE",
       "name": "dfe",
-      "data": "users.dfe",
+      "data": "schools.dfe",
       "meta": [
         "searchable",
         "sortable"
