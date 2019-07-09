@@ -13,6 +13,7 @@ class LineChart extends Chart
     $this->type('line')
       ->ratio(1.6)
       ->ticks();
+      $this->options['hover']['mode'] = 'nearest';
       $this->options['scales']['yAxes'][0]['scaleLabel'] = [
         'display' => true,
         'labelString' => 'Percentage',
