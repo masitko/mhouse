@@ -2,16 +2,17 @@
 
 namespace App\Reports;
 
-class BarChart extends Chart
+class LineChart extends Chart
 {
-  public function __construct($options = [])
+  private $fill = false;
+
+  public function __construct()
   {
     parent::__construct();
 
-    $this->type('bar')
+    $this->type('line')
       ->ratio(1.6)
       ->ticks();
-      $this->options['hover']['mode'] = 'nearest';
       $this->options['scales']['yAxes'][0]['scaleLabel'] = [
         'display' => true,
         'labelString' => 'Percentage',
@@ -20,11 +21,10 @@ class BarChart extends Chart
         'min' => 0,
         'max' => 100,
         'stepSize' => 10,
-      ];
-  
+      ];  
   }
 
-  protected function response()
+  public function response()
   {
     return [
       'data' => [
@@ -37,16 +37,9 @@ class BarChart extends Chart
     ];
   }
 
-  public function stackedScales()
+  public function fill()
   {
-    $this->options['scales'] = [
-      'xAxes' => [
-        ['stacked' => true],
-      ],
-      'yAxes' => [
-        ['stacked' => true],
-      ],
-    ];
+    $this->fill = true;
 
     return $this;
   }
@@ -55,22 +48,18 @@ class BarChart extends Chart
   {
     collect($this->datasets)->each(function ($dataset, $label) {
       $color = $this->color();
+
       $this->data[] = [
+        'fill' => $this->fill,
+        'lineTension' => 0.1,
+        'pointHoverRadius' => 5,
+        'pointHitRadius' => 5,
         'label' => $label,
-        'borderColor' => $this->hex2rgba($color, 0.7),
-        'borderWidth' => 1,        
-        'backgroundColor' => $this->hex2rgba($color, 0.3),
-
-        'hoverBorderWidth' => 1,
-        // 'hoverBorderColor' => $color,
-        'hoverBackgroundColor' => $this->hex2rgba($color, 0.4),
-
+        'borderColor' => $color,
+        'backgroundColor' => $this->hex2rgba($color),
         'data' => $dataset,
         'datalabels' => [
-          'borderWidth' => 1,
-          'borderColor' => $this->hex2rgba($color, 0.7),
-          'backgroundColor' => $this->hex2rgba($color, 0.3 ),
-          'color' => 'black',
+          'backgroundColor' => $color,
         ],
       ];
     });

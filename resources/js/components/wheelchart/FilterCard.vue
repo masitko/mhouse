@@ -30,9 +30,18 @@
     <vue-select-filter multiple
       v-if="type==='reports'"
       source="schools.terms.options"
-      :placeholder="__('Select Term')"
+      title="Terms"
+      :placeholder="__('Select Terms')"
       v-model="filters.terms"
       @fetch="$emit('terms-fetched', $event)"
+    />
+    <vue-select-filter
+      v-if="type==='reports'"
+      trackBy="name"
+      title="Chart Type"
+      :disableClear="true"
+      :options="chartTypes"
+      v-model="filters.type"
     />
     <div v-if="type==='outcomes'" class="columns has-padding-medium is-desktop">
       <div class="column">
@@ -93,6 +102,11 @@ export default {
 
   data() {
     return {
+      chartTypes: [
+        { name: 'Bars' },
+        { name: 'Lines' },
+        { name: 'Radar' },
+        ],
       statuses: {
         changed: {
           label: "Data changed...",

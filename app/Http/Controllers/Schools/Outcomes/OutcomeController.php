@@ -18,6 +18,8 @@ use App\Term;
 
 class OutcomeController extends Controller
 {
+  private $result;
+
   public function create(OutcomeForm $form)
   {
     return ['form' => $form->create()];
@@ -56,65 +58,84 @@ class OutcomeController extends Controller
   {
     $outcome = $request->all();
     // var_dump($outcome);
-    $result = Outcome::updateOrCreate([
+    $this->result = Outcome::updateOrCreate([
       'term_id' => $outcome['term_id'],
       'wheel_id' => $outcome['wheel_id'],
       'user_id' => $outcome['user_id'],
     ], [
-      // 'term_id' => $outcome['term_id'],
-      // 'wheel_id' => $outcome['wheel_id'],
-      // 'user_id' => $outcome['user_id'],
       'outcomes' =>  json_encode($outcome['outcomes']),
       'editable' => false
     ]);
     return [
       'message' => __('Outcomes stored...'),
     ];
-    var_dump($result);
+    var_dump($this->result);
     die();
   }
 
   /**
-     * 
-     */
+   * 
+   */
   public function getWheel(Request $request)
   {
 
-    $result = [];
+    $this->result = [];
     $filters = json_decode($request->get('filters'));
 
     if ($filters->wheelId && $filters->includeWheel) {
-      $result['wheel'] = Wheel::find($filters->wheelId);
-      $definition = json_decode($result['wheel']->definition);
+      $this->result['wheel'] = Wheel::find($filters->wheelId);
+      $definition = json_decode($this->result['wheel']->definition);
       if (!$definition) {
         throw new ConflictHttpException(
           __("This wheel has no structure defined!")
         );
-          // return 'ERROR';
+        // return 'ERROR';
       }
-      $result['wheel']->areas = Area::find($definition->areas);
-      $result['wheel']->observations = Observation::find($definition->observations);
+      $this->result['wheel']->areas = Area::find($definition->areas);
+      $this->result['wheel']->observations = Observation::find($definition->observations);
     }
     if ($filters->userId && $filters->termId && $filters->wheelId) {
-      $result['user'] = User::find($filters->userId);
-      $result['term'] = Term::find($filters->termId);
-      $result['outcomeRec'] =
-        Outcome::where('term_id', $filters->termId)
-        ->where('wheel_id', $filters->wheelId)
-        ->where('user_id', $filters->userId)
-        ->first();
-      if (!$result['outcomeRec']) {
-        $result['outcomeRec'] = [
-          'term_id' => $filters->termId,
-          'wheel_id' => $filters->wheelId,
-          'user_id' => $filters->userId,
-          'outcomes' => "{}"
-        ];
-      }
-      $result['outcomeRec']['outcomes'] = json_decode($result['outcomeRec']['outcomes']);
+      $this->getData($filters, $this->result);
+      $this->result['outcomeRec']['outcomes'] = json_decode($this->result['outcomeRec']['outcomes']);
     }
 
-    return $result;
+    return $this->result;
+  }
+
+  private function getData($filters)
+  {
+    $this->result['user'] = User::find($filters->userId);
+    $this->result['term'] = Term::find($filters->termId);
+    $this->result['outcomeRec'] = $this->getOutcome($filters->wheelId, $filters->userId, $filters->termId);
+    if (!$this->result['outcomeRec']) {
+      $oldTerm = $this->getPreviousTerm($this->result['term']);
+      $oldOutcome = $this->getOutcome($filters->wheelId, $filters->userId, $oldTerm->id);
+      $this->result['outcomeRec'] = [
+        'term_id' => $filters->termId,
+        'wheel_id' => $filters->wheelId,
+        'user_id' => $filters->userId,
+        'outcomes' => $oldOutcome?$oldOutcome->outcomes:"{}"
+      ];
+      if( $oldOutcome ) {
+        $this->result['message'] = __('The outcomes where copied form the last term. They will be saved only if you make any changes.');
+      }
+    }
+  }
+
+  private function getOutcome($wheelId, $userId, $termId)
+  {
+    return  Outcome::where('term_id', $termId)
+      ->where('wheel_id', $wheelId)
+      ->where('user_id', $userId)
+      ->first();
+  }
+
+  private function getPreviousTerm($term)
+  {
+    return Term::where('school_id', $term->school_id)
+      ->where('start_date', '<', $term->start_date)
+      ->orderBy('start_date', 'DESC')
+      ->first();
   }
 
   public function destroy(Outcome $outcome)

@@ -204,7 +204,9 @@ export default {
         });
     },
     processData(data) {
-      // console.log(data);
+      if( typeof data.message !== 'undefined'  && data.message) {
+        this.$toastr.info(data.message, 'Info', 10000);
+      }
       this.options.loading = false;
       if (typeof data.wheel !== "undefined") {
         this.wheelData = data.wheel;

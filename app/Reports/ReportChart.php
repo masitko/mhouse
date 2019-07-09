@@ -75,42 +75,93 @@ class ReportChart
     });
 
     $this->datasets = $this->areas->mapWithKeys(function ($area) {
-      $data = $this->terms->map(function($term) use ($area) {
+      $data = $this->terms->map(function ($term) use ($area) {
         // select outcomes for current term
         $outcome = $this->outcomes->firstWhere('term_id', $term->id);
-        if( $outcome) {
+        if ($outcome) {
           // get outcomes
           return round(collect(json_decode($outcome->outcomes))
-          // filter outcomes for current area only
-          ->filter(function($value, $key) use ($area){
-            return in_array($key, $area->observations->toArray());
-            // add results
-          })->sum()*100/$area->observations->count());
-        }
-        else 
+            // filter outcomes for current area only
+            ->filter(function ($value, $key) use ($area) {
+              return in_array($key, $area->observations->toArray());
+              // add results
+            })->sum() * 100 / ($area->observations->count() * 3));
+        } else
           return null;
       });
       return [$area->name => $data];
     });
   }
 
+  private function processRadarData()
+  {
+    $this->labels = $this->areas->map(function ($area) {
+      return $area->name;
+    });
+
+    // assign obervations to corresponding areas
+    $this->areas->transform(function ($area) {
+      $area->observations = $this->observations->filter(function ($observation) use ($area) {
+        return $area->id === $observation->area_id;
+      })->map(function ($observation) {
+        return $observation->id;
+      })->values();
+      return $area;
+    });
+
+    $this->datasets = $this->terms->mapWithKeys(function ($term) {
+      $data = $this->areas->map(function ($area) use ($term) {
+        // select outcomes for current term
+        $outcome = $this->outcomes->firstWhere('term_id', $term->id);
+        if ($outcome) {
+          // get outcomes
+          return round(collect(json_decode($outcome->outcomes))
+            // filter outcomes for current area only
+            ->filter(function ($value, $key) use ($area) {
+              return in_array($key, $area->observations->toArray());
+              // add results
+            })->sum() * 100 / ($area->observations->count() * 3));
+        } else
+          return null;
+      });
+      return [$term->name => $data];
+    });
+  }
+
   public function getChart()
   {
+    $chart = null;
 
-    $this->processData();
-
-    $chart = (new BarChart())
-      ->title($this->student->name())
-      ->labels($this->labels->toArray())
-      ->datasets($this->datasets->toArray())
-      // ->setColors($this->colors->toArray())
-      // ->labels(["first", "second", "third", "thourth"])
-      // ->datasets([
-      //   'Sales' => [1233, 1231, 3123],
-      //   'Spendings' => [1250, 1730, 5300],
-      //   'Profit' => [1250 - 1233, 1730 - 1231, 5300 - 3123],
-      // ])
-      ->get();
+    switch ($this->filters->type) {
+      case 'Lines':
+        $this->processData();
+        $chart = (new LineChart())
+          ->title($this->student->name())
+          ->labels($this->labels->toArray())
+          ->datasets($this->datasets->toArray())
+          // ->setColors($this->colors->toArray())
+          ->get();
+        break;
+      case 'Radar':
+        $this->processRadarData();
+        $chart = (new RadarChart())
+          ->title($this->student->name())
+          ->labels($this->labels->toArray())
+          ->datasets($this->datasets->toArray())
+          // ->setColors($this->colors->toArray())
+          ->get();
+        break;
+      case 'Bars':
+      default:
+        $this->processData();
+        $chart = (new BarChart())
+          ->title($this->student->name())
+          ->labels($this->labels->toArray())
+          ->datasets($this->datasets->toArray())
+          // ->setColors($this->colors->toArray())
+          ->get();
+        break;
+    }
 
     $chart['raw'] = [
       'wheel' => $this->wheel,

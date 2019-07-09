@@ -56,6 +56,7 @@ export default {
       filters: {
         wheelId: null,
         userId: null,
+        type: 'Bars',
         terms: []
       }
     },

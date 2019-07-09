@@ -85,6 +85,15 @@ export default {
                 return;
             }
 
+            if ( this.chart.config.type !== this.type) {
+            console.log(this.chart);
+            console.log(this.chart.config.type);
+            console.log(this.type);
+                this.chart.destroy();
+                this.init();
+                return;
+            }
+
             this.updateDatasets();
             this.chart.data.labels = this.data.labels;
             this.chart.update();
