@@ -13,7 +13,7 @@
       @fetch="$emit('wheels-fetched', $event)"
     />
     <vue-select-filter
-      source="administration.users.options"
+      source="administration.students.options"
       :placeholder="__('Select Student')"
       v-model="filters.userId"
       @fetch="$emit('users-fetched', $event)"
