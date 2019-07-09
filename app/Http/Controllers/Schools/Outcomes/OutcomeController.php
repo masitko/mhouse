@@ -109,14 +109,14 @@ class OutcomeController extends Controller
     $this->result['outcomeRec'] = $this->getOutcome($filters->wheelId, $filters->userId, $filters->termId);
     if (!$this->result['outcomeRec']) {
       $oldTerm = $this->getPreviousTerm($this->result['term']);
-      $oldOutcome = $this->getOutcome($filters->wheelId, $filters->userId, $oldTerm->id);
+      $oldOutcome = $oldTerm ? $this->getOutcome($filters->wheelId, $filters->userId, $oldTerm->id) : null;
       $this->result['outcomeRec'] = [
         'term_id' => $filters->termId,
         'wheel_id' => $filters->wheelId,
         'user_id' => $filters->userId,
-        'outcomes' => $oldOutcome?$oldOutcome->outcomes:"{}"
+        'outcomes' => $oldOutcome ? $oldOutcome->outcomes : "{}"
       ];
-      if( $oldOutcome ) {
+      if ($oldOutcome) {
         $this->result['message'] = __('The outcomes where copied form the last term. They will be saved only if you make any changes.');
       }
     }
