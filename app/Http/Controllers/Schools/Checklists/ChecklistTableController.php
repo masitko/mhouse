@@ -17,12 +17,12 @@ class ChecklistTableController extends Controller
   private $request;
   private $data;
 
+  protected $tableClass = ChecklistTable::class;
+
   public function __construct(Request $request)
   {
     $this->request = $request->all();
   }
-
-  protected $tableClass = ChecklistTable::class;
 
   public function customData()
   {
@@ -42,7 +42,8 @@ class ChecklistTableController extends Controller
         ->get()->first();
       if ($outcomeData) {
         $outcomes = json_decode($outcomeData->outcomes);
-        $this->data['data'] = $this->data['data']->transform(function ($observation) use ($outcomes) {
+        // $this->data['data'] = $this->data['data']->transform(function ($observation) use ($outcomes) {
+        $this->data['data']->transform(function ($observation) use ($outcomes) {
           // var_dump($observation);
           $observation['outcome'] = $outcomes->{$observation['id']};
           return $observation;

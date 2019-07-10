@@ -85,12 +85,6 @@ export default {
     outcomes: {}
   }),
 
-  // created() {
-  //   this.options.history = this.$route.meta.history;
-  //   // this.name = this.name+this.options.history;
-  //   // console.log(this);
-  // },
-
   watch: {
     "filters.wheelId": {
       handler() {
@@ -124,16 +118,6 @@ export default {
         this.pivotParams.area.id = [];
       }
     },
-    // chartChange(values) {
-    //   this.infos = values;
-    //   if (values.type === "click") {
-    //     // console.log("CHART CLICKED!!!");
-    //     // console.log( values );
-    //     this.filters.status = "changed";
-    //     clearTimeout(this.timeout);
-    //     this.timeout = setTimeout(this.save, 1000);
-    //   }
-    // },
     wheelsFetched(wheels) {
       // console.log("Wheels fetched!", wheels);
       this.wheels = wheels;

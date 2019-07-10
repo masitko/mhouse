@@ -100,6 +100,15 @@ Route::namespace ('Schools\Reports')
     Route::get('getChart', 'ReportController@getChart')->name('getChart');
   });
 
+// ====== EXPORTS ====================
+Route::namespace ('Schools\Exports')
+  ->prefix('schools/exports')->as('schools.exports.')
+  ->group(function () {
+    Route::get('initTable', 'ExportTableController@init')->name('initTable');
+    Route::get('tableData', 'ExportTableController@customData')->name('tableData');
+    Route::get('exportExcel', 'ExportTableController@excel')->name('exportExcel');
+  });
+
 // ====== CHECKLISTS ====================
 Route::namespace ('Schools\Checklists')
   ->prefix('schools/checklists')->as('schools.checklists.')
