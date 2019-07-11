@@ -6,11 +6,11 @@
           <vue-table
             class="box has-background-light is-paddingless raises-on-hover is-rounded"
             :path="path"
-            :pivot-params="pivotParams"
+            :pivot-params="params.filters"
             id="export"
           >
             <figure class="image is-24x24 avatar" slot="avatarId" slot-scope="{ row }">
-              <img class="is-rounded" :src="avatarLink(row.avatarId)" v-if="row.avatarId">
+              <img class="is-rounded" :src="avatarLink(row.avatarId)" v-if="row.avatarId" />
             </figure>
           </vue-table>
         </div>
@@ -20,7 +20,7 @@
           class="is-rounded has-background-light raises-on-hover has-margin-bottom-large has-padding-medium"
           :filters="params.filters"
           :options="options"
-          type="reports"
+          type="exports"
           @users-fetched="usersFetched"
           @terms-fetched="termsFetched"
           @wheels-fetched="wheelsFetched"
@@ -56,13 +56,13 @@ export default {
     params: {
       filters: {
         wheelId: null,
-        userId: null,
-        type: "Bars",
-        terms: []
+        termId: null,
+        ageGroups: [],
       }
     },
     options: {
-      loading: false
+      loading: false,
+      history: true,
     },
     pivotParams: {
       term: {
@@ -114,12 +114,23 @@ export default {
       this.users = users;
     },
     termsFetched(terms) {
-      console.log("TERMS!", terms);
-
-      terms.forEach((term, idx) => {
-        if (idx < 3)
-          // default amount of past terms to include in the reports
-          this.params.filters.terms.push(term.id);
+      terms.forEach(term => {
+        if (
+          isWithinInterval(new Date(), {
+            start: new Date(term.start_date),
+            end: new Date(term.end_date)
+          }) === true
+        ) {
+          this.params.filters.termId = term.id;
+        }
+        if (!this.options.history && !this.filters.termId) {
+          console.log("NO CURRENT TERM!!!");
+          this.params.filters.termId = 99999;
+          terms.push({
+            id: this.filters.termId,
+            name: "No active term!"
+          });
+        }
       });
     },
     updateTitle() {

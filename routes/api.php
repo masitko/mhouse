@@ -105,7 +105,7 @@ Route::namespace ('Schools\Exports')
   ->prefix('schools/exports')->as('schools.exports.')
   ->group(function () {
     Route::get('initTable', 'ExportTableController@init')->name('initTable');
-    Route::get('tableData', 'ExportTableController@customData')->name('tableData');
+    Route::get('tableData', 'ExportTableController@data')->name('tableData');
     Route::get('exportExcel', 'ExportTableController@excel')->name('exportExcel');
   });
 
@@ -114,7 +114,7 @@ Route::namespace ('Schools\Checklists')
   ->prefix('schools/checklists')->as('schools.checklists.')
   ->group(function () {
     Route::get('initTable', 'ChecklistTableController@init')->name('initTable');
-    Route::get('tableData', 'ChecklistTableController@customData')->name('tableData');
+    Route::get('tableData', 'ChecklistTableController@data')->name('tableData');
     Route::get('exportExcel', 'ChecklistTableController@excel')->name('exportExcel');
 
   });

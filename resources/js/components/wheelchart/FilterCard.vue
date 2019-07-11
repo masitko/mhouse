@@ -13,6 +13,7 @@
       @fetch="$emit('wheels-fetched', $event)"
     />
     <vue-select-filter
+      v-if="type!=='exports'"
       source="administration.students.options"
       :placeholder="__('Select Student')"
       v-model="filters.userId"
@@ -42,6 +43,12 @@
       :disableClear="true"
       :options="chartTypes"
       v-model="filters.type"
+    />
+    <vue-select-filter multiple
+      v-if="type==='exports'"
+      title="Age Groups"
+      :options="ageGroups"
+      v-model="filters.ageGroups"
     />
     <div v-if="type==='outcomes'" class="columns has-padding-medium is-desktop">
       <div class="column">
@@ -106,6 +113,16 @@ export default {
         { name: 'Bars' },
         { name: 'Lines' },
         { name: 'Radar' },
+        ],
+      ageGroups: [
+        { id:3, name: '3' },
+        { id:4, name: '4' },
+        { id:5, name: '5' },
+        { id:6, name: '6' },
+        { id:7, name: '7' },
+        { id:8, name: '8' },
+        { id:9, name: '9' },
+        { id:10, name: '10' },
         ],
       statuses: {
         changed: {

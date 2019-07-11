@@ -31,8 +31,12 @@ abstract class Table
 
   public function data()
   {
-    return $this->builder()
-      ->data();
+    return $this->processData($this->builder()->data());
+  }
+
+  protected function processData($data)
+  {
+    return $data;
   }
 
   public function fetcher()
@@ -59,11 +63,10 @@ abstract class Table
             $this->query->whereHas($relation, function ($query) use ($param) {
               collect($param)->each(
                 function ($value, $attribute) use ($query) {
-                  $query->whereIn($attribute, (array)$value);
+                  $query->whereIn($attribute, (array) $value);
                 }
               );
             });
-            
         });
     }
   }
