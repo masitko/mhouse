@@ -22,6 +22,7 @@ class ValidateObservationRequest extends FormRequest {
   public function rules() {
     return [
       'name' => ['required'],
+      'key' =>'nullable',
       'description' => 'nullable',
     ];
   }

@@ -9,11 +9,11 @@ class Observation extends Model
 {
   use LogsActivity;
 
-  protected $fillable = ['name', 'description', 'order', 'area_id'];
+  protected $fillable = ['name', 'key', 'description', 'order', 'area_id'];
 
   protected $loggableLabel = 'name';
 
-  protected $loggable = ['name', 'description'];
+  protected $loggable = ['name', 'key'];
 
   public function area() {
     return $this->belongsTo(Area::class);

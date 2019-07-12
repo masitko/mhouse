@@ -26,6 +26,15 @@
           }
         },
         {
+          "label": "Key",
+          "name": "key",
+          "value": null,
+          "meta": {
+            "type": "input",
+            "content": "text"
+          }
+        },
+        {
           "label": "Order",
           "name": "order",
           "value": 0,

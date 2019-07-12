@@ -9,6 +9,15 @@
   ],
   "columns": [
     {
+      "label": "Key",
+      "name": "key",
+      "data": "observations.key",
+      "meta": [
+        "searchable",
+        "sortable"
+      ]
+    },
+    {
       "label": "Name",
       "name": "name",
       "data": "observations.name",
