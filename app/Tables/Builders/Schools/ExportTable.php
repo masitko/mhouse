@@ -6,18 +6,20 @@ use App\User;
 use LaravelEnso\VueDatatable\app\Classes\Table;
 
 use App\Traits\CurrentUser;
+use App\Observation;
 
 class ExportTable extends Table
 {
   use CurrentUser;
 
   protected $templatePath = __DIR__ . '/../../Templates/Schools/export-students.json';
+  private $observations = null;
 
   public function query()
   {
 
+    // dd('query');
     $params = json_decode($this->request->pivotParams);
-    // dd($params);
 
     $edgeDate = new \DateTime(date('Y') . '-09-01');
     if ($edgeDate < new \DateTime()) {
@@ -25,12 +27,19 @@ class ExportTable extends Table
     }
 
     $query = User::select(
-      'users.id as dtRowId', 'avatars.id as avatarId',
-        'schools.dfe as dfe', 'users.upn',
-        'users.first_name', 'users.last_name', 'users.admission_date',
-        'users.is_active', 'users.created_at', 'users.birthday', 
-        // 'outcomes.outcomes',
-        \DB::raw("GREATEST(TIMESTAMPDIFF(YEAR, users.birthday, '" . $edgeDate->format('Y-m-d') . "')-5, 0) AS age_group")
+      'users.id as dtRowId',
+      'avatars.id as avatarId',
+      'schools.dfe as dfe',
+      'users.upn',
+      'users.first_name',
+      'users.last_name',
+      'users.email',
+      'users.admission_date',
+      'users.is_active',
+      'users.created_at',
+      'users.birthday',
+      'outcomes.outcomes',
+      \DB::raw("GREATEST(TIMESTAMPDIFF(YEAR, users.birthday, '" . $edgeDate->format('Y-m-d') . "')-5, 0) AS age_group")
     )
       ->where('users.is_active', true)
       ->join('outcomes', 'outcomes.user_id', '=', 'users.id')
@@ -42,12 +51,35 @@ class ExportTable extends Table
       ->where('schools.id', $this->getCurrentUser()->school_id)
       ->leftJoin('avatars', 'users.id', '=', 'avatars.user_id');
 
-    if( sizeof($params->ageGroups) ) {
-      $query->whereRaw("TIMESTAMPDIFF(YEAR, users.birthday, '" . $edgeDate->format('Y-m-d') . "')-5 in (".join(",",$params->ageGroups).")");
+    if (sizeof($params->ageGroups)) {
+      $query->whereRaw("TIMESTAMPDIFF(YEAR, users.birthday, '" . $edgeDate->format('Y-m-d') . "')-5 in (" . join(",", $params->ageGroups) . ")");
     }
     return $query;
-    // return Observation::select(\DB::raw('
-    //   observations.*, observations.id as "dtRowId", areas.name as area_name
-    // '))->leftJoin('areas', 'observations.area_id',  '=',  'areas.id');
+  }
+
+  public function processExcelData($data)
+  {
+    if (!$this->observations) {
+      $params = json_decode($this->request->pivotParams);
+      $this->observations = Observation::select(
+        "observations.*",
+        'observations.id as dtRowId',
+        "areas.name as area_name"
+      )
+        ->leftJoin('areas', 'observations.area_id',  '=',  'areas.id')
+        ->whereIn('areas.id', $params->areas)
+        ->get();
+    }
+    if ($this->observations) {
+      $data->transform(function($student){
+        $outcomes = collect(json_decode($student['outcomes']));
+        $outcomes->each(function($outcome, $index) use (&$student){
+          $key = ($this->observations->firstWhere('id', $index))['key'];
+          $student[$key] = $outcome;
+        }); 
+        return $student;
+      });
+    }
+    return $this->processData($data);
   }
 }

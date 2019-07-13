@@ -22,7 +22,7 @@
         ]
       },
       {
-        "label": "Name",
+        "label": "Observation",
         "name": "name",
         "data": "observations.name",
         "meta": [

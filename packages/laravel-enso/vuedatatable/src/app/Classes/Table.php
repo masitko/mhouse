@@ -39,6 +39,11 @@ abstract class Table
     return $data;
   }
 
+  public function processExcelData($data)
+  {
+    return $data;
+  }
+
   public function fetcher()
   {
     return $this->builder()

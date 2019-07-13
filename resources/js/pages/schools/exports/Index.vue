@@ -58,34 +58,25 @@ export default {
         wheelId: null,
         termId: null,
         ageGroups: [],
+        areas: []
       }
     },
     options: {
       loading: false,
-      history: true,
-    },
-    pivotParams: {
-      term: {
-        id: null
-      },
-      wheel: {
-        id: null
-      },
+      history: true
     },
     infos: {},
     wheelData: {},
     outcomes: {}
   }),
 
-  // watch: {
-  //   "params.filters": {
-  //     handler() {
-  //       console.log('FILTERS CHANGE!!!');
-  //       console.log(this.ready);
-  //     },
-  //     deep: true
-  //   }
-  // },
+  watch: {
+    "params.filters.wheelId": {
+      handler() {
+        this.wheelChange();
+      }
+    }
+  },
 
   computed: {
     ready() {
@@ -106,6 +97,18 @@ export default {
   },
 
   methods: {
+    wheelChange() {
+      if (this.params.filters.wheelId) {
+        let def = JSON.parse(
+          this.wheels.find(wheel => wheel.id === this.params.filters.wheelId)
+            .definition
+        );
+        console.log(def);
+        if (def && def.areas) this.params.filters.areas = def.areas;
+      } else {
+        this.params.filters.areas = [];
+      }
+    },
     wheelsFetched(wheels) {
       this.wheels = wheels;
     },

@@ -7,44 +7,53 @@ use App\Http\Controllers\Controller;
 
 use LaravelEnso\VueDatatable\app\Traits\Excel;
 use LaravelEnso\VueDatatable\app\Traits\Datatable;
-use Illuminate\Http\Request;
+
+use App\Observation;
 
 class ExportTableController extends Controller
 {
   use Datatable, Excel;
 
-  private $request;
-  private $data;
-
   protected $tableClass = ExportTable::class;
 
-  public function __construct(Request $request)
+  private function prepareExcelParams($params)
   {
-    $this->request = $request->all();
-  }
-
-  public function customData()
-  {
-    $this->data = (new $this->tableClass($this->request))
-      ->data();
-    $params = json_decode($this->request['pivotParams']);
-    // $this->prepareData($params);
-    return $this->data;
-  }
-
-  private function prepareData($params)
-  {
-    $edgeDate = new \DateTime(date('Y').'-08-31');
-    if ($edgeDate < new \DateTime()) {
-      $edgeDate = new \DateTime((date('Y')+1).'-08-31');
-    }
-
-    $this->data['data']->transform(function($student) use($edgeDate){
-      $bday = new \DateTime($student['birthday']);
-      $student['age_group'] = $edgeDate->diff($bday)->y-5;
-      return $student;
+    // return $params;
+    $pivotParams = json_decode($params['pivotParams']);
+    $observations = $this->getObservations($pivotParams);
+    $observations->each(function($observation) use (&$params){
+      array_push($params['columns'], json_encode((object)[
+        "name" => $observation->key,
+        "label" => $observation->key,
+        "data" => $observation->key,
+        "meta" => (object)[
+          "searchable" => false,
+          "sortable" => false,
+          "sort" => null,
+          "total" => false,
+          "date" => false,
+          "translatable" => false,
+          "nullLast" => false,
+          "rogue" => false,
+          "notExportable" => false
+        ]
+      ]));
     });
+    return $params;
   }
 
+  private function getObservations($params)
+  {
+    return Observation::select(
+      'observations.*',
+      'areas.name as area_name',
+      "areas.order as area_order"
+    )
+      ->join('areas', 'observations.area_id',  '=',  'areas.id')
+      ->whereIn('areas.id', $params->areas)
+      ->orderBy('areas.order')
+      ->orderBy('observations.order')
+      ->get();
+  }
 
 }
