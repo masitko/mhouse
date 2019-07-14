@@ -68,16 +68,6 @@ export default {
     outcomes: {}
   }),
 
-  // watch: {
-  //   "params.filters": {
-  //     handler() {
-  //       console.log('FILTERS CHANGE!!!');
-  //       console.log(this.ready);
-  //     },
-  //     deep: true
-  //   }
-  // },
-
   computed: {
     ready() {
       console.log("FILTERS CHANGE!!!");
@@ -108,7 +98,7 @@ export default {
       console.log("TERMS!", terms);
 
       terms.forEach((term, idx) => {
-        if (idx < 3)
+        if (idx < 4)
           // default amount of past terms to include in the reports
           this.params.filters.terms.push(term.id);
       });
