@@ -3,7 +3,11 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
         <figure class="image is-32x32">
-          <img class="school-logo" :src="$store.getters.logoLink" onerror="this.style.display='none'">
+          <img
+            class="school-logo"
+            :src="$store.getters.logoLink"
+            onerror="this.style.display='none'"
+          />
         </figure>
         <h4
           v-if="menu.isExpanded && !isMobile"
@@ -12,7 +16,7 @@
       </a>
       <a class="navbar-item" @click="toggleMenu(isTouch)">
         <span class="icon is-small">
-          <fa icon="bars" :class="{ 'rotate': !menu.isExpanded || !menu.isVisible }"/>
+          <fa icon="bars" :class="{ 'rotate': !menu.isExpanded || !menu.isVisible }" />
         </span>
       </a>
       <div v-if="meta.env === 'local'" class="navbar-item">
@@ -29,28 +33,28 @@
           @click="$root.$emit('stop-impersonating')"
         >
           <span class="icon is-small">
-            <fa icon="user"/>
+            <fa icon="user" />
           </span>
           <span class="icon is-small">
-            <fa icon="times"/>
+            <fa icon="times" />
           </span>
         </button>
       </div>
       <div v-if="isTouch" class="is-pulled-right is-flex">
-        <search v-if="!isMobile"/>
+        <search v-if="!isMobile" />
         <!-- <i-o/> -->
-        <notifications/>
-        <profile-control/>
-        <settings-control/>
+        <notifications />
+        <profile-control />
+        <settings-control />
       </div>
     </div>
     <div class="navbar-menu">
       <div v-if="!isTouch" class="navbar-end">
         <!-- <search/> -->
         <!-- <i-o/> -->
-        <notifications/>
-        <profile-control/>
-        <settings-control/>
+        <notifications />
+        <profile-control />
+        <settings-control />
       </div>
     </div>
   </nav>
@@ -95,7 +99,7 @@ export default {
       // return this.meta.user.school.name;
     }
   },
-  
+
   methods: {
     ...mapMutations("layout/menu", { toggleMenu: "toggle" })
   }
