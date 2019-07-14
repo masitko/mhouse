@@ -103,7 +103,6 @@ export default {
           this.wheels.find(wheel => wheel.id === this.params.filters.wheelId)
             .definition
         );
-        console.log(def);
         if (def && def.areas) this.params.filters.areas = def.areas;
       } else {
         this.params.filters.areas = [];
