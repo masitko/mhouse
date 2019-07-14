@@ -2,11 +2,13 @@
 
 namespace App\Tables\Builders\Schools;
 
-use App\User;
+use Illuminate\Support\Str;
 use LaravelEnso\VueDatatable\app\Classes\Table;
 
-use App\Traits\CurrentUser;
 use App\Observation;
+use App\User;
+
+use App\Traits\CurrentUser;
 
 class ExportTable extends Table
 {
@@ -17,8 +19,6 @@ class ExportTable extends Table
 
   public function query()
   {
-
-    // dd('query');
     $params = json_decode($this->request->pivotParams);
 
     $edgeDate = new \DateTime(date('Y') . '-09-01');
@@ -71,15 +71,28 @@ class ExportTable extends Table
         ->get();
     }
     if ($this->observations) {
-      $data->transform(function($student){
+      $data->transform(function ($student) {
         $outcomes = collect(json_decode($student['outcomes']));
-        $outcomes->each(function($outcome, $index) use (&$student){
+        $outcomes->each(function ($outcome, $index) use (&$student) {
           $key = ($this->observations->firstWhere('id', $index))['key'];
           $student[$key] = $outcome;
-        }); 
+        });
         return $student;
       });
     }
     return $this->processData($data);
+  }
+
+  public function getExportFileName()
+  {
+    $params = json_decode($this->request->pivotParams);
+
+    $fileName = $params->exportFileName ?
+      $params->exportFileName : $this->request->get('name') . " Table Report";
+    return preg_replace(
+      '/[^A-Za-z0-9_.-]/',
+      '_',
+      Str::title(Str::snake($fileName))
+    );
   }
 }

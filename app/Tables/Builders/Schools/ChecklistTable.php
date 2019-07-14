@@ -2,10 +2,11 @@
 
 namespace App\Tables\Builders\Schools;
 
+use Illuminate\Support\Str;
+
 use App\Outcome;
 use App\Observation;
 use LaravelEnso\VueDatatable\app\Classes\Table;
-use Illuminate\Support\Collection;
 
 class ChecklistTable extends Table
 {
@@ -14,9 +15,6 @@ class ChecklistTable extends Table
 
   public function query()
   {
-    // return Observation::select(\DB::raw('
-    //   observations.*, observations.id as "dtRowId", areas.name as area_name
-    // '))->leftJoin('areas', 'observations.area_id',  '=',  'areas.id');
     return Observation::select(
       "observations.*",
       'observations.id as dtRowId',
@@ -44,7 +42,6 @@ class ChecklistTable extends Table
         });
       }
     }
-    // dd($data);
     return $data;
   }
 
@@ -52,4 +49,18 @@ class ChecklistTable extends Table
   {
     return $this->processData($data);
   }
+
+  public function getExportFileName()
+  {
+    $params = json_decode($this->request->pivotParams);
+
+    $fileName = $params->exportFileName ?
+      $params->exportFileName : $this->request->get('name') . " Table Report";
+    return preg_replace(
+      '/[^A-Za-z0-9_.-]/',
+      '_',
+      Str::title(Str::snake($fileName))
+    );
+  }
+
 }

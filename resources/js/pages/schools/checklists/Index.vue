@@ -47,24 +47,15 @@ export default {
 
   data: () => ({
     path: route("schools.checklists.initTable"),
-    // ready: false,
-    // loading: false,
-    // axiosRequest: null,
-    // timeout: null,
-    // feed: [],
-    // title: "",
-    // offset: 0,
     filters: {
       userId: null,
       wheelId: null,
       termId: null,
-      unsaved: false, // needs saving if set to true
-      // status: "current",
-      // showLegend: false
+      unsaved: false // needs saving if set to true
     },
     options: {
       loading: false,
-      history: true,
+      history: true
     },
     pivotParams: {
       area: {
@@ -79,6 +70,7 @@ export default {
       wheel: {
         id: null
       },
+      exportFileName: null
     },
     infos: {},
     wheelData: {},
@@ -90,16 +82,19 @@ export default {
       handler() {
         this.pivotParams.wheel.id = this.filters.wheelId;
         this.wheelChange();
+        this.updateFileName();
       }
     },
     "filters.userId": {
       handler() {
         this.pivotParams.user.id = this.filters.userId;
+        this.updateFileName();
       }
     },
     "filters.termId": {
       handler() {
         this.pivotParams.term.id = this.filters.termId;
+        this.updateFileName();
       }
     }
   },
@@ -112,7 +107,6 @@ export default {
           this.wheels.find(wheel => wheel.id === this.filters.wheelId)
             .definition
         );
-        console.log(def);
         if (def && def.areas) this.pivotParams.area.id = def.areas;
       } else {
         this.pivotParams.area.id = [];
@@ -146,42 +140,30 @@ export default {
           });
         }
       });
+      this.terms = terms;
     },
-    // updateTitle() {
-    //   this.title = "";
-    //   this.title += this.filters.wheelId ? this.wheelData.name : "";
-    //   this.title +=
-    //     this.filters.userId && this.users
-    //       ? " - " +
-    //         this.users.filter(user => user.id === this.filters.userId)[0].name
-    //       : "";
-    //   this.title +=
-    //     this.filters.termId && this.terms
-    //       ? " - " +
-    //         this.terms.filter(term => term.id === this.filters.termId)[0].name
-    //       : "";
-    // },
-    // fetch() {},
-    // processData(data) {
-    //   // console.log(data);
-    //   this.options.loading = false;
-    //   if (typeof data.wheel !== "undefined") {
-    //     this.wheelData = data.wheel;
-    //     this.outcomes = {};
-    //     // this.wheelData.outcomes = this.outcomes;
-    //   }
-    //   if (typeof data.outcomeRec !== "undefined") {
-    //     // console.log("UPDATING OUTCOMES!!!");
-    //     this.outcomes = data.outcomeRec.outcomes;
-    //     // this.wheelData.outcomes = this.outcomes;
-    //     this.wheelData.observations.forEach(observation => {
-    //       if (typeof this.outcomes[observation.id] === "undefined") {
-    //         this.outcomes[observation.id] = 0;
-    //       }
-    //     });
-    //   }
-    //   this.updateTitle();
-    // }
+    updateFileName() {
+      this.pivotParams.exportFileName = "Checklist";
+      this.pivotParams.exportFileName +=
+        this.pivotParams.user.id && this.users
+          ? " " +
+            this.users.filter(user => user.id === this.pivotParams.user.id)[0]
+              .name
+          : "";
+      this.pivotParams.exportFileName +=
+        this.pivotParams.wheel.id && this.wheels
+          ? " " +
+            this.wheels.filter(
+              wheel => wheel.id === this.pivotParams.wheel.id
+            )[0].name
+          : "";
+      this.pivotParams.exportFileName +=
+        this.pivotParams.term.id && this.terms
+          ? " " +
+            this.terms.filter(term => term.id === this.pivotParams.term.id)[0]
+              .name
+          : "";
+    }
   }
 };
 </script>

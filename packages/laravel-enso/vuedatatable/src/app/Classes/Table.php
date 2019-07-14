@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\VueDatatable\app\Classes;
 
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use LaravelEnso\Helpers\app\Classes\Obj;
 use LaravelEnso\VueDatatable\app\Classes\Table\Builder;
 
@@ -44,6 +44,16 @@ abstract class Table
     return $data;
   }
 
+  public function getExportFileName()
+  {
+    return preg_replace(
+      '/[^A-Za-z0-9_.-]/',
+      '_',
+      Str::title(Str::snake($this->request->get('name')))
+        . '_' . __('Table_Report')
+    );
+  }
+
   public function fetcher()
   {
     return $this->builder()
@@ -58,9 +68,7 @@ abstract class Table
   private function setPivotParams()
   {
     $params = json_decode($this->request);
-    // dd($params);
     if (isset($params->pivotParams)) {
-      // Log::debug($params->pivotParams);
       collect(json_decode($params->pivotParams))
         ->each(function ($param, $relation) {
           $model = $this->query->getModel();
@@ -80,8 +88,6 @@ abstract class Table
   {
     $this->query = $this->query();
     $this->setPivotParams();
-
-    // dd($this->query);
 
     return new Builder($this->request, $this->query);
   }

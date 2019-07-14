@@ -37,10 +37,7 @@ class ExportDoneNotification extends Notification implements ShouldQueue
       $html = join([
         __('Click below to download the file'),
         ':<a href="'.$this->link.'" class="button">',
-        __($this->filename),
-        // '<span class="icon is-small">',
-        // '<fa icon="download"/>',
-        // '</span>',
+        __('Download Export'),
         '</a>'
       ], ' ');
         return (new BroadcastMessage([

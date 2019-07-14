@@ -6,7 +6,7 @@ export default {
     component: ReportsIndex,
     meta: {
         breadcrumb: 'index',
-        title: 'Exports',
+        title: 'Outcomes Export',
         history: false
     },
 };

@@ -7,15 +7,15 @@ use LaravelEnso\Helpers\app\Classes\Obj;
 class Fetcher
 {
   private $request;
-  private $tableClass;
+  private $tableInstance;
   private $builder;
   private $data;
   private $page = 0;
 
   public function __construct(string $class, array $request)
   {
-    $this->tableClass = new $class($request);
-    $this->builder = $this->tableClass->fetcher();
+    $this->tableInstance = new $class($request);
+    $this->builder = $this->tableInstance->fetcher();
     $this->request = new Obj($request);
   }
 
@@ -26,7 +26,7 @@ class Fetcher
 
   public function data()
   {
-    return $this->tableClass->processExcelData($this->data);
+    return $this->tableInstance->processExcelData($this->data);
   }
 
   public function chunkSize()

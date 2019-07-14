@@ -17,13 +17,13 @@ trait Excel
     $type = Str::title(Str::snake($request->get('name')));
 
     if ($this->dataExportExists($request->user(), $type)) {
-      throw new ExportException(
-        __('An export job is already running for the same table')
-      );
+      // throw new ExportException(
+      //   __('An export job is already running for the same table')
+      // );
     }
 
     $request->user()->notify(
-      (new ExportStartNotification($type . '_' . __('Table_Report')))
+      (new ExportStartNotification(Str::title($request->get('name'))))
         ->onQueue(config('enso.datatable.queues.notifications'))
     );
 
@@ -31,7 +31,6 @@ trait Excel
 
     ExcelExport::dispatch(
       $request->user(),
-      // $request->all(),
       $this->prepareExcelParams($request->all()),
       $this->tableClass,
       $dataExport

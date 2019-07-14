@@ -58,7 +58,8 @@ export default {
         wheelId: null,
         termId: null,
         ageGroups: [],
-        areas: []
+        areas: [],
+        exportFileName: null
       }
     },
     options: {
@@ -74,6 +75,12 @@ export default {
     "params.filters.wheelId": {
       handler() {
         this.wheelChange();
+        this.updateFileName();
+      }
+    },
+    "params.filters.termId": {
+      handler() {
+        this.updateFileName();
       }
     }
   },
@@ -134,68 +141,28 @@ export default {
           });
         }
       });
+      this.terms = terms;
     },
-    updateTitle() {
-      this.title = "";
-      this.title += this.filters.wheelId ? this.wheelData.name : "";
-      this.title +=
-        this.filters.userId && this.users
-          ? " - " +
-            this.users.filter(user => user.id === this.filters.userId)[0].name
+    updateFileName() {
+      this.params.filters.exportFileName = "Outcomes Export";
+      this.params.filters.exportFileName +=
+        this.params.filters.wheelId && this.wheels
+          ? " " +
+            this.wheels.filter(
+              wheel => wheel.id === this.params.filters.wheelId
+            )[0].name
           : "";
-      this.title +=
-        this.filters.termId && this.terms
-          ? " - " +
-            this.terms.filter(term => term.id === this.filters.termId)[0].name
+      // this.params.filters.exportFileName +=
+      //   this.params.filters.userId && this.users
+      //     ? " - " +
+      //       this.users.filter(user => user.id === this.params.filters.userId)[0].name
+      //     : "";
+      this.params.filters.exportFileName +=
+        this.params.filters.termId && this.terms
+          ? " " +
+            this.terms.filter(term => term.id === this.params.filters.termId)[0]
+              .name
           : "";
-    },
-    fetch() {
-      if (
-        !this.filters.userId ||
-        !this.filters.wheelId ||
-        this.filters.terms.length < 1
-      ) {
-        return;
-      }
-      this.options.loading = true;
-      if (this.axiosRequest) {
-        this.axiosRequest.cancel();
-      }
-      this.axiosRequest = axios.CancelToken.source();
-      axios
-        .get(route("schools.outcomes.getWheel"), {
-          params: { filters: this.filters },
-          cancelToken: this.axiosRequest.token
-        })
-        .then(({ data }) => this.processData(data))
-        .catch(error => {
-          this.options.loading = false;
-          if (axios.isCancel(error)) {
-            this.axiosRequest = null;
-            return;
-          }
-          this.handleError(error);
-        });
-    },
-    processData(data) {
-      // console.log(data);
-      this.options.loading = false;
-      if (typeof data.wheel !== "undefined") {
-        this.wheelData = data.wheel;
-        this.outcomes = {};
-        // this.wheelData.outcomes = this.outcomes;
-      }
-      if (typeof data.outcomeRec !== "undefined") {
-        // console.log("UPDATING OUTCOMES!!!");
-        this.outcomes = data.outcomeRec.outcomes;
-        // this.wheelData.outcomes = this.outcomes;
-        this.wheelData.observations.forEach(observation => {
-          if (typeof this.outcomes[observation.id] === "undefined") {
-            this.outcomes[observation.id] = 0;
-          }
-        });
-      }
-      this.updateTitle();
     },
     avatarLink(id) {
       return route("core.avatars.show", id);
