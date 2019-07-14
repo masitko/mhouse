@@ -99,7 +99,7 @@ import Echo from 'laravel-echo';
 import Favico from 'favico.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faBell, faCheck, faEye, faCogs, faQuestion,
+    faBell, faCheck, faEye, faCogs, faQuestion, faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import Overlay from '../../../components/enso/bulma/Overlay.vue';
 import format from '../../../modules/enso/plugins/date-fns/format';
@@ -107,7 +107,7 @@ import formatDistance from '../../../modules/enso/plugins/date-fns/formatDistanc
 
 import './icons';
 
-library.add(faBell, faCheck, faEye, faCogs, faQuestion);
+library.add(faBell, faCheck, faEye, faCogs, faQuestion, faDownload);
 
 export default {
     name: 'Notifications',
@@ -236,13 +236,16 @@ export default {
         listen() {
             const self = this;
             this.echo.private(`App.User.${this.user.id}`)
-                .notification(({ level, body, title }) => {
+                .notification(({ level, body, title, duration }) => {
                     self.unreadCount++;
                     self.needsUpdate = true;
                     self.offset = 0;
+                    if( !duration ){
+                      duration = 3500;
+                    }
 
                     if (!document.hidden) {
-                        this.$toastr[level](body, title);
+                        this.$toastr[level](body, title, duration);
                         return;
                     }
 

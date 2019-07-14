@@ -29,7 +29,7 @@
                             {{ i18n(title) }}
                         </p>
                         <p class="subtitle is-6">
-                            {{ i18n(body) }}
+                            <span v-html="i18n(body)"></span>
                         </p>
                     </div>
                 </div>

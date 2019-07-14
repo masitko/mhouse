@@ -34,13 +34,23 @@ class ExportDoneNotification extends Notification implements ShouldQueue
 
     public function toBroadcast($notifiable)
     {
+      $html = join([
+        __('Click below to download the file'),
+        '<a href="'.$this->link.'" class="button">',
+        __($this->filename),
+        // '<span class="icon is-small">',
+        // '<fa icon="download"/>',
+        // '</span>',
+        '</a>'
+      ], ' ');
         return (new BroadcastMessage([
             'level' => 'success',
             'title' => __('Export Done'),
             'body' => $this->link
-                ? __('Export available for download').': '.__($this->filename)
+                ? $html
                 : __('Export emailed').': '.__($this->filename),
             'icon' => 'file-excel',
+            'duration' => 20000
         ]))->onQueue(config('enso.datatable.queues.notifications'));
     }
 

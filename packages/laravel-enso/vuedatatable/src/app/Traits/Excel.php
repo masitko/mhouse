@@ -17,9 +17,9 @@ trait Excel
     $type = Str::title(Str::snake($request->get('name')));
 
     if ($this->dataExportExists($request->user(), $type)) {
-      // throw new ExportException(
-      //   __('An export job is already running for the same table')
-      // );
+      throw new ExportException(
+        __('An export job is already running for the same table')
+      );
     }
 
     $request->user()->notify(
