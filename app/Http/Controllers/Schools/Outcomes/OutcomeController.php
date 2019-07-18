@@ -91,8 +91,10 @@ class OutcomeController extends Controller
         );
         // return 'ERROR';
       }
-      $this->result['wheel']->areas = Area::find($definition->areas);
-      $this->result['wheel']->observations = Observation::find($definition->observations);
+      $this->result['wheel']->areas = 
+        Area::whereIn('id', $definition->areas)->orderBy('order')->get();
+      $this->result['wheel']->observations = 
+        Observation::whereIn('id', $definition->observations)->orderBy('order')->get();
     }
     if ($filters->userId && $filters->termId && $filters->wheelId) {
       $this->getData($filters, $this->result);
