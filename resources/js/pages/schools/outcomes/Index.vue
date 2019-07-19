@@ -150,6 +150,7 @@ export default {
       this.users = users;
     },
     termsFetched( terms ) {
+      this.terms = terms;
       terms.forEach( term => {
         if(isWithinInterval(new Date(), {
           start:new Date(term.start_date),
