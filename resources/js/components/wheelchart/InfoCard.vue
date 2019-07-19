@@ -1,14 +1,28 @@
 <template>
-  <card fixed :title="__('Info:')" icon="eye" :controls="2" class="has-padding-medium">
+  <card
+    fixed
+    :title="__('Info:')"
+    icon="eye"
+    :controls="2"
+    class="has-padding-medium wheel-info-card"
+    :style="style"
+  >
     <!-- <card-control slot="control-2">
     </card-control>-->
-    <div class="has-padding-medium has-margin-top-medium">
+    <div
+      class="has-padding-medium has-margin-top-medium has-background-light"
+      style="border-radius: 0.5em; opacity:0.8;"
+    >
+      <p v-if="infos.record">
+        <strong>Area:</strong>
+        {{infos.record.areaName}}
+      </p>
       <p v-if="infos.record">
         <strong>Observation:</strong>
         {{infos.record.name}}
       </p>
       <p v-if="infos.outcome">
-        <strong>Score: </strong>
+        <strong>Score:</strong>
         {{getOutcome(infos.outcome).label}}
       </p>
     </div>
@@ -28,6 +42,16 @@ export default {
   components: {
     Card,
     CardControl
+  },
+
+  computed: {
+    style() {
+      return [
+        this.infos.record
+          ? "background-color:" + this.infos.record.areaColour + " !important"
+          : ""
+      ].join(";");
+    }
   },
 
   props: {

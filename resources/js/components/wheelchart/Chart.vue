@@ -119,52 +119,52 @@ export default {
             return "<p>CUSTOM LEGEND</p>";
           },
 
-          // tooltips: false,
-          tooltips: {
-            borderWidth: 1,
-            borderColor: "white",
-            bodyFontSize: 15,
-            bofyFontStyle: "bold",
-            bodySpacing: 5,
-            // xAlign: "center",
-            // titleAlign: 'center',
-            // bodyAlign: "center",
-            // footerAlign: 'center',
-            displayColors: false,
-            callbacks: {
-              label(item, data) {
-                // console.log(item, data);
-                if (item) {
-                  if (
-                    typeof data.datasets[item.datasetIndex].records[
-                      item.index
-                    ] !== "undefined"
-                  )
-                    return data.datasets[item.datasetIndex].records[item.index][
-                      item.datasetIndex ? "name" : "description"
-                    ];
-                  else return "not set";
-                }
-              },
-              afterLabel(item, data) {
-                if (
-                  item &&
-                  item.datasetIndex &&
-                  typeof data.datasets[item.datasetIndex].records[
-                    item.index
-                  ] !== "undefined"
-                ) {
-                  const record =
-                    data.datasets[item.datasetIndex].records[item.index];
-                  const outcomes = data.datasets[item.datasetIndex].outcomes;
-                  if (typeof Outcomes[outcomes[record.id]] !== "undefined")
-                    return (
-                      "Current score: " + Outcomes[outcomes[record.id]].label
-                    );
-                }
-              }
-            }
-          },
+          tooltips: false,
+          // tooltips: {
+          //   borderWidth: 1,
+          //   borderColor: "white",
+          //   bodyFontSize: 15,
+          //   bofyFontStyle: "bold",
+          //   bodySpacing: 5,
+          //   // xAlign: "center",
+          //   // titleAlign: 'center',
+          //   // bodyAlign: "center",
+          //   // footerAlign: 'center',
+          //   displayColors: false,
+          //   callbacks: {
+          //     label(item, data) {
+          //       // console.log(item, data);
+          //       if (item) {
+          //         if (
+          //           typeof data.datasets[item.datasetIndex].records[
+          //             item.index
+          //           ] !== "undefined"
+          //         )
+          //           return data.datasets[item.datasetIndex].records[item.index][
+          //             item.datasetIndex ? "name" : "description"
+          //           ];
+          //         else return "not set";
+          //       }
+          //     },
+          //     afterLabel(item, data) {
+          //       if (
+          //         item &&
+          //         item.datasetIndex &&
+          //         typeof data.datasets[item.datasetIndex].records[
+          //           item.index
+          //         ] !== "undefined"
+          //       ) {
+          //         const record =
+          //           data.datasets[item.datasetIndex].records[item.index];
+          //         const outcomes = data.datasets[item.datasetIndex].outcomes;
+          //         if (typeof Outcomes[outcomes[record.id]] !== "undefined")
+          //           return (
+          //             "Current score: " + Outcomes[outcomes[record.id]].label
+          //           );
+          //       }
+          //     }
+          //   }
+          // },
           onHover: function(event, elements) {
             // console.log('HOVER', elements);
             if (

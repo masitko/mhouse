@@ -122,6 +122,9 @@ export default {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(this.save, 1000);
       }
+      if( values.type === 'hover') {
+        // console.log(this.infos);
+      }
     },
     save() {
       axios

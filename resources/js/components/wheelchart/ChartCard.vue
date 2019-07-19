@@ -168,6 +168,7 @@ export default {
             let record = area.selection[index];
             record.questionIndex = index;
             record.areaColour = area.colour;
+            record.areaName = area.name;
             if (typeof wheel.outcomes[record.id] === "undefined") {
               // console.log('setting default value');
               wheel.outcomes[record.id] = 3; // default value
