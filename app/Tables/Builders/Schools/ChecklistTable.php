@@ -7,11 +7,20 @@ use Illuminate\Support\Str;
 use App\Outcome;
 use App\Observation;
 use LaravelEnso\VueDatatable\app\Classes\Table;
+use LaravelEnso\VueDatatable\app\Classes\Template;
 
 class ChecklistTable extends Table
 {
   protected $templatePath = __DIR__ . '/../../Templates/Schools/checklists.json';
   private $outcomeData = null;
+
+  public function init()
+  {
+    $template = (new Template($this->templatePath()))->get();
+    dd($this->request);
+    dd($template);
+    return ['template' => $template];
+  }
 
   public function query()
   {

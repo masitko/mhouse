@@ -46,11 +46,12 @@ export default {
   },
 
   data: () => ({
-    path: route("schools.checklists.initTable"),
+    // path: ,
     filters: {
       userId: null,
       wheelId: null,
       termId: null,
+      terms: [ 1 ],
       unsaved: false // needs saving if set to true
     },
     options: {
@@ -70,13 +71,22 @@ export default {
       wheel: {
         id: null
       },
+      terms: {
+        id: []
+      },
+
+
       exportFileName: null
     },
     infos: {},
     wheelData: {},
     outcomes: {}
   }),
-
+  computed: {
+    path() {
+      return route("schools.checklists.initTable", {params: this.filters});
+    }
+  },
   watch: {
     "filters.wheelId": {
       handler() {
@@ -94,6 +104,12 @@ export default {
     "filters.termId": {
       handler() {
         this.pivotParams.term.id = this.filters.termId;
+        this.updateFileName();
+      }
+    },
+    "filters.terms": {
+      handler() {
+        this.pivotParams.terms.id = this.filters.terms;
         this.updateFileName();
       }
     }

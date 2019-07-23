@@ -29,7 +29,7 @@
       @fetch="$emit('terms-fetched', $event)"
     />
     <vue-select-filter multiple
-      v-if="type==='reports'"
+      v-if="type==='reports' || type==='checklists'"
       source="schools.terms.options"
       title="Terms"
       :placeholder="__('Select Terms')"

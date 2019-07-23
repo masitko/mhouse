@@ -260,7 +260,7 @@ export default {
   methods: {
     init() {
       axios
-        .get(this.path)
+        .get(this.path, {})
         .then(({ data }) => {
           this.template = data.template;
           this.start = 0;
