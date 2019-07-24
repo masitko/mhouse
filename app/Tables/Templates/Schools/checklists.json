@@ -29,13 +29,6 @@
           "searchable",
           "sortable"
         ]
-      },
-      {
-        "label": "Outcome",
-        "name": "outcome",
-        "data": "outcome",
-        "meta": [
-        ]
       }
     ]
 }

@@ -141,6 +141,10 @@ export default {
       type: Object,
       default: null
     },
+    initParams: {
+      type: Object,
+      default: null
+    },
     intervals: {
       type: Object,
       default: null
@@ -226,6 +230,12 @@ export default {
       },
       deep: true
     },
+    initParams: {
+      handler() {
+        this.init();
+      },
+      deep: true
+    },
     pivotParams: {
       handler() {
         this.filterUpdate();
@@ -259,8 +269,9 @@ export default {
 
   methods: {
     init() {
+      this.initialised = false;
       axios
-        .get(this.path, {})
+        .get(this.path, this.initParams?{params:this.initParams}:null)
         .then(({ data }) => {
           this.template = data.template;
           this.start = 0;
@@ -271,11 +282,13 @@ export default {
           this.$nextTick(() => {
             this.initialised = true;
             this.$emit("initialised");
+          // this.fetch();
           });
 
           this.fetch();
         })
         .catch(error => {
+          console.error(error);
           const { status, data } = error.response;
 
           if (status === 555) {
@@ -300,7 +313,7 @@ export default {
 
       const preferences = JSON.parse(localStorage.getItem(this.preferencesKey));
 
-      if (preferences.columns.length !== this.template.columns.length) {
+      if (!preferences || preferences.columns.length !== this.template.columns.length) {
         localStorage.removeItem(this.preferencesKey);
         return null;
       }

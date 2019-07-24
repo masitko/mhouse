@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 trait Datatable
 {
-    public function init()
+    public function init(Request $request)
     {
-        return (new $this->tableClass())
+        return (new $this->tableClass($request->all()))
             ->init();
     }
 

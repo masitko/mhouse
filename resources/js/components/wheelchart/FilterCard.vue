@@ -20,7 +20,7 @@
       @fetch="$emit('users-fetched', $event)"
     />
     <vue-select-filter
-      v-if="type!=='reports'"
+      v-if="type!=='reports' && type!=='checklists'"
       source="schools.terms.options"
       trackBy="id"
       :disabled="!options.history"

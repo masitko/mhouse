@@ -7,6 +7,7 @@
             class="box has-background-light is-paddingless raises-on-hover is-rounded"
             :path="path"
             :pivot-params="pivotParams"
+            :init-params="initParams"
             id="checklist"
           />
         </div>
@@ -50,9 +51,8 @@ export default {
     filters: {
       userId: null,
       wheelId: null,
-      termId: null,
-      terms: [ 1 ],
-      unsaved: false // needs saving if set to true
+      // termId: null,
+      terms: [],
     },
     options: {
       loading: false,
@@ -65,17 +65,15 @@ export default {
       user: {
         id: null
       },
-      term: {
-        id: null
-      },
+      // term: {
+      //   id: null
+      // },
       wheel: {
         id: null
       },
       terms: {
         id: []
       },
-
-
       exportFileName: null
     },
     infos: {},
@@ -84,7 +82,13 @@ export default {
   }),
   computed: {
     path() {
-      return route("schools.checklists.initTable", {params: this.filters});
+      return route("schools.checklists.initTable");
+    },
+    initParams() {
+      this.pivotParams.terms.id = this.filters.terms;
+      return {
+        terms: this.filters.terms
+      }
     }
   },
   watch: {
@@ -101,18 +105,18 @@ export default {
         this.updateFileName();
       }
     },
-    "filters.termId": {
-      handler() {
-        this.pivotParams.term.id = this.filters.termId;
-        this.updateFileName();
-      }
-    },
-    "filters.terms": {
-      handler() {
-        this.pivotParams.terms.id = this.filters.terms;
-        this.updateFileName();
-      }
-    }
+    // "filters.termId": {
+    //   handler() {
+    //     this.pivotParams.term.id = this.filters.termId;
+    //     this.updateFileName();
+    //   }
+    // },
+    // "filters.terms": {
+    //   handler() {
+    //     this.pivotParams.terms.id = this.filters.terms;
+    //     this.updateFileName();
+    //   }
+    // }
   },
 
   methods: {
@@ -138,24 +142,12 @@ export default {
     },
     termsFetched(terms) {
       // console.log("TERMS!", terms);
-      terms.forEach(term => {
-        if (
-          isWithinInterval(new Date(), {
-            start: new Date(term.start_date),
-            end: new Date(term.end_date)
-          }) === true
-        ) {
-          this.filters.termId = term.id;
-        }
-        if (!this.options.history && !this.filters.termId) {
-          console.log("NO CURRENT TERM!!!");
-          this.filters.termId = 99999;
-          terms.push({
-            id: this.filters.termId,
-            name: "No active term!"
-          });
-        }
+      terms.forEach((term, idx) => {
+        if (idx < 3)
+          // default amount of past terms to include in the reports
+          this.filters.terms.push(term.id);
       });
+
       this.terms = terms;
     },
     updateFileName() {
@@ -173,12 +165,12 @@ export default {
               wheel => wheel.id === this.pivotParams.wheel.id
             )[0].name
           : "";
-      this.pivotParams.exportFileName +=
-        this.pivotParams.term.id && this.terms
-          ? " " +
-            this.terms.filter(term => term.id === this.pivotParams.term.id)[0]
-              .name
-          : "";
+      // this.pivotParams.exportFileName +=
+      //   this.pivotParams.term.id && this.terms
+      //     ? " " +
+      //       this.terms.filter(term => term.id === this.pivotParams.term.id)[0]
+      //         .name
+      //     : "";
     }
   }
 };
