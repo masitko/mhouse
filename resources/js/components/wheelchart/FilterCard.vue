@@ -112,7 +112,7 @@ export default {
       chartTypes: [
         { name: 'Bars' },
         { name: 'Lines' },
-        { name: 'Radar' },
+        // { name: 'Radar' },
         ],
       ageGroups: [
         { id:3, name: '3' },

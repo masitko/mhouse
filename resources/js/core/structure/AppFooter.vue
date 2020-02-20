@@ -37,9 +37,9 @@
             <p class="level">
                 <span class="level-item">
                     <!-- <strong>Powered by:</strong> -->
-                    <a href="https://www.22pointsix.co.uk/"
+                    <a href="https://www.muntham.org.uk"
                         target="_blank">
-                        © 22PointSix
+                        © Muntham House School
                     </a>
                 </span>
             </p>
