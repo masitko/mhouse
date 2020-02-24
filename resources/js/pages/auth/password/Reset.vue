@@ -22,8 +22,11 @@ export default {
     components: { AuthForm, PasswordStrength },
 
     methods: {
+      ...mapMutations("auth", ["login"]),
+
         success({ status }) {
             this.$toastr.success(status);
+            this.login();
             setTimeout(() => this.$router.push({ name: 'login' }), 350);
         },
     },

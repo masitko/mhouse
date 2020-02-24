@@ -130,7 +130,7 @@
         class="is-pulled-right"
       >{{ __('Forgot password') }}</router-link>
       <a
-        v-if="isConfirm"
+        v-if="!isLogin"
         @click.prevent="backToLogin()"
         class="is-pulled-right"
       >{{ __('Back to login page') }}</a>
