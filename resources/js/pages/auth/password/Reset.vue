@@ -26,8 +26,11 @@ export default {
 
         success({ status }) {
             this.$toastr.success(status);
-            this.login();
-            setTimeout(() => this.$router.push({ name: 'login' }), 350);
+            setTimeout(() => {
+              this.login();
+              this.showHome();
+              // this.$router.push({ name: 'login' })
+            }, 350);
         },
     },
 };
