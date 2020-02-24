@@ -13,7 +13,8 @@ export default (to, from, next) => {
       });
     }
   } else {
-    if (to.name === 'login') {
+    let authRoutes = ['login', 'auth.code', 'password.email', 'password.reset']
+    if ( authRoutes.indexOf( to.name ) > -1 ) {
       next();
     } else {
       next({

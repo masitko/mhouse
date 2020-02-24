@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function loadDependencies()
     {
-        // $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
 
