@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Wheels;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateAreaRequest extends FormRequest {
@@ -20,8 +21,15 @@ class ValidateAreaRequest extends FormRequest {
    * @return array
    */
   public function rules() {
+    $id = $this->route('area');
+    $areaUnique = Rule::unique('areas', 'name');
+
+    $areaUnique = ($this->method() === 'PATCH')
+    ? $areaUnique->ignore($id)
+    : $areaUnique;
+
     return [
-      'name' => ['required'],
+      'name' => ['required', $areaUnique],
       'description' => 'nullable',
       'observations' => 'array',
     ];
