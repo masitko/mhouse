@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import { mapMutations, mapState } from "vuex";
 import AuthForm from '../AuthForm.vue';
 import PasswordStrength from './PasswordStrength.vue';
 
