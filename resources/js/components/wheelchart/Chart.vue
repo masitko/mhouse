@@ -88,7 +88,8 @@ export default {
         options: {
           cutoutPercentage: 20,
           rotation: -0.45 * Math.PI,
-          aspectRatio: this.showLegend ? 2 : 1.8,
+          aspectRatio: this.showLegend ? 1.8 : 1.6,
+          // maintainAspectRatio: false,
           elements: {
             center: {
               text: this.title,
