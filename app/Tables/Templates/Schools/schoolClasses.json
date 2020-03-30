@@ -18,7 +18,7 @@
       ]
     },
     {
-      "label": "Age Group",
+      "label": "Year group",
       "name": "age",
       "data": "school_classes.age",
       "meta": [

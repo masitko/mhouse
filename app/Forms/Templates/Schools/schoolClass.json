@@ -15,7 +15,7 @@
           }
         },
         {
-          "label": "Age group",
+          "label": "Year group",
           "name": "age",
           "value": 0,
           "column": 4,

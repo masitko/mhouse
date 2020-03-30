@@ -73,7 +73,7 @@
       ]
     },
     {
-      "label": "Age Group",
+      "label": "Year group",
       "name": "age_group",
       "data": "age_group",
       "meta": [

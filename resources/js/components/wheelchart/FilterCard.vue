@@ -46,7 +46,7 @@
     />
     <vue-select-filter multiple
       v-if="type==='exports'"
-      title="Age Groups"
+      title="Year Groups"
       :options="ageGroups"
       v-model="filters.ageGroups"
     />
@@ -123,6 +123,10 @@ export default {
         { id:8, name: '8' },
         { id:9, name: '9' },
         { id:10, name: '10' },
+        { id:11, name: '11' },
+        { id:12, name: '12' },
+        { id:13, name: '13' },
+        { id:14, name: '14' },
         ],
       statuses: {
         changed: {
