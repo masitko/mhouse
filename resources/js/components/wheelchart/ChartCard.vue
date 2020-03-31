@@ -1,5 +1,5 @@
 <template>
-  <card fixed refresh :title="title" icon="chart-pie" :overlay="loading" :controls="1" @refresh="update">
+  <card fixed refresh icon="chart-pie" :overlay="loading" :controls="1" @refresh="update">
     <card-control slot="control-1">
       <span class="icon is-small download" @click="download">
         <fa icon="download"/>
@@ -7,6 +7,7 @@
     </card-control>
     <chart
       class="has-padding-medium"
+      :center-title="config.centerTitle"
       :title="config.title"
       :show-legend="showLegend"
       :disabled="disabled"
@@ -91,7 +92,8 @@ export default {
         this.wheelData.outcomes = this.outcomes;
         this.config = {
           data: this.processData(this.prepareData(this.wheelData)),
-          title: this.wheelData.name
+          title: this.title,
+          centerTitle: this.wheelData.name
         };
       } else {
         this.config = null;

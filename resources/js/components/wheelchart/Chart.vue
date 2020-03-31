@@ -5,6 +5,7 @@
 <script>
 import Chart from "chart.js";
 import "./chart-center.js";
+import "./chart-title.js";
 import "./chart-legend.js";
 import "./core.tooltip.js";
 import "chartjs-plugin-datalabels";
@@ -25,6 +26,9 @@ export default {
     data: {
       type: Object,
       required: true
+    },
+    centerTitle: {
+      type: String
     },
     title: {
       type: String
@@ -50,7 +54,8 @@ export default {
   watch: {
     data() {
       // console.log("CHART CHANGE!");
-      this.chart.options.elements.center.text = this.title;
+      this.chart.options.elements.center.text = this.centerTitle;
+      this.chart.options.elements.title.text = this.title;
       this.update();
     },
     showLegend() {
@@ -86,15 +91,27 @@ export default {
         type: "pie",
         data: this.data,
         options: {
+          // title: {
+          //   display: true,
+          //   fontColor: this.fontColour,
+          //   fontStyle: 'bold',
+          //   fontSize: 16,
+          //   align: 'start',
+          //   text: this.title,
+          // },
           cutoutPercentage: 20,
           rotation: -0.45 * Math.PI,
           aspectRatio: this.showLegend ? 1.8 : 1.6,
           // maintainAspectRatio: false,
           elements: {
-            center: {
+            title: {
               text: this.title,
               color: this.fontColour, // Default is #000000
-              // fontStyle: "Arial", // Default is Arial
+              sidePadding: 20 // Defualt is 20 (as a percentage)
+            },
+            center: {
+              text: this.centerTitle,
+              color: this.fontColour, // Default is #000000
               sidePadding: 20 // Defualt is 20 (as a percentage)
             }
           },
@@ -111,7 +128,7 @@ export default {
           },
           layout: {
             padding: {
-              top: 10,
+              top: 30,
               bottom: 10
             }
           },
