@@ -21,6 +21,10 @@
         <strong>Observation:</strong>
         {{infos.record.name}}
       </p>
+      <p v-if="infos.record">
+        <strong>Description:</strong>
+        {{infos.record.description}}
+      </p>
       <p v-if="infos.outcome">
         <strong>Score:</strong>
         {{getOutcome(infos.outcome).label}}
