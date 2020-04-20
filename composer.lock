@@ -1089,6 +1089,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1135,6 +1136,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1253,8 +1255,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/actionlogger",
-                "reference": "8f6ccc658d71823301acf2e84c538e15589cacc0",
-                "shasum": null
+                "reference": "8f6ccc658d71823301acf2e84c538e15589cacc0"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1303,8 +1304,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/activitylog",
-                "reference": "38cb5c798e81a2d10703a2e3af91b2fdb709503e",
-                "shasum": null
+                "reference": "38cb5c798e81a2d10703a2e3af91b2fdb709503e"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1356,8 +1356,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/addressesmanager",
-                "reference": "5fee17e7018fc0faa628a36aede56ae192e0fe71",
-                "shasum": null
+                "reference": "5fee17e7018fc0faa628a36aede56ae192e0fe71"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -1417,8 +1416,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/avatarmanager",
-                "reference": "e1b09803148f5ce6a393923b563e87022871075e",
-                "shasum": null
+                "reference": "e1b09803148f5ce6a393923b563e87022871075e"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1472,8 +1470,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/charts",
-                "reference": "1eb3461b2847e3a9c4916de14736eaf11f4b8c35",
-                "shasum": null
+                "reference": "1eb3461b2847e3a9c4916de14736eaf11f4b8c35"
             },
             "require": {
                 "laravel-enso/vuecomponents": "2.7.*",
@@ -1521,8 +1518,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/commentsmanager",
-                "reference": "aef46ae1de13a7966ac1afe31f9f59216b39aa08",
-                "shasum": null
+                "reference": "aef46ae1de13a7966ac1afe31f9f59216b39aa08"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -1578,8 +1574,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/controlpanelapi",
-                "reference": "9764ea94dfc5413fc816818e337d966e5dac91aa",
-                "shasum": null
+                "reference": "9764ea94dfc5413fc816818e337d966e5dac91aa"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1636,8 +1631,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/core",
-                "reference": "006865044030b54a22d6c4a72ae5f437e2234fd0",
-                "shasum": null
+                "reference": "006865044030b54a22d6c4a72ae5f437e2234fd0"
             },
             "require": {
                 "guzzlehttp/guzzle": "~6.0",
@@ -1730,8 +1724,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/dataexport",
-                "reference": "455fd07603b694f68ed9e8a6cedd8fc98ac29280",
-                "shasum": null
+                "reference": "455fd07603b694f68ed9e8a6cedd8fc98ac29280"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -1782,8 +1775,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/dataimport",
-                "reference": "0f4cfff6acfc98c4dcb4f727ec5aaa0af687a0b4",
-                "shasum": null
+                "reference": "0f4cfff6acfc98c4dcb4f727ec5aaa0af687a0b4"
             },
             "require": {
                 "box/spout": "2.7.*",
@@ -1848,8 +1840,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/discussions",
-                "reference": "561385a07233354d1b18060b7d1478cbabb9739a",
-                "shasum": null
+                "reference": "561385a07233354d1b18060b7d1478cbabb9739a"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -1900,8 +1891,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/documentsmanager",
-                "reference": "2342d5c89eae429aaf338a374d39cb12aff79d25",
-                "shasum": null
+                "reference": "2342d5c89eae429aaf338a374d39cb12aff79d25"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -1958,8 +1948,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/examples",
-                "reference": "19379ab30b797982ae15ef5cf006be14510a22a0",
-                "shasum": null
+                "reference": "19379ab30b797982ae15ef5cf006be14510a22a0"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2007,8 +1996,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/filemanager",
-                "reference": "f5691de299bdf2ed2cbfec3a056d028a76be129a",
-                "shasum": null
+                "reference": "f5691de299bdf2ed2cbfec3a056d028a76be129a"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2062,8 +2050,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/formbuilder",
-                "reference": "3ad634149bea45d8e2b5ea65f75143a8f04353fc",
-                "shasum": null
+                "reference": "3ad634149bea45d8e2b5ea65f75143a8f04353fc"
             },
             "require": {
                 "laravel-enso/helpers": "1.10.*",
@@ -2114,8 +2101,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/helpers",
-                "reference": "9588c24ec0f51921b93d60e64caaae10ff82b3cf",
-                "shasum": null
+                "reference": "9588c24ec0f51921b93d60e64caaae10ff82b3cf"
             },
             "require": {
                 "php": ">=7.1.0"
@@ -2160,8 +2146,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/historytracker",
-                "reference": "c90b13bab57a90ac4256448fc36fa4ab14f5f1e0",
-                "shasum": null
+                "reference": "c90b13bab57a90ac4256448fc36fa4ab14f5f1e0"
             },
             "require": {
                 "laravel/framework": "5.7.*",
@@ -2201,8 +2186,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/howtovideos",
-                "reference": "1182bdcc8ce1191d7b7bc011039c28a2c61ca967",
-                "shasum": null
+                "reference": "1182bdcc8ce1191d7b7bc011039c28a2c61ca967"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -2257,8 +2241,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/imagetransformer",
-                "reference": "f8e71ee91a9aafdf86667acc2a8fc4edb2c9137e",
-                "shasum": null
+                "reference": "f8e71ee91a9aafdf86667acc2a8fc4edb2c9137e"
             },
             "require": {
                 "intervention/image": "^2.4",
@@ -2307,8 +2290,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/impersonate",
-                "reference": "ab02a3de89f9f8b535c1517ec05e7e1a248bfd81",
-                "shasum": null
+                "reference": "ab02a3de89f9f8b535c1517ec05e7e1a248bfd81"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2360,8 +2342,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/localisation",
-                "reference": "56ca41fc17c1d2190b250a2d65965845d4e15d81",
-                "shasum": null
+                "reference": "56ca41fc17c1d2190b250a2d65965845d4e15d81"
             },
             "require": {
                 "jenssegers/date": "^3.4",
@@ -2415,8 +2396,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/logmanager",
-                "reference": "26663679249d76a244e57194993ecdf2e2f824c2",
-                "shasum": null
+                "reference": "26663679249d76a244e57194993ecdf2e2f824c2"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2468,8 +2448,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/menumanager",
-                "reference": "4aeaeb17e32e297f780f031fd1abfe7f34a85b98",
-                "shasum": null
+                "reference": "4aeaeb17e32e297f780f031fd1abfe7f34a85b98"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2523,8 +2502,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/notifications",
-                "reference": "ee824bcb211fe8b636bf4cb0ce926bebe04da560",
-                "shasum": null
+                "reference": "ee824bcb211fe8b636bf4cb0ce926bebe04da560"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2575,8 +2553,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/people",
-                "reference": "aec97923ddb9133340eaa23cff1ad9cd75718e2e",
-                "shasum": null
+                "reference": "aec97923ddb9133340eaa23cff1ad9cd75718e2e"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -2632,8 +2609,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/permissionmanager",
-                "reference": "f4ed9dbaedd784cdff09949446d896f7cdeec84d",
-                "shasum": null
+                "reference": "f4ed9dbaedd784cdff09949446d896f7cdeec84d"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2688,8 +2664,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/rememberable",
-                "reference": "08487a5769649ade6abbb86624d1b74a1a09cf88",
-                "shasum": null
+                "reference": "08487a5769649ade6abbb86624d1b74a1a09cf88"
             },
             "require": {
                 "laravel/framework": "5.7.*",
@@ -2730,8 +2705,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/rolemanager",
-                "reference": "49458ab35d56287065dfc76e4870eed8de3eebdc",
-                "shasum": null
+                "reference": "49458ab35d56287065dfc76e4870eed8de3eebdc"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2788,8 +2762,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/schools",
-                "reference": "a42be710d0bffe92f00f0ff96544899c72c120d1",
-                "shasum": null
+                "reference": "a42be710d0bffe92f00f0ff96544899c72c120d1"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -2844,8 +2817,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/searchable",
-                "reference": "45d3076f2ae9cfb8032367063575375589efe6e0",
-                "shasum": null
+                "reference": "45d3076f2ae9cfb8032367063575375589efe6e0"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2893,8 +2865,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/select",
-                "reference": "fb018bb24c25aee0013028184fd724adf97995ff",
-                "shasum": null
+                "reference": "fb018bb24c25aee0013028184fd724adf97995ff"
             },
             "require": {
                 "laravel/framework": "5.7.*",
@@ -2943,8 +2914,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/structuremanager",
-                "reference": "65245f296889f8ac1cd7c07b81aeec1144a8c435",
-                "shasum": null
+                "reference": "65245f296889f8ac1cd7c07b81aeec1144a8c435"
             },
             "require": {
                 "laravel-enso/core": "3.6.*",
@@ -2995,8 +2965,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/teams",
-                "reference": "af54539f74e3a0c31918648635a69a8db2589c88",
-                "shasum": null
+                "reference": "af54539f74e3a0c31918648635a69a8db2589c88"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -3046,8 +3015,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/trackwho",
-                "reference": "51622e3ece8e61776f8f16ddc14ef12a5b8a3516",
-                "shasum": null
+                "reference": "51622e3ece8e61776f8f16ddc14ef12a5b8a3516"
             },
             "require": {
                 "laravel/framework": "5.7.*",
@@ -3095,8 +3063,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/tutorialmanager",
-                "reference": "b50daf179f2e75a8473700df0370f91fe1fcadb7",
-                "shasum": null
+                "reference": "b50daf179f2e75a8473700df0370f91fe1fcadb7"
             },
             "require": {
                 "laravel-enso/activitylog": "1.1.*",
@@ -3151,8 +3118,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/versioning",
-                "reference": "bf62de8c91a31003d3a3444370a51671f5df76b4",
-                "shasum": null
+                "reference": "bf62de8c91a31003d3a3444370a51671f5df76b4"
             },
             "require": {
                 "laravel/framework": "^5.5"
@@ -3200,8 +3166,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/vuecomponents",
-                "reference": "9e34c4fc6fcb8bd7a53b8951994a075ecf76c12e",
-                "shasum": null
+                "reference": "9e34c4fc6fcb8bd7a53b8951994a075ecf76c12e"
             },
             "type": "library",
             "extra": {
@@ -3245,8 +3210,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/laravel-enso/vuedatatable",
-                "reference": "d6970eb571d24137ac4b62e93196756e536494be",
-                "shasum": null
+                "reference": "d6970eb571d24137ac4b62e93196756e536494be"
             },
             "require": {
                 "box/spout": "2.7.*",
@@ -4951,17 +4915,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
@@ -5635,31 +5599,31 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.3.5",
+            "version": "v4.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "76590ced16d4674780863471bae10452b79210a5"
+                "reference": "62f92509c9abfd1f73e17b8cf1b72c0bdac6611b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/76590ced16d4674780863471bae10452b79210a5",
-                "reference": "76590ced16d4674780863471bae10452b79210a5",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/62f92509c9abfd1f73e17b8cf1b72c0bdac6611b",
+                "reference": "62f92509c9abfd1f73e17b8cf1b72c0bdac6611b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
-                "symfony/mime": "^4.3",
+                "symfony/mime": "^4.3|^5.0",
                 "symfony/polyfill-mbstring": "~1.1"
             },
             "require-dev": {
                 "predis/predis": "~1.0",
-                "symfony/expression-language": "~3.4|~4.0"
+                "symfony/expression-language": "^3.4|^4.0|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5686,7 +5650,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-04T19:48:13+00:00"
+            "time": "2020-03-30T14:07:33+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -5782,16 +5746,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v4.3.5",
+            "version": "v4.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "32f71570547b91879fdbd9cf50317d556ae86916"
+                "reference": "6dde9dc70155e91b850b1d009d1f841c54bc4aba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/32f71570547b91879fdbd9cf50317d556ae86916",
-                "reference": "32f71570547b91879fdbd9cf50317d556ae86916",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/6dde9dc70155e91b850b1d009d1f841c54bc4aba",
+                "reference": "6dde9dc70155e91b850b1d009d1f841c54bc4aba",
                 "shasum": ""
             },
             "require": {
@@ -5799,14 +5763,17 @@
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
             },
+            "conflict": {
+                "symfony/mailer": "<4.4"
+            },
             "require-dev": {
                 "egulias/email-validator": "^2.1.10",
-                "symfony/dependency-injection": "~3.4|^4.1"
+                "symfony/dependency-injection": "^3.4|^4.1|^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -5837,7 +5804,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2019-09-19T17:00:15+00:00"
+            "time": "2020-03-27T16:54:36+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5958,22 +5925,22 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.12.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "6af626ae6fa37d396dc90a399c0ff08e5cfc45b2"
+                "reference": "47bd6aa45beb1cd7c6a16b7d1810133b728bdfcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6af626ae6fa37d396dc90a399c0ff08e5cfc45b2",
-                "reference": "6af626ae6fa37d396dc90a399c0ff08e5cfc45b2",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/47bd6aa45beb1cd7c6a16b7d1810133b728bdfcf",
+                "reference": "47bd6aa45beb1cd7c6a16b7d1810133b728bdfcf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php72": "^1.9"
+                "symfony/polyfill-php72": "^1.10"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -5981,7 +5948,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -6016,20 +5983,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2020-03-09T19:04:49+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.12.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17"
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/b42a2f66e8f1b15ccf25652c3424265923eb4f17",
-                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
                 "shasum": ""
             },
             "require": {
@@ -6041,7 +6008,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -6075,20 +6042,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2020-03-09T19:04:49+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
-            "version": "v1.12.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "04ce3335667451138df4307d6a9b61565560199e"
+                "reference": "37b0976c78b94856543260ce09b460a7bc852747"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/04ce3335667451138df4307d6a9b61565560199e",
-                "reference": "04ce3335667451138df4307d6a9b61565560199e",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/37b0976c78b94856543260ce09b460a7bc852747",
+                "reference": "37b0976c78b94856543260ce09b460a7bc852747",
                 "shasum": ""
             },
             "require": {
@@ -6097,7 +6064,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -6130,7 +6097,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -6740,6 +6707,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-08-06T17:53:53+00:00"
         }
     ],
@@ -7332,6 +7300,7 @@
                 "bcmath",
                 "math"
             ],
+            "abandoned": "brick/math",
             "time": "2017-02-16T16:54:46+00:00"
         },
         {
