@@ -2,12 +2,35 @@
     <div>
         <div class="columns">
             <div class="column is-3-desktop is-8-tablet is-12-mobile">
-                <vue-select v-model="importType"
+                <vue-select
+                    v-model="importType"
                     :options="importTypes"
                     placeholder="Import Type"
-                    @input="getTemplate"/>
+                    @input="getTemplate"
+                />
             </div>
-            <div class="column is-6 is-hidden-touch has-text-centered"
+            <div
+                class="column is-3-desktop is-8-tablet is-12-mobile"
+                v-if="importType"
+            >
+                <vue-select
+                    v-model="school"
+                    :options="schoolOptions"
+                    placeholder="Select School"
+                />
+            </div>
+            <div
+                class="column has-text-centered-touch has-text-right-desktop"
+                v-if="importType && school"
+            >
+                <import-uploader
+                    :path="importLink"
+                    :params="{ type: importType, school: school }"
+                    @upload-successful="$refs.imports.fetch()"
+                />
+            </div>
+
+            <!-- <div class="column is-6 is-hidden-touch has-text-centered"
                 v-if="importType">
                 <file-uploader class="animated fadeIn"
                     :url="templateLink"
@@ -48,138 +71,167 @@
                         <fa icon="trash-alt"/>
                     </span>
                 </a>
-            </div>
-            <div class="column has-text-centered-touch has-text-right-desktop"
-                v-if="importType">
-                <import-uploader :path="importLink"
-                    :params="{ type: importType }"
-                    @upload-successful="$refs.imports.fetch()"/>
-            </div>
+            </div> -->
         </div>
-        <vue-table class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
+        <vue-table
+            class="box is-paddingless raises-on-hover is-rounded animated fadeIn"
             :path="path"
             id="imports"
             @download-rejected="downloadRejected"
-            ref="imports">
-            <b slot="entries"
-                slot-scope="{ row }"
-                class="has-text-info">
-                {{ row.entries || '-' }}
+            ref="imports"
+        >
+            <b slot="entries" slot-scope="{ row }" class="has-text-info">
+                {{ row.entries || "-" }}
             </b>
-            <b slot="successful" slot-scope="{ row }"
-                class="has-text-success">
-                {{ row.successful === null ? '-' : row.successful }}
+            <b slot="successful" slot-scope="{ row }" class="has-text-success">
+                {{ row.successful === null ? "-" : row.successful }}
             </b>
-            <b slot="failed"
-                slot-scope="{ row }"
-                class="has-text-danger">
-                {{ row.failed === null ? '-' : row.failed }}
+            <b slot="failed" slot-scope="{ row }" class="has-text-danger">
+                {{ row.failed === null ? "-" : row.failed }}
             </b>
-            <span slot="computedStatus"
+            <span
+                slot="computedStatus"
                 slot-scope="{ row }"
                 :class="[
                     'tag is-table-tag',
-                    {'is-info': row.status === 10},
-                    {'is-warning': row.status === 20},
-                    {'is-primary': row.status === 23},
-                    {'is-danger': row.status === 26},
-                    {'is-success': row.status === 30}
-                ]">
+                    { 'is-info': row.status === 10 },
+                    { 'is-warning': row.status === 20 },
+                    { 'is-primary': row.status === 23 },
+                    { 'is-danger': row.status === 26 },
+                    { 'is-success': row.status === 30 }
+                ]"
+            >
                 {{ row.computedStatus }}
             </span>
         </vue-table>
-        <modal :show="modal"
+        <modal
+            :show="modal"
             @close="modal = false"
             :i18n="__"
-            @commit="deleteTemplate(template.id); modal = false"/>
+            @commit="
+                deleteTemplate(template.id);
+                modal = false;
+            "
+        />
     </div>
 </template>
 
 <script>
-
-import { VTooltip } from 'v-tooltip';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { mapState } from "vuex";
+import { VTooltip } from "v-tooltip";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-    faUpload, faDownload, faTrashAlt, faFileExcel,
-} from '@fortawesome/free-solid-svg-icons';
-import VueSelect from '../../components/enso/select/VueSelect.vue';
-import VueTable from '../../components/enso/vuedatatable/VueTable.vue';
-import FileUploader from '../../components/enso/filemanager/FileUploader.vue';
-import ImportUploader from '../../components/enso/dataimport/ImportUploader.vue';
-import Modal from './Modal.vue';
+    faUpload,
+    faDownload,
+    faTrashAlt,
+    faFileExcel
+} from "@fortawesome/free-solid-svg-icons";
+import VueSelect from "../../components/enso/select/VueSelect.vue";
+import VueTable from "../../components/enso/vuedatatable/VueTable.vue";
+import FileUploader from "../../components/enso/filemanager/FileUploader.vue";
+import ImportUploader from "../../components/enso/dataimport/ImportUploader.vue";
+import Modal from "./Modal.vue";
 
 library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
 export default {
     components: {
-        VueSelect, VueTable, FileUploader, ImportUploader, Modal,
+        VueSelect,
+        VueTable,
+        FileUploader,
+        ImportUploader,
+        Modal
     },
 
     directives: { tooltip: VTooltip },
 
     data: () => ({
-        path: route('import.initTable'),
+        path: route("import.initTable"),
         importType: null,
+        school: null,
         summary: {},
         template: null,
         modal: false,
         loadingTemplate: false,
         importTypes: [],
+        schoolOptions: []
     }),
 
     computed: {
+        ...mapState(["user"]),
         templateLink() {
-            return this.importType
-                && route('import.uploadTemplate');
+            return this.importType && route("import.uploadTemplate");
         },
         downloadLink() {
-            return this.template
-                && route('import.downloadTemplate', this.template.id);
+            return (
+                this.template &&
+                route("import.downloadTemplate", this.template.id)
+            );
         },
         importLink() {
-            return this.importType
-                && route('import.store');
+            return this.importType && route("import.store");
         },
         hasErrors() {
-            return this.summary
-                && this.summary.errors
-                && Object.keys(this.summary.errors).length;
-        },
+            return (
+                this.summary &&
+                this.summary.errors &&
+                Object.keys(this.summary.errors).length
+            );
+        }
     },
 
     created() {
-        axios.get(route('import.index'))
+        console.log(this.user);
+        this.school = this.user.school_id;
+
+        axios
+            .get(route("import.index"))
             .then(({ data }) => {
                 this.importTypes = data.importTypes;
-            }).catch(error => this.handleError(error));
+            })
+            .catch(error => this.handleError(error));
+        try {
+            axios
+                .get(route("administration.schools.options"))
+                .then(({ data }) => {
+                    this.schoolOptions = data;
+                });
+        } catch (error) { // if user doesn't have access to school options
+            this.schoolOptions = [this.user.school];
+        }
     },
 
     methods: {
         getTemplate() {
+            console.log(this);
             if (!this.importType) {
                 return;
             }
 
             this.loadingTemplate = true;
 
-            axios.get(route('import.template', this.importType))
+            axios
+                .get(route("import.template", this.importType))
                 .then(({ data }) => {
                     this.template = data;
                     this.loadingTemplate = false;
-                }).catch((error) => {
+                })
+                .catch(error => {
                     this.loadingTemplate = false;
                     this.handleError(error);
                 });
         },
         deleteTemplate(id) {
             this.loadingTemplate = true;
-            axios.delete(route('import.deleteTemplate', id))
+            axios
+                .delete(route("import.deleteTemplate", id))
                 .then(({ data }) => {
                     this.template = null;
                     this.modal = false;
                     this.$toastr.success(data.message);
                     this.loadingTemplate = false;
-                }).catch((error) => {
+                })
+                .catch(error => {
                     this.modal = false;
                     this.loadingTemplate = false;
                     this.handleError(error);
@@ -187,13 +239,12 @@ export default {
         },
         downloadRejected({ rejectedId }) {
             if (!rejectedId) {
-                this.$toastr.info(this.__('No rejected summary available'));
+                this.$toastr.info(this.__("No rejected summary available"));
                 return;
             }
 
-            window.location.href = route('import.downloadRejected', rejectedId);
-        },
-    },
+            window.location.href = route("import.downloadRejected", rejectedId);
+        }
+    }
 };
-
 </script>
