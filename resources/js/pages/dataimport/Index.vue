@@ -25,7 +25,7 @@
             >
                 <import-uploader
                     :path="importLink"
-                    :params="{ type: importType, school: school }"
+                    :params="{ type: importType, school_id: school }"
                     @upload-successful="$refs.imports.fetch()"
                 />
             </div>

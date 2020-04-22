@@ -5,6 +5,7 @@ namespace LaravelEnso\DataImport\app\Models;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Enums\IOTypes;
+use LaravelEnso\Schools\app\Models\School;
 use LaravelEnso\DataImport\app\Enums\Statuses;
 use LaravelEnso\DataImport\app\Jobs\ImportJob;
 use LaravelEnso\TrackWho\app\Traits\CreatedBy;
@@ -24,7 +25,7 @@ class DataImport extends Model implements Attachable, VisibleFile, IOOperation
 
     protected $extensions = ['xlsx'];
 
-    protected $fillable = ['type', 'successful', 'failed', 'status'];
+    protected $fillable = ['type', 'successful', 'failed', 'status', 'school_id'];
 
     protected $casts = ['status' => 'integer'];
 
@@ -108,4 +109,9 @@ class DataImport extends Model implements Attachable, VisibleFile, IOOperation
     {
         return $this->status;
     }
+
+    public function school() {
+      return $this->belongsTo(School::class);
+    }
+  
 }

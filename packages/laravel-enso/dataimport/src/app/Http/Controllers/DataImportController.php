@@ -17,10 +17,11 @@ class DataImportController extends Controller
     public function store(ValidateImportRequest $request, DataImport $dataImport)
     {
         $dataImport->type = $request->get('type');
+        $dataImport->school_id = $request->get('school_id');
 
         return $dataImport->run(
             $request->file('import'),
-            $request->except(['import', 'type'])
+            $request->except(['import', 'type', 'school_id'])
         );
     }
 

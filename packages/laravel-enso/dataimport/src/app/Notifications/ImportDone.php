@@ -24,7 +24,7 @@ class ImportDone extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return array_merge(['mail'], config('enso.imports.notifications'));
+        return array_merge([], config('enso.imports.notifications'));
     }
 
     public function toBroadcast($notifiable)
@@ -42,8 +42,7 @@ class ImportDone extends Notification implements ShouldQueue
         return (new MailMessage())
             ->subject($this->mailSubject())
             ->markdown('laravel-enso/dataimport::emails.import', [
-                'name' => $notifiable->person->appellative
-                    ?: $notifiable->person->name,
+                'name' => $notifiable->name(),
                 'filename' => $this->filename(),
                 'type' => $this->type(),
                 'successful' => $this->dataImport->successful,
