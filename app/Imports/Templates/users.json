@@ -29,15 +29,15 @@
         },
         {
           "name": "password",
-          "validations": "required|min:6"
+          "validations": "nullable|min:6"
         },
         {
           "name": "role",
-          "validations": "string|required|in:admin,teacher, schooladmin"
+          "validations": "string|required|in:admin,teacher,schooladmin"
         },
         {
           "name": "gender",
-          "validations": "string|required|in:male,female"
+          "validations": "string|in:male,female"
         }
       ]
     }

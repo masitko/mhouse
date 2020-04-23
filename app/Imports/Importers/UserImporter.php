@@ -25,8 +25,8 @@ class UserImporter implements Importable, BeforeHook, AfterHook
   {
     $row->school_id = $param->school_id;
     $row->role_id = Role::whereName($row->role)->first()->id;
-    $row->gender = Genders::select()->pluck('id', 'name')->get($row->gender);
-    $row->title = Titles::select()->pluck('id', 'name')->get($row->title);
+    $row->gender = $row->gender?Genders::select()->pluck('id', 'name')->get($row->gender):null;
+    $row->title = $row->title?Titles::select()->pluck('id', 'name')->get($row->title):null;
     // if( $row->password ) 
     //   $row->password = ;
     $row->is_active = true;
@@ -35,7 +35,7 @@ class UserImporter implements Importable, BeforeHook, AfterHook
     // \Log::debug(Titles::select());
     $current = User::firstOrNew(['email' => $row->email])
       ->fill((array)$row);
-    $current->setPassword(bcrypt($row->password));
+    $current->setPassword($row->password?bcrypt($row->password):null);
     $current->save();
 
     \Log::debug($current);
