@@ -9,4 +9,11 @@ class Titles extends Enum
     const Miss = 1;
     const Ms = 2;
     const Mr = 3;
+
+  //   protected static $data = [
+  //     self::Miss => 'miss',
+  //     self::Ms => 'ms',
+  //     self::Mr => 'mr',
+  // ];
+
 }

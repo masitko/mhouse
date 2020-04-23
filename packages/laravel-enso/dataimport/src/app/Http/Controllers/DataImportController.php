@@ -21,7 +21,7 @@ class DataImportController extends Controller
 
         return $dataImport->run(
             $request->file('import'),
-            $request->except(['import', 'type', 'school_id'])
+            $request->except(['import', 'type'])
         );
     }
 

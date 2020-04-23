@@ -37,30 +37,30 @@ class User extends Authenticatable
     HasAvatar,
     HasPassword,
     Impersonates,
-        // IsPerson, 
+    // IsPerson, 
     LogsActivity,
     Notifiable,
     Uploads;
 
   protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
-    // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
+  // protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
   protected $fillable = [
     'role_id', 'school_id', 'first_name', 'last_name', 'other_name',
-    'email', 'is_active', 'birthday', 'upn',
+    'email', 'is_active', 'birthday', 'upn', 'title',
     'ethnicity', 'gender', 'admission_date', 'idaci',
-    'flag_fsm', 'post_cla', 'flag_cla','flag_sen'
+    'flag_fsm', 'post_cla', 'flag_cla', 'flag_sen'
   ];
 
   protected $casts = [
-    'is_active' => 'boolean', 
+    'is_active' => 'boolean',
 
-    'flag_fsm' => 'boolean', 
-    'post_cla' => 'boolean', 
-    'flag_cla' => 'boolean', 
-    'flag_sen' => 'boolean', 
+    'flag_fsm' => 'boolean',
+    'post_cla' => 'boolean',
+    'flag_cla' => 'boolean',
+    'flag_sen' => 'boolean',
 
-    'owner_id' => 'int', 
+    'owner_id' => 'int',
     'role_id' => 'int',
   ];
 
@@ -74,15 +74,16 @@ class User extends Authenticatable
     'role_id' => [Role::class => 'name'],
   ];
 
-    // public function person()
-    // {
-    //     return $this->belongsTo(Person::class);
-    // }
+  // public function person()
+  // {
+  //     return $this->belongsTo(Person::class);
+  // }
 
   public $test = true;
 
-  public function name() {
-    return $this->first_name.' '.$this->last_name;
+  public function name()
+  {
+    return $this->first_name . ' ' . $this->last_name;
   }
 
   public function school()
@@ -110,12 +111,13 @@ class User extends Authenticatable
     return $this->hasOne(Preference::class);
   }
 
-  public function hasPermission( $name ) {
+  public function hasPermission($name)
+  {
     $role = $this->role;
     return $role->permissions()->get()->contains('name', $name);
     // return (boolean)$role->permissions()->where('role_id', $role->id)->where('name', $name)->count();
   }
- 
+
   public function isAdmin2()
   {
     return $this->role_id === Role::AdminId;
@@ -131,10 +133,10 @@ class User extends Authenticatable
     return $this->group_id === UserGroup::AdminGroupId;
   }
 
-    // public function isPerson(Person $person)
-    // {
-    //     return $this->person_id === $person->id;
-    // }
+  // public function isPerson(Person $person)
+  // {
+  //     return $this->person_id === $person->id;
+  // }
 
   public function persistDefaultPreferences()
   {
@@ -185,16 +187,21 @@ class User extends Authenticatable
 
   public function setBirthdayAttribute($value)
   {
-      $this->attributes['birthday'] = isset($value)
-          ? Carbon::parse($value)
-          : null;
+    $this->attributes['birthday'] = isset($value)
+      ? Carbon::parse($value)
+      : null;
   }
 
   public function setAdmissionDateAttribute($value)
   {
-      $this->attributes['admission_date'] = isset($value)
-          ? Carbon::parse($value)
-          : null;
+    $this->attributes['admission_date'] = isset($value)
+      ? Carbon::parse($value)
+      : null;
+  }
+
+  public function setPassword($password)
+  {
+    $this->attributes['password'] = $password;
   }
 
   public function delete()

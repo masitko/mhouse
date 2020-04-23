@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Validations
     |--------------------------------------------------------------------------
@@ -11,9 +11,9 @@ return [
     |
     */
 
-    'validations' => 'local',
+  'validations' => 'always',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Chunk Size
     |--------------------------------------------------------------------------
@@ -22,9 +22,9 @@ return [
     |
     */
 
-    'chunkSize' => 1000,
+  'chunkSize' => 1000,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Chunk Splitting Queue
     |--------------------------------------------------------------------------
@@ -33,9 +33,9 @@ return [
     |
     */
 
-    'splittingQueue' => 'split',
+  'splittingQueue' => 'split',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Queues
     |--------------------------------------------------------------------------
@@ -44,14 +44,14 @@ return [
     | to a larger value.
     */
 
-    'queues' => [
-        'splitting' => 'heavy',
-        'processing' => 'light',
-        'rejected' => 'heavy',
-        'notifications' => 'notifications',
-    ],
+  'queues' => [
+    'splitting' => 'heavy',
+    'processing' => 'light',
+    'rejected' => 'heavy',
+    'notifications' => 'notifications',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Timeout
     |--------------------------------------------------------------------------
@@ -60,9 +60,9 @@ return [
     |
     */
 
-    'timeout' => 60 * 4,
+  'timeout' => 60 * 4,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Error Column
     |--------------------------------------------------------------------------
@@ -72,20 +72,21 @@ return [
     |
     */
 
-    'errorColumn' => '_errors',
+  'errorColumn' => '_errors',
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Notification channels
     |--------------------------------------------------------------------------
     | After each import the user will be notified by email. Additionally
     | a notification can be broadcasted to the user.
-    |
+    | ** I've removed default notification by email, 
+    |    it can be added to the array as 'mail'
     */
 
-    'notifications' => ['broadcast', 'database'],
+  'notifications' => ['broadcast', 'database'],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Configurations
     |--------------------------------------------------------------------------
@@ -94,10 +95,18 @@ return [
     |
     */
 
-    'configs' => [
-        'userGroups' => [
-            'label' => 'User Groups',
-            'template' => 'vendor/laravel-enso/dataimport/src/app/Tests/userGroups.json',
-        ],
+  'configs' => [
+    // 'userGroups' => [
+    //     'label' => 'User Groups 4',
+    //     'template' => 'vendor/laravel-enso/dataimport/src/app/Tests/userGroups.json',
+    // ],
+    'users' => [
+      'label' => 'Users',
+      'template' => 'app/Imports/Templates/users.json',
     ],
+    'students' => [
+      'label' => 'Students',
+      'template' => 'app/Imports/Templates/students.json',
+    ],
+  ],
 ];

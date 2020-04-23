@@ -29,7 +29,7 @@
         },
         {
           "name": "password",
-          "validations": "string|required"
+          "validations": "required|min:6"
         },
         {
           "name": "role",
@@ -37,7 +37,7 @@
         },
         {
           "name": "gender",
-          "validations": "string|required|in:Male,Female"
+          "validations": "string|required|in:male,female"
         }
       ]
     }
