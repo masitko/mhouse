@@ -1,0 +1,77 @@
+{
+  "timeout": 500,
+  "sheets": [
+    {
+      "name": "students",
+      "importerClass": "App\\Imports\\Importers\\StudentImporter",
+      "validatorClass": "App\\Imports\\Validators\\CustomValidator",
+      "chunkSize": 250,
+      "columns": [
+        {
+          "name": "title",
+          "validations": "string|in:Miss,Ms,Mr"
+        },
+        {
+          "name": "first_name",
+          "validations": "string|required"
+        },
+        {
+          "name": "last_name",
+          "validations": "string|required"
+        },
+        {
+          "name": "other_name",
+          "validations": "string"
+        },
+        {
+          "name": "email",
+          "validations": "email|required"
+        },
+        {
+          "name": "password",
+          "validations": "nullable|min:6"
+        },
+        {
+          "name": "birthday",
+          "validations": "date|before:today"
+        },
+        {
+          "name": "ethnicity",
+          "validations": "string"
+        },
+        {
+          "name": "gender",
+          "validations": "string|in:male,female"
+        },
+        {
+          "name": "upn",
+          "validations": ""
+        },
+        {
+          "name": "admission_date",
+          "validations": "date"
+        },
+        {
+          "name": "idaci",
+          "validations": ""
+        },
+        {
+          "name": "flag_fsm",
+          "validations": "string|in:yes,YES,no,NO"
+        },
+        {
+          "name": "post_cla",
+          "validations": "string|in:yes,YES,no,NO"
+        },
+        {
+          "name": "flag_cla",
+          "validations": "string|in:yes,YES,no,NO"
+        },
+        {
+          "name": "flag_sen",
+          "validations": "string|in:yes,YES,no,NO"
+        }
+      ]
+    }
+  ]
+}
