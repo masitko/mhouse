@@ -15,8 +15,13 @@ class WheelSelectController extends Controller
 
     //protected $queryAttributes = ['name'];
 
-    //public function query(Request $request)
-    //{
-    //    return Wheel::query();
-    //}
+    public function query(Request $request)
+    { 
+      $response = Wheel::query();
+      if( !$request->user()->hasPermission('wheels.wheels.seeInactive') ) {
+        $response = $response->where('is_active', true);
+      }
+      return $response;
+
+    }
 }
