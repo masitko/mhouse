@@ -48,7 +48,7 @@
         "@fortawesome/vue-fontawesome": "^0.1.1",
         "accounting-js": "^1.1.1",
         "animate.css": "^3.6.1",
-        "axios": "^0.18",
+        "axios": "^0.21",
         "bulma": "^0.7.2",
         "bulma-extensions": "^2.2.1",
         "chart.js": "^2.8.0",
